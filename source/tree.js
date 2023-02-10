@@ -1,23 +1,45 @@
 "use strict";
 
+/**
+ *
+ * @param {number} inHeight - The tree height
+ * @returns {string} The string with ASCII tree
+ */
 const tree = (inHeight) => {
+    const MIN_HEIGHT = 3;
+    const SPACE_CHAR = " ";
+    const LEAF_CHAR = "*";
+    const TRUNK_CHAR = "|";
+    const SPACE_REMOVED_PER_TRUNK = 3;
+    const MIRROR_COEF = 2;
+
     const height = Number(inHeight);
-    if (height === NaN || height < 3) {
+    if (!isFinite(height) || height < MIN_HEIGHT) {
         return null;
     }
 
+    const calcSpacesCount = (charCount) => {
+        return height - (SPACE_REMOVED_PER_TRUNK + charCount) / MIRROR_COEF;
+    };
+
     const getTreeLine = (char, charCount) => {
-        const spaces = Array(height - charCount).join(" ");
-        return spaces + Array(charCount * 2).join(char) + spaces + "\n";
+        let spaces = "";
+        for (let i = 0; i < calcSpacesCount(charCount); ++i) {
+            spaces += SPACE_CHAR;
+        }
+        let chars = "";
+        for (let i = 0; i < charCount; ++i) {
+            chars += char;
+        }
+        return spaces + chars + spaces + "\n";
     };
 
     let result = "";
-    for (let i = 1; i < height; i++) {
-        result += getTreeLine("*", i);
-        //  result += Array(height - i).join(" ") + Array(i * 2).join("*") + Array(height - i).join(" ") + "\n";
+    for (let i = 0; i < height - 1; i++) {
+        result += getTreeLine(LEAF_CHAR, i * MIRROR_COEF + 1);
     }
-    result += getTreeLine("|", 1);
-    // result += Array(height - 1).join(" ") + Array(2).join("|") + Array(height - 1).join(" ") + "\n";
+    result += getTreeLine(TRUNK_CHAR, 1);
 
+    console.log(result);
     return result;
 };

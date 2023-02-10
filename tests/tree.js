@@ -12,6 +12,22 @@ QUnit.module("Тестируем функцию tree", function () {
         assert.strictEqual(tree("2"), null);
     });
 
+    QUnit.test("Ёлочка, проверка на входной тип данных", function (assert) {
+        assert.strictEqual(tree(null), null);
+        assert.strictEqual(tree(undefined), null);
+        assert.strictEqual(tree({}), null);
+        assert.strictEqual(tree({ name: "Mihail" }), null);
+        assert.strictEqual(tree([]), null);
+        assert.strictEqual(tree([1, 2, 5]), null);
+        assert.strictEqual(tree(["42", "12"]), null);
+        assert.strictEqual(tree(true), null);
+        assert.strictEqual(tree(false), null);
+        assert.strictEqual(
+            tree(() => 5),
+            null
+        );
+    });
+
     QUnit.test("Ёлочка высотой 3", function (assert) {
         const expected =
             " * \n" + //
