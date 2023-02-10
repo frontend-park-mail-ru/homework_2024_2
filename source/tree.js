@@ -40,6 +40,5 @@ const tree = (inHeight) => {
     }
     result += getTreeLine(TRUNK_CHAR, 1);
 
-    console.log(result);
     return result;
 };
