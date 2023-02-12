@@ -1,18 +1,19 @@
 "use strict";
 
+const MIN_HEIGHT = 3;
+const SPACE_CHAR = " ";
+const LEAF_CHAR = "*";
+const TRUNK_CHAR = "|";
+const ENDL = "\n";
+const SPACE_REMOVED_PER_TRUNK = 3;
+const MIRROR_COEF = 2;
+
 /**
  *
  * @param {number} inHeight - The tree height
  * @returns {string} The string with ASCII tree
  */
 const tree = (inHeight) => {
-    const MIN_HEIGHT = 3;
-    const SPACE_CHAR = " ";
-    const LEAF_CHAR = "*";
-    const TRUNK_CHAR = "|";
-    const SPACE_REMOVED_PER_TRUNK = 3;
-    const MIRROR_COEF = 2;
-
     const height = Number(inHeight);
     if (!isFinite(height) || height < MIN_HEIGHT) {
         return null;
@@ -23,15 +24,9 @@ const tree = (inHeight) => {
     };
 
     const getTreeLine = (char, charCount) => {
-        let spaces = "";
-        for (let i = 0; i < calcSpacesCount(charCount); ++i) {
-            spaces += SPACE_CHAR;
-        }
-        let chars = "";
-        for (let i = 0; i < charCount; ++i) {
-            chars += char;
-        }
-        return spaces + chars + spaces + "\n";
+        const spaces = SPACE_CHAR.repeat(calcSpacesCount(charCount));
+        const chars = char.repeat(charCount);
+        return spaces + chars + spaces + ENDL;
     };
 
     let result = "";
