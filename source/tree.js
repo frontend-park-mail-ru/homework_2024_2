@@ -15,7 +15,7 @@ const MIRROR_COEF = 2;
  */
 const tree = (inHeight) => {
 	const height = Number(inHeight);
-	if (!isFinite(height) || height < MIN_HEIGHT) {
+	if (!Number.isFinite(height) || height < MIN_HEIGHT) {
 		return null;
 	}
 
