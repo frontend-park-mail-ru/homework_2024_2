@@ -1,24 +1,26 @@
-function inverse(arr, skip = 0) {
+'use strict'; // Включение строгого режима
+
+const inverse = (arr, skip = 0) => {
     if (!Array.isArray(arr)) {
         throw new Error("Первый аргумент должен быть массивом");
     }
 
-    if (typeof skip !== 'number') {
-        throw new Error("Второй аргумент должен быть числом");
+    if (!Number.isInteger(skip)) {
+        throw new Error("Второй аргумент должен быть целым числом");
     }
 
-    const len = arr.length;
+    const arrayLength = arr.length;
 
-    if (len === 0 || skip >= len || -skip >= len) {
+    if (arrayLength === 0 || Math.abs(skip) >= arrayLength) {
         return arr.slice(); // Возвращаем копию массива
     }
 
     const startIndex = Math.max(0, skip);
-    const endIndex = skip >= 0 ? len : len + skip;
+    const endIndex = skip >= 0 ? arrayLength : arrayLength + skip;
 
     return [
         ...arr.slice(0, startIndex),
         ...arr.slice(startIndex, endIndex).reverse(),
         ...arr.slice(endIndex)
     ];
-}
+};
