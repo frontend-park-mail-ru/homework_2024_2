@@ -14,12 +14,4 @@ function format(input, columns) {
       )
       .join('\n');
   }
-
-  const intMax32 = 2**31 - 1;
-		const intMin32 = -(2**31);
-		const intMax64 = 2**63 - 1;
-		const intMin64 = -(2**63);
-	
-		const input = [1];
-  console.log(format[input, 1]);
   
