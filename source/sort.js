@@ -7,7 +7,7 @@ const sort = (sentence) => {
     if (typeof(sentence) !== 'string') {
         return "";
     }
-    sentence=sentence.trim()
+    sentence = sentence.trim()
     if (sentence.length === 0){
         return "";
     }
@@ -18,12 +18,11 @@ const sort = (sentence) => {
 }
 
 function sortLetterInWords(words){
-    for (let i in words) {
-        let letterArray = words[i].split("");
+    words.forEach(function (word, i){
+        let letterArray = word.split("");
         letterArray.sort(collator.compare);
-            words[i] = letterArray[0].toUpperCase() + letterArray.join("").slice(1);
-    }
+        words[i] = letterArray[0].toUpperCase() + letterArray.join("").slice(1);
+    });
     return words;
 }
-
 
