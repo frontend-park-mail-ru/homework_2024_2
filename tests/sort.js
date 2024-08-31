@@ -41,7 +41,15 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно если входная строка пуста', function (assert) {
 		assert.strictEqual(sort(''), '');
+		assert.strictEqual(sort('   '), '');
 		assert.strictEqual(sort('ёж Еж ел'), 'Еж Ёж Ел');
 		assert.strictEqual(sort('some text'), 'Emos Ettx');
 	});
+	QUnit.test('Функция работает правильно при неккоретных входных данных', function (assert) {
+		assert.strictEqual(sort(123), '');
+		assert.strictEqual(sort(false), '');
+		assert.strictEqual(sort(null), '');
+		assert.strictEqual(sort(undefined), '');
+	});
 });
+

@@ -2,7 +2,15 @@
 
 const collator = new Intl.Collator()
 
-function sortSentence(sentence) {
+
+const sort = (sentence) => {
+    if (typeof(sentence) !== 'string') {
+        return ""
+    }
+    sentence=sentence.trim()
+    if (sentence.length === 0){
+        return ""
+    }
     let str = sentence.toLowerCase()
     let words = sortLetterInWords(str.split(" "))
     words.sort(collator.compare)
@@ -13,11 +21,9 @@ function sortLetterInWords(words){
     for (let i in words) {
         let letterArray = words[i].split("")
         letterArray.sort(collator.compare)
-        if (letterArray.length > 0) {
             words[i] = letterArray[0].toUpperCase() + letterArray.join("").slice(1)
-        }
     }
     return words
 }
 
-const sort = sentence => sortSentence(sentence)
+
