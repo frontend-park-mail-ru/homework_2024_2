@@ -1,23 +1,23 @@
 'use strict';
 
-function minmax(numbers = '') {
-    if (numbers.length === 0){
+const minmax = function (numbers = '') {
+    if (!(typeof numbers === 'string') || !numbers){
         return [undefined, undefined];
     }
 
-    const mas = [];
+    const numbersArray = [];
 
     numbers.split(" ").forEach(value => {
         const num = parseFloat(value);
 
         if (!Number.isNaN(num)) {
-            mas.push(num);
+            numbersArray.push(num);
         }
     });
 
-    if (mas.length === 0) {
+    if (numbersArray.length === 0) {
         return [undefined, undefined];
     }
 
-    return [Math.min(...mas), Math.max(...mas)];
+    return [Math.min(...numbersArray), Math.max(...numbersArray)];
 }
