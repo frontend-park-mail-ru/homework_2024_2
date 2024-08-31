@@ -55,4 +55,25 @@ QUnit.module("Тестируем функцию euclid", function () {
     assert.strictEqual(euclid(15, 0), 15, "euclid(15, 0) === 15");
     assert.strictEqual(euclid(0, -3), 3, "euclid(0, -3) === 3");
   });
+
+  QUnit.test(
+    "Функция должна выбрасывать ошибки, если есть не числовые элементы",
+    function (assert) {
+      assert.throws(
+        () => euclid("hello"),
+        new Error("Все элементы массива должны быть числами"),
+        "euclid(hello) === Error(Все элементы массива должны быть числами)"
+      );
+      assert.throws(
+        () => euclid(16, "hello", 4),
+        new Error("Все элементы массива должны быть числами"),
+        "euclid(16, hello, 4) === Error(Все элементы массива должны быть числами)"
+      );
+      assert.throws(
+        () => euclid(16, 8, 4, "hello"),
+        new Error("Все элементы массива должны быть числами"),
+        "euclid(16, 8, 4, hello) === Error(Все элементы массива должны быть числами)"
+      );
+    }
+  );
 });
