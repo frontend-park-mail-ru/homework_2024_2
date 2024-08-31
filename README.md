@@ -1,4 +1,5 @@
 # frontend-homework, вариант №12
+## Ягмуров Игорь
 > Introductory homework for the course "Frontend-development"
 
 ## Привет!
@@ -49,7 +50,7 @@ QUnit.module('Тестируем функцию max', function () {
 		assert.strictEqual(max([-1, 0, 1]), 1, 'max([-1, 0, 1]) === 1');
 		assert.strictEqual(max([1, 0, -1]), 1, 'max([1, 0, -1]) === 1');
 	});
-	
+
 	...
 });
 ```
