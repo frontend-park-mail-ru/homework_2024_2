@@ -19,5 +19,38 @@ const minmax = function (numbers = '') {
         return [undefined, undefined];
     }
 
-    return [Math.min(...numbersArray), Math.max(...numbersArray)];
+    return [findMin(...numbersArray), findMax(...numbersArray)];
+}
+
+const findMax = function (...numbers){
+    if (!numbers) {
+        return undefined;
+    }
+
+    let max = numbers[0];
+
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > max) {
+            max = numbers[i];
+        }
+    }
+
+    return max;
+}
+
+
+const findMin = function (...numbers){
+    if (!numbers) {
+        return undefined;
+    }
+
+    let min = numbers[0];
+
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] < min) {
+            min = numbers[i];
+        }
+    }
+
+    return min;
 }
