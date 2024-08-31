@@ -1,4 +1,3 @@
-// Земляков Алексей
 'use strict';
 
 const collator = new Intl.Collator()
