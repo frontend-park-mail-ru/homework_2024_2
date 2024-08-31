@@ -85,3 +85,4 @@ QUnit.module('Тестируем функцию inverse', function () {
 		}
 	});
 });
+
