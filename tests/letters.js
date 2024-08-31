@@ -56,40 +56,34 @@ QUnit.module("Тестируем функцию letters", function () {
     assert.strictEqual(letters("от топота копыт", false), "а копыт")
     assert.strictEqual(letters("hello world", false), "he world")
   })
+
+  QUnit.test("Обработка строк содержащих символы utf-8", function (assert) {
+    assert.strictEqual(
+      letters(
+        "АдӕƵймӕȡгтӕ£ се\n 'ппӕт дӕƵр райгуырынц\nĦ сӕрибарӕƵй ӕмӕ ӕмхуызонӕй сӕĦ барты."
+      ),
+      "Аȡ£е'цихзо."
+    )
+  })
+
+  // prettier-ignore
   QUnit.test(
     "Обработка ошибки при передаче неверного типа первого аргумента",
     function (assert) {
-      assert.throws(function () {
-        letters(123)
-      }, TypeError)
-      assert.throws(function () {
-        letters(true)
-      }, TypeError)
-      assert.throws(function () {
-        letters(null)
-      }, TypeError)
-      assert.throws(function () {
-        letters([])
-      }, TypeError)
+      assert.throws(function () { letters(123)}, TypeError);
+      assert.throws(function () { letters(true)}, TypeError);
+      assert.throws(function () { letters(null)}, TypeError);
+      assert.throws(function () { letters([])}, TypeError);
     }
-  )
-
+  );
+  // prettier-ignore
   QUnit.test(
     "Обработка ошибок при передаче неверного типа второго аргумента",
     function (assert) {
-      assert.throws(function () {
-        letters("abc", "true")
-      }, TypeError)
-      assert.throws(function () {
-        letters("abc", 1)
-      }, TypeError)
-      assert.throws(function () {
-        letters("abc", null)
-      }, TypeError)
-
-      assert.throws(function () {
-        letters("abc", [])
-      }, TypeError)
+      assert.throws(function () { letters("abc", "true")}, TypeError);
+      assert.throws(function () { letters("abc", 1) }, TypeError);
+      assert.throws(function () { letters("abc", null)}, TypeError);
+      assert.throws(function () { letters("abc", [])}, TypeError);
     }
-  )
+  );
 })
