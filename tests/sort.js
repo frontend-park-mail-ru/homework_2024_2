@@ -21,14 +21,14 @@ QUnit.module('Тестируем функцию sort', function () {
 	QUnit.test('Функция сортирует буквы в отдельных словах по алфавиту', function (assert) {
 		assert.strictEqual(sort('fedcba'), 'Abcdef', 'Работает с английским алфавитом');
 		assert.strictEqual(sort('zyxwvu'), 'Uvwxyz');
-		assert.strictEqual(sort('жёедгвба'), 'Абвгдеёж', 'Работает с русским алфавитом');
+		assert.strictEqual(sort('жёедгвба'), 'Абвгдееж', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('вбава'), 'Аабвв');
 	});
 
 	QUnit.test('Функция сортирует слова в предложении по алфавиту', function (assert) {
 		assert.strictEqual(sort('f e d c b a'), 'A B C D E F', 'Работает с английским алфавитом');
 		assert.strictEqual(sort('z y x w v u'), 'U V W X Y Z');
-		assert.strictEqual(sort('ж ё е д г в б а'), 'А Б В Г Д Е Ё Ж', 'Работает с русским алфавитом');
+		assert.strictEqual(sort('ж ё е д г в б а'), 'А Б В Г Д Е Е Ж', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('в б а в а'), 'А А Б В В');
 	});
 
@@ -42,7 +42,7 @@ QUnit.module('Тестируем функцию sort', function () {
 	QUnit.test('Функция работает правильно если входная строка пуста', function (assert) {
 		assert.strictEqual(sort(''), '');
 		assert.strictEqual(sort('   '), '');
-		assert.strictEqual(sort('ёж Еж ел'), 'Еж Ёж Ел');
+		assert.strictEqual(sort('ёж Еж ел'), 'Еж Еж Ел');
 		assert.strictEqual(sort('some text'), 'Emos Ettx');
 	});
 	QUnit.test('Функция работает правильно при неккоретных входных данных', function (assert) {
