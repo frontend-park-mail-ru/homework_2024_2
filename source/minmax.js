@@ -1,13 +1,13 @@
-'use strict';
+"use strict";
 
-const minmax = function (numbers = '') {
-    if (!(typeof numbers === 'string') || !numbers){
+const minmax = function (numbers = "") {
+    if (!(typeof numbers === "string") || !numbers){
         return [undefined, undefined];
     }
 
     const numbersArray = [];
 
-    numbers.split(" ").forEach(value => {
+    numbers.split(" ").forEach(value =>{
         const num = parseFloat(value);
 
         if (!Number.isNaN(num)) {
@@ -20,9 +20,9 @@ const minmax = function (numbers = '') {
     }
 
     return [findMin(...numbersArray), findMax(...numbersArray)];
-}
+};
 
-const findMax = function (...numbers){
+const findMax = function (...numbers) {
     if (!numbers) {
         return undefined;
     }
@@ -36,10 +36,10 @@ const findMax = function (...numbers){
     }
 
     return max;
-}
+};
 
 
-const findMin = function (...numbers){
+const findMin = function (...numbers) {
     if (!numbers) {
         return undefined;
     }
@@ -53,4 +53,4 @@ const findMin = function (...numbers){
     }
 
     return min;
-}
+};
