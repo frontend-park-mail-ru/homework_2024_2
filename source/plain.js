@@ -9,30 +9,40 @@
 // По сути тут у меня рекурсия. и рекурсия ограничена на глубину, т.е.
 // Стек переполниться не сможет. Если использовать рекурсию, то только с условием выхода из нее
 
+const plainify = (obj, prefix = '', maxDepth = 1000) => {
+  // Проверяем, что obj является объектом
+  if (typeof obj !== 'object' || obj === null) {
+    return {};    
+  }
 
-const plainify = (obj, prefix = '') => {
-    // Проверяем, что obj является объектом
-    if (typeof obj !== 'object' || obj === null) {
-        return {};    
+  // Проверяем, что prefix является строкой
+  if (typeof prefix !== 'string') {
+    throw new Error('Префикс должен быть строкой');
+  }
+
+  const result = {};
+  const stack = [{ obj, prefix, depth: 0 }];
+
+  while (stack.length > 0) {
+    const { obj: currentObject, prefix: currentPrefix, depth } = stack.pop();
+
+    // Условие выхода из цикла
+    if (depth > maxDepth) {
+      throw new Error('Объект слишком глубоко вложен. Максимальная глубина: ${maxDepth}');
     }
-  
-    // Проверяем, что prefix является строкой
-    if (typeof prefix !== 'string') {
-      throw new Error('Префикс должен быть строкой');
-    }
-  
     // Используем Object.entries для итерации по ключ-значению объекта (хеш)
-    return Object.entries(obj).reduce((acc, [key, value]) => {
+    for (const [key, value] of Object.entries(currentObject)) {
       // Создаем новый ключ, конкатенируя префикс и оригинальный ключ
-      const newKey = prefix ? `${prefix}.${key}` : key;
-  
+      const newKey = currentPrefix ? `${currentPrefix}.${key}` : key;
+
       // Проверяем, что value является объектом и не является null или массивом
       if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-        return { ...acc, ...plainify(value, newKey) };
+        stack.push({ obj: value, prefix: newKey, depth: depth + 1});
       } else {
-        // Иначе добавляем его в результирующий объект
-        return { ...acc, [newKey]: value };
+        result[newKey] = value;
       }
-    }, {});
-  };
+    }
+  }
 
+  return result;
+};
