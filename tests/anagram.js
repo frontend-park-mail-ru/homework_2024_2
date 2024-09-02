@@ -43,4 +43,37 @@ QUnit.module('Тестируем функцию anagram', function () {
 		];
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Функция корректно возвращает ошибку, если аргумент не является массивом (подается строка)', function (assert) {
+		const input = 'кот, ток, окт';
+		assert.throws(() => {
+			anagram(input)
+		}, new Error('Argument must be an array'))
+	});
+
+	QUnit.test('Функция корректно возвращает ошибку, если аргумент не является массивом (подается число)', function (assert) {
+		const input = 123;
+		assert.throws(() => {
+			anagram(input)
+		}, new Error('Argument must be an array'))
+	});
+	QUnit.test('Функция корректно возвращает ошибку, если массив содержит не только слова', function (assert) {
+		const input = ['кот', 1, true, 'ток123', '123'];
+		assert.throws(() => {
+			anagram(input)
+		}, new Error('Array must only contain words'))
+	});
+
+	QUnit.test('Функция корректно возвращает ошибку, если массив содержит не только слова', function (assert) {
+		const input = ['кот', 'ток123', '123'];
+		assert.throws(() => {
+			anagram(input)
+		}, new Error('Array must only contain words'))
+	});
+
+	QUnit.test('Функция работает правильно с английским алфавитом', function (assert) {
+		const input = ['eat', 'tea', 'tan', 'ate', 'nat', 'bat'];
+		const output = [['ate', 'eat', 'tea'], ['nat', 'tan']]
+		assert.deepEqual(anagram(input), output);
+	});
 });
