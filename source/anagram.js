@@ -2,10 +2,10 @@
 
 const anagram = (words) => {
     if (!Array.isArray(words)) {
-        throw new Error('Argument must be an array')
+        throw new Error('Argument must be an array');
     }
     if (words.some(word => typeof word !== 'string' || word === '' || [...word].some(symbol => !isNaN(symbol)))) {
-        throw new Error('Array must only contain words')
+        throw new Error('Array must only contain words');
     }
 
     const arrayMap = {};
