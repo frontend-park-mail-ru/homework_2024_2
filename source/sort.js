@@ -2,11 +2,11 @@
 
 const sort = (sentence) => {
     if (typeof(sentence) !== 'string') {
-        return "";
+        throw new Error("wrong type of data: should be string")
     }
     sentence = sentence.trim()
     if (sentence.length === 0){
-        return "";
+        throw new Error("empty data")
     }
     let str = sentence.toLowerCase().replaceAll('ё', 'е');
     let words = sortLetterInWords(str.split(" "));
