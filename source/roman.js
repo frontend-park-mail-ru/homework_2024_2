@@ -60,4 +60,3 @@ function arabic (roman){
     return num;
 }
 
-console.log(arabic('MMXVII')); // Ожидается 2017
