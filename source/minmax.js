@@ -1,8 +1,8 @@
 "use strict";
 
-const minmax = function (numbers = "") {
-    if (!(typeof numbers === "string") || !numbers){
-        return [undefined, undefined];
+const minmax = function (numbers) {
+    if (!(typeof numbers === "string")) {
+        throw new TypeError('Аргумент должен быть строкой');
     }
 
     const numbersArray = [];
