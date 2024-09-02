@@ -115,3 +115,4 @@ QUnit.module('Тестируем функцию tree', function() {
   });
 
 });
+

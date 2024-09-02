@@ -20,3 +20,4 @@ const tree = (treeHeight) => {
 
   return treeString;
 };
+
