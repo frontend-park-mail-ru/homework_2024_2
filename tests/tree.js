@@ -36,6 +36,17 @@ QUnit.module('Тестируем функцию tree', function() {
     assert.strictEqual(tree({}), null);
   });
 
+  QUnit.test('Передаём null и undefined', function(assert) {
+    assert.strictEqual(tree(null), null);
+    assert.strictEqual(tree(), null);
+  });
+
+  QUnit.test('Передаём NaN, Infinity', function(assert) {
+    assert.strictEqual(tree(NaN), null);
+    assert.strictEqual(tree(Infinity), null);
+    assert.strictEqual(tree(-Infinity), null);
+  });
+
   QUnit.test('Ёлочка высотой 3', function(assert) {
     const expected =
       ' * \n' +

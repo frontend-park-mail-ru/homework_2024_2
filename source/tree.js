@@ -1,20 +1,26 @@
 "use strict";
 
-let tree = treeHeight => {
-  if (typeof treeHeight === "object") return null;
-  if (isNaN(Number(treeHeight))) return null;
+const tree = (treeHeight) => {
+  const MIN_TREE_HEIGHT = 2;
+  const startsRowsCount = Math.trunc(Number(treeHeight)) - 1;
 
-  treeHeight = Math.trunc(Number(treeHeight));
-  if (treeHeight <= 2) return null;
-
-  let treeString = "";
-  for (let i = 0; i != treeHeight - 1; ++i) {
-    let spaces = " ".repeat(treeHeight - i - 2);
-    let starts = "*".repeat(2 * i + 1);
-    treeString += spaces + starts + spaces + "\n";
+  if (
+    typeof treeHeight === "object" ||
+    !isFinite(treeHeight) ||
+    startsRowsCount + 1 <= MIN_TREE_HEIGHT
+  ) {
+    return null;
   }
 
-  treeString += " ".repeat(treeHeight - 2) + "|" + " ".repeat(treeHeight - 2) + "\n";
+  let treeString = "";
+  for (let i = 0; i != startsRowsCount ; ++i) {
+    const spaces = " ".repeat(treeHeight - i - 2);
+    const stars = "*".repeat(2 * i + 1);
+    treeString += spaces + stars + spaces + "\n";
+  }
+
+  const lastRowSpaces = " ".repeat(startsRowsCount - 1);
+  treeString += `${lastRowSpaces}|${lastRowSpaces}\n`;
 
   return treeString;
-}
+};
