@@ -40,6 +40,31 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('5'), expected);
 	});
 
+	QUnit.test('Ёлочка высотой 6', function (assert) {
+		const expected =
+			'    *    \n' +
+			'   ***   \n' +
+			'  *****  \n' +
+			' ******* \n' +
+			'*********\n' +
+			'    |    \n';
+		assert.strictEqual(tree(6), expected);
+		assert.strictEqual(tree('6'), expected);
+	});
+
+	QUnit.test('Ёлочка высотой 7', function (assert) {
+		const expected =
+			'     *     \n' +
+			'    ***    \n' +
+			'   *****   \n' +
+			'  *******  \n' +
+			' ********* \n' +
+			'***********\n' +
+			'     |     \n';
+		assert.strictEqual(tree(7), expected);
+		assert.strictEqual(tree('7'), expected);
+	});
+
 	QUnit.test('Ёлочка высотой 8', function (assert) {
 		const expected =
 			'      *      \n' +
