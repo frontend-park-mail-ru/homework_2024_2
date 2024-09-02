@@ -120,4 +120,53 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting сортирует по численному свойству разных знаков', function (assert) {
+		const initial = [
+			{prop: 90},
+			{prop: -1},
+			{prop: 40},
+			{prop: -10},
+			{prop: 150},
+			{prop: -60},
+			{prop: 10},
+			{prop: -30}
+		];
+		const actual = sorting(initial, [ 'prop' ]);
+
+		const expected = [
+			{prop: -60},
+			{prop: -30},
+			{prop: -10},
+			{prop: -1},
+			{prop: 10},
+			{prop: 40},
+			{prop: 90},
+			{prop: 150}
+		];
+		
+		assert.deepEqual(actual, expected)
+	});
+
+	QUnit.test('sorting сортирует по отрицательному числовому свойству', function (assert) {
+		const initial = [
+			{prop: 60},
+			{prop: -50},
+			{prop: 30},
+			{prop: -1},
+			{prop: -100},
+			{prop: 1}
+		];
+		const actual = sorting(initial, [ 'prop' ]);
+
+		const expected = [
+			{prop: -100},
+			{prop: -50},
+			{prop: -1},
+			{prop: 1},
+			{prop: 30},
+			{prop: 60}
+		]
+		assert.deepEqual(actual, expected)
+	});
 });
