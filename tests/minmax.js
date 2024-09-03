@@ -27,6 +27,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('0 0 0 0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1 1 1 1'), [ 1, 1 ]);
 		assert.deepEqual(minmax('1 2 3 4'), [ 1, 4 ]);
+		assert.deepEqual(minmax(new String('1 2 3 4')), [ 1, 4 ]);
 		assert.deepEqual(minmax('-Infinity -1 0 1 Infinity'), [ -Infinity, Infinity ]);
 		assert.deepEqual(minmax('-.01 0 .01'), [ -.01, .01 ]);
     assert.deepEqual(minmax('-1 -2 -3 -4'), [ -4, -1 ], 'Все числа отрицательные');
