@@ -3,7 +3,7 @@
 /**
  * Draws an ASCII Christmas tree with a height of `n` characters made of asterisks.
  *
- * @param {number|string} n - The height of the tree. Can be a number or a string that will be converted to a number.
+ * @param {number|string} treeHeight - The height of the tree. Can be a number or a string that will be converted to a number.
  * @returns {string} A string representing the ASCII Christmas tree.
  *
  * @example
@@ -12,7 +12,8 @@
  * //  ***
  * // *****
  * //*******
- * tree(4);
+ * //   |
+ * tree(5);
  *
  * @example
  * // Returns a string:
@@ -20,7 +21,8 @@
  * //  ***
  * // *****
  * //*******
- * tree('4');
+ * //   |
+ * tree('5');
  */
 const tree = (treeHeight) => {
   const MIN_TREE_HEIGHT = 2;
