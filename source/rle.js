@@ -1,27 +1,42 @@
 'use strict';
 
-let rle = (str) => {
-    if ( str == undefined || typeof(str) != "string") {
+/**
+ * Performs Run-Length Encoding (RLE) on the input string.
+ *
+ * Run-Length Encoding is a basic form of data compression where
+ * consecutive identical characters are replaced with the character
+ * followed by the number of occurrences. If a character appears
+ * only once, it is not followed by a number.
+ *
+ * Example:
+ * - "aaabbc" would be encoded as "a3b2c".
+ * - "abc" would remain "abc" (since no characters are repeated).
+ *
+ * @param {string} inputString - The string to be encoded using RLE.
+ * @returns {string|null} The RLE encoded string, or null if the input is not a string.
+ */
+const rle = (inputString) => {
+    if ( typeof(inputString) !== "string") {
         return null;
     }
 
-    if (str.length <= 1) {
-        return str;
+    if (inputString.length <= 1) {
+        return inputString; 
     }
 
-    let char = str[0];
-    let strNew = "";
+    let currentSymbol = inputString[0];
+    let stringRLE = "";
     let count = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (char == str[i]) {
+    for (let stringSymbol of inputString) {
+        if (stringSymbol == currentSymbol) {
             count++;
         } else {
-            strNew += char + ((count === 1) ? "" : count);
-            char = str[i];
+            stringRLE += `${currentSymbol}${count > 1 ? count : ''}`;
+            currentSymbol = stringSymbol;
             count = 1;
         }
 
     }
-    strNew += char + ((count === 1) ? "" : count);
-    return strNew;
+    stringRLE += `${currentSymbol}${count > 1 ? count : ''}`;
+    return stringRLE; 
 }
