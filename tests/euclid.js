@@ -28,4 +28,14 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const temp = [ 80325, 55275, 8746650, 3000000, 45672375, 225, 54675 ];
 		assert.strictEqual(euclid(...[ ...temp, ...temp, ...temp, ...temp, ...temp ]), euclid(...temp));
 	});
+
+	QUnit.test('ДОБ.: Функция должна уметь обрабатывать отрицательные числа', function (assert) {
+		assert.strictEqual(euclid(-9, -3, 27, 9), -3, 'euclid(-9, -3, 27, 9) === -3');
+		assert.strictEqual(euclid(-125, -25, 500), -25, 'euclid(-125, -25, 500) === -25');
+		assert.strictEqual(euclid(11, -121, 93), 1, 'euclid(11, -121, 93) === 1');
+	});
+	
+	QUnit.test('ДОБ.: Функция может принимать нечисловые аргументы', function (assert) {
+		assert.strictEqual(euclid('a', 2), 'Error', 'euclid("a", 2) === Error');
+	});
 });
