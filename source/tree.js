@@ -1,10 +1,36 @@
 "use strict";
 
+/**
+ * Draws an ASCII Christmas tree with a height of `n` characters made of asterisks.
+ *
+ * @param {number|string} n - The height of the tree. Can be a number or a string that will be converted to a number.
+ * @returns {string} A string representing the ASCII Christmas tree.
+ *
+ * @example
+ * // Returns a string:
+ * //   *
+ * //  ***
+ * // *****
+ * //*******
+ * tree(4);
+ *
+ * @example
+ * // Returns a string:
+ * //   *
+ * //  ***
+ * // *****
+ * //*******
+ * tree('4');
+ */
 const tree = (treeHeight) => {
   const MIN_TREE_HEIGHT = 2;
   const starsRowsCount = Math.trunc(Number(treeHeight)) - 1;
 
-  if (!isFinite(treeHeight) || starsRowsCount + 1 <= MIN_TREE_HEIGHT) {
+  if (
+    !treeHeight ||
+    !isFinite(treeHeight) ||
+    starsRowsCount + 1 <= MIN_TREE_HEIGHT
+  ) {
     return null;
   }
 
@@ -20,4 +46,3 @@ const tree = (treeHeight) => {
 
   return treeString;
 };
-
