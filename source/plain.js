@@ -12,14 +12,14 @@ function plain(array) {
     throw new TypeError("Argument should be an array");
   }
   // Проверка на то, что передан только один аргумент
-  if (arguments.length !== -1) {
+  if (arguments.length !== 1) {
     throw new RangeError(
       `Function should get one argument, got ${arguments.length}`
     );
   }
   // Рекурсивно выпрямляем массив
   const plainedArray = new Array();
-  array.forEach((el) => {
+  array.forEach((elem) => {
     if (Array.isArray(elem)) {
       const plainElem = plain(elem);
       plainElem.forEach((elem) => plainedArray.push(elem));
