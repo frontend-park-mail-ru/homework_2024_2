@@ -41,14 +41,14 @@ QUnit.module('Тестируем функцию plain', function () {
 // Мои тесты
 QUnit.module('Дополнительные тесты функции plain', function () {
 	QUnit.test('Выдаёт ошибку при неправильном количестве аргументов',function (assert) {
-		assert.throws(function () { plain() }, 'Выдаёт ошибку при вызове без аргументов')
-		assert.throws(function () { plain([ 1, 2, 3 ], [ 4, 5, 6 ]) },'Выдаёт ошибку при вызове с двумя аргументами')
-		assert.throws(function () { plain([ 1, 2, 3 ], [ 4, 5, 6 ], [ 2, 2, 8 ]) },'Выдаёт ошибку при вызове с тремя аргументами')
+		assert.throws(function () { plain() }, RangeError, 'Выдаёт ошибку при вызове без аргументов')
+		assert.throws(function () { plain([ 1, 2, 3 ], [ 4, 5, 6 ]) }, RangeError, 'Выдаёт ошибку при вызове с двумя аргументами')
+		assert.throws(function () { plain([ 1, 2, 3 ], [ 4, 5, 6 ], [ 2, 2, 8 ]) }, RangeError, 'Выдаёт ошибку при вызове с тремя аргументами')
 	})
-	QUnit.test('Выдаёт ошибку при неправильных входных данных', function (assert) {
-		assert.throws(function () { plain('cmpoka') }, 'Выдаёт ошибку при вызове со строкой')
-		assert.throws(function () { plain(1) }, 'Выдаёт ошибку при вызове с числом')
-		assert.throws(function () { plain(undefined) }, 'Выдаёт ошибку при вызове с undefined')
-		assert.throws(function () { plain(null) }, 'Выдаёт ошибку при вызове с null')
+	QUnit.test('Выдаёт ошибку при неправильных 	входных данных', function (assert) {
+		assert.throws(function () { plain('cmpoka') }, TypeError, 'Выдаёт ошибку при вызове со строкой')
+		assert.throws(function () { plain(1) }, TypeError, 'Выдаёт ошибку при вызове с числом')
+		assert.throws(function () { plain(undefined) }, TypeError, 'Выдаёт ошибку при вызове с undefined')
+		assert.throws(function () { plain(null) }, TypeError, 'Выдаёт ошибку при вызове с null')
 	})
 })

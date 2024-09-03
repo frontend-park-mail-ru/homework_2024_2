@@ -7,15 +7,15 @@
  * @throws {TypeError} Выдаст ошибку, если передан не массив
  */
 function plain(array) {
-  // Проверка на то, является ли аргумент массивом
-  if (!Array.isArray(array)) {
-    throw new TypeError("Argument should be an array");
-  }
   // Проверка на то, что передан только один аргумент
   if (arguments.length !== 1) {
     throw new RangeError(
       `Function should get one argument, got ${arguments.length}`
     );
+  }
+  // Проверка на то, является ли аргумент массивом
+  if (!Array.isArray(array)) {
+    throw new TypeError("Argument should be an array");
   }
   // Рекурсивно выпрямляем массив
   const plainedArray = new Array();
