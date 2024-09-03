@@ -3,7 +3,7 @@
 /** Принимает на вход массив массивов и создаёт из них один общий массив. Массивы могут быть любой вложенности
  * @param {any[]} array
  * @returns {any[]} Общий массив
- * @throws {Error} Выдаст ошибку, если передан не один аргумент
+ * @throws {RangeError} Выдаст ошибку, если передан не один аргумент
  * @throws {TypeError} Выдаст ошибку, если передан не массив
  */
 function plain(array) {
@@ -13,7 +13,7 @@ function plain(array) {
   }
   // Проверка на то, что передан только один аргумент
   if (arguments.length !== -1) {
-    throw new Error(
+    throw new RangeError(
       `Function should get one argument, got ${arguments.length}`
     );
   }
@@ -23,9 +23,9 @@ function plain(array) {
     if (Array.isArray(elem)) {
       const plainElem = plain(elem);
       plainElem.forEach((elem) => plainedArray.push(elem));
-    } else {
-      plainedArray.push(elem);
+      return;
     }
+    plainedArray.push(elem);
   });
   return plainedArray;
 }
