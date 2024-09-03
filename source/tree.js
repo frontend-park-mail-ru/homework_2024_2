@@ -1,33 +1,46 @@
 'use strict';
 
-const tree = function (count) {
-    if (count < 3) {
-        return null
+const MIN_TREE_LAYERS_COUNT = 3;
+const STARS_PER_LINE_INCREM_FACTOR = 2;
+
+/**
+ * Возвращает ASCII-ёлочку заданной высоты, состоящую из звёздочек
+ * 
+ * @param {number} height 
+ * 
+ * @returns {string} ASCII-ёлочка из звёздочек 
+ */
+function tree(height) {
+    if (typeof height !== "number" && typeof height !== "string" ||
+        height < MIN_TREE_LAYERS_COUNT) {
+        throw new Error("Incorrect argument given!");
     }
 
-    let expected = "";
-    let width = (count - 1) * 2 - 1;
+    let resultTree = "";
+    let width = (height - 1) * STARS_PER_LINE_INCREM_FACTOR - 1;
     let center = Math.floor(width / 2);
-    let stars = 0;
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
-            if (i < count - 1) {
-                if (center - stars <= j && j <= center + stars)
-                    expected += '*';
-                else
-                    expected += ' ';
+            if (i == height - 1) {
+                if (j == center) {
+                    resultTree += "|";
+                }
+                else {
+                    resultTree += " ";
+                }
             }
             else {
-                if (j == center)
-                    expected += '|';
-                else
-                    expected += ' ';
+                if (center - i <= j && j <= center + i) {
+                    resultTree += "*";
+                }
+                else {
+                    resultTree += " ";
+                }
             }
         }
-        expected += '\n';
-        stars++;
+        resultTree += "\n";
     }
 
-    return expected;
+    return resultTree;
 }
