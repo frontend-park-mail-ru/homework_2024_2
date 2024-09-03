@@ -5,7 +5,7 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('яяя'), 'Яяя', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('Бббббб'), 'Бббббб');
 		assert.strictEqual(sort('zzzzzz'), 'Zzzzzz', 'Работает с английским алфавитом');
-		assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr');
+		assert.strictEqual(sort('Rrrrrrrr'), 'Rrrrrrrr');
 	});
 
 	QUnit.test('Функция делает все буквы, кроме первой, строчными', function (assert) {
@@ -34,8 +34,34 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
-		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт');
+		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
+
+	QUnit.test('Функция работает правильно с пустой строкой', function(assert){
+		assert.strictEqual(sort(''), '');
+	});
+
+	QUnit.test('Функция работает правильно с одним символом', function(assert){
+		assert.strictEqual(sort('в'), 'В');
+		assert.strictEqual(sort('У'), 'У');
+	});
+
+	QUnit.test('Функция работает с со строками расположенными в обратной сортировке', function(assert){
+		assert.strictEqual(sort('zzZzzz DddDddddD ccfed bbbre AAA'), 'Aaa Bbber Ccdef Ddddddddd Zzzzzz');
+		assert.strictEqual(sort('Aab aaa'), 'Aaa Aab');
+	});
+
+	QUnit.test('Функция работает правильно если строки уже отсортированы', function(assert){
+		assert.strictEqual(sort('Aaa Bbb Ccc Ggg'), 'Aaa Bbb Ccc Ggg');
+		assert.strictEqual(sort('AaA bbBB CcCCc GgGg'), 'Aaa Bbbb Ccccc Gggg');
+	});
+
+	QUnit.test('Функция работает на разных строках', function(assert){
+		assert.strictEqual(sort('abcd abbb baa'), 'Aab Abbb Abcd');
+		assert.strictEqual(sort('abbbbacc aaa abcdef bbb'), 'Aaa Aabbbbcc Abcdef Bbb');
+	})
+
+	
 });
