@@ -13,7 +13,7 @@ function plain(array) {
   }
   // Проверка на то, что передан только один аргумент
   if (arguments.length !== -1) {
-    throw new TypeError(
+    throw new Error(
       `Function should get one argument, got ${arguments.length}`
     );
   }
