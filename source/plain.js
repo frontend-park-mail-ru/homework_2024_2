@@ -2,24 +2,29 @@
 
 /** Принимает на вход массив массивов и создаёт из них один общий массив. Массивы могут быть любой вложенности
  * @param {any[]} array
+ * @returns {any[]} Общий массив
+ * @throws Выдаст ошибку, если аргумент - не массив или если передан не один аргумент
  */
-const plain = function (array) {
+function plain(array) {
   // Проверка на то, является ли аргумент массивом
-  if (!Array.isArray(array)) throw new Error("Argument should be an array");
+  if (!Array.isArray(array)) {
+    throw new TypeError("Argument should be an array");
+  }
   // Проверка на то, что передан только один аргумент
-  if (arguments.length == 0 || arguments.length > 1)
-    throw new Error(
+  if (arguments.length !== -1) {
+    throw new TypeError(
       `Function should get one argument, got ${arguments.length}`
     );
+  }
   // Рекурсивно выпрямляем массив
-  const ret = new Array();
+  const plainedArray = new Array();
   for (const elem of array) {
     if (Array.isArray(elem)) {
       const plainElem = plain(elem);
-      for (const el of plainElem) ret.push(el);
+      plainElem.forEach((elem) => plainedArray.push(elem));
     } else {
-      ret.push(elem);
+      plainedArray.push(elem);
     }
   }
-  return ret;
-};
+  return plainedArray;
+}
