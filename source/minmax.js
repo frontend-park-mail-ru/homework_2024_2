@@ -1,8 +1,16 @@
 "use strict";
 
+/**
+ * Находит минимальное и максимальное значения в строке чисел.
+ *
+ * @param {string} numbers - Строка, содержащая числа, разделенные пробелами.
+ * @returns {Array} Массив, содержащий минимальное и максимальное значения в строке.
+ * В случае, если строка не содержит чисел, возвращает [undefined, undefined].
+ * @throws {TypeError} Если аргумент не является строкой.
+ */
 const minmax = function (numbers) {
     if (!(typeof numbers === "string")) {
-        throw new TypeError('Аргумент должен быть строкой');
+        throw new TypeError("Аргумент должен быть строкой");
     }
 
     const numbersArray = [];
@@ -22,6 +30,12 @@ const minmax = function (numbers) {
     return [findMin(...numbersArray), findMax(...numbersArray)];
 };
 
+/**
+ * Находит максимальное значение среди переданных чисел.
+ *
+ * @param {...number} numbers - Перечисление чисел, среди которых нужно найти максимальное.
+ * @returns {number|undefined} Максимальное значение или undefined, если аргумент пустой.
+ */
 const findMax = function (...numbers) {
     if (!numbers) {
         return undefined;
@@ -38,7 +52,12 @@ const findMax = function (...numbers) {
     return max;
 };
 
-
+/**
+ * Находит минимальное значение среди переданных чисел.
+ *
+ * @param {...number} numbers - Перечисление чисел, среди которых нужно найти минимальное.
+ * @returns {number|undefined} Минимальное значение или undefined, если аргумент пустой.
+ */
 const findMin = function (...numbers) {
     if (!numbers) {
         return undefined;
