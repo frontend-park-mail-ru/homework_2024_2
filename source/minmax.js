@@ -1,5 +1,6 @@
 "use strict";
 
+
 /**
  * Находит минимальное и максимальное значения в строке чисел.
  *
@@ -8,26 +9,27 @@
  * В случае, если строка не содержит чисел, возвращает [undefined, undefined].
  * @throws {TypeError} Если аргумент не является строкой.
  */
+
 const minmax = function (numbers) {
-    if (!(typeof numbers === "string")) {
-        throw new TypeError("Аргумент должен быть строкой");
+  if (!(typeof numbers === "string" || (typeof numbers === "object" && numbers instanceof String))) {
+    throw new TypeError("Аргумент должен быть строкой");
+  }
+
+  const numbersArray = [];
+
+  numbers.split(" ").forEach(value =>{
+    const num = parseFloat(value);
+
+    if (!Number.isNaN(num)) {
+      numbersArray.push(num);
     }
+  });
 
-    const numbersArray = [];
+  if (!numbersArray) {
+    return [ undefined, undefined ];
+  }
 
-    numbers.split(" ").forEach(value =>{
-        const num = parseFloat(value);
-
-        if (!Number.isNaN(num)) {
-            numbersArray.push(num);
-        }
-    });
-
-    if (numbersArray.length === 0) {
-        return [undefined, undefined];
-    }
-
-    return [findMin(...numbersArray), findMax(...numbersArray)];
+  return [ findMin(...numbersArray), findMax(...numbersArray) ];
 };
 
 /**
@@ -37,19 +39,19 @@ const minmax = function (numbers) {
  * @returns {number|undefined} Максимальное значение или undefined, если аргумент пустой.
  */
 const findMax = function (...numbers) {
-    if (!numbers) {
-        return undefined;
+  if (!numbers) {
+    return undefined;
+  }
+
+  let max = numbers[0];
+
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] > max) {
+      max = numbers[i];
     }
+  }
 
-    let max = numbers[0];
-
-    for (let i = 1; i < numbers.length; i++) {
-        if (numbers[i] > max) {
-            max = numbers[i];
-        }
-    }
-
-    return max;
+  return max;
 };
 
 /**
@@ -59,17 +61,17 @@ const findMax = function (...numbers) {
  * @returns {number|undefined} Минимальное значение или undefined, если аргумент пустой.
  */
 const findMin = function (...numbers) {
-    if (!numbers) {
-        return undefined;
+  if (!numbers) {
+    return undefined;
+  }
+
+  let min = numbers[0];
+
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] < min) {
+      min = numbers[i];
     }
+  }
 
-    let min = numbers[0];
-
-    for (let i = 1; i < numbers.length; i++) {
-        if (numbers[i] < min) {
-            min = numbers[i];
-        }
-    }
-
-    return min;
+  return min;
 };
