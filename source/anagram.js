@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Функция, которая принимает на вход массив строк и группирует его на группы слов-анаграм
+ * @param {string[]} words - Массив строк.
+ * @returns {string[][]} Отсортированные группы слов-анаграм.
+ */
 const anagram = (words) => {
     if (!Array.isArray(words)) {
         throw new Error('Argument must be an array');
