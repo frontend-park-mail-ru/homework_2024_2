@@ -39,6 +39,10 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
 
+	QUnit.test('Функция работает правильно если строка создана через new', function (assert) {
+		assert.strictEqual(sort(new String('мама мыла раму')), 'Аамм Алмы Амру');
+	});
+
 	QUnit.test('Функция работает правильно если входная строка пуста', function (assert) {
 		assert.throws(function () {
 			sort('  ')

@@ -9,10 +9,10 @@
  * @throws {TypeError} Если строка пустая.
  */
 const sort = (sentence) => {
-    if (typeof(sentence) !== 'string') {
+    if (typeof(sentence) !== 'string' && !(sentence instanceof String)) {
         throw new TypeError('wrong type of data: should be string');
     }
-    if ( sentence.trim() === ''){
+    if (sentence.trim() === ''){
         throw new RangeError('empty data');
     }
     let str = sentence.toLowerCase().replaceAll('ё', 'е');
