@@ -10,17 +10,17 @@
  * @param {...*} objects - The objects to be zipped
  */
 const zip = (...objects) => {
-  return objects.reduce((zippedObject, currentObject) => {
-    if (zippedObject === undefined ||
-        typeof currentObject !== 'object' ||
-        currentObject === null){
-      return undefined;
-    }
-    for (const attr in currentObject) {
-      if (zippedObject[attr] === undefined) {
-        zippedObject[attr] = currentObject[attr];
-      }
-    }
-    return zippedObject;
-  }, {});
+	return objects.reduce((zippedObject, currentObject) => {
+		if (zippedObject === undefined ||
+			typeof currentObject !== 'object' ||
+			currentObject === null) {
+			return undefined;
+		}
+		for (const attr in currentObject) {
+			if (zippedObject[attr] === undefined) {
+				zippedObject[attr] = currentObject[attr];
+			}
+		}
+		return zippedObject;
+	}, {});
 }
