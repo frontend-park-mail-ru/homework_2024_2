@@ -4,9 +4,9 @@ const MIN_SIZE = 2;
 
 /**
  * Получение первой и второй линии шахматного поля
- * @param {number} size 
- * @param {boolean} isWhiteFirst 
- * @returns {string}
+ * @param {number} size size of chess deck
+ * @param {boolean} isWhiteFirst if first cell in deck is white -> true
+ * @returns {string} line of deck
  */
 const getChessLine = (size, isWhiteFirst) => {
     let line = '';
@@ -19,9 +19,9 @@ const getChessLine = (size, isWhiteFirst) => {
 
 /**
  * Принимает ее размер и возвращает поле шахматной доски
- * @param {number} size 
- * @returns {string, null}
- * @throws {Error}
+ * @param {number} size size of chess deck
+ * @returns {string, null} chess deck
+ * @throws {Error} The wrong type of size
  */
 const chess = (size) => {
     if (isNaN(size)) {
