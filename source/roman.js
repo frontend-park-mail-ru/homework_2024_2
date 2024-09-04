@@ -1,5 +1,21 @@
 'use strict';
 
+const arabicRomanMap = {
+    'M': 1000,
+    'CM': 900,
+    'D': 500,
+    'CD': 400,
+    'C': 100,
+    'XC': 90,
+    'L': 50,
+    'XL': 40,
+    'X': 10,
+    'IX': 9,
+    'V': 5,
+    'IV': 4,
+    'I': 1
+};
+
 /**
  * Converts Arabic number into Roman numeral and Roman numeral into Arabic number.
  *
@@ -28,24 +44,15 @@ function roman(numberOrNumeral) {
  */
 function romanToArabic(romanNumeral) {
     let copiedRomanNumeral = romanNumeral.toUpperCase();
-    const romanArabicMap = {
-        'I': 1,
-        'V': 5,
-        'X': 10,
-        'L': 50,
-        'C': 100,
-        'D': 500,
-        'M': 1000
-    };
     if (!/^[IVXLCDM]+$/.test(copiedRomanNumeral)) {
         throw new Error('Неверный формат римского числа');
     }
     return [...copiedRomanNumeral].reduce((result, currentSymbol, i) => {
         const nextSymbol = copiedRomanNumeral[i + 1];
-        if (romanArabicMap[currentSymbol] < romanArabicMap[nextSymbol]) {
-            result -= romanArabicMap[currentSymbol];
+        if (arabicRomanMap[currentSymbol] < arabicRomanMap[nextSymbol]) {
+            result -= arabicRomanMap[currentSymbol];
         } else {
-            result += romanArabicMap[currentSymbol];
+            result += arabicRomanMap[currentSymbol];
         }
         return result;
     }, 0);
@@ -59,21 +66,6 @@ function romanToArabic(romanNumeral) {
  */
 function arabicToRoman(arabicNumber) {
     let copiedArabicNumber = arabicNumber;
-    const arabicRomanMap = {
-        'M': 1000,
-        'CM': 900,
-        'D': 500,
-        'CD': 400,
-        'C': 100,
-        'XC': 90,
-        'L': 50,
-        'XL': 40,
-        'X': 10,
-        'IX': 9,
-        'V': 5,
-        'IV': 4,
-        'I': 1
-    };
     return Object.entries(arabicRomanMap).reduce(
         (result, [romanKey, arabicValue]) => {
             while (copiedArabicNumber >= arabicValue) {
