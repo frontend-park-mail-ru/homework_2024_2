@@ -1,9 +1,11 @@
-"use strict";
+'use strict';
+
+const MIN_SIZE = 2;
 
 /**
- * 
+ * Получение первой и второй линии шахматного поля
  * @param {number} size 
- * @param {number} isWhiteFirst 
+ * @param {boolean} isWhiteFirst 
  * @returns {string}
  */
 const getChessLine = (size, isWhiteFirst) => {
@@ -16,21 +18,24 @@ const getChessLine = (size, isWhiteFirst) => {
 }
 
 /**
- * 
+ * Принимает ее размер и возвращает поле шахматной доски
  * @param {number} size 
- * @returns {string}
+ * @returns {string, null}
+ * @throws {Error}
  */
 const chess = (size) => {
-    const minSize = 2;
-    if (isNaN(size) || size < minSize) {
+    if (isNaN(size)) {
+        throw new Error('The wrong type of size');
+    }
+    if (size < MIN_SIZE) {
         return null;
     }
-    let first = getChessLine(size, false);
-    let second = getChessLine(size, true);
+    const first = getChessLine(size, false);
+    const second = getChessLine(size, true);
 
     let result = '';
     for (let i = 0; i < size; i++) {
-        result += i % 2 === 0 ? first : second;
+        result += i % 2 ? second : first;
     }
     return result;
 }
