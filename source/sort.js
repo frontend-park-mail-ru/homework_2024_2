@@ -19,7 +19,7 @@ const sort = (sentence) => {
     let words = sortLetterInWords(str.split(' '));
     words = mySort(words);
     return words.join(' ');
-}
+};
 
 /**
  * Сортирует буквы в словах, а затем сортирует сами слова в тексте.
@@ -34,7 +34,7 @@ let sortLetterInWords = (words) => {
         words[i] = letterArray[0].toUpperCase() + letterArray.join('').slice(1);
     });
     return words;
-}
+};
 
 /**
  * Сортирует массив по возрастанию.
@@ -58,5 +58,5 @@ const mySort = (array) => {
         }
     }
     return [...mySort(leftArr), pivot, ...mySort(rightArr)];
-}
+};
 
