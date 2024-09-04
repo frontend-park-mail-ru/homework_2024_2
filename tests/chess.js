@@ -37,4 +37,45 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('8'), expected);
 	});
 
+	QUnit.test('Шахматная доска 8 на 8', function (assert) {
+		const expected =
+			'* * * * \n' +
+			' * * * *\n' +
+			'* * * * \n' +
+			' * * * *\n' +
+			'* * * * \n' +
+			' * * * *\n' +
+			'* * * * \n' +
+			' * * * *\n';
+		assert.strictEqual(chess(8), expected);
+		assert.strictEqual(chess('8'), expected);
+	});
+
+	QUnit.test('Шахматная доска 9 на 9', function (assert) {
+		const expected =
+			'* * * * *\n' +
+			' * * * * \n' +
+			'* * * * *\n' +
+			' * * * * \n' +
+			'* * * * *\n' +
+			' * * * * \n' +
+			'* * * * *\n' +
+			' * * * * \n' +
+			'* * * * *\n';
+		assert.strictEqual(chess(9), expected);
+		assert.strictEqual(chess('9'), expected);
+	});
+
+	QUnit.test('Шахматной доски отрицательного размера не бывает', function (assert) {
+		assert.strictEqual(chess(-1), null);
+		assert.strictEqual(chess(-99), null);
+		assert.strictEqual(chess('-51'), null);
+	});
+
+	QUnit.test('Неверное введенный размер доски', function (assert) {
+		assert.strictEqual(chess('test'), null);
+		assert.strictEqual(chess('t75jf3f'), null);
+		assert.strictEqual(chess({password: "1234"}), null);
+	});
+
 });

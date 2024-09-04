@@ -1,29 +1,36 @@
-const chess = size => {
-    size = Number(size);
-    if (size < 2 || isNaN(size)) {
+"use strict";
+
+/**
+ * 
+ * @param {number} size 
+ * @param {number} isWhiteFirst 
+ * @returns {string}
+ */
+const getChessLine = (size, isWhiteFirst) => {
+    let line = '';
+    for (let i = 0; i < size; i++) {
+        line += i % 2 == isWhiteFirst ? '*' : ' ';
+    }
+    line += '\n';
+    return line;
+}
+
+/**
+ * 
+ * @param {number} size 
+ * @returns {string}
+ */
+const chess = (size) => {
+    const minSize = 2;
+    if (isNaN(size) || size < minSize) {
         return null;
     }
-    let first = '';
-    let second = '';
-    for (let i = 0; i < size; i++) {
-        if (i % 2 == 0) {
-            first += '*';
-            second += ' ';
-        } else {
-            first += ' ';
-            second += '*';
-        }
-    }
-    first += '\n';
-    second += '\n';
+    let first = getChessLine(size, false);
+    let second = getChessLine(size, true);
 
     let result = '';
     for (let i = 0; i < size; i++) {
-        if (i % 2 === 0) {
-            result += first;
-        } else {
-            result += second;
-        }
+        result += i % 2 === 0 ? first : second;
     }
     return result;
 }
