@@ -90,17 +90,11 @@ QUnit.module('Тестируем функцию format', function () {
 		const input2 = true;
 		const input3 = ['1', '2', '3'];
 
-		const expected1 =
-			'';
+		const expected =
+			'Invalid data';
 
-		const expected2 =
-			'';
-
-		const expected3 =
-			'';
-			
-		assert.strictEqual(format(input1, 1), expected1);
-		assert.strictEqual(format(input2, 1), expected2);
-		assert.strictEqual(format(input3, 1), expected3);
+		assert.throws(() => format(input1, 1), new Error(expected));
+		assert.throws(() => format(input2, 1), new Error(expected));
+		assert.throws(() => format(input3, 1), new Error(expected));
 	});
 });
