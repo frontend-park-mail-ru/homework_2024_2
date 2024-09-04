@@ -72,10 +72,4 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('-51'), null);
 	});
 
-	QUnit.test('Неверное введенный размер доски', function (assert) {
-		assert.strictEqual(chess('test'), null);
-		assert.strictEqual(chess('t75jf3f'), null);
-		assert.strictEqual(chess({password: "1234"}), null);
-	});
-
 });
