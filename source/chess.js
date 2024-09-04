@@ -10,12 +10,15 @@ const MIN_SIZE = 2;
  */
 const getChessLine = (size, isWhiteFirst) => {
     let line = '';
+    let prev = isWhiteFirst ? '*' : ' ';
+    let cur = '';
     for (let i = 0; i < size; i++) {
-        line += i % 2 === Number(isWhiteFirst) ? '*' : ' ';
+        cur = prev == '*' ? ' ' : '*';
+        line += cur;
+        prev = cur;
     }
     line += '\n';
     return line;
-
 }
 
 /**
@@ -33,8 +36,6 @@ const chess = (size) => {
     }
     const first = getChessLine(size, false);
     const second = getChessLine(size, true);
-    console.log(first)
-    console.log(second)
 
     let result = '';
     for (let i = 0; i < size; i++) {
