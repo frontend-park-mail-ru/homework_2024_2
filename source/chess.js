@@ -3,7 +3,7 @@
 const MIN_SIZE = 2;
 
 /**
- * Получение первой и второй линии шахматного поля
+ * Getting first and second line of the chess deck
  * @param {number} size size of chess deck
  * @param {boolean} isWhiteFirst if first cell in deck is white -> true
  * @returns {string} line of deck
@@ -18,7 +18,7 @@ const getChessLine = (size, isWhiteFirst) => {
 }
 
 /**
- * Принимает ее размер и возвращает поле шахматной доски
+ * Chess deck by the given size
  * @param {number} size size of chess deck
  * @returns {string, null} chess deck
  * @throws {Error} The wrong type of size
