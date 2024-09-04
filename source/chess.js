@@ -15,6 +15,7 @@ const getChessLine = (size, isWhiteFirst) => {
     }
     line += '\n';
     return line;
+
 }
 
 /**
@@ -41,5 +42,3 @@ const chess = (size) => {
     }
     return result;
 }
-
-chess(3)
