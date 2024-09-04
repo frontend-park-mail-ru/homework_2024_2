@@ -1,5 +1,13 @@
 'use strict';
 
+/**
+ * Сортирует буквы в словах, а затем сортирует сами слова в тексте.
+ *
+ * @param {string} sentence - Строка, содержащая исходный текст.
+ * @returns {String} Строка, содержащая отсортированный текст.
+ * @throws {TypeError} Если аргумент не является строкой.
+ * @throws {TypeError} Если строка пустая.
+ */
 const sort = (sentence) => {
     if (typeof(sentence) !== 'string') {
         throw new Error('wrong type of data: should be string');
@@ -13,6 +21,12 @@ const sort = (sentence) => {
     return words.join(' ');
 }
 
+/**
+ * Сортирует буквы в словах, а затем сортирует сами слова в тексте.
+ *
+ * @param {Array} words - Массив слов.
+ * @returns {Array} Массив, в каждом слове отсортированны буквы.
+ */
 let sortLetterInWords = (words) => {
     words.forEach((word, i)=> {
         let letterArray = word.split('');
@@ -22,6 +36,12 @@ let sortLetterInWords = (words) => {
     return words;
 }
 
+/**
+ * Сортирует массив по возрастанию.
+ *
+ * @param {Array} array - Массив.
+ * @returns {Array} Отсортированный массив.
+ */
 const mySort = (array) => {
    if (array.length <= 1){
        return array;
