@@ -10,10 +10,10 @@
  */
 const sort = (sentence) => {
     if (typeof(sentence) !== 'string') {
-        throw new Error('wrong type of data: should be string');
+        throw new TypeError('wrong type of data: should be string');
     }
     if ( sentence.trim() === ''){
-        throw new Error("empty data");
+        throw new RangeError('empty data');
     }
     let str = sentence.toLowerCase().replaceAll('ё', 'е');
     let words = sortLetterInWords(str.split(' '));

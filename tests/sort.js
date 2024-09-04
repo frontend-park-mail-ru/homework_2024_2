@@ -40,38 +40,23 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция работает правильно если входная строка пуста', function (assert) {
-		try {
-			sort('       ');
-			assert.ok(false, 'Want err')
-		} catch (err){
-			assert.equal(err.message, 'empty data', 'Ошибки пустой строки обрабатываются корректно')
-		}
+		assert.throws(function () {
+			sort('  ')
+		}, new RangeError('empty data'));
 	});
 	QUnit.test('Функция работает правильно при неккоретных входных данных', function (assert) {
-		try {
-			sort(123);
-			assert.ok(false, 'Want err')
-		} catch (err){
-			assert.equal(err.message, 'wrong type of data: should be string', 'Ошибки неверных данных обрабатываются корректно')
-		}
-		try {
-			sort(false);
-			assert.ok(false, 'Want err')
-		} catch (err){
-			assert.equal(err.message, 'wrong type of data: should be string', 'Ошибки неверных обрабатываются корректно')
-		}
-		try {
-			sort(null);
-			assert.ok(false, 'Want err')
-		} catch (err){
-			assert.equal(err.message, 'wrong type of data: should be string', 'Ошибки неверных обрабатываются корректно')
-		}
-		try {
-			sort(undefined);
-			assert.ok(false, 'Want err')
-		} catch (err){
-			assert.equal(err.message, 'wrong type of data: should be string', 'Ошибки неверных обрабатываются корректно')
-		}
+		assert.throws(function () {
+			sort(123)
+		}, new TypeError('wrong type of data: should be string'));
+		assert.throws(function () {
+			sort(false)
+		}, new TypeError('wrong type of data: should be string'));
+		assert.throws(function () {
+			sort(null)
+		}, new TypeError('wrong type of data: should be string'));
+		assert.throws(function () {
+			sort(undefined)
+		}, new TypeError('wrong type of data: should be string'));
 	});
 });
 
