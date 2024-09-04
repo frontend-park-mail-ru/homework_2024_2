@@ -12,6 +12,22 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip(obj), obj);
 	});
 
+	QUnit.test('Функция работает с falsy свойствами', function(assert) {
+		assert.deepEqual(zip({ falsy: "" }), { falsy: "" });
+		assert.deepEqual(zip({ falsy: 0 }), { falsy: 0 });
+		assert.deepEqual(zip({ falsy: null }), { falsy: null });
+		assert.deepEqual(zip({ falsy: NaN }), { falsy: NaN });
+
+		const falsyObj = {
+			str: "",
+			num: 0,
+			bool: false,
+			nan: NaN,
+		};
+		assert.deepEqual(zip({ str: "" }, { num: 0 }, { bool: false }, { nan: NaN }), falsyObj);
+
+	});
+
 	QUnit.test('Функция работает с объектами среди которых есть объекты без свойств', function (assert) {
 		assert.deepEqual(zip({}, {}), {});
 		assert.deepEqual(zip({answer: 42}, {}), {answer: 42});
@@ -74,4 +90,38 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+	QUnit.test('Функция правильно работает с вложенными объектами', function(assert) {
+		assert.deepEqual(zip({ empty: {} }), { empty: {} });
+
+		const obj = {
+			val: 5,
+			selfref: null
+		};
+		obj.selfref = obj;
+		assert.deepEqual(zip(obj), obj);
+
+		const car = {
+			owner: "John",
+			type: "sedan",
+			allowedDrivers: [
+				"Linda",
+				"Bill"
+			],
+		};
+		assert.deepEqual(zip(car), car);
+
+	});
+
+	QUnit.test('Функция правильно обрабатывает некорректные входные данные', function(assert) {
+		assert.deepEqual(zip(1), undefined, 'При подаче на вход не объекта должно возвращаться undefined');
+		assert.deepEqual(zip(""), undefined);
+		assert.deepEqual(zip(null), undefined);
+		assert.deepEqual(zip(undefined), undefined);
+		assert.deepEqual(zip(false), undefined);
+
+		assert.deepEqual(zip(1, { name: 'age' }), undefined);
+		assert.deepEqual(zip({ name: 'age' }, 1, undefined));
+	});
+
 });
