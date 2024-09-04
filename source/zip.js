@@ -1,6 +1,9 @@
 'use strict';
 
+/*** функция выделяющая все параметры и их значения */
 function zip(...objects) {
+
+    /*** проверка на параметры */
     if (objects.size() == 0) {
          throw new Error('No parameters');
     }
