@@ -95,4 +95,159 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
+
+
+	// Добавленные тесты
+
+	QUnit.test('set работает правильно c объектами со свойством null', function (assert) {
+		const object = {
+			deep: {
+				nested: {
+					null: 2
+				}
+			}
+		};
+
+		const object2 = {
+			deep: {
+				nested: {
+					null: 43
+				}
+			}
+		};
+
+		const object3 = {
+			deep: {
+				null: {
+					null: 43
+				}
+			}
+		};
+
+		const object4 = {
+			deep: {
+				null: {
+					null: null
+				}
+			}
+		};
+
+		assert.deepEqual(set(object, '.deep.nested.null', 43), object2);
+		assert.deepEqual(set(object3, '.deep.null.null', null), object4);
+
+		assert.deepEqual(object, object2);
+		assert.deepEqual(object3, object4);
+	});
+
+	QUnit.test('set работает правильно c объектами со вложенностью больше 3', function (assert) {
+		const object = {
+			very: {
+				deep: {
+					nested: {
+						field: "value"
+					}
+				}
+			}
+		};
+
+		const object2 = {
+			very: {
+				deep: {
+					nested: {
+						field: "other value"
+					}
+				}
+			}
+		};
+
+
+		const object3 = {
+			incredibly: {
+				very: {
+					deep: {
+						nested: {
+							field: "value"
+						}
+					}
+				}
+			}
+		};
+
+		const object4 = {
+			incredibly: {
+				very: {
+					deep: {
+						nested: {
+							field: "other value"
+						}
+					}
+				}
+			}
+		};
+
+		const objectNested5 = {
+			absolutely: {
+				incredibly: {
+					very: {
+						deep: {
+							nested: {
+								field: "value"
+							}
+						}
+					}
+				}
+			}
+			
+		};
+
+		const objectNested5_2 = {
+			absolutely: {
+				incredibly: {
+					very: {
+						deep: {
+							nested: {
+								field: "other value"
+							}
+						}
+					}
+				}
+			}
+			
+		};
+
+		const objectNested5_3 = {
+			null: {
+				absolutely: {
+					incredibly: {
+						very: {
+							deep: {
+								nested: {
+									field: "other value"
+								}
+							}
+						}
+					}
+				}
+			},
+			absolutely: {
+				incredibly: {
+					very: {
+						deep: {
+							nested: {
+								field: "other value"
+							}
+						}
+					}
+				}
+			}
+			
+		};
+
+		assert.deepEqual(set(object, '.very.deep.nested.field', "other value"), object2);
+		assert.deepEqual(set(object3, '.incredibly.very.deep.nested.field', "other value"), object4);
+		assert.deepEqual(set(objectNested5, '.absolutely.incredibly.very.deep.nested.field', "other value"), objectNested5_2);
+		assert.deepEqual(set(objectNested5, '.null.absolutely.incredibly.very.deep.nested.field', "other value"), objectNested5_3);
+	});
+
+
 });
