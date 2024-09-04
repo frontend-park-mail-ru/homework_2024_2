@@ -17,11 +17,23 @@ function roman (num) {
         {value: 4, symbol: 'IV' },
         {value: 1, symbol: 'I'}         
     ];
+
+   if (typeof num === 'object' || num === null || num === undefined ){
+    throw new Error('Ввод должен быть числом или строкой, представляющей число');
+   } 
+
    let result = "";
    if(typeof num === 'string'){
     num=parseInt(num, 10)
+    if (isNaN(num)){
+        throw new Error('Строку не удалось преобразовать в число');
+    }
    } 
-   
+
+    if (!Number.isInteger(num) || num <= 0) {
+    throw new Error('Значение должно быть целым положительным числом');
+    }
+
    if(Number.isInteger(num)) {
     for(let i=0; i<romRadix.length; i++){
         while(num>=romRadix[i].value){
@@ -45,7 +57,9 @@ function arabic (roman){
     }
     let num = 0;
     let prev = 0;
-    
+    if (roman === null || roman === undefined ||  roman.trim() === ''){
+        throw new Error('Ввод должен быть числом или строкой, представляющей число');
+    }
     for(let i = roman.length-1; i>=0; i--){
         let symbol = roman[i].toUpperCase();
         let value = arabicRadix[symbol];
