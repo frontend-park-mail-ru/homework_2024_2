@@ -9,7 +9,7 @@
 const getChessLine = (size, isWhiteFirst) => {
     let line = '';
     for (let i = 0; i < size; i++) {
-        line += i % 2 == isWhiteFirst ? '*' : ' ';
+        line += i % 2 === isWhiteFirst ? '*' : ' ';
     }
     line += '\n';
     return line;
