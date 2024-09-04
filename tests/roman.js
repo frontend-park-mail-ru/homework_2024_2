@@ -41,24 +41,24 @@ QUnit.module('Тестируем функцию roman', function () {
     QUnit.test('roman выдает ошибку при передаче невалидного типа данных', function (assert) {
         assert.throws(function () {
             roman(NaN);
-        }, new Error('Неверный тип данных'));
+        }, new TypeError('Неверный тип данных'));
         assert.throws(function () {
             roman(1.23);
-        }, new Error('Неверный тип данных'));
+        }, new TypeError('Неверный тип данных'));
         assert.throws(function () {
             roman(-123);
-        }, new Error('Неверный тип данных'));
+        }, new TypeError('Неверный тип данных'));
         assert.throws(function () {
             roman(true);
-        }, new Error('Неверный тип данных'));
+        }, new TypeError('Неверный тип данных'));
     });
 
     QUnit.test('roman выдает ошибку при передаче несуществующего римского числа', function (assert) {
         assert.throws(function () {
             roman('XYPR');
-        }, new Error('Неверный формат римского числа'));
+        }, new TypeError('Неверный формат римского числа'));
         assert.throws(function () {
             roman('kekw');
-        }, new Error('Неверный формат римского числа'));
+        }, new TypeError('Неверный формат римского числа'));
     });
 });

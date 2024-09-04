@@ -21,7 +21,7 @@ const arabicRomanMap = {
  *
  * @param {number|string} numberOrNumeral - Arabic number or Roman numeral
  * @return {string|number} - converted value as a Roman numeral or Arabic number
- * @throws {Error} Throws an error if the input data is of the wrong type or format.
+ * @throws {TypeError} Throws an error if the input data is of the wrong type or format.
  */
 function roman(numberOrNumeral) {
     if (typeof numberOrNumeral === 'number' || typeof numberOrNumeral === 'string') {
@@ -32,7 +32,7 @@ function roman(numberOrNumeral) {
             return romanToArabic(numberOrNumeral);
         }
     }
-    throw new Error('Неверный тип данных');
+    throw new TypeError('Неверный тип данных');
 }
 
 /**
@@ -40,12 +40,12 @@ function roman(numberOrNumeral) {
  *
  * @param {string} romanNumeral - Roman numeral for convertion
  * @return {string|number} - converted Arabic number
- * @throws {Error} Throws an error if Roman numeral is of the wrong format.
+ * @throws {TypeError} Throws an error if Roman numeral is of the wrong format.
  */
 function romanToArabic(romanNumeral) {
     let copiedRomanNumeral = romanNumeral.toUpperCase();
     if (!/^[IVXLCDM]+$/.test(copiedRomanNumeral)) {
-        throw new Error('Неверный формат римского числа');
+        throw new TypeError('Неверный формат римского числа');
     }
     return [...copiedRomanNumeral].reduce((result, currentSymbol, i) => {
         const nextSymbol = copiedRomanNumeral[i + 1];
