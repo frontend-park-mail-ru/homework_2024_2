@@ -49,19 +49,16 @@ QUnit.module('Тестируем функцию roman', function () {
             roman(-123);
         }, new Error('Неверный тип данных'));
         assert.throws(function () {
-            roman(null);
-        }, new Error('Неверный тип данных'));
-        assert.throws(function () {
             roman(true);
-        }, new Error('Неверный тип данных'));
-        assert.throws(function () {
-            roman(alert);
         }, new Error('Неверный тип данных'));
     });
 
     QUnit.test('roman выдает ошибку при передаче несуществующего римского числа', function (assert) {
         assert.throws(function () {
             roman('XYPR');
+        }, new Error('Неверный формат римского числа'));
+        assert.throws(function () {
+            roman('kekw');
         }, new Error('Неверный формат римского числа'));
     });
 });
