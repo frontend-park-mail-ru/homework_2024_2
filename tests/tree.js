@@ -1,27 +1,13 @@
 'use strict';
 
-let expectTreeThrow = function(height) {
-	let throws;
-
-	try {
-		tree(height);
-		throws = false;
-	}
-	catch (error) {
-		throws = true;
-	}
-
-	return throws;
-}
-
 QUnit.module('Тестируем функцию tree', function () {	
 	QUnit.test('Ёлочек высотой ниже трёх не бывает', function (assert) {
-		assert.strictEqual(expectTreeThrow(0), true);
-		assert.strictEqual(expectTreeThrow(1), true);
-		assert.strictEqual(expectTreeThrow(2), true);
-		assert.strictEqual(expectTreeThrow('0'), true);
-		assert.strictEqual(expectTreeThrow('1'), true);
-		assert.strictEqual(expectTreeThrow('2'), true);
+		assert.throws(() => tree(0));
+		assert.throws(() => tree(1));
+		assert.throws(() => tree(2));
+		assert.throws(() => tree('0'));
+		assert.throws(() => tree('1'));
+		assert.throws(() => tree('2'));
 	});
 
 	QUnit.test('Ёлочка высотой 3', function (assert) {
@@ -94,14 +80,18 @@ QUnit.module('Тестируем функцию tree', function () {
 	});
 
 	QUnit.test('Вызов функции построения дерева без указания высоты', function (assert) {
-		assert.strictEqual(expectTreeThrow(), true);
+		assert.throws(tree);
+	});
+
+	QUnit.test('Вызов функции построения дерева с дробным числом в качестве высоты', function (assert) {
+		assert.throws(() => tree(10.5));
 	});
 
 	QUnit.test('Вызов функции построения дерева с массивом в качестве высоты', function (assert) {
-		assert.strictEqual(expectTreeThrow([1, 2, 3]), true);
+		assert.throws(() => tree([1, 2, 3]));
 	});
 
 	QUnit.test('Вызов функции построения дерева с объектом в качестве высоты', function (assert) {
-		assert.strictEqual(expectTreeThrow({ city: 'Moscow' }), true);
+		assert.throws(() => tree({ city: 'Moscow' }));
 	});
 });
