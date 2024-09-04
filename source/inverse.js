@@ -1,15 +1,21 @@
+/**
+ *
+ * Функция inverse меняет порядок элементов в массиве на противоположный
+ * @param {Array} numbers - массив чисел
+ * @param {Integer} partition - количество нетронутых элементов
+ * @returns {Array} - переыернутый массив
+ */
+
 'use strict';
 
-const inverse = (numbers, val) => {
-    if (val === undefined) {
-        return numbers.reverse();
+const inverse = (numbers, partition) => {
+    if (!Array.isArray(numbers)) return;
+    if (!Number.isInteger(partition)) {
+        return [...numbers].reverse();
     }
-    else {
-        if ( val < 0) {
-            val = numbers.length + val;
-            return [...numbers.slice(0,val).reverse(), ...numbers.slice(val)];
-        }
-        return [...numbers.slice(0,val), ...numbers.slice(val).reverse()];
+    if (Number.isInteger(partition) && partition < 0) {
+        partition = numbers.length + partition;
+        return [...[...numbers.slice(0, partition)].reverse(), ...numbers.slice(partition)];
     }
+    return [...numbers.slice(0, partition), ...[...numbers.slice(partition)].reverse()];
 }
-console.log(inverse([1, 2, 3, 4, 5], -1))
