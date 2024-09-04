@@ -15,7 +15,7 @@ const sort = (sentence) => {
     if (sentence.trim() === ''){
         throw new RangeError('empty data');
     }
-    let str = sentence.toLowerCase().replaceAll('ё', 'е');
+    let str = sentence.trim().toLowerCase().replaceAll('ё', 'е');
     let words = sortLetterInWords(str.split(' '));
     words = mySort(words);
     return words.join(' ');
