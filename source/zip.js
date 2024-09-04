@@ -23,4 +23,5 @@ const zip = (...objects) => {
 		}
 		return zippedObject;
 	}, {});
-}
+};
+
