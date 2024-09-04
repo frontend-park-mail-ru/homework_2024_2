@@ -6,7 +6,7 @@
  * @param {string} sentence - Строка, содержащая исходный текст.
  * @returns {String} Строка, содержащая отсортированный текст.
  * @throws {TypeError} Если аргумент не является строкой.
- * @throws {TypeError} Если строка пустая.
+ * @throws {RangeError} Если строка пустая.
  */
 const sort = (sentence) => {
     if (typeof(sentence) !== 'string' && !(sentence instanceof String)) {
