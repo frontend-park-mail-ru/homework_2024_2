@@ -16,6 +16,8 @@ const arabicRomanMap = {
     'I': 1
 };
 
+const ROMAN_TYPE_TEST_REGEX = /^[ivxlcdm]+$/i;
+
 /**
  * Converts Arabic number into Roman numeral and Roman numeral into Arabic number.
  *
@@ -23,12 +25,15 @@ const arabicRomanMap = {
  * @return {string|number} - converted value as a Roman numeral or Arabic number
  * @throws {TypeError} Throws an error if the input data is of the wrong type or format.
  */
-function roman(numberOrNumeral) {
+const roman = (numberOrNumeral) => {
     if (typeof numberOrNumeral === 'number' || typeof numberOrNumeral === 'string') {
         if (Number.isInteger(+numberOrNumeral) && +numberOrNumeral > 0) {
-            return arabicToRoman(numberOrNumeral);
+            return arabicToRoman(+numberOrNumeral);
         }
         if (typeof numberOrNumeral === 'string') {
+            if (!ROMAN_TYPE_TEST_REGEX.test(numberOrNumeral)) {
+                throw new TypeError('Неверный формат римского числа');
+            }
             return romanToArabic(numberOrNumeral);
         }
     }
@@ -42,11 +47,8 @@ function roman(numberOrNumeral) {
  * @return {string|number} - converted Arabic number
  * @throws {TypeError} Throws an error if Roman numeral is of the wrong format.
  */
-function romanToArabic(romanNumeral) {
+const romanToArabic = (romanNumeral) => {
     let copiedRomanNumeral = romanNumeral.toUpperCase();
-    if (!/^[IVXLCDM]+$/.test(copiedRomanNumeral)) {
-        throw new TypeError('Неверный формат римского числа');
-    }
     return [...copiedRomanNumeral].reduce((result, currentSymbol, i) => {
         const nextSymbol = copiedRomanNumeral[i + 1];
         if (arabicRomanMap[currentSymbol] < arabicRomanMap[nextSymbol]) {
@@ -61,10 +63,10 @@ function romanToArabic(romanNumeral) {
 /**
  * Converts Roman numeral into Arabic number.
  *
- * @param {number|string} arabicNumber - Arabic number for convertion
+ * @param {number} arabicNumber - Arabic number for convertion
  * @return {string|number} - converted Roman numeral
  */
-function arabicToRoman(arabicNumber) {
+const arabicToRoman = (arabicNumber) => {
     let copiedArabicNumber = arabicNumber;
     return Object.entries(arabicRomanMap).reduce(
         (result, [romanKey, arabicValue]) => {
