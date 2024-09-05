@@ -53,7 +53,7 @@ QUnit.module('Тестируем функцию inverse', function () {
 	});
 
 	QUnit.test('Работа функции с краевыми случаями', function (assert) {
-		assert.throws(() => { inverse(5, 2); }, Error, "numbers должен быть массивом");
+		assert.throws(() => { inverse(5, 2); }, TypeError, "numbers должен быть массивом");
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 1.2), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], ""), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], null), [ 5, 4, 3, 2, 1 ]);

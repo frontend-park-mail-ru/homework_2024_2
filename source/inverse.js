@@ -9,13 +9,14 @@
  */
 const inverse = (numbers, partition) => {
     if (!Array.isArray(numbers)) {
-        throw new Error("numbers должен быть массивом");
+        throw new TypeError("numbers должен быть массивом");
     }
     if (!Number.isInteger(partition)) {
         return [...numbers].reverse();
     }
     if (partition < 0) {
-        return [...numbers.slice(0, numbers.length + partition).reverse(), ...numbers.slice(numbers.length + partition)];
+        let reversePartition = numbers.length + partition;
+        return [...numbers.slice(0, reversePartition).reverse(), ...numbers.slice(reversePartition)];
     }
     return [...numbers.slice(0, partition), ...numbers.slice(partition).reverse()];
 }
