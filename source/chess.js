@@ -35,7 +35,7 @@ const alternateRepeat = (count, {first, second}) => {
  * Chess deck by the given size
  * @param {number} size size of chess deck
  * @returns {string | null} chess deck
- * @throws {Error} The wrong type of size
+ * @throws {TypeError} The wrong type of size
  */
 const chess = (size) => {
     if (isNaN(size) || typeof size !== 'number' && typeof size !== 'string') {
