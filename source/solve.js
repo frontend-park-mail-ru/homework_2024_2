@@ -1,9 +1,7 @@
-function solve(formula, value) {
-    try {
-        let x = value
-        const result = eval(formula)
-        return result
-    } catch (error) {
-        return null;
-    }
+'use strict';
+
+function solve(formula, x) {
+    const validation = /^(?!.*\*\*)([0-9x()*\s-+]+)$/
+    const result = validation.test(formula) ? eval(formula) : null
+    return result
 }
