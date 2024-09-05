@@ -3,7 +3,7 @@
 const MIN_SIZE = 2;
 
 /**
- * Interleaving symbols * and ' '
+ * Interleaving strings first and second
  * @param {number | string} size size of chess deck
  * @param {Object} line first and second line
  * @param {string} line.first first line 
