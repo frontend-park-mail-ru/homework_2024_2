@@ -7,24 +7,31 @@ const sorting = (arr, props) => {
 
   const sortedArr = [...arr];
 
-  for (let i = 0; i < sortedArr.length - 1; i++) {
-    for (let j = 0; j < sortedArr.length - 1 - i; j++) {
-      let flag = false;
+  sortedArr.forEach((_, i) => {
+    let swapped = false;
+    sortedArr.forEach((_, j) => {
+      if (j < sortedArr.length - 1 - i) {
+        let flag = false;
+        for (let prop of props) {
+          if (sortedArr[j][prop] > sortedArr[j + 1][prop]) {
+            flag = true;
+            break;
+          } else if (sortedArr[j][prop] < sortedArr[j + 1][prop]) {
+            break;
+          }
+        }
 
-      for (let key of props) {
-        if (sortedArr[j][key] > sortedArr[j + 1][key]) {
-          flag = true;
-          break;
-        } else if (sortedArr[j][key] < sortedArr[j + 1][key]) {
-          break;
+        if (flag) {
+          [sortedArr[j], sortedArr[j + 1]] = [sortedArr[j + 1], sortedArr[j]];
+          swapped = true;
         }
       }
+    });
 
-      if (flag) {
-        [sortedArr[j], sortedArr[j + 1]] = [sortedArr[j + 1], sortedArr[j]];
-      }
+    if (!swapped) {
+      return sortedArr;
     }
-  }
+  });
 
   return sortedArr;
 };
