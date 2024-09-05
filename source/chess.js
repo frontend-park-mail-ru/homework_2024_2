@@ -4,14 +4,18 @@ const MIN_SIZE = 2;
 
 /**
  * 
- * @param {number} count index of cell
+ * @param {number | string} size size of chess deck
  * @param {Object} line first and second line
  * @param {string} line.first first line 
  * @param {string} line.second second line 
  * @returns {string} line of deck
  */
-const alternateRepeat = (count, {first, second}) => {
-    return count % 2 ? second : first;
+const alternateRepeat = (size, {first, second}) => {
+    let line = ''
+    for (let i = 0; i < size; i++) {
+        line += i % 2 ? second : first;
+    }
+    return line
 }
 
 /**
@@ -21,11 +25,8 @@ const alternateRepeat = (count, {first, second}) => {
  * @returns {string} line of deck
  */
 const getChessLine = (size, isWhiteFirst) => {
-    let line = '';
     const [first, second] = isWhiteFirst ? [' ', '*'] : ['*', ' '];
-    for (let i = 0; i < size; i++) {
-        line += alternateRepeat(i, {second, first})
-    }
+    let line = alternateRepeat(size, {second, first})
     line += '\n';
     return line;
 }
@@ -46,9 +47,6 @@ const chess = (size) => {
     const first = getChessLine(size, false);
     const second = getChessLine(size, true);
 
-    let result = '';
-    for (let i = 0; i < size; i++) {
-        result += alternateRepeat(i, {first, second})
-    }
+    let result = alternateRepeat(size, {first, second});
     return result;
 }
