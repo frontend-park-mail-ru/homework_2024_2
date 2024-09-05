@@ -10,12 +10,13 @@ const MIN_SIZE = 2;
  */
 const getChessLine = (size, isWhiteFirst) => {
     let line = '';
-    let prev = isWhiteFirst ? '*' : ' ';
-    let cur = '';
     for (let i = 0; i < size; i++) {
-        cur = prev == '*' ? ' ' : '*';
-        line += cur;
-        prev = cur;
+        if (isWhiteFirst) {
+            line += i % 2 ? '*' : ' ';
+        }
+        else {
+            line += i % 2 ? ' ' : '*';
+        }
     }
     line += '\n';
     return line;
@@ -24,11 +25,11 @@ const getChessLine = (size, isWhiteFirst) => {
 /**
  * Chess deck by the given size
  * @param {number} size size of chess deck
- * @returns {string, null} chess deck
+ * @returns {string | null} chess deck
  * @throws {Error} The wrong type of size
  */
 const chess = (size) => {
-    if (isNaN(size)) {
+    if (isNaN(size) || typeof size !== 'number' && typeof size !== 'string') {
         throw new Error('The wrong type of size');
     }
     if (size < MIN_SIZE) {
