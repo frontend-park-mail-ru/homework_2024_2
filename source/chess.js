@@ -47,6 +47,5 @@ const chess = (size) => {
     const first = getChessLine(size, false);
     const second = getChessLine(size, true);
 
-    let result = alternateRepeat(size, {first, second});
-    return result;
+    return alternateRepeat(size, {first, second});;
 }
