@@ -1,27 +1,30 @@
-'use strict';
+'use strict'; //включаем строгий режим, чтобы не думать о косяках старого js, выскакивающих в режиме обратной совместимости
 
 /**
  * @param {number} inputNumber - Десятичное число, которое необходимо перевести в римскую систему счисления.
+ * @throws {null} - Введено некорректное число inputNumber
  * @returns {string} - Число в римской системе счисления.
  *
  * @also
  *
  * @param {string} inputNumber - Десятичное число в виде строки, которое необходимо перевести в римскую систему счисления.
+ * @throws {null} - Введено некорректное число inputNumber
  * @returns {string} - Число в римской системе счисления.
  *
  * @also
  *
  * @param {string} inputNumber - Число в римской системе счисления в виде строки, которое необходимо перевести в десятичную систему счисления.
+ * @throws {null} - Введено некорректное число inputNumber
  * @returns {number} - Число в десятичной системе счисления.
  */
-const roman = function (inputNumber) {
+const roman = (inputNumber) => {
     if(!inputNumber){ //Проверяем на NaN, null, undefined и т.д.
         return null;
     }
     if (inputNumber == parseInt(inputNumber, 10) && inputNumber>0){ //Проверяем, что на входе корректное число
         //Переводим число из десятичной системы счисления в римскую
-        let romanNumbers = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
-        let numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        const romanNumbers = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
+        const numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
         
         let i = 0;
         let answer = "";
@@ -47,7 +50,7 @@ const roman = function (inputNumber) {
 
     inputNumber = inputNumber.toLowerCase();
 
-    let map = { 'i': 1, 'v':5, 'x':10, 'l':50, 'c':100, 'd':500, 'm':1000 };
+    const map = { 'i': 1, 'v':5, 'x':10, 'l':50, 'c':100, 'd':500, 'm':1000 };
 
     let answer = 0;
     let n = inputNumber.length;

@@ -55,6 +55,7 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman(), null);
 
 		assert.strictEqual(roman(NaN), null);
+		assert.strictEqual(roman(undefined), null);
         assert.strictEqual(roman(Infinity), null);
         assert.strictEqual(roman(-Infinity), null);
 	});
