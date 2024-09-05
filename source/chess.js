@@ -52,5 +52,3 @@ const chess = (size) => {
     }
     return result;
 }
-
-console.log(chess('5'))
