@@ -26,21 +26,14 @@ const tree = (height) => {
         for (let j = 0; j < width; j++) {
             // Обработка последней строки
             if (i === height - 1) {
-                // Палочка
-                if (j === center) {
-                    resultTree += '|';
-                } else {
-                    resultTree += ' ';
-                }
+                // Палочка или пробел
+                resultTree += j == center ? '|' : ' ';
                 continue;
             }
-            // Звездчоки
-            if (center - i <= j && j <= center + i) {
-                resultTree += '*';
-                continue;
-            }
-            // Иначе пробел
-            resultTree += ' ';
+
+            let isTree = center - i <= j && j <= center + i;
+            // Звездочка или пробел в зависимости от текущего индекса
+            resultTree += isTree ? '*' : ' ';
         }
         resultTree += '\n';
     }
