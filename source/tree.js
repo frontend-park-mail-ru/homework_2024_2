@@ -31,7 +31,7 @@ const tree = (height) => {
                 continue;
             }
 
-            let isTree = center - i <= j && j <= center + i;
+            const isTree = center - i <= j && j <= center + i;
             // Звездочка или пробел в зависимости от текущего индекса
             resultTree += isTree ? '*' : ' ';
         }
