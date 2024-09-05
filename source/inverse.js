@@ -15,7 +15,7 @@ const inverse = (numbers, partition) => {
         return [...numbers].reverse();
     }
     if (partition < 0) {
-        let reversePartition = numbers.length + partition;
+        const reversePartition = numbers.length + partition;
         return [...numbers.slice(0, reversePartition).reverse(), ...numbers.slice(reversePartition)];
     }
     return [...numbers.slice(0, partition), ...numbers.slice(partition).reverse()];
