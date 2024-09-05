@@ -11,9 +11,6 @@ const STARS_PER_LINE_INCREM_FACTOR = 2;
  * @returns {boolean} Результат проверки значения высоты дерева
  */
 const isHeightCorrect = (height) => {
-    if (typeof height !== 'number' && typeof height !== 'string') {
-        return false;
-    }
     return Number.isInteger(+height);
 }
 
