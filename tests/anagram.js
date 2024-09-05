@@ -48,14 +48,14 @@ QUnit.module('Тестируем функцию anagram', function () {
 		const input = 'кот, ток, окт';
 		assert.throws(() => {
 			anagram(input)
-		}, new Error('Argument must be an array'))
+		}, new TypeError('Argument must be an array'))
 	});
 
 	QUnit.test('Функция корректно возвращает ошибку, если аргумент не является массивом (подается число)', function (assert) {
 		const input = 123;
 		assert.throws(() => {
 			anagram(input)
-		}, new Error('Argument must be an array'))
+		}, new TypeError('Argument must be an array'))
 	});
 	QUnit.test('Функция корректно возвращает ошибку, если массив содержит не только слова', function (assert) {
 		const input = ['кот', 1, true, 'ток123', '123'];
