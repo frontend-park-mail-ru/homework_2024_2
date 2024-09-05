@@ -2,12 +2,12 @@
 
 QUnit.module('Тестируем функцию tree', function () {	
 	QUnit.test('Ёлочек высотой ниже трёх не бывает', function (assert) {
-		assert.throws(() => tree(0));
-		assert.throws(() => tree(1));
-		assert.throws(() => tree(2));
-		assert.throws(() => tree('0'));
-		assert.throws(() => tree('1'));
-		assert.throws(() => tree('2'));
+		assert.strictEqual(tree(0), null);
+		assert.strictEqual(tree(1), null);
+		assert.strictEqual(tree(2), null);
+		assert.strictEqual(tree('0'), null);
+		assert.strictEqual(tree('1'), null);
+		assert.strictEqual(tree('2'), null);
 	});
 
 	QUnit.test('Ёлочка высотой 3', function (assert) {
@@ -89,6 +89,14 @@ QUnit.module('Тестируем функцию tree', function () {
 
 	QUnit.test('Вызов функции построения дерева с массивом в качестве высоты', function (assert) {
 		assert.throws(() => tree([1, 2, 3]));
+	});
+
+	QUnit.test('Вызов функции построения дерева с массивом в качестве высоты', function (assert) {
+		assert.throws(() => tree([10.1, 20.2, 30.3]));
+	});
+
+	QUnit.test('Вызов функции построения дерева с массивом в качестве высоты', function (assert) {
+		assert.throws(() => tree(['Hello', 'world', '!']));
 	});
 
 	QUnit.test('Вызов функции построения дерева с объектом в качестве высоты', function (assert) {

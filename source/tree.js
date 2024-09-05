@@ -5,30 +5,34 @@ const STARS_PER_LINE_INCREM_FACTOR = 2;
 
 /**
  * Проверяет значение высоты дерева на корректность:
- * высота должна иметь либо строковый тип, либо целочисленный тип,
- * а так же иметь значение не меньше MIN_TREE_LAYERS_COUNT
+ * высота должна иметь либо строковый тип, либо целочисленный тип
  * 
- * @param {(number|string)} height 
+ * @param {number|string} height 
  * 
  * @returns {boolean} Результат проверки значения высоты дерева
  */
-const heightIsCorrect = (height) => {
+const isHeightIsCorrect = (height) => {
+    if (typeof height !== 'number' && typeof height !== 'string') {
+        return false;
+    }
     const heightInt = parseFloat(height);
-    return Number.isInteger(heightInt) && height >= MIN_TREE_LAYERS_COUNT;
+    return Number.isInteger(heightInt);
 }
 
 /**
  * Возвращает ASCII-ёлочку заданной высоты, состоящую из звёздочек
  * 
- * @param {(number|string)} height 
+ * @param {number|string} height 
  * 
  * @throws {TypeError} для некорректного значения параметра
  * 
  * @returns {string} ASCII-ёлочка из звёздочек
  */
 const tree = (height) => {
-    if (!heightIsCorrect(height)) {
+    if (!isHeightIsCorrect(height)) {
         throw new TypeError('Please provide a valid value for the tree height!');
+    } else if (height < MIN_TREE_LAYERS_COUNT) {
+        return null;
     }
 
     let resultTree = '';
