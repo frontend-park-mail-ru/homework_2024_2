@@ -77,42 +77,42 @@ QUnit.module('Тестируем функцию chess', function () {
 			function() {
 				chess({});
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'Empty object is not a size of chess deck'
 		);
 		assert.throws(
 			function() {
 				chess({"1" : 1});
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'Object is not a size of chess deck'
 		);
 		assert.throws(
 			function() {
 				chess([]);
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'Empty array is not a size of chess deck'
 		);
 		assert.throws(
 			function() {
 				chess([1, 2, 3, 4]);
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'Array is not a size of chess deck'
 		);
 		assert.throws(
 			function() {
 				chess('kekw');
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'Letters is not a size of chess deck'
 		);
 		assert.throws(
 			function() {
 				chess(undefined);
 			},
-			new Error('The wrong type of size'),
+			new TypeError('The wrong type of size'),
 			'undefined is not a size of chess deck'
 		);
 	});
