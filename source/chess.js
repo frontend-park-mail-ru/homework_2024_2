@@ -3,25 +3,8 @@
 const MIN_SIZE = 2;
 
 /**
- * Getting first and second line of the chess deck
- * @param {number} size size of chess deck
- * @param {boolean} isWhiteFirst if first cell in deck is white -> true
- * @returns {string} line of deck
- */
-const getChessLine = (size, isWhiteFirst) => {
-    let line = '';
-    const [first, second] = isWhiteFirst ? ['*', ' '] : [' ', '*'];
-    for (let i = 0; i < size; i++) {
-        line += i % 2 ? first : second;
-    }
-    line += '\n';
-    return line;
-}
-
-
-/**
  * 
- * @param {number} count 
+ * @param {number} count index of cell
  * @param {Object} line first and second line
  * @param {string} line.first first line 
  * @param {string} line.second second line 
@@ -32,13 +15,29 @@ const alternateRepeat = (count, {first, second}) => {
 }
 
 /**
+ * Getting first and second line of the chess deck
+ * @param {number | string} size size of chess deck
+ * @param {boolean} isWhiteFirst if first cell in deck is white -> true
+ * @returns {string} line of deck
+ */
+const getChessLine = (size, isWhiteFirst) => {
+    let line = '';
+    const [first, second] = isWhiteFirst ? [' ', '*'] : ['*', ' '];
+    for (let i = 0; i < size; i++) {
+        line += alternateRepeat(i, {second, first})
+    }
+    line += '\n';
+    return line;
+}
+
+/**
  * Chess deck by the given size
- * @param {number} size size of chess deck
+ * @param {number | string} size size of chess deck
  * @returns {string | null} chess deck
  * @throws {TypeError} The wrong type of size
  */
 const chess = (size) => {
-    if (isNaN(size) || typeof size !== 'number' && typeof size !== 'string') {
+    if (!Number.isInteger(+size) || Array.isArray(size)) {
         throw new TypeError('The wrong type of size');
     }
     if (size < MIN_SIZE) {
@@ -53,3 +52,5 @@ const chess = (size) => {
     }
     return result;
 }
+
+console.log(chess('5'))
