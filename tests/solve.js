@@ -16,6 +16,9 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('“; drop table users', 5), null);
 		assert.strictEqual(solve('x / 1', 1), null);
 		assert.strictEqual(solve('x**2', 3), null);
-		// assert.strictEqual(solve('()', 1), null);
+		assert.strictEqual(solve('()', 1), null);
+		assert.strictEqual(solve('x)', 1), null);
+		assert.strictEqual(solve('(x+1', 1), null);
+		assert.strictEqual(solve('*', 1), null);
 	});
 });
