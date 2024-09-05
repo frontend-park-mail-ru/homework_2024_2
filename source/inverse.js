@@ -7,17 +7,15 @@
  * @param {Integer} partition - количество нетронутых элементов
  * @returns {Array} - перевернутый массив
  */
-
 const inverse = (numbers, partition) => {
     if (!Array.isArray(numbers)) {
-        return [];
+        throw new Error("numbers должен быть массивом");
     }
     if (!Number.isInteger(partition)) {
         return [...numbers].reverse();
     }
-    if (Number.isInteger(partition) && partition < 0) {
-        partition = numbers.length + partition;
-        return [...numbers.slice(0, partition).reverse(), ...numbers.slice(partition)];
+    if (partition < 0) {
+        return [...numbers.slice(0, numbers.length + partition).reverse(), ...numbers.slice(numbers.length + partition)];
     }
     return [...numbers.slice(0, partition), ...numbers.slice(partition).reverse()];
 }

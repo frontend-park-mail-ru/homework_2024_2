@@ -30,12 +30,10 @@ QUnit.module('Тестируем функцию inverse', function () {
 	QUnit.test('Функция не переставляет последние элементы массива', function (assert) {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 0), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -1), [ 4, 3, 2, 1, 5 ]);
-		assert.deepEqual(inverse(3, -2), []);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 1.2), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], ""), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], null), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], Infinity), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], ""), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -2), [ 3, 2, 1, 4, 5 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -5), [ 1, 2, 3, 4, 5 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -15), [ 1, 2, 3, 4, 5 ]);
+
 	});
 
 	// Мои тесты
@@ -52,5 +50,14 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 1, "decwcds"), [ 1, 5, 4, 3, 2 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 2, 'd'), [ 1, 2, 5, 4, 3 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 5, "dcwwec", "dcdwcw", 324), [ 1, 2, 3, 4, 5 ]);
+	});
+
+	QUnit.test('Работа функции с краевыми случаями', function (assert) {
+		assert.throws(() => { inverse(5, 2); }, Error, "numbers должен быть массивом");
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 1.2), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], ""), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], null), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], Infinity), [ 5, 4, 3, 2, 1 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], ""), [ 5, 4, 3, 2, 1 ]);
 	});
 });
