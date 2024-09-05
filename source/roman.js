@@ -48,9 +48,9 @@ const roman = (numberOrNumeral) => {
  * @throws {TypeError} Throws an error if Roman numeral is of the wrong format.
  */
 const romanToArabic = (romanNumeral) => {
-    let copiedRomanNumeral = romanNumeral.toUpperCase();
-    return [...copiedRomanNumeral].reduce((result, currentSymbol, i) => {
-        const nextSymbol = copiedRomanNumeral[i + 1];
+    const upperCaseRomanNumeral = romanNumeral.toUpperCase();
+    return [...upperCaseRomanNumeral].reduce((result, currentSymbol, i) => {
+        const nextSymbol = upperCaseRomanNumeral[i + 1];
         if (arabicRomanMap[currentSymbol] < arabicRomanMap[nextSymbol]) {
             result -= arabicRomanMap[currentSymbol];
         } else {
