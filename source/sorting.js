@@ -8,7 +8,7 @@
  */
 const sorting = (initial, fields) => {
     let sorted = initial.slice();
-    fields.reverse().forEach(field => {
+    fields.slice().reverse().forEach(field => {
         sorted = quickSort(sorted, (a, b) => {
             if (a[field] === b[field]) {
                 return 0;
