@@ -7,9 +7,18 @@
  * @returns {object[]}
  */
 const sorting = (initial, fields) => {
+    if (!Array.isArray(initial) || !Array.isArray(fields)) {
+        throw new Error('initial and fields must be arrays');
+    }
     let sorted = initial.slice();
     fields.slice().reverse().forEach(field => {
+        if (typeof field !== 'string') {
+            throw new Error('fields must contain only strings');
+        }
         sorted = quickSort(sorted, (a, b) => {
+            if (typeof a !== 'object' || typeof b !== 'object') {
+                throw new Error('initial must contain only strings');
+            }
             if (a[field] === b[field]) {
                 return 0;
             }

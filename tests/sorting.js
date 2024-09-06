@@ -169,4 +169,53 @@ QUnit.module('Тестируем функцию sorting', function () {
 		];
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting при получении не массивов бросает ошибку', function (assert) {
+		const initial = [
+			{prop: 60},
+			{prop: -50},
+			{prop: 30},
+			{prop: -1},
+			{prop: -100},
+			{prop: 1}
+		];
+		assert.throws(
+			function () {
+				sorting(initial, "prop");
+			},
+			Error('initial and fields must be arrays'),
+		);
+		assert.throws(
+			function () {
+				sorting(5, [ "prop" ]);
+			},
+			Error('initial and fields must be arrays'),
+		);
+		assert.throws(
+			function () {
+				sorting();
+			},
+			Error('initial and fields must be arrays'),
+		);
+	});
+
+	QUnit.test('sorting при сортировке не объектов бросает ошибку', function (assert) {
+		const initial = [1, 6, 3, 9, 7];
+		assert.throws(
+			function () {
+				sorting(initial, ['prop']);
+			},
+			Error('initial must contain only strings'),
+		);
+	});
+
+	QUnit.test('sortings бросает ошибку, если field содержит не строку', function(assert) {
+		const initial = [1, 6, 3, 9, 7];
+		assert.throws(
+			function () {
+				sorting(initial, [5]);
+			},
+			Error('fields must contain only strings'),
+		);
+	});
 });
