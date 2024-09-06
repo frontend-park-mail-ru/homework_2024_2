@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Сортирует массив initial по полям fields
+ * @param {object[]} initial 
+ * @param {string[]} fields 
+ * @returns {object[]}
+ */
 const sorting = (initial, fields) => {
     let sorted = initial.slice();
     fields.reverse().forEach(field => {
@@ -13,6 +19,13 @@ const sorting = (initial, fields) => {
     return sorted;
 };
 
+/**
+ * Сортирует массив arr
+ * @param {any[]} arr 
+ * @param {(a: any, b:any) => number} callback 
+ * Функция используется для определения положения элементов массива. Если она возвращает отрицательное число, a будет левее b, если 0, то они равны, если положительное число, то a правее b
+ * @returns {any[]}
+ */
 const quickSort = (arr, callback) => {
     if (arr.length <= 1) {
         return arr;

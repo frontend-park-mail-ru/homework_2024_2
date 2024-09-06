@@ -145,7 +145,7 @@ QUnit.module('Тестируем функцию sorting', function () {
 			{prop: 150}
 		];
 		
-		assert.deepEqual(actual, expected)
+		assert.deepEqual(actual, expected);
 	});
 
 	QUnit.test('sorting сортирует по отрицательному числовому свойству', function (assert) {
@@ -166,7 +166,7 @@ QUnit.module('Тестируем функцию sorting', function () {
 			{prop: 1},
 			{prop: 30},
 			{prop: 60}
-		]
-		assert.deepEqual(actual, expected)
+		];
+		assert.deepEqual(actual, expected);
 	});
 });
