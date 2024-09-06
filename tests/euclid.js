@@ -34,8 +34,10 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(-125, -25, 500), -25, 'euclid(-125, -25, 500) === -25');
 		assert.strictEqual(euclid(11, -121, 93), 1, 'euclid(11, -121, 93) === 1');
 	});
-	
+
 	QUnit.test('ДОБ.: Функция может принимать нечисловые аргументы', function (assert) {
-		assert.strictEqual(euclid('a', 2), 'Error', 'euclid("a", 2) === Error');
-	});
+		assert.throws(function() {
+		  euclid('a', 2);
+		}, Error, 'euclid("a", 2) выбрасывает ошибку');
+	  });
 });
