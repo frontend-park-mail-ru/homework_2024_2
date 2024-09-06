@@ -12,15 +12,15 @@ const sort = (str) =>{
     }
 
     const arrayOfStrings = str.split(' ');
-    const result = arrayOfStrings.reduce( (result_array_string, item) => {
-        
+    const result = arrayOfStrings.reduce((res, item) => {
+
         item = item.toLowerCase().split('').sort((a, b) => a.localeCompare(b)).join('');
-        if (item){
+        if (item) {
             item = item[0].toUpperCase() + item.slice(1);
         }
         
-        result_array_string.push(item);
-        return result_array_string;
+        res.push(item);
+        return res;
         
     }, []);
 
