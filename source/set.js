@@ -46,7 +46,7 @@ const set = (obj, path, value) => {
                 throw new RangeError('Addressing an array element with a negative key is invalid');
             }
 
-            return acc[key] = (index === pathArray.length - 1) ? value : (typeof acc[key] !== 'object' || acc[key] === null)
+            return acc[key] = (index === pathArray.length - 1) ? value : (typeof acc[key] !== 'object' || acc[key] === null || !(acc[key] instanceof Object))
                 ? (REGEX_PATTERNS.MASSIVE.test(pathArray[index + 1]) ? [] : {}) : acc[key];
         }, obj);
     }
