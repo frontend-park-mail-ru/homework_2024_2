@@ -7,21 +7,26 @@
  * Note that subobjects are not deepcopied.
  * If the function receives at least one non-object argument,
  * the output will be undefined.
- * @param {...*} objects - The objects to be zipped
+ * @param {...Object} objects - The objects to be zipped
+ * @throws {TypeError} All of the arguments must be objects
  */
 const zip = (...objects) => {
+	objects.forEach((obj) => {
+		if (typeof obj !== 'object' ||
+			obj === null) {
+			throw new TypeError("All of the arguments must be objects");
+		}
+	});
+
 	return objects.reduce((zippedObject, currentObject) => {
-		if (zippedObject === undefined ||
-			typeof currentObject !== 'object' ||
-			currentObject === null) {
-			return undefined;
-		}
-		for (const attr in currentObject) {
-			if (zippedObject[attr] === undefined) {
-				zippedObject[attr] = currentObject[attr];
+		Object.entries(currentObject).forEach(([key, value]) => {
+			if (!zippedObject.hasOwnProperty(key)) {
+				zippedObject[key] = value;
 			}
-		}
+		});
 		return zippedObject;
 	}, {});
 };
+
+
 

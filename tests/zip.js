@@ -114,14 +114,24 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция правильно обрабатывает некорректные входные данные', function(assert) {
-		assert.deepEqual(zip(1), undefined, 'При подаче на вход не объекта должно возвращаться undefined');
-		assert.deepEqual(zip(""), undefined);
-		assert.deepEqual(zip(null), undefined);
-		assert.deepEqual(zip(undefined), undefined);
-		assert.deepEqual(zip(false), undefined);
+		const error = new TypeError('All of the arguments must be objects');
+		assert.throws(() => zip(1), error, 'При подаче на вход не объекта должна выбрасываться ошибка');
+		assert.throws(() => zip(""), error);
+		assert.throws(() => zip(undefined), error);
+		assert.throws(() => zip(false), error);
+		assert.throws(() => zip(null), error);
 
-		assert.deepEqual(zip(1, { name: 'age' }), undefined);
-		assert.deepEqual(zip({ name: 'age' }, 1, undefined));
+		assert.throws(() => zip(1, { name: 'age' }), error);
+		assert.throws(() => zip({ name: 'age' }, 1), error);
+	});
+
+
+	QUnit.test('Функция не копирует свойства прототипа объекта', function(assert) {
+		const prototypeObj = { prototypeAttr: "Prototype value" };
+		const newObj = Object.create(prototypeObj);
+		newObj.newAttr = "New value";
+		const newObjWithoutPrototype = { newAttr: "New value" };
+		assert.deepEqual(zip(newObj), newObjWithoutPrototype);
 	});
 
 });
