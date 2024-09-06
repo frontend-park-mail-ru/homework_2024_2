@@ -47,7 +47,7 @@ const set = (obj, path, value) => {
             }
 
             return acc[key] = (index === pathArray.length - 1) ? value : (typeof acc[key] !== 'object' || acc[key] === null)
-                ? (/^\d+$/.test(pathArray[index + 1]) ? [] : {}) : acc[key];
+                ? (REGEX_PATTERNS.MASSIVE.test(pathArray[index + 1]) ? [] : {}) : acc[key];
         }, obj);
     }
 
