@@ -13,11 +13,11 @@
  */
 const inverse = (arr, skip = 0) => {
     if (!Array.isArray(arr)) {
-        throw new Error("Первый аргумент должен быть массивом");
+        throw new TypeError('Первый аргумент должен быть массивом');
     }
 
     if (!Number.isInteger(skip)) {
-        throw new Error("Второй аргумент должен быть целым числом");
+        throw new TypeError('Второй аргумент должен быть целым числом');
     }
 
     const arrayLength = arr.length;

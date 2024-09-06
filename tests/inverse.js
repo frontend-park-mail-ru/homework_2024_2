@@ -59,30 +59,39 @@ QUnit.module('Тестируем функцию inverse', function () {
 	});
 
 	QUnit.test('Вызов с некорректным первым аргументом', function(assert) {
-		try {
-			inverse('not an array', 2);
-			assert.ok(false, 'Ошибка не была объявлена'); // Должна быть ошибка
-		} catch (err) {
-			assert.equal(err.message, "Первый аргумент должен быть массивом", "Объявлена правильная ошибка");
-		}
+		assert.throws(
+			function() {
+				inverse('not an array', 2);
+			},
+			function(err) {
+				return err instanceof TypeError && err.message === 'Первый аргумент должен быть массивом';
+			},
+			'Ошибка должна быть TypeError с правильным сообщением'
+		);
 	});
 
 	QUnit.test('Вызов с некорректным вторым аргументом', function(assert) {
 		// Проверка на нечисловой тип
-		try {
-			inverse([1, 2, 3], 'not a number');
-			assert.ok(false, 'Ошибка не была объявлена');
-		} catch (err) {
-			assert.equal(err.message, "Второй аргумент должен быть целым числом", "Объявлена правильная ошибка");
-		}
+		assert.throws(
+			function() {
+				inverse([1, 2, 3], 'not a number');
+			},
+			function(err) {
+				return err instanceof TypeError && err.message === 'Второй аргумент должен быть целым числом';
+			},
+			'Ошибка должна быть TypeError с правильным сообщением'
+		);
 
 		// Проверка на нецелое число
-		try {
-			inverse([1, 2, 3], 1.5);
-			assert.ok(false, 'Ошибка не была объявлена');
-		} catch (err) {
-			assert.equal(err.message, "Второй аргумент должен быть целым числом", "Объявлена правильная ошибка");
-		}
+		assert.throws(
+			function() {
+				inverse([1, 2, 3], 1.5);
+			},
+			function(err) {
+				return err instanceof TypeError && err.message === 'Второй аргумент должен быть целым числом';
+			},
+			'Ошибка должна быть TypeError с правильным сообщением'
+		);
 	});
 });
 
