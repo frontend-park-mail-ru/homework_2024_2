@@ -44,25 +44,32 @@ const filter = (htmlText, permittedTags) => {
     );
   }
 
-  let chars = [...htmlText];
+  let shouldSkip = false;
+  
+  return [...htmlText].reduce((acc, char, index, chars) => {
+    if (shouldSkip) {
+      if (char === ">") {
+        shouldSkip = false;
+      }
 
-  let i = 0;
-  while (i < chars.length) {
-    if (chars[i] === "<") {
-      let tagEnd = chars.indexOf(">", i) + 1;
+      return acc;
+    }
+
+    if (char === "<") {
+      let tagEnd = chars.indexOf(">", index) + 1;
       if (tagEnd !== -1) {
-        let tag = chars.slice(i, tagEnd).join("");
+        let tag = chars.slice(index, tagEnd).join("");
         let tagName = parseTagName(tag);
         if (permittedTags.includes(tagName)) {
-          i = tagEnd;
-          continue;
+          acc.push(tag);
+          shouldSkip = true;
+          return acc;
         }
       }
     }
 
-    chars[i] = specialChars[chars[i]] ?? chars[i];
-    ++i;
-  }
+    acc.push(specialChars[char] ?? char);
 
-  return chars.join("");
+    return acc;
+  }, []).join("");
 };
