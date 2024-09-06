@@ -21,7 +21,8 @@ const REGEX_PATTERNS = {
  * Путь может быть задан в виде 'a.b.c' или 'a[0].b["key"]'.
  * @param {*} value - Значение, которое необходимо установить.
  * @returns {Object} Объект с установленным значением.
- * @throws {Error} Если пытаются обратиться к элементу массива с отрицательным индексом.
+ * @throws {RangeError} Если пытаются обратиться к элементу массива с отрицательным индексом.
+ * @throws {TypeError} Если путь не является строкой
  *
  * @example
  * const obj = {};
@@ -34,27 +35,20 @@ const REGEX_PATTERNS = {
  * // obj теперь равно { a: [ { b: { key: 'value' } } ] }
  */
 const set = (obj, path, value) => {
+    if (typeof path !== 'string') {
+        throw new TypeError('Path must be a string');
+    }
     if (path !== '') {
         const pathArray = path.replace(REGEX_PATTERNS.PATH, '.$1$2').split('.').filter(Boolean);
 
-        let acc = obj;
-
-        let prevKey = 0;
-
-        pathArray.forEach((key, index) => {
-            if (index !== 0) {
-                if (REGEX_PATTERNS.INVALID_KEY.test(prevKey)) {
-                    throw new Error("Addressing an array element with a negative key is invalid");
-                }
-
-                acc = acc[prevKey] = (typeof acc[prevKey] !== 'object' || acc[prevKey] === null || !(acc[prevKey] instanceof Object))
-                    ? (REGEX_PATTERNS.MASSIVE.test(key) ? [] : {}) : acc[prevKey];
+        pathArray.reduce((acc, key, index) => {
+            if (REGEX_PATTERNS.INVALID_KEY.test(key)) {
+                throw new RangeError('Addressing an array element with a negative key is invalid');
             }
 
-            prevKey = key;
-        });
-
-        acc[prevKey] = value;
+            return acc[key] = (index === pathArray.length - 1) ? value : (typeof acc[key] !== 'object' || acc[key] === null)
+                ? (/^\d+$/.test(pathArray[index + 1]) ? [] : {}) : acc[key];
+        }, obj);
     }
 
     return obj;
