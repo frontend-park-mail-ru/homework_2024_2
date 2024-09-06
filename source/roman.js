@@ -50,8 +50,12 @@ function roman(input) {
 
     // число конвертируем в римскую форму
     if (typeof input === 'number') {
-        if (!Number.isInteger(input) || input <= 0) {
-            throw new Error('Значение должно быть целым положительным числом');
+        if (input <= 0) {
+            throw new RangeError('Значение должно бытьположительным числом');
+        }
+
+        if(!Number.isInteger(input)){
+            throw new TypeError('Значение должно быть целым числом');
         }
 
         let result = '';
