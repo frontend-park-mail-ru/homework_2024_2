@@ -35,3 +35,4 @@ const inverse = (arr, skip = 0) => {
         ...arr.slice(endIndex)
     ];
 };
+
