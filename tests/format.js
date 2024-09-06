@@ -72,14 +72,14 @@ QUnit.module('Тестируем функцию format', function () {
 		const input = [1, 10, intMax32, intMin32];
 
 		const expected1 =
-		'          1\n' +
-        '         10\n' +
-    	' 2147483647\n' +
-        '-2147483648';
+			'          1\n' +
+			'         10\n' +
+			' 2147483647\n' +
+			'-2147483648';
 	
 		const expected2 =
-		'         1          10\n' +
-		'2147483647 -2147483648';
+			'         1          10\n' +
+			'2147483647 -2147483648';
 	
 		assert.strictEqual(format(input, 1), expected1);
 		assert.strictEqual(format(input, 2), expected2);
