@@ -1,76 +1,69 @@
-//Ховен Ольга, WEB-22
-// Вариант 3
 'use strict'
-function roman (num) {
-    const romRadix = [
-        {value: 1000, symbol: 'M'},
-        {value: 900, symbol: 'CM' },
-        {value: 500, symbol: 'D'},
-        {value: 400, symbol: 'CD' },
-        {value: 100, symbol: 'C'},
-        {value: 90, symbol: 'XC' },
-        {value: 50, symbol: 'L'},
-        {value: 40, symbol: 'XL' },
-        {value: 10, symbol: 'X'},
-        {value: 9, symbol: 'IX' },
-        {value: 5, symbol: 'V'},
-        {value: 4, symbol: 'IV' },
-        {value: 1, symbol: 'I'}         
-    ];
 
-   if (typeof num === 'object' || num === null || num === undefined ){
-    throw new Error('Ввод должен быть числом или строкой, представляющей число');
-   } 
-
-   let result = "";
-   if(typeof num === 'string'){
-    num=parseInt(num, 10)
-    if (isNaN(num)){
-        throw new Error('Строку не удалось преобразовать в число');
-    }
-   } 
-
-    if (!Number.isInteger(num) || num <= 0) {
-    throw new Error('Значение должно быть целым положительным числом');
-    }
-
-   if(Number.isInteger(num)) {
-    for(let i=0; i<romRadix.length; i++){
-        while(num>=romRadix[i].value){
-            num-=romRadix[i].value;
-            result+=romRadix[i].symbol;
-        }
-    }
-   }
-   return result;    
-}
-
-function arabic (roman){
-    const arabicRadix = {
-        I: 1,
-        V: 5, 
-        X: 10,
-        L: 50,
-        C: 100,
+/** 
+ * @param {number|string} input - Входное значение, которое может быть числом или строкой, представляющей либо римские цифры, либо арабские числа.
+ * @returns {string|number} - Возвращает римское число (строка) при вводе арабского числа, или арабское число (число) при вводе римского числа.
+ */
+function roman(input) {
+    const romanRadix = {
+        M: 1000,
+        CM: 900,
         D: 500,
-        M: 1000
-    }
-    let num = 0;
-    let prev = 0;
-    if (roman === null || roman === undefined ||  roman.trim() === ''){
-        throw new Error('Ввод должен быть числом или строкой, представляющей число');
-    }
-    for(let i = roman.length-1; i>=0; i--){
-        let symbol = roman[i].toUpperCase();
-        let value = arabicRadix[symbol];
-        
-        if(value<prev){
-            num-=value;
-        } else {
-            num+=value;
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+    };
+
+    // распознование римского числа
+    if (typeof input === 'string') {
+        input = input.trim().toUpperCase();
+        if (/^[IVXLCDM]+$/.test(input)) {
+            let num = 0;
+            let prev = 0;
+            for (let i = input.length - 1; i >= 0; i--) {
+                let symbol = input[i];
+                let value = romanRadix[symbol];
+
+                if (value < prev) {
+                    num -= value;
+                } else {
+                    num += value;
+                }
+                prev = value;
+            }
+            return num;
         }
-        prev=value;
-    } 
-    return num;
+
+        // строку конвертируем в число
+        input = parseInt(input, 10);
+        if (isNaN(input)) {
+            throw new Error('Строку не удалось преобразовать в число');
+        }
+    }
+
+    // число конвертируем в римскую форму
+    if (typeof input === 'number') {
+        if (!Number.isInteger(input) || input <= 0) {
+            throw new Error('Значение должно быть целым положительным числом');
+        }
+
+        let result = '';
+        for (const [symbol, value] of Object.entries(romanRadix)) {
+            while (input >= value) {
+                input -= value;
+                result += symbol;
+            }
+        }
+        return result;
+    }
+
+    throw new Error('Неподдерживаемый формат ввода');
 }
 
