@@ -1,9 +1,12 @@
 const chess = size => {
-    if (typeof size !== 'number' || !Number.isInteger(size)) {
+    const numericSize = Number(size);
+    
+    if (isNaN(numericSize) || !Number.isInteger(numericSize)) {
         throw new Error('Size must be an integer.');
     }
-    
+
     if (size <= 1) return null;
+    
 
     const board = Array.from({ length: size }, (_, line) =>
         Array.from({ length: size }, (_, row) =>
