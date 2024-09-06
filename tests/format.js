@@ -74,7 +74,7 @@ QUnit.module('Тестируем функцию format', function () {
 		const expected1 =
 		'          1\n' +
         '         10\n' +
-        ' 2147483647\n' +
+    	' 2147483647\n' +
         '-2147483648';
 	
 		const expected2 =
@@ -89,12 +89,17 @@ QUnit.module('Тестируем функцию format', function () {
 		const input1 = "string";
 		const input2 = true;
 		const input3 = ['1', '2', '3'];
+		const input4 = [1, 2, Infinity, 4, -Infinity];
+		const input5 = [1, NaN]
 
 		const expected =
 			'Invalid data';
 
-		assert.throws(() => format(input1, 1), new Error(expected));
-		assert.throws(() => format(input2, 1), new Error(expected));
-		assert.throws(() => format(input3, 1), new Error(expected));
+		assert.throws(() => format(input1, 1), new TypeError(expected));
+		assert.throws(() => format(input2, 1), new TypeError(expected));
+		assert.throws(() => format(input3, 1), new TypeError(expected));
+		assert.throws(() => format(input4, 1), new TypeError(expected));
+		assert.throws(() => format(input5, 1), new TypeError(expected));
 	});
 });
+
