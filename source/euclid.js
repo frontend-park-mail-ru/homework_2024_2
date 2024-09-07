@@ -6,7 +6,7 @@
  * @param {number} b Второе число.
  * @returns {number} НОД чисел a и b.
  */
-function findNOD(a, b) {
+const findNOD = (a, b) => {
   let tempA = a;
   let tempB = b;
   while (tempB !== 0) {
@@ -22,7 +22,7 @@ function findNOD(a, b) {
  * @throws {RangeError} Если не переданы аргументы.
  * @throws {TypeError} Если переданы нечисловые значения.
  */
-let euclid = (...numbers) => {
+const euclid = (...numbers) => {
   if (!numbers.length) {
     throw new RangeError('No arguments provided');
   }
