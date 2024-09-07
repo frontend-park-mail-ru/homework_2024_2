@@ -83,6 +83,9 @@ QUnit.module('Проверка работы функции filter', function () 
 			assert.throws(function () {
 				filter('<strong>Text</strong>', 10);
 			}, TypeError);
+			assert.throws(function () {
+				filter('<strong>Text</strong>', ['strong', 10]);
+			}, TypeError);
 		},
 	);
 });
