@@ -43,48 +43,48 @@ QUnit.module('Тестируем функцию plainify', function () {
 		assert.deepEqual(plainify(nested2), plain2);
 	});
 
-  QUnit.test('Преобразование не объекта', function (assert) {
-    assert.deepEqual(plainify('строка'), {}, 'Строка должна преобразоваться в пустой объект');
-  });
+	QUnit.test('Преобразование не объекта', function (assert) {
+		assert.deepEqual(plainify('строка'), {}, 'Строка должна преобразоваться в пустой объект');
+	});
   
-  QUnit.test('Преобразование объекта с null', function (assert) {
-    const obj = { 
-      foo: null, 
-      bar: 42 
-    };
+	QUnit.test('Преобразование объекта с null', function (assert) {
+		const obj = { 
+		foo: null, 
+		bar: 42 
+		};
 
-    const expected = { 
-      foo: null, 
-      bar: 42 
-    };
+		const expected = { 
+		foo: null, 
+		bar: 42 
+		};
 
-    assert.deepEqual(plainify(obj), expected, 'Null должно остаться null');
-  });
-  
-  QUnit.test('Преобразование объекта с массивом', function (assert) {
-    const obj = { 
-      foo: [1, 2, 3], 
-      bar: 42 
-    };
+		assert.deepEqual(plainify(obj), expected, 'Null должно остаться null');
+	});
+	
+	QUnit.test('Преобразование объекта с массивом', function (assert) {
+		const obj = { 
+		foo: [1, 2, 3], 
+		bar: 42 
+		};
 
-    const expected = { 
-      foo: [1, 2, 3], 
-      bar: 42 
-    };
+		const expected = { 
+		foo: [1, 2, 3], 
+		bar: 42 
+		};
 
-    assert.deepEqual(plainify(obj), expected, 'Массив должен остаться массивом');
-  });
-  
-  QUnit.test('Преобразование объекта с префиксом, не являющимся строкой', function (assert) {
-    const obj = { 
-      foo: 'bar' 
-    };
+		assert.deepEqual(plainify(obj), expected, 'Массив должен остаться массивом');
+	});
+	
+	QUnit.test('Преобразование объекта с префиксом, не являющимся строкой', function (assert) {
+		const obj = { 
+		foo: 'bar' 
+		};
 
-    const prefix = 42;
+		const prefix = 42;
 
-    assert.throws(function () {
-      plainify(obj, prefix);
-    }, 'Префикс должен быть строкой'); 
-  });
+		assert.throws(function () {
+		plainify(obj, prefix);
+		}, 'Префикс должен быть строкой'); 
+	});
 
 });
