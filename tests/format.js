@@ -1,5 +1,5 @@
 'use strict';
-import format from "./source/format.js"
+
 QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format работает правильно c одной колонкой и положительными числами', function (assert) {
 		const input = [ 0, 1, 2, 10, 100, 1000, 10000 ];
@@ -50,5 +50,35 @@ QUnit.module('Тестируем функцию format', function () {
 
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
+	});
+	QUnit.test('format работает правильно c количеством колонок равным количеству чисел', function (assert) {
+		const input = [1, 2, 10, 100, 1000, 10000];
+
+		const expected =
+			'1 2 10 100 1000 10000';
+
+		assert.strictEqual(format(input, 6), expected);
+	});
+
+	QUnit.test('format правильно валидирует элементы массива', function (assert) {
+		const input = [1, "some", 10, NaN, 1000, 10000];
+
+		const expected =
+			"string is in input data, all elements must be numbers";
+
+		assert.strictEqual(format(input, 6), expected);
+	});
+
+	QUnit.test('format правильно валидирует число колонок', function (assert) {
+		const input = [1, 2, 10, 3, 1000, 10000];
+
+		const expected =
+			"Amount of coloms could't be -1";
+
+		const expected2 =
+			"Amount of coloms could't be bigger than amount of numbers (7>6)";
+
+		assert.strictEqual(format(input, -1), expected);
+		assert.strictEqual(format(input, 7), expected2);
 	});
 });
