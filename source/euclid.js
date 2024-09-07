@@ -7,24 +7,28 @@
  * @returns {number} НОД чисел a и b.
  */
 function findNOD(a, b) {
-  while (b !== 0) {
-    [a, b] = [b, a % b];
+  let tempA = a;
+  let tempB = b;
+  while (tempB !== 0) {
+    [tempA, tempB] = [tempB, tempA % tempB];
   }
-  return a;
+  return tempA;
 }
 
 /**
  * Вычисляет НОД нескольких чисел с помощью алгоритма Евклида.
- * @param {...number} числа Массив чисел.
+ * @param {...number} Массив чисел.
  * @returns {number} НОД всех чисел в массиве.
+ * @throws {RangeError} Если не переданы аргументы.
+ * @throws {TypeError} Если переданы нечисловые значения.
  */
 let euclid = (...numbers) => {
   if (!numbers.length) {
-    throw new Error('No arguments provided');
+    throw new RangeError('No arguments provided');
   }
 
   if (!numbers.every(Number.isInteger)) {
-    throw new Error('euclid() function does not accept non-numeric values')
+    throw new TypeError('euclid() function does not accept non-numeric values')
   }
   return numbers.reduce((a, b) => findNOD(a, b), numbers[0]);
 }
