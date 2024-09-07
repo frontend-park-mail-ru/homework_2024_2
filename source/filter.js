@@ -15,7 +15,7 @@ const specialChars = {
  * @return {string} - name of html tag
  */
 const parseTagName = (tag) => {
-  if (typeof tag !== "string") {
+  if (typeof tag !== "string" && !(tag instanceof String)) {
     throw new TypeError(`'tag' must be a type of string, got '${typeof tag}'`);
   }
 
@@ -32,44 +32,51 @@ const parseTagName = (tag) => {
  *                    and escaped special characters
  */
 const filter = (htmlText, permittedTags) => {
-  if (typeof htmlText !== "string") {
+  if (typeof htmlText !== "string" && !(htmlText instanceof String)) {
     throw new TypeError(
       `'htmlText' must be a type of 'string', got '${typeof htmlText}'`,
     );
   }
 
-  if (!Array.isArray(permittedTags)) {
+  if (
+    !Array.isArray(permittedTags) ||
+    !permittedTags.every(
+      (item) => typeof item === "string" || item instanceof String,
+    )
+  ) {
     throw new TypeError(
       `'permittedTags' must be a type of 'string[]', got '${typeof permittedTags}'`,
     );
   }
 
   let shouldSkip = false;
-  
-  return [...htmlText].reduce((acc, char, index, chars) => {
-    if (shouldSkip) {
-      if (char === ">") {
-        shouldSkip = false;
+
+  return [...htmlText]
+    .reduce((acc, char, index, chars) => {
+      if (shouldSkip) {
+        if (char === ">") {
+          shouldSkip = false;
+        }
+
+        return acc;
       }
 
-      return acc;
-    }
-
-    if (char === "<") {
-      let tagEnd = chars.indexOf(">", index) + 1;
-      if (tagEnd !== -1) {
-        let tag = chars.slice(index, tagEnd).join("");
-        let tagName = parseTagName(tag);
-        if (permittedTags.includes(tagName)) {
-          acc.push(tag);
-          shouldSkip = true;
-          return acc;
+      if (char === "<") {
+        let tagEnd = chars.indexOf(">", index) + 1;
+        if (tagEnd !== -1) {
+          let tag = chars.slice(index, tagEnd).join("");
+          let tagName = parseTagName(tag);
+          if (permittedTags.includes(tagName)) {
+            acc.push(tag);
+            shouldSkip = true;
+            return acc;
+          }
         }
       }
-    }
 
-    acc.push(specialChars[char] ?? char);
+      acc.push(specialChars[char] ?? char);
 
-    return acc;
-  }, []).join("");
+      return acc;
+    }, [])
+    .join("");
 };
