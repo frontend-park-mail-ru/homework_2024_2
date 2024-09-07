@@ -21,12 +21,16 @@ const ROMAN_NUMBER_REGEX = /^[IVXLCDM]+$/;
  * @param {number|string} input - Входное значение, которое может быть числом или строкой, представляющей либо римские цифры, либо арабские числа
  * @returns {string|number} - Возвращает римское число (строка) при вводе арабского числа, или арабское число (строка) при вводе римского числа
  * @throws {TypeError} - Если входное значение имеет неверный тип
+ * @throws {RangeError} - Если входное значение отрицательное
  */
 const roman = (input) => {
     if (typeof input === 'string') {
         const trimmed = input.trim().toUpperCase();
-        if (/^\d+$/.test(input)) { 
-            const parsed = parseInt(trimmed);
+        const parsed = parseInt(trimmed);
+        if ( Number.isInteger(parsed)) {
+            if (parsed < 0) {
+                throw new RangeError('Нельзя передавать отрицательные значения');
+            }
             return arabicToRoman(parsed);
         }
         if (ROMAN_NUMBER_REGEX.test(trimmed)) {
@@ -50,8 +54,6 @@ const roman = (input) => {
 /**
  * @param {string} roman - Римское число для преобразования
  * @returns {number} - Арабское представление римского числа
- * @throws {TypeError} - Если входное значение не является строкой
- * @throws {TypeError} - Если строка содержит недопустимые символы или не может быть преобразована в число
  */
 const romanToArabic = (roman) => {
     const trimmedToArabic = roman.trim().toUpperCase();
@@ -68,22 +70,19 @@ const romanToArabic = (roman) => {
         prev = value;
     }
     return num;
-    
 }
 
 
 /**
  * @param {number} num - Арабское число для преобразования
  * @returns {string} - Римское представление числа
- * @throws {TypeError} - Если входное значение не является целым числом
- * @throws {RangeError} - Если число меньше или равно нулю
  */
 const arabicToRoman = (num) => {
-        return Object.entries(romanRadix).reduce((result, [symbol, value]) => {
-            while (num >= value) {
-                num -= value;
-                result += symbol;
-            }
+    return Object.entries(romanRadix).reduce((result, [symbol, value]) => {
+        while (num >= value) {
+            num -= value;
+            result += symbol;
+        }
     return result;
-        }, '');
+    }, '');
 }
