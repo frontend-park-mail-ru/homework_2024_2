@@ -4,14 +4,14 @@
  * @returns {string} - Фильтрованная строка.
  */
 const letters = (str, saveFirst) => {
-  if (typeof str !== "string") {
-    throw new TypeError("Первый аргумент должен быть строкой");
+  if (typeof str !== 'string' && !(str instanceof String)) {
+    throw new TypeError('Первый аргумент должен быть строкой');
   }
-  if (typeof saveFirst !== "boolean" && saveFirst !== undefined) {
-    throw new TypeError("Второй аргумент должен быть булевым значением");
+  if (typeof saveFirst !== 'boolean' && saveFirst !== undefined) {
+    throw new TypeError('Второй аргумент должен быть булевым значением');
   }
 
-  const charArray = str.split("");
+  const charArray = str.split('');
   return charArray
     .filter((item, index) => {
       if (saveFirst === undefined) {
@@ -21,5 +21,5 @@ const letters = (str, saveFirst) => {
         ? charArray.indexOf(item) === index
         : charArray.lastIndexOf(item) === index;
     })
-    .join("");
+    .join('');
 };
