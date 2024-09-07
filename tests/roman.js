@@ -60,3 +60,4 @@ QUnit.module('Тестируем функцию roman', function () {
         assert.strictEqual(roman(-Infinity), null);
 	});
 });
+
