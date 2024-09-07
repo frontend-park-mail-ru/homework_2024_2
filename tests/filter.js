@@ -25,4 +25,25 @@ QUnit.module('Проверка работы функции filter', function () 
 		assert.strictEqual(filter(`<script>alert('1');</script>`, [ 'strong', 'em' ]), '&lt;script&gt;alert(&#39;1&#39;);&lt;/script&gt;');
 		assert.strictEqual(filter(`<img src="bad" onerror="alert('1');">`, [ 'strong', 'em' ]), '&lt;img src=&quot;bad&quot; onerror=&quot;alert(&#39;1&#39;);&quot;&gt;');
 	});
+
+	QUnit.test('filter обрабатывает пустую строку', function (assert) {
+        const input = '';
+        const output = filter(input, [ 'strong', 'em' ]);
+        const expected = '';
+        assert.strictEqual(output, expected);
+    });
+
+	QUnit.test('filter корректно обрабатывает текст с одинарными кавычками', function (assert) {
+        const input = "It's a beautiful day!";
+        const output = filter(input, [ 'strong' ]);
+        const expected = "It&#39;s a beautiful day!";
+        assert.strictEqual(output, expected);
+    });
+
+	QUnit.test('filter не обрабатывает текст без тегов', function (assert) {
+        const input = 'Простой текст без тегов';
+        const output = filter(input, [ 'strong', 'em' ]);
+        const expected = 'Простой текст без тегов';
+        assert.strictEqual(output, expected);
+    });
 });
