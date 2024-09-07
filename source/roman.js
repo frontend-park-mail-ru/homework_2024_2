@@ -15,83 +15,75 @@ const romanRadix = {
     IV: 4,
     I: 1
 };
-const RomanNum = /^[IVXLCDM]+$/;
+const ROMAN_NUMBER_REGEX = /^[IVXLCDM]+$/;
 
 /** 
- * @param {number|string} input - Входное значение, которое может быть числом или строкой, представляющей либо римские цифры, либо арабские числа.
- * @returns {string|number} - Возвращает римское число (строка) при вводе арабского числа, или арабское число (число) при вводе римского числа.
- * @throws {TypeError} - Если входное значение имеет неверный тип.
+ * @param {number|string} input - Входное значение, которое может быть числом или строкой, представляющей либо римские цифры, либо арабские числа
+ * @returns {string|number} - Возвращает римское число (строка) при вводе арабского числа, или арабское число (строка) при вводе римского числа
+ * @throws {TypeError} - Если входное значение имеет неверный тип
  */
 const roman = (input) => {
     if (typeof input === 'string') {
+        const trimmed = input.trim().toUpperCase();
         if (/^\d+$/.test(input)) { 
-            const parsed = parseInt(input); 
+            const parsed = parseInt(trimmed);
             return arabicToRoman(parsed);
         }
-        return romanToArabic(input);
-    }
+        if (ROMAN_NUMBER_REGEX.test(trimmed)) {
+            return romanToArabic(trimmed);  
+        }
+        throw new TypeError('Недопустимое римское или арабское число');
+    }   
+       
     if (typeof input === 'number') {
+        if (input <= 0) {
+            throw new RangeError('Значение должно быть положительным числом');
+        }
+        if (!Number.isInteger(input)) {
+            throw new TypeError('Значение должно быть целым числом');
+        }  
         return arabicToRoman(input);
     }
-
-    throw new TypeError('Неподдерживаемый формат ввода');
+    throw new TypeError('Неподдерживаемый формат ввода'); 
 }
-
+    
 /**
- * @param {string} roman - Римское число для преобразования.
- * @returns {number} - Арабское представление римского числа.
- * @throws {TypeError} - Если входное значение не является строкой.
- * @throws {TypeError} - Если строка содержит недопустимые символы или не может быть преобразована в число.
+ * @param {string} roman - Римское число для преобразования
+ * @returns {number} - Арабское представление римского числа
+ * @throws {TypeError} - Если входное значение не является строкой
+ * @throws {TypeError} - Если строка содержит недопустимые символы или не может быть преобразована в число
  */
 const romanToArabic = (roman) => {
-    if (typeof roman !== 'string') {
-        throw new TypeError('Входное значение должно быть строкой');
-    }
-    let trimmed = roman.trim().toUpperCase();
-    if (RomanNum.test(trimmed)) {
-        let num = 0;
-        let prev = 0;
-        for (let i = trimmed.length - 1; i >= 0; i--) {
-            let symbol = trimmed[i];
-            let value = romanRadix[symbol];
-            if (value < prev) {
-                num -= value;
-            } else {
-                num += value;
-            }
-            prev = value;
+    const trimmedToArabic = roman.trim().toUpperCase();
+    let num = 0;
+    let prev = 0;
+    for (let i = trimmedToArabic.length - 1; i >= 0; i--) {
+        const symbol = trimmedToArabic[i];
+        const value = romanRadix[symbol];
+        if (value < prev) {
+            num -= value;
+        } else {
+            num += value;
         }
-        return num;
+        prev = value;
     }
-    let parsed = parseInt(trimmed);
-    if (isNaN(parsed)) {
-        throw new TypeError('Строку не удалось преобразовать в число');
-    }
-    return parsed;
+    return num;
+    
 }
 
 
 /**
- * @param {number} num - Арабское число для преобразования.
- * @returns {string} - Римское представление числа.
- * @throws {TypeError} - Если входное значение не является целым числом.
- * @throws {RangeError} - Если число меньше или равно нулю.
+ * @param {number} num - Арабское число для преобразования
+ * @returns {string} - Римское представление числа
+ * @throws {TypeError} - Если входное значение не является целым числом
+ * @throws {RangeError} - Если число меньше или равно нулю
  */
 const arabicToRoman = (num) => {
-    if (!Number.isInteger(num)) {
-        throw new TypeError('Значение должно быть целым числом');
-    }
-
-    if (num <= 0) {
-        throw new RangeError('Значение должно быть положительным числом');
-    }
-
-    let result = '';
-        Object.entries(romanRadix).forEach(([symbol, value]) => {
+        return Object.entries(romanRadix).reduce((result, [symbol, value]) => {
             while (num >= value) {
                 num -= value;
                 result += symbol;
             }
-        });
     return result;
+        }, '');
 }
