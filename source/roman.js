@@ -27,7 +27,7 @@ const roman = (input) => {
     if (typeof input === 'string') {
         const trimmed = input.trim().toUpperCase();
         const parsed = parseInt(trimmed);
-        if ( Number.isInteger(parsed)) {
+        if (Number.isInteger(parsed) ) {
             if (parsed < 0) {
                 throw new RangeError('Нельзя передавать отрицательные значения');
             }
