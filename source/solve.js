@@ -1,5 +1,17 @@
 'use strict';
 
+/**
+ * Решает математическую формулу, содержащее переменную x
+ * Поддерживает операции сложения, вычитания и умножения с целыми числами и скобками
+ *
+ * @param {string} formula - Математическая формула в виде строки
+ * @param {number|Number} x - Значение переменной, которое будет подставлено в формулу
+ * @returns {number} - Результат вычисления формулы
+ * @throws {TypeError} - Если x имеет недопустимое значение 
+ * @throws {RangeError} - Если x равно Infinity или -Infinity
+ * @throws {SyntaxError} - Если формула содержит недопустимые символы
+ * @throws {RangeError} - Если результат вычисления равен Infinity или -Infinity
+ */
 const solve = (formula, x) => {
     const formulaErrorMessage = 'The expression must consist only of addition, subtraction, and multiplication operations, using only integers and parentheses'
     const variableErrorMessage = 'x must be a number or a Number object'
@@ -15,24 +27,24 @@ const solve = (formula, x) => {
     }
 
     if (typeof x !== 'number') {
-        throw new Error(variableErrorMessage);
+        throw new TypeError(variableErrorMessage);
     }
 
     if (x === Infinity || x === -Infinity) {
-        throw new Error(infinityVariableErrorMessage)
+        throw new RangeError(infinityVariableErrorMessage)
     }
 
     try {
         const validation = /^(?!.*\*\*)([0-9x()*\s-+]+)$/
 
         if (!validation.test(formula)) {
-            throw new Error(formulaErrorMessage);
+            throw new SyntaxError(formulaErrorMessage);
         }
 
         const result = eval(formula)
 
         if (result === Infinity || result === -Infinity) {
-            throw new Error(infinityResultErrorMessage);
+            throw new RangeError(infinityResultErrorMessage);
         }
 
         return result    
