@@ -83,6 +83,6 @@ const arabicToRoman = (num) => {
             num -= value;
             result += symbol;
         }
-    return result;
+        return result;
     }, '');
 }
