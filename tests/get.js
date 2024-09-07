@@ -48,4 +48,20 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.length'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 	});
+
+	QUnit.test('get работает правильно c пустым объектом', function (assert) {
+		const object = {};
+
+		assert.strictEqual(get(object, '.'), object);
+		assert.strictEqual(get(object, ''), object);	
+		assert.strictEqual(get(object, '.foo.baz'), undefined);
+	});
+
+	QUnit.test('get работает правильно с простейшими объектами', function (assert) {
+        assert.strictEqual(get(null, '.foo'), undefined);
+        assert.strictEqual(get(undefined, '.foo'), undefined);
+        assert.strictEqual(get(4, '.foo'), undefined);
+        assert.strictEqual(get('string', '.foo'), undefined);
+		assert.strictEqual(get(false, '.foo'), undefined);
+    });
 });
