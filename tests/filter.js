@@ -58,11 +58,11 @@ QUnit.module('Проверка работы функции filter', function () 
 	QUnit.test(
 		'filter корректно работает с разрешенными и неразрешенными самозакрывающимися тегами',
 		function (assert) {
-			const input =
-				'<br/><hr /><strong>Lorem ipsum</strong><img src="image.jpg" />';
+			const input = '<br/><hr /><strong>Lorem ipsum</strong><img src="image.jpg" />';
+			
 			const output = filter(input, ['strong', 'br', 'hr']);
-			const expected =
-				'<br/><hr /><strong>Lorem ipsum</strong>&lt;img src=&quot;image.jpg&quot; /&gt;';
+			
+			const expected = '<br/><hr /><strong>Lorem ipsum</strong>&lt;img src=&quot;image.jpg&quot; /&gt;';
 
 			assert.strictEqual(output, expected);
 		},
