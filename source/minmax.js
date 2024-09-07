@@ -27,11 +27,11 @@ const minmax = (numberString) => {
   // Dont like to raise error. In my opinion, there must be an error_handler, that will
   // render some special response, but it would be an overengineering for this task, so just raise message.
   if (typeof numberString !== 'string' && !(numberString instanceof String)) {
-    throw new Error(`Incorrect input parameter type, expected: string, got: ${typeof numberString}`);
+    throw new TypeError(`Incorrect input parameter type, expected: string, got: ${typeof numberString}`);
   }
 
   if (numberString instanceof String) {
-    numberString = numberString.valueOf()
+    numberString = numberString.valueOf();
   }
 
   const extremeValues = new Map([

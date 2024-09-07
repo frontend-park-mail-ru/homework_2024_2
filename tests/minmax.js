@@ -42,7 +42,7 @@ QUnit.module('Тестируем функцию minmax', function () {
   QUnit.test('minmax выдает сообщение об ошибке типов', function (assert) {
     assert.throws(
       () => minmax(true),
-      new Error('Incorrect input parameter type, expected: string, got: boolean'),
+      new TypeError('Incorrect input parameter type, expected: string, got: boolean'),
       'Передан некорректный тип данных'
     );
 	});
