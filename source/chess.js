@@ -1,18 +1,53 @@
+'use strict';
+
 const chess = size => {
-    const numericSize = Number(size);
+    const oddLineGen = size => {
+        let line = '';
+        for (let i = 0; i < size; i++) {
+            i % 2 == 0 ? line += '*' : line += ' '
+        }
+        return line
+    }
+
+    const evenLineGen = size => {
+        let line = '';
+        for (let i = 0; i < size; i++) {
+            i % 2 == 0 ? line += ' ' : line += '*'
+        }
+        return line
+    }
+
     
-    if (isNaN(numericSize) || !Number.isInteger(numericSize)) {
+
+    const numericSize = +size;
+    
+    if (
+        typeof numericSize !== 'number' || 
+        isNaN(numericSize) || 
+        !Number.isInteger(numericSize) || 
+        size === null || 
+        Array.isArray(size) || 
+        (typeof numericSize === 'object' && numericSize !== null) ||
+        typeof size === 'boolean'
+    ) {
         throw new Error('Size must be an integer.');
     }
 
-    if (size <= 1) return null;
+
+    if (numericSize < 1) throw new Error('Size must be more than 1');
     
 
-    const board = Array.from({ length: size }, (_, line) =>
-        Array.from({ length: size }, (_, row) =>
-            (line + row) % 2 === 0 ? '*' : ' '
-        ).join('')
-    ).join('\n');
+    const oddLine = oddLineGen(size);
+    const evenLine = evenLineGen(size);
+    let board = '';
+    for (let i = 0; i < size; i++) {
+        i % 2 == 0 ? board += oddLine : board += evenLine
+        board += '\n'; 
+    }
 
-    return board + '\n';
+
+    return board;
 };
+
+
+console.log(chess(1))
