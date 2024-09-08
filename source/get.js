@@ -1,7 +1,23 @@
 'use strict';
 
+/**
+ * Получает путь к вложенному свойству объекта и возвращает значение этого свойства
+ * @function
+ * @param {object} obj - Объект, из которого нужно получить вложенное свойство
+ * @param {string} path - Строка, которая содержит путь к искомому значению
+ * @throws {Error} - Если указанный путь не строка
+ * @returns {*} Найденное свойство или undefined, если свойства не существует
+ */
+
 const get = (obj, path) => {
-    if (obj)
+    if (typeof path != 'string'){
+        throw new Error;
+    }
+
+    if (typeof obj !='object' || !obj){
+        return;
+    }
+
     if (!path || path === '.'){
         return obj; 
     } 
