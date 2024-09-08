@@ -18,7 +18,7 @@
  * @returns {number} - Число в десятичной системе счисления.
  */
 const roman = (inputNumber) => {
-    if(!inputNumber){ //Проверяем на NaN, null, undefined и т.д.
+    if (!inputNumber){ //Проверяем на NaN, null, undefined и т.д.
         return TypeError('Введено NaN, null или undefined');
     }
     if ((inputNumber == +inputNumber) && (inputNumber % 1 == 0) && inputNumber>0){ //Проверяем, что на входе корректное число
@@ -29,11 +29,11 @@ const roman = (inputNumber) => {
         let i = 0;
         let answer = "";
 
-        while(inputNumber>0){
-            if(inputNumber >= numbers[i]){
+        while (inputNumber>0){
+            if (inputNumber >= numbers[i]){
                 answer += romanNumbers[i];
                 inputNumber -= numbers[i];
-            }else{
+            } else{
                 i++;
             }
         }
@@ -42,7 +42,7 @@ const roman = (inputNumber) => {
 
     }
 
-    if(typeof inputNumber !== 'string'){ // Проверяем, что на входе строка
+    if (typeof inputNumber !== 'string'){ // Проверяем, что на входе строка
         return TypeError('Введено некорректное число');
     }
 
@@ -56,12 +56,12 @@ const roman = (inputNumber) => {
     const n = inputNumber.length;
 
     for (let i = 0; i < n; i++) {
-        if('mdclxvi'.indexOf(inputNumber[i]) === -1){ // Проверяем, что все символы - это римские цифры
+        if ('mdclxvi'.indexOf(inputNumber[i]) === -1){ // Проверяем, что все символы - это римские цифры
             TypeError('Введено некорректное число');
         }
-        if(map[inputNumber[i]] < map[inputNumber[i+1]]){
+        if (map[inputNumber[i]] < map[inputNumber[i+1]]){
             answer -= map[inputNumber[i]];
-        }else{
+        } else{
             answer += map[inputNumber[i]];
         }
     }
