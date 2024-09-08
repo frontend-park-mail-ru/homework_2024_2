@@ -39,25 +39,25 @@ QUnit.module('Тестируем функцию roman', function () {
 	});
 
 	QUnit.test('roman правильно определяет, некорректные входные данные', function (assert) {
-	    assert.strictEqual(roman(''), null);
-	    assert.strictEqual(roman('0'), null);
-	    assert.strictEqual(roman(0), null);
-	    assert.strictEqual(roman('-15252'), null);
-	    assert.strictEqual(roman(-15252), null);
-	    assert.strictEqual(roman('708.5'), null);
-	    assert.strictEqual(roman(708.5), null);
+	    assert.throws(roman(''));
+	    assert.throws(roman('0'));
+	    assert.throws(roman(0));
+	    assert.throws(roman('-15252'));
+	    assert.throws(roman(-15252));
+	    assert.throws(roman('708.5'));
+	    assert.throws(roman(708.5));
 
-	    assert.strictEqual(roman(':\\]/.-+'), null);
-		assert.strictEqual(roman('190M4'), null);
-		assert.strictEqual(roman('Вход'), null);
-		assert.strictEqual(roman('こんにちは！'), null);
+	    assert.throws(roman(':\\]/.-+'));
+		assert.throws(roman('190M4'));
+		assert.throws(roman('Вход'));
+		assert.throws(roman('こんにちは！'));
 
-		assert.strictEqual(roman(), null);
+		assert.throws(roman());
 
-		assert.strictEqual(roman(NaN), null);
-		assert.strictEqual(roman(undefined), null);
-        assert.strictEqual(roman(Infinity), null);
-        assert.strictEqual(roman(-Infinity), null);
+		assert.throws(roman(NaN));
+		assert.throws(roman(undefined));
+        assert.throws(roman(Infinity));
+        assert.throws(roman(-Infinity));
 	});
 });
 
