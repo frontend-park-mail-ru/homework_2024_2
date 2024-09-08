@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Сортирует массив объектов по заданным свойствам в порядке возрастания.
  * Сортировка выполняется с учётом лексикографического порядка для строк и
@@ -8,73 +9,45 @@
  *                           Сначала сортировка происходит по первому свойству, 
  *                           затем по второму и так далее.
  * @returns {Object[]} Отсортированный массив объектов.
- * @throws {Error} Если `arr` не является массивом или `props` не является массивом строк, 
+ * @throws {TypeError} Если `arr` не является массивом или `props` не является массивом строк, 
  *                  будет выброшена ошибка. Также выбрасывается ошибка, если какое-либо
  *                  свойство отсутствует в объектах.
  *
  */
 
-
-
-
-
-'use strict';
-
 function sorting(arr, props) {
     // Проверка параметра arr
     if (!Array.isArray(arr)) {
-        throw new Error("Первый параметр должен быть массивом объектов.");
+        throw new TypeError("Первый параметр должен быть массивом объектов.");
     }
 
     // Если массив пустой — сразу возвращаем его, сортировать нечего
-    if (arr.length === 0) {
+    if (!arr.length) {
         return arr;
     }
 
     // Проверка параметра props
-    if (!Array.isArray(props)) {
-        throw new Error("Второй параметр должен быть массивом строк.");
+    if (!Array.isArray(props) || !props.every(prop => typeof prop === 'string')) {
+        throw new TypeError("Второй параметр должен быть массивом строк.");
     }
 
     // Если props пуст — возвращаем исходный массив, так как нечем сортировать
-    if (props.length === 0) {
+    if (!props.length) {
         return arr;
     }
 
     // Функция слияния двух отсортированных массивов
     function merge(left, right, props) {
         let result = [];
-        let i = 0;
-        let j = 0;
+        while (left.length && right.length) {
+            const comparison = compareObjects(left[0], right[0], props);
 
-        // Пока есть элементы в обоих массивах
-        while (i < left.length && j < right.length) {
-            // Сравниваем объекты по списку свойств
-            let comparison = compareObjects(left[i], right[j], props);
-
-            if (comparison <= 0) {
-                result.push(left[i]);
-                i++;
-            } else {
-                result.push(right[j]);
-                j++;
-            }
+            result.push(comparison <= 0 ? left.shift() : right.shift());
         }
 
-        // Добавляем оставшиеся элементы из левого массива
-        while (i < left.length) {
-            result.push(left[i]);
-            i++;
-        }
-
-        // Добавляем оставшиеся элементы из правого массива
-        while (j < right.length) {
-            result.push(right[j]);
-            j++;
-        }
-
-        return result;
+        return result.concat(left, right); // Используем concat для добавления оставшихся элементов
     }
+        
 
     // Рекурсивная функция сортировки слиянием
     function mergeSort(arr, props) {
@@ -91,23 +64,18 @@ function sorting(arr, props) {
 
     // Функция сравнения объектов по нескольким свойствам
     function compareObjects(a, b, props) {
-        for (let prop of props) {
+        return props.reduce((result, prop) => {
+            if (result !== 0) return result; // Если уже не равно, возвращаем результат
+
             const aValue = a[prop];
             const bValue = b[prop];
 
-            // Обрабатываем случай, когда свойство отсутствует
             if (aValue === undefined || bValue === undefined) {
-                throw new Error(`Свойство '${prop}' отсутствует у одного из объектов.`);
+                throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
             }
 
-            if (aValue > bValue) {
-                return 1;
-            } else if (aValue < bValue) {
-                return -1;
-            }
-            // Если значения равны, продолжаем проверку по следующему свойству
-        }
-        return 0;
+            return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+        }, 0);
     }
 
     // Запуск сортировки
