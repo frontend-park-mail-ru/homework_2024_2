@@ -54,7 +54,28 @@ QUnit.module('Тестируем функцию get', function () {
 
 		assert.strictEqual(get(object, '.foobar'), undefined);
 		assert.strictEqual(get(object, '.'), object);
+	});
+	QUnit.test('get работает правильно с объектами с большой вложенностью', function (assert) {
+		const object = {
+			foo: {
+				bar: {
+					baz: {
+						deep: {
+							more: {
+								word: 'ok'
+							}
+						}
+					}
+				}
+			}
+		};
 
+		assert.strictEqual(get(object, '.foo'), object.foo);
+		assert.strictEqual(get(object, '.foo.bar'), object.foo.bar);
+		assert.strictEqual(get(object, '.foo.bar.baz'), object.foo.bar.baz);
+		assert.strictEqual(get(object, '.foo.bar.baz.deep'), object.foo.bar.baz.deep);
+		assert.strictEqual(get(object, '.foo.bar.baz.deep.more'), object.foo.bar.baz.deep.more);
+		assert.strictEqual(get(object, '.foo.bar.baz.deep.more.word'), object.foo.bar.baz.deep.more.word);
 	});
 	QUnit.test('get работает правильно c существующими свойствами и возвращает разные типы', function (assert) {
 		const object = {
@@ -69,6 +90,5 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.good'), object.good);
 		assert.strictEqual(get(object, '.bad'), object.bad);
 		assert.strictEqual(get(object, '.'), object);
-
 	});
 });
