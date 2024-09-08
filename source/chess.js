@@ -48,6 +48,3 @@ const chess = size => {
 
     return board;
 };
-
-
-console.log(chess(1))
