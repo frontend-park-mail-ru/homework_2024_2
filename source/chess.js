@@ -1,5 +1,15 @@
 'use strict';
 
+
+/**
+ * Генерирует строки для шахматной доски.
+ *
+ * @param {number} size - Размер строки, должен быть положительным целым числом.
+ * @returns {{ oddLine: string, 
+*              evenLine: string }} Объект с двумя строками:
+ *   - oddLine: Строка для нечетной линии шахматной доски.
+ *   - evenLine: Строка для четной линии шахматной доски.
+**/
 const lineGen = size => {
     let oddLine = '';
     let evenLine = ''
