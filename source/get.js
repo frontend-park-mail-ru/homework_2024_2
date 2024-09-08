@@ -1,5 +1,7 @@
 'use strict';
 
+// Напишите функцию `get`, которая получает путь к вложенному свойству объекта и возвращает значение этого свойства (или undefined, если свойства не существует)
+
 /**
  * Finds the value of an object's property by path to property.
  *
