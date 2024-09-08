@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Вычисляет наибольший общий делитель (НОД) двух чисел с помощью алгоритма Евклида.
@@ -24,11 +24,12 @@ const findNOD = (a, b) => {
  */
 const euclid = (...numbers) => {
   if (!numbers.length) {
-    throw new RangeError("No arguments provided");
+    throw new RangeError('No arguments provided');
   }
-
+  
   if (!numbers.every(Number.isInteger)) {
-    throw new TypeError("euclid() function does not accept non-numeric values")
+    throw new TypeError('euclid() function does not accept non-numeric values')
   }
+  
   return numbers.reduce((a, b) => findNOD(a, b), numbers[0]);
 }

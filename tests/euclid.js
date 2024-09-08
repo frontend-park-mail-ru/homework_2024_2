@@ -38,6 +38,28 @@ QUnit.module('Тестируем функцию euclid', function () {
 	QUnit.test('ДОБ.: Функция может принимать нечисловые аргументы', function (assert) {
 		assert.throws(function() {
 		  euclid('a', 2);
-		}, Error, 'euclid("a", 2) выбрасывает ошибку');
-	  });
+		}, TypeError, 'euclid("a", 2) выбрасывает ошибку');
+		
+		assert.throws(function() {
+		euclid(null, 2);
+		}, TypeError, 'euclid(null, 2) выбрасывает ошибку');
+
+		assert.throws(function() {
+		euclid(1, true);
+		}, TypeError, 'euclid(1, true) выбрасывает ошибку');
+
+		assert.throws(function() {
+		euclid(1, []);
+		}, TypeError, 'euclid(1, []) выбрасывает ошибку');
+
+		assert.throws(function() {
+		euclid(undefined, 2);
+		}, TypeError, 'euclid(undefined, 2) выбрасывает ошибку');
+	});
+
+	QUnit.test('ДОБ.: Функция может обработать отсутствие аргументов', function (assert) {
+		assert.throws(function() {
+		  euclid();
+		}, RangeError, 'euclid() приводит к ошибке');
+	});
 });
