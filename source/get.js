@@ -1,16 +1,19 @@
 'use strict';
 
-function get(obj, path) {
-    if (!path || path === '.') return obj; 
+const get = (obj, path) => {
+    if (obj)
+    if (!path || path === '.'){
+        return obj; 
+    } 
 
     const parts = path.slice(1).split('.'); 
 
-    for (const part of parts) {
-        if (obj === undefined || obj === null) {
-            return undefined;
+    const result = parts.reduce((acc, part) => {
+        if (acc !== undefined) {
+            acc = acc[part];
         }
-        obj = obj[part];
-    }
+        return acc;
+    }, obj);
     
-    return obj;
+    return result;
 }
