@@ -56,7 +56,7 @@ const roman = (inputNumber) => {
     const n = inputNumber.length;
 
     for (let i = 0; i < n; i++) {
-        if('mdclxvi'.indexOf(inputNumber[i]) == -1){ // Проверяем, что все символы - это римские цифры
+        if('mdclxvi'.indexOf(inputNumber[i]) === -1){ // Проверяем, что все символы - это римские цифры
             TypeError('Введено некорректное число');
         }
         if(map[inputNumber[i]] < map[inputNumber[i+1]]){
