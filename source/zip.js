@@ -31,4 +31,5 @@ const zip = (...objects) => {
 const isObject = (potentialObject) => {
 	return (typeof potentialObject === 'object' &&
 		potentialObject !== null);
-}
+};
+
