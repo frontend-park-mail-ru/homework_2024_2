@@ -1,6 +1,9 @@
 'use strict';
 
-const minmax = text => {
+const minmax = function (text) {
+    if (typeof text !== 'string') {
+        throw new TypeError('Функция принимает на вход только тип string')
+    }
     const numbers = text
         .split(/ +/)
         .map(Number.parseFloat)
