@@ -13,7 +13,7 @@ const minmax = function (text) {
     const numbers = text
         .split(/ +/)
         .map(Number.parseFloat)
-        .filter(entry => !Number.isNaN(entry));
+        .filter(entry => !isNaN(entry));
     if (numbers.length === 0) return [undefined, undefined];
     return [Math.min(...numbers), Math.max(...numbers)];
 };
