@@ -63,5 +63,35 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('abbbbacc aaa abcdef bbb'), 'Aaa Aabbbbcc Abcdef Bbb');
 	})
 
-	
+	QUnit.test('Функция выдает ошибку на не строках', function(assert){
+		assert.throws(
+			function() {
+				sort(1523);
+			},
+			function(error) {
+				return error instanceof TypeError && error.message === 'Параметр должен быть строкой';
+			},
+			'Ошибка TypeError при входном параметре не строке'
+		);
+
+		assert.throws(
+			function() {
+				sort(true);
+			},
+			function(error) {
+				return error instanceof TypeError && error.message === 'Параметр должен быть строкой';
+			},
+			'Ошибка TypeError при входном параметре не строке'
+		);
+
+		assert.throws(
+			function() {
+				sort();
+			},
+			function(error) {
+				return error instanceof TypeError && error.message === 'Параметр должен быть строкой';
+			},
+			'Ошибка TypeError при входном параметре не строке'
+		)
+	})
 });

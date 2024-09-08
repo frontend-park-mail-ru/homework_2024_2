@@ -25,8 +25,5 @@ const sort = (str) =>{
         
     }
 
-    throw new RuntimeError('Некорректные данные');
+    throw new TypeError('Параметр должен быть строкой');
 };
-
-const a = new String('aaaa');
-console.log(sort(a));
