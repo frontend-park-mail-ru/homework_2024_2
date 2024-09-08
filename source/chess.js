@@ -1,5 +1,16 @@
 'use strict';
 
+const lineGen = size => {
+    let oddLine = '';
+    let evenLine = ''
+    for (let i = 0; i < size; i++) {
+        oddLine += (i % 2 === 0 ? '*' : ' ');
+        evenLine += (i % 2 === 0 ? ' ' : '*');
+    }
+    return {oddLine, evenLine}
+}
+
+
 /**
  * Генерирует шахматную доску заданного размера.
  *
@@ -17,47 +28,29 @@
  * //
  */
 const chess = size => {
-    const oddLineGen = size => {
-        let line = '';
-        for (let i = 0; i < size; i++) {
-            i % 2 == 0 ? line += '*' : line += ' '
-        }
-        return line
-    }
-
-    const evenLineGen = size => {
-        let line = '';
-        for (let i = 0; i < size; i++) {
-            i % 2 == 0 ? line += ' ' : line += '*'
-        }
-        return line
-    }
-
     
+    
+    if (typeof size !== 'number' && typeof size !== 'string') {
+        throw new TypeError('Size must be a number.');
+    }
 
     const numericSize = +size;
-    
-    if (
-        typeof numericSize !== 'number' || 
-        isNaN(numericSize) || 
-        !Number.isInteger(numericSize) || 
-        size === null || 
-        Array.isArray(size) || 
-        (typeof numericSize === 'object' && numericSize !== null) ||
-        typeof size === 'boolean'
-    ) {
+
+    if (!Number.isInteger(numericSize)) {
         throw new Error('Size must be an integer.');
     }
 
+    if (numericSize <= 1) {
+        throw new Error('Size must be a positive integer more than 1.');
+    }
 
-    if (numericSize < 1) throw new Error('Size must be more than 1');
     
 
-    const oddLine = oddLineGen(size);
-    const evenLine = evenLineGen(size);
+    const {oddLine, evenLine} = lineGen(numericSize);
+
     let board = '';
-    for (let i = 0; i < size; i++) {
-        i % 2 == 0 ? board += oddLine : board += evenLine
+    for (let i = 0; i < numericSize; i++) {
+        board += (i % 2 == 0 ? oddLine : evenLine)
         board += '\n'; 
     }
 
