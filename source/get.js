@@ -19,12 +19,12 @@ const get = (obj, path) => {
     }
 
     if (!path || path === '.') {
-        return obj; 
-    } 
+        return obj;
+    }
 
     if (!path.startsWith(".")) {
         throw new TypeError('path does not start with "."');
-    } 
+    }
 
     const parts = path.slice(1).split('.');
 
@@ -33,16 +33,16 @@ const get = (obj, path) => {
             return undefined;
         }
 
-     if (typeof acc === 'string') {
-        if (!isNaN(part)) {
-            return acc[Number(part)];
+        if (typeof acc === 'string') {
+            if (!isNaN(part)) {
+                return acc[Number(part)];
+            }
+            return acc[part];
         }
-        return acc[part];
-    }
 
-    if (typeof acc === 'object') {
-        return acc[part];
-    }
+        if (typeof acc === 'object') {
+            return acc[part];
+        }
         return;
     }, obj);
 
