@@ -1,13 +1,23 @@
-function euclid() {
-    let x = arguments[0];
-    for (let i = 1; i < arguments.length; i++) {
-        let y = arguments[i];
-        while (x && y) {
-            let temp = x
-            x = Math.max(x, y) % Math.min(x, y)
-            y = Math.min(temp, y)
-        }
-        x += y
+'use strict';
+
+/**
+ * Вычисление НОД нескольких натуральных чисел
+ * @param {number} numbers - натуральные числа
+ * @returns {number} - НОД натуральных чисел из numbers
+ */
+const euclid = (...numbers) => {
+    if (numbers.length === 0) {
+        throw new Error("empty data");
     }
-    return x;
+    return numbers.reduce(
+        (a, b) => {
+            if (typeof a != 'number' || a < 0) {
+                throw new Error('not a natural number');
+            }
+            if (b === 0) {
+                return a;
+            }
+            return euclid(b, a % b);
+        }
+    )
 }
