@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 
 /**
@@ -11,13 +11,13 @@
  */
 
 const minmax = function (numbers) {
-  if (!(typeof numbers === "string" || (typeof numbers === "object" && numbers instanceof String))) {
-    throw new TypeError("Аргумент должен быть строкой");
+  if (!(typeof numbers === 'string' || (typeof numbers === 'object' && numbers instanceof String))) {
+    throw new TypeError('Аргумент должен быть строкой');
   }
 
   const numbersArray = [];
 
-  numbers.split(" ").forEach(value =>{
+  numbers.split(' ').forEach(value =>{
     const num = parseFloat(value);
 
     if (!Number.isNaN(num)) {
