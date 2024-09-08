@@ -12,7 +12,7 @@ const sorting = (initial, fields) => {
     }
     let sorted = initial.slice();
     fields.slice().reverse().forEach(field => {
-        if (typeof field !== 'string') {
+        if (typeof field !== 'string' && !(field instanceof String)) {
             throw new Error('fields must contain only strings');
         }
         sorted = quickSort(sorted, (a, b) => {

@@ -218,4 +218,22 @@ QUnit.module('Тестируем функцию sorting', function () {
 			Error('fields must contain only strings'),
 		);
 	});
+
+	QUnit.test('sorting может работать с объектами класса String', function(assert) {
+		const initial = [
+			{'prop': new String('b')},
+			{'prop': new String('d')},
+			{'prop': new String('c')},
+			{'prop': new String('a')},
+		];
+		const actual = sorting(initial, [ new String('prop') ]);
+
+		const expected = [
+			{'prop': new String('a')},
+			{'prop': new String('b')},
+			{'prop': new String('c')},
+			{'prop': new String('d')},
+		];
+		assert.deepEqual(actual, expected);
+	});
 });
