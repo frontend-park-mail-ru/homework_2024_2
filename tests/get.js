@@ -64,4 +64,14 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get('string', '.foo'), undefined);
 		assert.strictEqual(get(false, '.foo'), undefined);
     });
+
+	QUnit.test('get работает правильно c простым объектом', function (assert) {
+		const object = {
+			a:5,
+		};
+
+		assert.strictEqual(get(object, '.'), object);
+		assert.strictEqual(get(object, '.a.b'), undefined);	
+		assert.strictEqual(get(object, '.foo.baz'), undefined);
+	});
 });
