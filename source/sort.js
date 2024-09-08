@@ -7,12 +7,9 @@
     * @returns {string} Строку с отсортированными буквами в словах и отсортированными словами в строке, с первой прописной и остальными строчными бувами в каждом слове 
 */
 const sort = (str) =>{
-    if (typeof(str) != 'string'){
-        throw new RuntimeError('Некорректные данные');
-    }
-
-    const arrayOfStrings = str.split(' ');
-    const result = arrayOfStrings.reduce((res, item) => {
+    if (typeof str === 'string' || str instanceof String){
+        const arrayOfStrings = str.split(' ');
+        const result = arrayOfStrings.reduce((res, item) => {
 
         item = item.toLowerCase().split('').sort((a, b) => a.localeCompare(b)).join('');
         if (item) {
@@ -22,7 +19,14 @@ const sort = (str) =>{
         res.push(item);
         return res;
         
-    }, []);
+        }, []);
 
-    return result.sort((a, b) => a.localeCompare(b)).join(' ');
+        return result.sort((a, b) => a.localeCompare(b)).join(' ');
+        
+    }
+
+    throw new RuntimeError('Некорректные данные');
 };
+
+const a = new String('aaaa');
+console.log(sort(a));
