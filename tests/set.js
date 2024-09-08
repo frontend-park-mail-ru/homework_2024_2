@@ -92,7 +92,64 @@ QUnit.module('Тестируем функцию set', function () {
 				}
 			}
 		};
+		const object2 = {
+			deep: {
+				nested: {
+					field: undefined
+				}
+			}
+		};
 
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
+		assert.deepEqual(set({}, '.deep.nested.field', undefined), object2);
+	});
+
+	QUnit.test('set работает правильно c объектами с повторяющимися именами свойств', function (assert) {
+		const object = {
+			deep: {
+				nested: {
+					field: {
+						nested: {
+							field: {
+								nested: 42
+							}
+						}
+					}
+				}
+			}
+		};
+		const object2 = {
+			deep: {
+				deep: {
+					deep: {
+						deep: {
+							deep: {
+								deep: 42
+							}
+						}
+					}
+				}
+			}
+		};
+
+		assert.deepEqual(set({}, '.deep.nested.field.nested.field.nested', 42), object);
+		assert.deepEqual(set({}, '.deep.deep.deep.deep.deep.deep', 42), object2);
+	});
+	QUnit.test('set работает правильно c символами в пути', function (assert) {
+		const object = {
+			d$eep: {
+				"nes{ted": {
+					"fi/eld": 42
+				}
+			}
+		};
+		const object2 = {
+			глубокое: {
+				поле: 42
+			}
+		};
+
+		assert.deepEqual(set({}, '.d$eep.nes{ted.fi/eld', 42), object);
+		assert.deepEqual(set({}, '.глубокое.поле', 42), object2);
 	});
 });
