@@ -17,7 +17,7 @@ const sorting = (initial, fields) => {
         }
         sorted = quickSort(sorted, (a, b) => {
             if (typeof a !== 'object' || typeof b !== 'object') {
-                throw new Error('initial must contain only strings');
+                throw new Error('initial must contain only objects');
             }
             if (a[field] === b[field]) {
                 return 0;
