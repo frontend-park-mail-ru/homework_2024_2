@@ -1,6 +1,6 @@
 'use strict';
 
-QUnit.module('Тестируем функцию plainify', function () {
+QUnit.module('Тестируем функцию plainify на позитивные тесты', function () {
 	QUnit.test('plainify работает правильно', function (assert) {
 		assert.deepEqual(plainify({foo: 'bar', baz: 42}), {'foo': 'bar', 'baz': 42});
 
@@ -72,3 +72,57 @@ QUnit.module('Тестируем функцию plainify', function () {
         assert.deepEqual(plainify(input), expected, 'plainify корректно обрабатывает null значения');
     });
 });
+
+
+
+
+
+QUnit.module('Тестируем функцию plainify на негативные кейсы', function () {
+    QUnit.test('plainify выбрасывает ошибку при передаче null', function (assert) {
+        assert.throws(
+            function() {
+                plainify(null);
+            },
+            /Invalid input: plainify expects an object/,
+            'plainify выбрасывает ошибку при null'
+        );
+    });
+
+    QUnit.test('plainify выбрасывает ошибку при передаче строки', function (assert) {
+        assert.throws(
+            function() {
+                plainify('string');
+            },
+            /Invalid input: plainify expects an object/,
+            'plainify выбрасывает ошибку при передаче строки'
+        );
+    });
+
+    QUnit.test('plainify выбрасывает ошибку при передаче числа', function (assert) {
+        assert.throws(
+            function() {
+                plainify(42);
+            },
+            /Invalid input: plainify expects an object/,
+            'plainify выбрасывает ошибку при передаче числа'
+        );
+    });
+
+    QUnit.test('plainify выбрасывает ошибку при передаче undefined', function (assert) {
+        assert.throws(
+            function() {
+                plainify(undefined);
+            },
+            /Invalid input: plainify expects an object/,
+            'plainify выбрасывает ошибку при undefined'
+        );
+    });
+});
+
+
+
+
+
+
+
+

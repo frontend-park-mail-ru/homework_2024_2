@@ -1,0 +1,14 @@
+{
+  "name": "homework_2024_2",
+  "version": "1.0.0",
+  "description": "> Introductory homework for the course \"Frontend-development\"",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
