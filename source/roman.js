@@ -18,10 +18,17 @@
  * @returns {number} - Число в десятичной системе счисления.
  */
 const roman = (inputNumber) => {
-    if (!inputNumber){ //Проверяем на NaN, null, undefined и т.д.
-        return TypeError('Введено NaN, null или undefined');
+
+    if ( !(+inputNumber) && typeof inputNumber !== 'string' ){
+        return TypeError(`Ожидался тип number | string, получено ${isNaN(inputNumber) ? NaN : typeof inputNumber}`);
     }
-    if ((inputNumber == +inputNumber) && (inputNumber % 1 == 0) && inputNumber>0){ //Проверяем, что на входе корректное число
+
+    if (+inputNumber){ //Проверяем, что на входе число
+
+        if (inputNumber % 1 !== 0 || inputNumber <= 0){
+            return TypeError('Введено нецелое число или число меньше 1');
+        }
+
         //Переводим число из десятичной системы счисления в римскую
         const romanNumbers = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
         const numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
@@ -29,21 +36,17 @@ const roman = (inputNumber) => {
         let i = 0;
         let answer = "";
 
-        while (inputNumber>0){
-            if (inputNumber >= numbers[i]){
+        while(inputNumber>0){
+            if(inputNumber >= numbers[i]){
                 answer += romanNumbers[i];
                 inputNumber -= numbers[i];
-            } else{
+            }else{
                 i++;
             }
         }
 
         return answer;
 
-    }
-
-    if (typeof inputNumber !== 'string'){ // Проверяем, что на входе строка
-        return TypeError('Введено некорректное число');
     }
 
     //Переводим число из десятичной системы счисления в римскую
@@ -56,10 +59,10 @@ const roman = (inputNumber) => {
     const n = inputNumber.length;
 
     for (let i = 0; i < n; i++) {
-        if ('mdclxvi'.indexOf(inputNumber[i]) === -1){ // Проверяем, что все символы - это римские цифры
-            TypeError('Введено некорректное число');
+        if('mdclxvi'.indexOf(inputNumber[i]) === -1){ // Проверяем, что все символы - это римские цифры
+            return TypeError('Введено некорректное римское число. Допустимые символы: I, V, X, L, C, D, M');
         }
-        if (map[inputNumber[i]] < map[inputNumber[i+1]]){
+        if( map[inputNumber[i]] < map[inputNumber[i+1]] ){
             answer -= map[inputNumber[i]];
         } else{
             answer += map[inputNumber[i]];
