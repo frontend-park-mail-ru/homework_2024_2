@@ -21,10 +21,5 @@ const get = (object, pathToProperty) => {
     const keys = pathToProperty.slice(1).split('.');
     let currentObject = object;
 
-    return keys.reduce((accum, key) => {
-        if (accum === undefined) {
-            return;
-        } 
-        return accum[key];
-    }, currentObject);
+    return keys.reduce((accum, key) => accum === undefined ? undefined : accum[key], currentObject);
 }
