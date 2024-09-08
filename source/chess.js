@@ -1,5 +1,21 @@
 'use strict';
 
+/**
+ * Генерирует шахматную доску заданного размера.
+ *
+ * @param {number} size - Размер шахматной доски (должен быть целым положительным числом).
+ * @returns {string} Строка, представляющая шахматную доску.
+ * @throws {Error} Если размер не является целым положительным числом.
+ *
+ * @example
+ * // Возвращает шахматную доску 3x3
+ * console.log(chess(3));
+ * // Output:
+ * // * *
+ * //  * 
+ * // * *
+ * //
+ */
 const chess = size => {
     const oddLineGen = size => {
         let line = '';
@@ -48,3 +64,6 @@ const chess = size => {
 
     return board;
 };
+
+
+
