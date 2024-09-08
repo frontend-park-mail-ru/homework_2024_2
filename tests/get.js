@@ -48,4 +48,27 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.length'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 	});
+
+	QUnit.test('get работает с пустым объектом', function (assert) {
+		const emptyObject = {};
+		
+		assert.strictEqual(get(emptyObject, '.foo'), undefined);
+		assert.strictEqual(get(emptyObject, '.deep.hested.field'), undefined);
+		assert.strictEqual(get(emptyObject, '.'), emptyObject);
+	});
+	
+	QUnit.test('get выбрасывает Error при некорректном пути', function (assert) {
+		const object = {
+			foo: 'bar',
+			deep: {
+				nested: {
+					field: 'value'
+				}
+			}
+		};
+	
+		assert.throws(function() {get(object, ''); }, Error, 'Invalid data');
+		assert.throws(function() {get(object, null); }, Error, 'Invalid data');
+		assert.throws(function() {get(object, undefined); }, Error, 'Invalid data');
+	});	
 });
