@@ -1,1 +1,10 @@
+# JetBrains IDE
 .idea
+
+# ESLint
+eslint.config.mjs
+
+# Node package manager
+node_modules
+package.json
+package-lock.json
