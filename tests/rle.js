@@ -19,7 +19,9 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle('CCCCCCCCCCCCCCCCCCCCC'), 'C21');
 	});
 
-	QUnit.test('некорректный ввод', function (assert) {
+	QUnit.test('проверка ввода', function (assert) {
+        const a = new String('aaa');
+        assert.strictEqual(rle(a), 'a3');
 		assert.strictEqual(rle(322), null);
 		assert.strictEqual(rle({}), null);
 		assert.strictEqual(rle([2,2,8]), null);

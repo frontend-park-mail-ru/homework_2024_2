@@ -16,7 +16,7 @@
  * @returns {string|null} The RLE encoded string, or null if the input is not a string.
  */
 const rle = (inputString) => {
-    if ( typeof(inputString) !== "string") {
+    if (typeof(inputString) !== "string" && !(inputString instanceof String)) {
         return null;
     }
 
