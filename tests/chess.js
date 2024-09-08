@@ -1,6 +1,14 @@
 'use strict';
 
 QUnit.module('Тестируем функцию chess', function () {
+	QUnit.test('Доска не c цисленными значениями', function (assert) {
+		assert.strictEqual(chess("test"), null);
+	});
+	QUnit.test('Доска с отрицательным размером', function (assert) {
+		assert.strictEqual(chess(-10), null);
+		assert.strictEqual(chess('-10'), null);
+	});
+
 	QUnit.test('Шахматной доски 1 на 1 не бывает', function (assert) {
 		assert.strictEqual(chess(1), null);
 		assert.strictEqual(chess('1'), null);
@@ -35,6 +43,53 @@ QUnit.module('Тестируем функцию chess', function () {
 			' * * * *\n';
 		assert.strictEqual(chess(8), expected);
 		assert.strictEqual(chess('8'), expected);
+	});
+
+	QUnit.test('Шахматная доска 15 на 15', function (assert) {
+		const expected =
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n' +
+			' * * * * * * * \n' +
+			'* * * * * * * *\n';
+		assert.strictEqual(chess(15), expected);
+		assert.strictEqual(chess('15'), expected);
+	});
+
+	QUnit.test('Шахматная доска 20 на 20', function (assert) {
+		const expected =
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n' +
+			'* * * * * * * * * * \n' +
+			' * * * * * * * * * *\n';
+		assert.strictEqual(chess(20), expected);
+		assert.strictEqual(chess('20'), expected);
 	});
 
 });
