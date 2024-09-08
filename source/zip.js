@@ -9,12 +9,9 @@
  * @throws {TypeError} All of the arguments must be objects
  */
 const zip = (...objects) => {
-	objects.forEach((obj) => {
-		if (typeof obj !== 'object' ||
-			obj === null) {
-			throw new TypeError("All of the arguments must be objects");
-		}
-	});
+	if (!objects.every(isObject)) {
+		throw new TypeError("All of the arguments must be objects");
+	};
 
 	return objects.reduce((zippedObject, currentObject) => {
 		Object.entries(currentObject).forEach(([key, value]) => {
@@ -26,5 +23,12 @@ const zip = (...objects) => {
 	}, {});
 };
 
-
-
+/**
+ * Check if input is object.
+ * Array is considered to be an object too.
+ * @param {*} potentialObject - a value to be checked
+ */
+const isObject = (potentialObject) => {
+	return (typeof potentialObject === 'object' &&
+		potentialObject !== null);
+}
