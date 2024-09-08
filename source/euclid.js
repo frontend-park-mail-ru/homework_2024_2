@@ -21,3 +21,4 @@ const euclid = (...numbers) => {
         }
     )
 }
+
