@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 QUnit.module('Тестируем функцию max', function () {

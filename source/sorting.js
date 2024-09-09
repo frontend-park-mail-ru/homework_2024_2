@@ -1,5 +1,70 @@
 'use strict';
 /**
+ * Функция сравнения объектов по нескольким свойствам.
+ * @param {Object} a - Первый объект.
+ * @param {Object} b - Второй объект.
+ * @param {string[]} props - Свойства для сравнения.
+ * @returns {number} Результат сравнения: -1, 0 или 1.
+ * @throws {TypeError} Если какое-либо свойство отсутствует в объектах.
+ */
+    function compareObjects(a, b, props) {
+        return props.reduce((result, prop) => {
+            if (result) {
+                return result; // Если результат уже не равен 0, возвращаем его
+            }
+
+            const aValue = a[prop];
+            const bValue = b[prop];
+
+            if (aValue === undefined || bValue === undefined) {
+                throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
+            }
+
+            return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+        }, 0);
+    }
+
+
+ /**
+ * Функция слияния двух отсортированных массивов.
+ * @param {Object[]} left - Левый отсортированный массив.
+ * @param {Object[]} right - Правый отсортированный массив.
+ * @param {string[]} props - Свойства для сортировки.
+ * @returns {Object[]} Слитый массив.
+ */
+ function merge(left, right, props) {
+    let result = [];
+    while (left.length && right.length) {
+        const comparison = compareObjects(left[0], right[0], props);
+
+        result.push(comparison <= 0 ? left.shift() : right.shift());
+    }
+
+    return result.concat(left, right); // Используем concat для добавления оставшихся элементов
+}
+
+
+/**
+ * Рекурсивная функция сортировки слиянием.
+ * @param {Object[]} arr - Массив объектов.
+ * @param {string[]} props - Свойства для сортировки.
+ * @returns {Object[]} Отсортированный массив.
+ */
+ function mergeSort(arr, props) {
+    if (arr.length <= 1) {
+        return arr;
+    }
+
+    const mid = Math.floor(arr.length / 2);
+    const left = mergeSort(arr.slice(0, mid), props);
+    const right = mergeSort(arr.slice(mid), props);
+
+    return merge(left, right, props);
+}
+
+
+
+/**
  * Сортирует массив объектов по заданным свойствам в порядке возрастания.
  * Сортировка выполняется с учётом лексикографического порядка для строк и
  * числового порядка для чисел. Поддерживает несколько уровней сортировки.
@@ -14,7 +79,6 @@
  *                  свойство отсутствует в объектах.
  *
  */
-
 function sorting(arr, props) {
     // Проверка параметра arr
     if (!Array.isArray(arr)) {
@@ -35,49 +99,6 @@ function sorting(arr, props) {
     if (!props.length) {
         return arr;
     }
-
-    // Функция слияния двух отсортированных массивов
-    function merge(left, right, props) {
-        let result = [];
-        while (left.length && right.length) {
-            const comparison = compareObjects(left[0], right[0], props);
-
-            result.push(comparison <= 0 ? left.shift() : right.shift());
-        }
-
-        return result.concat(left, right); // Используем concat для добавления оставшихся элементов
-    }
-        
-
-    // Рекурсивная функция сортировки слиянием
-    function mergeSort(arr, props) {
-        if (arr.length <= 1) {
-            return arr;
-        }
-
-        const mid = Math.floor(arr.length / 2);
-        const left = mergeSort(arr.slice(0, mid), props);
-        const right = mergeSort(arr.slice(mid), props);
-
-        return merge(left, right, props);
-    }
-
-    // Функция сравнения объектов по нескольким свойствам
-    function compareObjects(a, b, props) {
-        return props.reduce((result, prop) => {
-            if (result !== 0) return result; // Если уже не равно, возвращаем результат
-
-            const aValue = a[prop];
-            const bValue = b[prop];
-
-            if (aValue === undefined || bValue === undefined) {
-                throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
-            }
-
-            return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
-        }, 0);
-    }
-
-    // Запуск сортировки
+     // Запуск сортировки
     return mergeSort(arr, props);
 }
