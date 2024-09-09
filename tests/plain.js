@@ -49,4 +49,31 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.deepEqual(plain([ [], [ [ 2, [ 3 ] ] ], [ [] ] ]), [ 2, 3 ]);
 		assert.deepEqual(plain([ [ [ 1 ], [ 2 ] ], [ [ 3 ] ], [ [ [ 4 ] ] ] ]), [ 1, 2, 3, 4 ]);
 	});
+	QUnit.test('Работает с некорректным вводом', function (assert) {
+		assert.throws(
+			() => plain(null),
+			TypeError,
+			'Выбрасывает ошибку TypeError при передаче null'
+		);
+		assert.throws(
+			() => plain(undefined),
+			TypeError,
+			'Выбрасывает ошибку TypeError при передаче undefined'
+		);
+		assert.throws(
+			() => plain(42),
+			TypeError,
+			'Выбрасывает ошибку TypeError при передаче числа'
+		);
+		assert.throws(
+			() => plain('string'),
+			TypeError,
+			'Выбрасывает ошибку TypeError при передаче строки'
+		);
+		assert.throws(
+			() => plain({}),
+			TypeError,
+			'Выбрасывает ошибку TypeError при передаче объекта'
+		);
+	});
 });

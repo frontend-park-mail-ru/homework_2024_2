@@ -7,7 +7,7 @@
  * @returns {Array} Однажды вложенный массив.
  * @throws {TypeError} Если входное значение не является массивом.
  */
-const plain = arr => {
+const plain = (arr) => {
     if (!Array.isArray(arr)) {
         throw new TypeError('Argument must be an array');
     }
