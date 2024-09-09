@@ -1,4 +1,4 @@
-# frontend-homework, вариант №16
+# frontend-homework, вариант №16, Санин Ф.М.
 > Introductory homework for the course "Frontend-development"
 
 ## Привет!
