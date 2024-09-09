@@ -53,4 +53,10 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('от топота копыт', false), 'а копыт');
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
+	
+	QUnit.test('Дополнительные тесты', function (assert) {
+		assert.strictEqual(letters('aabbcc'), '', 'Удаляет все повторяющиеся символы');
+		assert.strictEqual(letters('aabbcc', true), 'abc', 'Сохраняет первую встречу символов');
+		assert.strictEqual(letters('abcdabcd', false), 'abcd', 'Сохраняет последнюю встречу символов');
+	});
 });
