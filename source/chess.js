@@ -17,6 +17,7 @@ const lineGen = (size) => {
         oddLine += (i % 2 === 0 ? '*' : ' ');
         evenLine += (i % 2 === 0 ? ' ' : '*');
     }
+
     return {oddLine, evenLine}
 }
 
@@ -38,8 +39,7 @@ const lineGen = (size) => {
  * //
  */
 const chess = (size) => {
-    
-    if (typeof size !== 'number' && typeof size !== 'string' || typeof size === 'object') {
+    if (typeof size !== 'number' && typeof size !== 'string' && typeof size !== 'object') {
         throw new TypeError('Size must be a number.');
     }
 
@@ -53,7 +53,7 @@ const chess = (size) => {
         throw new RangeError('Size must be a positive integer more than 1.');
     }
 
-
+    
     const {oddLine, evenLine} = lineGen(numericSize);
 
     let board = '';
@@ -65,7 +65,3 @@ const chess = (size) => {
 
     return board;
 };
-
-
-
-
