@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /** Принимает на вход массив массивов и создаёт из них один общий массив. Массивы могут быть любой вложенности
  * @param {any[]} array
@@ -15,7 +15,7 @@ function plain(array) {
   }
   // Проверка на то, является ли аргумент массивом
   if (!Array.isArray(array)) {
-    throw new TypeError("Argument should be an array");
+    throw new TypeError('Argument should be an array');
   }
   // Рекурсивно выпрямляем массив
   const plainedArray = new Array();
