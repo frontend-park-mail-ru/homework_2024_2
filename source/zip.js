@@ -1,7 +1,6 @@
 'use strict';
 
 const zip = (...objects) => {
-    /*** проверка на параметры */
     if (!objects.length) {
          throw new Error('No parameters');
     }
@@ -9,15 +8,15 @@ const zip = (...objects) => {
     const result = {};
 
     objects.forEach((obj) => {
-        if (obj === undefined) {
+        if (!obj) {
             throw new TypeError('Parameter is undefined!');
         }
-        for (const key in obj) {
-            if (obj[key] === undefined) {
-                throw new TypeError('Parameter is undefined!');
-            }
+
+        for (const [key, value] of Object.entries(obj)) {
+
+
             if (!result.hasOwnProperty(key)) {
-                    result[key] = obj[key];
+                    result[key] = value;
             }
         }
     }
