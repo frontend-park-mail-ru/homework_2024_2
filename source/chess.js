@@ -11,11 +11,11 @@ const MIN_SIZE = 2;
  * @returns {string} line of deck
  */
 const alternateRepeat = (size, {first, second}) => {
-    let line = ''
+    let line = '';
     for (let i = 0; i < size; i++) {
         line += i % 2 ? second : first;
     }
-    return line
+    return line;
 }
 
 /**
@@ -26,7 +26,7 @@ const alternateRepeat = (size, {first, second}) => {
  */
 const getChessLine = (size, isWhiteFirst) => {
     const [first, second] = isWhiteFirst ? [' ', '*'] : ['*', ' '];
-    let line = alternateRepeat(size, {second, first})
+    let line = alternateRepeat(size, {second, first});
     line += '\n';
     return line;
 }
@@ -38,7 +38,7 @@ const getChessLine = (size, isWhiteFirst) => {
  * @throws {TypeError} The wrong type of size
  */
 const chess = (size) => {
-    if (!Number.isInteger(+size) || Array.isArray(size)) {
+    if (!Number.isInteger(+size)) {
         throw new TypeError('The wrong type of size');
     }
     if (size < MIN_SIZE) {
