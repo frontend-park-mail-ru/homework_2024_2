@@ -9,13 +9,23 @@ const specialChars = {
 };
 
 /**
+ * Checks if given value is string.
+ *
+ * @param {*} value - variable to check
+ * @return {boolean} - returns `true` if value is string, otherwise `false`
+ */
+const isString = (value) => {
+    return (typeof value === 'string' || value instanceof String)
+}
+
+/**
  * Finds html tag name. Expects valid html tag.
  *
  * @param {string} tag - valid html tag
  * @return {string} - name of html tag
  */
 const parseTagName = (tag) => {
-    if (typeof tag !== 'string' && !(tag instanceof String)) {
+    if (!isString(tag)) {
         throw new TypeError(`'tag' must be a type of string, got '${typeof tag}'`);
     }
 
@@ -32,7 +42,7 @@ const parseTagName = (tag) => {
  *                    and escaped special characters
  */
 const filter = (htmlText, permittedTags) => {
-    if (typeof htmlText !== 'string' && !(htmlText instanceof String)) {
+    if (!isString(htmlText)) {
         throw new TypeError(
             `'htmlText' must be a type of 'string', got '${typeof htmlText}'`,
         );
@@ -40,9 +50,7 @@ const filter = (htmlText, permittedTags) => {
 
     if (
         !Array.isArray(permittedTags) ||
-        !permittedTags.every(
-            (item) => typeof item === 'string' || item instanceof String,
-        )
+        !permittedTags.every(isString)
     ) {
         throw new TypeError(
             `'permittedTags' must be a type of 'string[]', got '${typeof permittedTags}'`,
