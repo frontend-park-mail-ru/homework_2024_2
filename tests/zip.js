@@ -79,7 +79,11 @@ QUnit.module('Тестируем функцию zip', function () {
         assert.throws(() => zip(), Error);
 	});
 
-	   QUnit.test('Функция выдает ошибку при нулевом параметре', function (assert) {
+    QUnit.test('Функция выдает ошибку при нулевом параметре', function (assert) {
         assert.throws(() => zip(null, {name: 'age'}, {value: 42}), TypeError);
+
+        assert.throws(() => zip({name: 'age'}, null, {name: 'age'}, {value: 42}), TypeError);
+
+        assert.throws(() => zip({name: 'age'}, {name: 'age'}, {value: 42}, null), TypeError);
 	});
 });
