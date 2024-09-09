@@ -24,7 +24,7 @@ const arrMinmax = function (...numbers) {
  * Находит минимальное и максимальное числа в строке.
  * @param {string} text
  * @returns {[number,number]|[undefined,undefined]}
- * @throws {TypeError} Если входная строка не является строкой.
+ * @throws {TypeError} Если аргумент не является строкой.
  */
 const minmax = function (text) {
 	if (typeof text !== 'string' && !(text instanceof String)) {
