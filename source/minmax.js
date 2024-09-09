@@ -7,8 +7,8 @@
  * @throws {TypeError} Если входная строка не является строкой.
  */
 const minmax = function (text) {
-	if (typeof text !== 'string') {
-		throw new TypeError('Функция принимает на вход только тип string')
+	if (typeof text !== 'string' && !(text instanceof String)) {
+		throw new TypeError('Функция принимает на вход только string');
 	}
 	const numbers = text
 		.split(/ +/)
