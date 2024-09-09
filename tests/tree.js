@@ -1,6 +1,12 @@
 'use strict';
 
 QUnit.module('Тестируем функцию tree', function () {
+	QUnit.test('Высота елочки должна выражаться числом', function (assert) {
+		assert.strictEqual(tree([1, 2, 3]), null);
+		assert.strictEqual(tree('кривая строка'), null);
+		assert.strictEqual(tree(false), null);
+	});
+
 	QUnit.test('Ёлочек высотой ниже трёх не бывает', function (assert) {
 		assert.strictEqual(tree(0), null);
 		assert.strictEqual(tree(1), null);
