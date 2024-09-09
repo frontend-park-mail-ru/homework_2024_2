@@ -9,13 +9,14 @@
  * @throws {Error} - Если указанный путь не строка.
  * @returns {*} Найденное свойство или undefined, если свойства не существует.
  */
+
 const get = (obj, path) => {
     if (typeof path !== 'string') {
         throw new TypeError('path is not a string');
     }
 
-    if (typeof obj !== 'object' || obj === null) {
-        return undefined;
+    if (typeof obj !== 'object' || !obj) {
+        return;
     }
 
     if (!path || path === '.') {
@@ -30,17 +31,17 @@ const get = (obj, path) => {
 
     const result = parts.reduce((acc, part) => {
         if (acc === undefined) {
-            return undefined;
+            return;
         }
 
         if (typeof acc === 'string') {
-            if (!isNaN(part)) {
-                return acc[Number(part)];
+            if (!isNaN(part) && Number.isInteger(part) && part > 0) {
+                return acc[+part];
             }
             return acc[part];
         }
 
-        if (typeof acc === 'object') {
+        if (typeof acc === 'object' && acc) {
             return acc[part];
         }
         return;
