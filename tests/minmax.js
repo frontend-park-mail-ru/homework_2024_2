@@ -30,6 +30,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('-.01 0 .01'), [ -.01, .01 ]);
 		assert.deepEqual(minmax('Infinity Infinity'), [ Infinity, Infinity ]);
 		assert.deepEqual(minmax('-Infinity -Infinity'), [ -Infinity, -Infinity ]);
+		assert.deepEqual(minmax(new String('1 2 3 4')), [ 1, 4 ]);
 	});
 
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
@@ -39,5 +40,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax выбрасывает ошибку для неправильного типа данных', function (assert) {
 		assert.throws(() => minmax(42), TypeError);
 		assert.throws(() => minmax(false), TypeError);
+		assert.throws(() => minmax(), TypeError);
+		assert.throws(() => minmax(new Number(23)), TypeError);
 	})
 });
