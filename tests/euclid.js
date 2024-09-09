@@ -20,6 +20,34 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(2, 3), 1, 'euclid(2, 3) === 1');
 	});
 
+	QUnit.test('Числа должны быть натуральными', function (assert) {
+		assert.throws(
+			function () {
+				euclid(-7, 35);
+			},
+			Error('not a natural number'));
+
+		assert.throws(
+			function () {
+				euclid(-7, -14, -70);
+			},
+			Error('not a natural number'));
+
+		assert.throws(
+			function () {
+				euclid(-1, 'one', '100');
+			},
+			Error('not a natural number'));
+	});
+
+	QUnit.test('Должны быть аргументы', function (assert) {
+		assert.throws(
+			function () {
+				euclid();
+			},
+			Error('empty data'));
+	});
+
 	QUnit.test('Функция должна правильно находить НОД трёх натуральных чисел', function (assert) {
 		assert.strictEqual(euclid(1, 1, 1), 1, 'euclid(1, 1, 1) === 1');
 		assert.strictEqual(euclid(2, 2, 2), 2, 'euclid(2, 2, 2) === 2');

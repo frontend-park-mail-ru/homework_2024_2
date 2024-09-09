@@ -14,10 +14,8 @@ const euclid = (...numbers) => {
             if (typeof a != 'number' || a < 0) {
                 throw new Error('not a natural number');
             }
-            if (b === 0) {
-                return a;
-            }
-            return euclid(b, a % b);
+
+            return b === 0 ? a : euclid(b, a % b);
         }
     )
 }
