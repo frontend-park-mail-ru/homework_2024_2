@@ -10,14 +10,14 @@
 const compareObjects = (a, b, props) => {
     props.reduce((result, prop) => {
         if (result) {
-                return result; // Если результат уже не равен 0, возвращаем его
+            return result; // Если результат уже не равен 0, возвращаем его
         }
 
         const aValue = a[prop];
         const bValue = b[prop];
 
         if (aValue === undefined || bValue === undefined) {
-                throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
+            throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
         }
 
         return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
