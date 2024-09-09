@@ -8,24 +8,22 @@
 const letters = (str, flag) => {
     str = String(str);
     let finalString = '';
-    let map = new Map();
-    for(let char of str){
-        if(!map.has(char)){
-            map.set(char, 1);
-        } else {
-            map.set(char, map.get(char) + 1);
-        }
+    const charsCount = new Map();
+
+    for(const char of str){
+        charsCount.set(char, (charsCount.get(char) ?? 0) + 1);
     }
-    for(let char of str){
-        if(map.get(char) === 1){
+
+    for(const char of str){
+        if(charsCount.get(char) === 1){
             finalString += char;
-        } else if(flag === true && map.has(char)){
+        } else if(flag === true && charsCount.has(char)){
             finalString += char;
-            map.delete(char);
+            charsCount.delete(char);
         } else if(flag === false){
-            map.set(char, map.get(char) - 1);
+            charsCount.set(char, charsCount.get(char) - 1);
         }
     }
-    return finalString;
-    
+
+    return finalString;   
 }
