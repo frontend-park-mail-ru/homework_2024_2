@@ -1,10 +1,8 @@
 'use strict';
 
-/*** функция выделяющая все параметры и их значения */
-function zip(...objects) {
-
+const zip = (...objects) => {
     /*** проверка на параметры */
-    if (objects.size() == 0) {
+    if (!objects.length) {
          throw new Error('No parameters');
     }
 
@@ -12,11 +10,11 @@ function zip(...objects) {
 
     objects.forEach((obj) => {
         if (obj === undefined) {
-            throw new Error('Parameter is undefined!');
+            throw new TypeError('Parameter is undefined!');
         }
         for (const key in obj) {
             if (obj[key] === undefined) {
-                throw new Error('Parameter is undefined!');
+                throw new TypeError('Parameter is undefined!');
             }
             if (!result.hasOwnProperty(key)) {
                     result[key] = obj[key];
@@ -25,4 +23,4 @@ function zip(...objects) {
     }
     )
     return result;
-}
+};
