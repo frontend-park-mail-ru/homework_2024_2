@@ -7,7 +7,7 @@
  * @returns {number} Результат сравнения: -1, 0 или 1.
  * @throws {TypeError} Если какое-либо свойство отсутствует в объектах.
  */
-const compareObjects = (a, b, props) => 
+const compareObjects = (a, b, props) => {
     props.reduce((result, prop) => {
         if (result) {
                 return result; // Если результат уже не равен 0, возвращаем его
@@ -22,7 +22,7 @@ const compareObjects = (a, b, props) =>
 
         return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
     }, 0);
-
+};
 
 
  /**
@@ -80,12 +80,18 @@ const mergeSort = (arr, props) => {
  *
  */
 const sorting = (arr, props) => {
-    // Проверка параметров
-    if (!Array.isArray(arr) || !arr.length) {
+    // Проверка параметра arr
+    if (!Array.isArray(arr)) {
+        throw new TypeError("Первый параметр должен быть массивом объектов.");
+    }
+
+    // Если массив пустой или props пуст — сразу возвращаем его
+    if (!arr.length || !props.length) {
         return arr;
     }
 
-    if (!Array.isArray(props) || !props.length || !props.every(prop => typeof prop === 'string')) {
+    // Проверка параметра props
+    if (!Array.isArray(props) || !props.every(prop => typeof prop === 'string')) {
         throw new TypeError("Второй параметр должен быть массивом строк.");
     }
 
