@@ -1,6 +1,10 @@
 'use strict';
 
 
+/**
+ * Recursively inserts newProperty to object by the path
+ * @returns {Object} Returns modified object
+ */
 const changeNestedProperty = (object, propertyList, newProperty) =>
     {
             if ( !( propertyList.length ) )
@@ -8,7 +12,7 @@ const changeNestedProperty = (object, propertyList, newProperty) =>
                 return newProperty;
             }
 
-            if (!( propertyList[0] in object ))
+            if ( !( propertyList[0] in object ) )
             {
                 object[ propertyList[0] ] = {};
             }
@@ -26,7 +30,7 @@ const set = (object, path, newProperty) =>
         return object;
     }
     let propertyList = path.split( "." ).slice( 1 );
-    let newObject = changeNestedProperty(object, propertyList, newProperty );
+    let newObject = changeNestedProperty( object, propertyList, newProperty );
     
     return newObject;
 };
