@@ -74,4 +74,12 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+    QUnit.test('Функция выдает ошибку при отсутствии параметров', function (assert) {
+        assert.throws(() => zip(), Error);
+	});
+
+	   QUnit.test('Функция выдает ошибку при нулевом параметре', function (assert) {
+        assert.throws(() => zip(null, {name: 'age'}, {value: 42}), TypeError);
+	});
 });
