@@ -4,7 +4,7 @@
  * Решает математическую формулу, содержащее переменную x
  * Поддерживает операции сложения, вычитания и умножения с целыми числами и скобками
  *
- * @param {string} formula - Математическая формула в виде строки
+ * @param {string|String} formula - Математическая формула в виде строки
  * @param {number|Number} x - Значение переменной, которое будет подставлено в формулу
  * @returns {number} - Результат вычисления формулы
  * @throws {TypeError} - Если x имеет недопустимое значение 
@@ -22,7 +22,7 @@ const solve = (formula, x) => {
         formula = formula.toString()
     }
 
-    if (typeof x === 'object' && x instanceof Number) {
+    if (x instanceof Number) {
         x = x.valueOf()
     }
 
@@ -30,7 +30,7 @@ const solve = (formula, x) => {
         throw new TypeError(variableErrorMessage);
     }
 
-    if (x === Infinity || x === -Infinity) {
+    if (!Number.isFinite(x)) {
         throw new RangeError(infinityVariableErrorMessage)
     }
 
@@ -42,8 +42,7 @@ const solve = (formula, x) => {
         }
 
         const result = eval(formula)
-
-        if (result === Infinity || result === -Infinity) {
+        if (!Number.isFinite(result)) {
             throw new RangeError(infinityResultErrorMessage);
         }
 

@@ -26,10 +26,16 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.throws(() => solve('x)', 1), defaultErrorMessage);
 		assert.throws(() => solve('(x+1', 1), defaultErrorMessage);
 		assert.throws(() => solve('*', 1), defaultErrorMessage);
+		assert.throws(() => solve('[1, 2, 3]', 1), formulaErrorMessage);
+		assert.throws(() => solve('new Array(1,2,3)', 1), formulaErrorMessage);
 	});
 	QUnit.test('тест валидации параметра x', function (assert) {
 		assert.throws(() => solve('4 + x', 'abd'), variableErrorMessage);
 		assert.throws(() => solve('4', 'abd'), variableErrorMessage);
+		assert.throws(() => solve('x', [1,2,3]), variableErrorMessage);
+		assert.throws(() => solve('x', new Array(1,2,3)), variableErrorMessage);
+		assert.throws(() => solve('x', new Array('ab','ca','l')), variableErrorMessage);
+		assert.throws(() => solve('x', new Array(1)), variableErrorMessage);
 	});
 	QUnit.test('поддержка передачи объектов', function (assert) {
 		assert.strictEqual(solve(new String('x * x').toString(), 3), 9);
