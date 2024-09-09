@@ -15,6 +15,11 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('MCMIV'), 1904);
 		assert.strictEqual(roman('MCMXC'), 1990);
 		assert.strictEqual(roman('mmxvii'), 2017);
+		assert.strictEqual(roman('MCc'), 1200);
+		assert.strictEqual(roman('MmMmDlXiI'), 4562);
+		assert.strictEqual(roman('MMMMMMMMMMMMMMMMMMCMLXIV'), 18964);
+		assert.strictEqual(roman('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMmMMDLXXXIv'), 45584);
+		
 	});
 
 	QUnit.test('roman правильно переводит из десятичной системы счисления', function (assert) {
@@ -30,12 +35,15 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman(1904), 'MCMIV');
 		assert.strictEqual(roman(1990), 'MCMXC');
 		assert.strictEqual(roman(2017), 'MMXVII');
+
 	});
 
 	QUnit.test('roman правильно определяет, что было передано на вход', function (assert) {
 		assert.strictEqual(roman('1904'), 'MCMIV');
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
+		assert.strictEqual(roman('20525'), 'MMMMMMMMMMMMMMMMMMMMDXXV');
+		assert.strictEqual(roman('19634'), 'MMMMMMMMMMMMMMMMMMMDCXXXIV');
 	});
 
 	QUnit.test('roman выводит ошибку при некорректном вводе', function (assert) {
@@ -45,5 +53,6 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.throws(() => roman({}), 'Нельзя передавать пустой объект');
 		assert.throws(() => roman([]), 'Нельзя передавать пустой массив');
 		assert.throws(() => roman('-4'), 'Нельзя передавать отрицательные значения');
+		assert.throws(() => roman('aaa'), 'Неподдерживаемый формат');
 	});	
 });
