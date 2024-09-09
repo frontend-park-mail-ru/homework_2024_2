@@ -73,15 +73,24 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters(true), 'true');
 		assert.strictEqual(letters(NaN), 'a');
 		assert.strictEqual(letters(null), 'nu');
+		assert.strictEqual(letters(undefined), 'ufi');
+		assert.strictEqual(letters([1, 2, 3, 1, 2]), '3');
+		assert.strictEqual(letters({}), '[o O]');
 
 		assert.strictEqual(letters(1232, true), '123');
 		assert.strictEqual(letters(true, true), 'true');
 		assert.strictEqual(letters(NaN, true), 'Na');
 		assert.strictEqual(letters(null, true), 'nul');
+		assert.strictEqual(letters(undefined, true), 'undefi');
+		assert.strictEqual(letters([1, 2, 3, 1, 2], true), '1,23');
+		assert.strictEqual(letters({}, true), '[object O]');
 
 		assert.strictEqual(letters(1232, false), '132');
 		assert.strictEqual(letters(true, false), 'true');
 		assert.strictEqual(letters(NaN, false), 'aN');
 		assert.strictEqual(letters(null, false), 'nul');
+		assert.strictEqual(letters(undefined, false), 'ufined');
+		assert.strictEqual(letters([1, 2, 3, 1, 2], false), '31,2');
+		assert.strictEqual(letters({}, false), '[o Object]');
 	})
 });
