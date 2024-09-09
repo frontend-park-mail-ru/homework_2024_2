@@ -35,7 +35,7 @@ const get = (obj, path) => {
         }
 
         if (typeof acc === 'string') {
-            if (!isNaN(part) && Number.isInteger(part) && part > 0) {
+            if (!isNaN(part) && Number.isInteger(part) && part >= 0) {
                 return acc[+part];
             }
             return acc[part];
