@@ -46,6 +46,11 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('19634'), 'MMMMMMMMMMMMMMMMMMMDCXXXIV');
 	});
 
+	QUnit.test("Проверка для объекта String", function(assert) {
+		const result = roman(new String('I'));
+		assert.strictEqual(typeof result, 'number', "Результат должен быть типа number");
+	});
+	
 	QUnit.test('roman выводит ошибку при некорректном вводе', function (assert) {
 		assert.throws(() => roman(''), 'нельзя передавать пустую строку');
 		assert.throws(() => roman(null), 'null не является числом');
