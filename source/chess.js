@@ -53,7 +53,6 @@ const chess = (size) => {
         throw new RangeError('Size must be a positive integer more than 1.');
     }
 
-    
 
     const {oddLine, evenLine} = lineGen(numericSize);
 
