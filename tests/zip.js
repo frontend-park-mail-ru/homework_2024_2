@@ -74,4 +74,55 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+	// NEW TESTS
+
+    QUnit.test('Функция работает с объектами, содержащими массивы', function (assert) {
+        const obj1 = {a: [1, 2, 3]};
+        const obj2 = {b: [4, 5, 6], a: [1, 2]};
+        const expected = {a: [1, 2, 3], b: [4, 5, 6]};
+        assert.deepEqual(zip(obj1, obj2), expected);
+    });
+
+	QUnit.test('Функция работает с объектами, содержащими вложенные объекты', function (assert) {
+        const obj1 = {
+            a: {
+                secondLevel: {
+					workOk: true
+				}
+            }
+        };
+        const obj2 = {
+			a: {
+				anotherSecondLevel: {
+					shouldThisBeInResult: false
+                }
+			},
+
+            b: {
+				simpleSecondLevel: 777,
+                secondLevel: {
+                    testing: true
+                }
+            }
+        };
+
+
+        const expected = {
+            a: {
+                secondLevel: {
+					workOk: true
+				}
+            },
+            b: {
+                secondLevel: {
+                    testing: true
+                },
+				simpleSecondLevel: 777
+            }
+        };
+        assert.deepEqual(zip(obj1, obj2), expected);
+    });
+
+
 });
