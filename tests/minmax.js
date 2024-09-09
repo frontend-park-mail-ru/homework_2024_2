@@ -25,7 +25,7 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('0 0 0 0'), [ 0, 0 ]);
 		assert.deepEqual(minmax('1 1 1 1'), [ 1, 1 ]);
 		assert.deepEqual(minmax('1 2 3 4'), [ 1, 4 ]);
-		assert.deepEqual(minmax('-1 -2 -3 -4'), [-4, -1])
+		assert.deepEqual(minmax('-1 -2 -3 -4'), [-4, -1]);
 		assert.deepEqual(minmax('-Infinity -1 0 1 Infinity'), [ -Infinity, Infinity ]);
 		assert.deepEqual(minmax('-.01 0 .01'), [ -.01, .01 ]);
 		assert.deepEqual(minmax('Infinity Infinity'), [ Infinity, Infinity ]);
@@ -42,5 +42,5 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.throws(() => minmax(false), TypeError);
 		assert.throws(() => minmax(), TypeError);
 		assert.throws(() => minmax(new Number(23)), TypeError);
-	})
+	});
 });
