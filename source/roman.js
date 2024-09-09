@@ -23,7 +23,7 @@ const ROMAN_NUMBER_REGEX = /^[IVXLCDM]+$/;
  * @throws {TypeError} - Если входное значение имеет неверный тип
  */
 const roman = (input) => {
-    if (Object.prototype.toString.call(input) == '[object String]') {
+    if (typeof input === 'string' || input instanceof String) {
         const trimmed = input.trim().toUpperCase();
         const parsed = parseInt(trimmed);
         if (parsed > 0) {
