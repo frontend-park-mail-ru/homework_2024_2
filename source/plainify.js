@@ -1,6 +1,3 @@
-
-
-
 "use strict";
 
 /**
@@ -26,8 +23,8 @@ const plainify = (obj, prefix = '') => {
     for (let key in obj) {
         const newKey = prefix ? `${prefix}.${key}` : key;
 
-        // Проверяем на объект и исключаем null
-        if (typeof obj[key] === 'object' && obj[key] !== null) {
+        // Проверяем на объект и исключаем falsy значения (включая null)
+        if (typeof obj[key] === 'object' && obj[key]) {
             if (Array.isArray(obj[key])) {
                 obj[key].forEach((item, index) => {
                     result = { ...result, ...plainify(item, `${newKey}[${index}]`) };
