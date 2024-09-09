@@ -5,9 +5,9 @@ QUnit.module('Тестируем функцию chess', function () {
 		const expected =
 			'Size must be a positive integer more than 1.'
 		assert.throws(
-			() => chess(1), Error(expected), 'Не бывает доски 1 на 1');
+			() => chess(1), RangeError(expected), 'Не бывает доски 1 на 1');
 		assert.throws(
-			() => chess('1'), Error(expected), 'Не бывает доски 1 на 1');
+			() => chess('1'), RangeError(expected), 'Не бывает доски 1 на 1');
 			
 	});
 
@@ -54,16 +54,16 @@ QUnit.module('Тестируем функцию chess', function () {
 
 	QUnit.test('Шахматная доска 0 на 0', function (assert) {
 		assert.throws(
-			() => chess(0), Error('Size must be a positive integer more than 1.'), 'Не бывает доски 0 на 0');
+			() => chess(0), RangeError('Size must be a positive integer more than 1.'), 'Не бывает доски 0 на 0');
 		assert.throws(
-			() => chess('0'), Error('Size must be a positive integer more than 1.'), 'Не бывает доски 0 на 0');
+			() => chess('0'), RangeError('Size must be a positive integer more than 1.'), 'Не бывает доски 0 на 0');
 	});
 
 	QUnit.test('Шахматная доска -10 на -10', function (assert) {
 		assert.throws(
-			() => chess(-10), Error('Size must be a positive integer more than 1.'), 'Не бывает доски -10 на -10');
+			() => chess(-10), RangeError('Size must be a positive integer more than 1.'), 'Не бывает доски -10 на -10');
 		assert.throws(
-			() => chess('-10'), Error('Size must be a positive integer more than 1.'), 'Не бывает доски -10 на -10');
+			() => chess('-10'), RangeError('Size must be a positive integer more than 1.'), 'Не бывает доски -10 на -10');
 	});
 
 	QUnit.test('Шахматная доска размером не int', function (assert) {
@@ -72,25 +72,25 @@ QUnit.module('Тестируем функцию chess', function () {
 
 		assert.throws(
 			() => chess('9.2'), 
-			new Error('Size must be an integer.'), 
+			new TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с нецелым числом'
 		);
 
 		assert.throws(
 			() => chess('-9.2'), 
-			new Error('Size must be an integer.'), 
+			new TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с нецелым числом'
 		);
 
 		assert.throws(
 			() => chess('not1hing'), 
-			new Error('Size must be an integer.'), 
+			new TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки без числа'
 		);
 
 		assert.throws(
 			() => chess('something'), 
-			new Error('Size must be an integer.'), 
+			new TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с текстом'
 		);
 
