@@ -10,7 +10,6 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 
-
 	QUnit.test('sorting не изменяет массив, если не передано никаких полей для сортировки', function (assert) {
 		const initial = [
 			{prop1: 1},
@@ -184,4 +183,3 @@ QUnit.module('Тестируем функцию sorting', function () {
         ], "Должно правильно сортировать по отрицательному числовому свойству");
     });
 });
-
