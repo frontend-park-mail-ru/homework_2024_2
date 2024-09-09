@@ -7,8 +7,8 @@
  * @returns {number} Результат сравнения: -1, 0 или 1.
  * @throws {TypeError} Если какое-либо свойство отсутствует в объектах.
  */
-function compareObjects(a, b, props) {
-       return props.reduce((result, prop) => {
+const compareObjects = (a, b, props) => 
+    props.reduce((result, prop) => {
         if (result) {
                 return result; // Если результат уже не равен 0, возвращаем его
         }
@@ -22,7 +22,7 @@ function compareObjects(a, b, props) {
 
         return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
     }, 0);
-}
+
 
 
  /**
@@ -32,7 +32,7 @@ function compareObjects(a, b, props) {
  * @param {string[]} props - Свойства для сортировки.
  * @returns {Object[]} Слитый массив.
  */
- function merge(left, right, props) {
+ const merge = (left, right, props) => {
     const result = [];
     while (left.length && right.length) {
         const comparison = compareObjects(left[0], right[0], props);
@@ -41,7 +41,7 @@ function compareObjects(a, b, props) {
     }
 
     return result.concat(left, right); // Используем concat для добавления оставшихся элементов
-}
+};
 
 
 /**
@@ -50,7 +50,7 @@ function compareObjects(a, b, props) {
  * @param {string[]} props - Свойства для сортировки.
  * @returns {Object[]} Отсортированный массив.
  */
- function mergeSort(arr, props) {
+const mergeSort = (arr, props) => {
     if (arr.length <= 1) {
         return arr;
     }
@@ -60,7 +60,7 @@ function compareObjects(a, b, props) {
     const right = mergeSort(arr.slice(mid), props);
 
     return merge(left, right, props);
-}
+};
 
 
 
@@ -79,7 +79,7 @@ function compareObjects(a, b, props) {
  *                  свойство отсутствует в объектах.
  *
  */
-function sorting(arr, props) {
+const sorting = (arr, props) => {
     // Проверка параметров
     if (!Array.isArray(arr) || !arr.length) {
         return arr;
@@ -91,4 +91,4 @@ function sorting(arr, props) {
 
     // Запуск сортировки
     return mergeSort(arr, props);
-}
+};
