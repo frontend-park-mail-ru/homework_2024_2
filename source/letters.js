@@ -14,14 +14,14 @@ const letters = (str, flag) => {
             map.set(str[i], 1);
             uniqeCharacters += str[i];
         } else {
-            if(flag == false){
+            if(flag === false){
                 uniqeCharacters = uniqeCharacters.replace(str[i], '');
                 uniqeCharacters += str[i];
             }
             repeatingCharacters += str[i];
         }
     }
-    if(flag == undefined){
+    if(flag === undefined){
         for(let i = 0; i < repeatingCharacters.length; i++){
             uniqeCharacters = uniqeCharacters.replaceAll(repeatingCharacters[i], '');
         }
