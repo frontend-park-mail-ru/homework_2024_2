@@ -12,9 +12,8 @@ const changeNestedProperty = (object, propertyList, newProperty) =>
             {
                 object[ propertyList[0] ] = {};
             }
-
-            let nestedObj = changeNestedProperty( object[propertyList[0]], propertyList.slice(1), newProperty );  
-            object[ propertyList[0] ] = nestedObj;
+ 
+            object[ propertyList[0] ] = changeNestedProperty( object[propertyList[0] ], propertyList.slice(1), newProperty ); ;
             return object;
             
     };
@@ -22,8 +21,12 @@ const changeNestedProperty = (object, propertyList, newProperty) =>
 
 const set = (object, path, newProperty) =>
 {
-    let propertyList = path.split(".").slice(1);
-    let newObject = changeNestedProperty(object, propertyList, newProperty);
+    if ( path[0] !== "." )
+    {
+        return object;
+    }
+    let propertyList = path.split( "." ).slice( 1 );
+    let newObject = changeNestedProperty(object, propertyList, newProperty );
     
     return newObject;
 };
