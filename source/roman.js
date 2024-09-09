@@ -21,16 +21,12 @@ const ROMAN_NUMBER_REGEX = /^[IVXLCDM]+$/;
  * @param {number|string} input - Входное значение, которое может быть числом или строкой, представляющей либо римские цифры, либо арабские числа
  * @returns {string|number} - Возвращает римское число (строка) при вводе арабского числа, или арабское число (строка) при вводе римского числа
  * @throws {TypeError} - Если входное значение имеет неверный тип
- * @throws {RangeError} - Если входное значение отрицательное
  */
 const roman = (input) => {
-    if (typeof input === 'string') {
+    if (Object.prototype.toString.call(input) == '[object String]') {
         const trimmed = input.trim().toUpperCase();
         const parsed = parseInt(trimmed);
-        if (Number.isInteger(parsed) ) {
-            if (parsed < 0) {
-                throw new RangeError('Нельзя передавать отрицательные значения');
-            }
+        if (parsed > 0) {
             return arabicToRoman(parsed);
         }
         if (ROMAN_NUMBER_REGEX.test(trimmed)) {
@@ -86,3 +82,4 @@ const arabicToRoman = (num) => {
         return result;
     }, '');
 }
+
