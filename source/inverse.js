@@ -1,7 +1,7 @@
 'use strict';
 
 const inverse = function (array, start = 0) {
-  if (array.length <= 1)
+  if (array.length <= 1 || array.length <= Math.abs(start))
     return array
 
   var begin = Math.max(0, start)

@@ -5,6 +5,12 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([]), []);
 	});
 
+	QUnit.test('Функция работает с пустым массивом и с переданным параметром', function (assert) {
+		assert.deepEqual(inverse([], 0), []);
+		assert.deepEqual(inverse([], 1), []);
+		assert.deepEqual(inverse([], 2), []);
+	});
+
 	QUnit.test('Функция работает с массивом длины один', function (assert) {
 		assert.deepEqual(inverse([ 1 ]), [ 1 ]);
 		assert.deepEqual(inverse([ 'a' ]), [ 'a' ]);
@@ -34,9 +40,20 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -15), [ 1, 2, 3, 4, 5 ]);
 	});
 
-	QUnit.test('Функция работает с параметром больше длины массива', function (assert) {
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 10), [ 1, 2, 3, 4, 5 ]);
+	QUnit.test('Функция работает с параметром по модулю больше или равно длины массива', function (assert) {
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 5), [ 1, 2, 3, 4, 5 ]);
 		assert.deepEqual(inverse([ 'a', 'b', 'c', 'd', 'e' ], 6), [ 'a', 'b', 'c', 'd', 'e' ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 10), [ 1, 2, 3, 4, 5 ]);
 		assert.deepEqual(inverse([ null, false, 0, Infinity, '' ], 15 ), [ null, false, 0, Infinity, '' ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -5), [ 1, 2, 3, 4, 5 ]);
+		assert.deepEqual(inverse([ 'a', 'b', 'c', 'd', 'e' ], -6), [ 'a', 'b', 'c', 'd', 'e' ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -10), [ 1, 2, 3, 4, 5 ]);
+		assert.deepEqual(inverse([ null, false, 0, Infinity, '' ], -15 ), [ null, false, 0, Infinity, '' ]);
 	});
+
+	QUnit.test('Функция работает с массивами, содержащими разные типы данных', function (assert) {
+		assert.deepEqual(inverse([1, 'two', null]), [null, 'two', 1]);
+		assert.deepEqual(inverse([true, false], -1), [true, false]);
+		assert.deepEqual(inverse([undefined, NaN, "apple"], 1), [undefined, "apple", NaN]);
+  	});
 });
