@@ -7,22 +7,22 @@
  * @returns {number} Результат сравнения: -1, 0 или 1.
  * @throws {TypeError} Если какое-либо свойство отсутствует в объектах.
  */
-    function compareObjects(a, b, props) {
-        return props.reduce((result, prop) => {
-            if (result) {
+function compareObjects(a, b, props) {
+       return props.reduce((result, prop) => {
+        if (result) {
                 return result; // Если результат уже не равен 0, возвращаем его
-            }
+        }
 
-            const aValue = a[prop];
-            const bValue = b[prop];
+        const aValue = a[prop];
+        const bValue = b[prop];
 
-            if (aValue === undefined || bValue === undefined) {
+        if (aValue === undefined || bValue === undefined) {
                 throw new TypeError (`Свойство '${prop}' отсутствует у одного из объектов.`);
-            }
+        }
 
-            return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
-        }, 0);
-    }
+        return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+    }, 0);
+}
 
 
  /**
@@ -33,7 +33,7 @@
  * @returns {Object[]} Слитый массив.
  */
  function merge(left, right, props) {
-    let result = [];
+    const result = [];
     while (left.length && right.length) {
         const comparison = compareObjects(left[0], right[0], props);
 
@@ -80,25 +80,15 @@
  *
  */
 function sorting(arr, props) {
-    // Проверка параметра arr
-    if (!Array.isArray(arr)) {
-        throw new TypeError("Первый параметр должен быть массивом объектов.");
-    }
-
-    // Если массив пустой — сразу возвращаем его, сортировать нечего
-    if (!arr.length) {
+    // Проверка параметров
+    if (!Array.isArray(arr) || !arr.length) {
         return arr;
     }
 
-    // Проверка параметра props
-    if (!Array.isArray(props) || !props.every(prop => typeof prop === 'string')) {
+    if (!Array.isArray(props) || !props.length || !props.every(prop => typeof prop === 'string')) {
         throw new TypeError("Второй параметр должен быть массивом строк.");
     }
 
-    // Если props пуст — возвращаем исходный массив, так как нечем сортировать
-    if (!props.length) {
-        return arr;
-    }
-     // Запуск сортировки
+    // Запуск сортировки
     return mergeSort(arr, props);
 }
