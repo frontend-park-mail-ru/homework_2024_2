@@ -10,7 +10,7 @@
  *   - oddLine: Строка для нечетной линии шахматной доски.
  *   - evenLine: Строка для четной линии шахматной доски.
 **/
-const lineGen = size => {
+const lineGen = (size) => {
     let oddLine = '';
     let evenLine = ''
     for (let i = 0; i < size; i++) {
@@ -37,21 +37,20 @@ const lineGen = size => {
  * // * *
  * //
  */
-const chess = size => {
+const chess = (size) => {
     
-    
-    if (typeof size !== 'number' && typeof size !== 'string') {
+    if (typeof size !== 'number' && typeof size !== 'string' || typeof size === 'object') {
         throw new TypeError('Size must be a number.');
     }
 
     const numericSize = +size;
 
     if (!Number.isInteger(numericSize)) {
-        throw new Error('Size must be an integer.');
+        throw new TypeError('Size must be an integer.');
     }
 
     if (numericSize <= 1) {
-        throw new Error('Size must be a positive integer more than 1.');
+        throw new RangeError('Size must be a positive integer more than 1.');
     }
 
     
@@ -67,6 +66,7 @@ const chess = size => {
 
     return board;
 };
+
 
 
 
