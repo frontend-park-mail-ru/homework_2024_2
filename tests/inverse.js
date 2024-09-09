@@ -56,4 +56,23 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([true, false], -1), [true, false]);
 		assert.deepEqual(inverse([undefined, NaN, "apple"], 1), [undefined, "apple", NaN]);
   	});
+
+	QUnit.test('Функция корретно работает, не изменяя исходный массив', function (assert) {
+       const original = [1, 2, 3, 4, 5];
+       inverse(original);
+       assert.deepEqual(original, [1, 2, 3, 4, 5]);
+	   inverse(original, 0);
+	   assert.deepEqual(original, [1, 2, 3, 4, 5]);
+	   inverse(original, -1);
+	   assert.deepEqual(original, [1, 2, 3, 4, 5]);
+	   inverse(original, 2);
+	   assert.deepEqual(original, [1, 2, 3, 4, 5]);
+   });
+
+	QUnit.test('Функция не переставляет элементы массива, если в неё передан некорректный параметр (не целое число)', function (assert) {
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], "apple"), [ 1, 2, 3, 4, 5 ]);
+		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], 2.5), [ 1, 2, 3, 4, 5 ]);
+		assert.deepEqual(inverse([ 'a', 'b', 'c', 'd', 'e' ], true), [ 'a', 'b', 'c', 'd', 'e' ]);
+		assert.deepEqual(inverse([ null, false, 0, Infinity, '' ], null), [ null, false, 0, Infinity, '' ]);
+	});
 });
