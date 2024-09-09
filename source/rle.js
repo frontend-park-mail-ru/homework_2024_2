@@ -24,10 +24,10 @@ const rle = (inputString) => {
         return inputString; 
     }
 
-    let currentSymbol = inputString[0];
+    let currentSymbol = "";
     let stringRLE = "";
     let count = 0;
-    for (let stringSymbol of inputString) {
+    inputString.split('').forEach((stringSymbol) => {
         if (stringSymbol == currentSymbol) {
             count++;
         } else {
@@ -36,7 +36,7 @@ const rle = (inputString) => {
             count = 1;
         }
 
-    }
+    });
     stringRLE += `${currentSymbol}${count > 1 ? count : ''}`;
     return stringRLE; 
 }
