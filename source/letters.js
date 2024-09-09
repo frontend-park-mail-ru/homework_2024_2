@@ -7,26 +7,25 @@
  */
 const letters = (str, flag) => {
     str = String(str);
-    let repeatingCharacters = '', uniqeCharacters = '';
+    let finalString = '';
     let map = new Map();
-    for(let i = 0; i < str.length; i++){
-        if(!map.has(str[i])){
-            map.set(str[i], 1);
-            uniqeCharacters += str[i];
+    for(let char of str){
+        if(!map.has(char)){
+            map.set(char, 1);
         } else {
-            if(flag === false){
-                uniqeCharacters = uniqeCharacters.replace(str[i], '');
-                uniqeCharacters += str[i];
-            }
-            repeatingCharacters += str[i];
+            map.set(char, map.get(char) + 1);
         }
     }
-    if(flag === undefined){
-        for(let i = 0; i < repeatingCharacters.length; i++){
-            uniqeCharacters = uniqeCharacters.replaceAll(repeatingCharacters[i], '');
+    for(let char of str){
+        if(map.get(char) === 1){
+            finalString += char;
+        } else if(flag === true && map.has(char)){
+            finalString += char;
+            map.delete(char);
+        } else if(flag === false){
+            map.set(char, map.get(char) - 1);
         }
-        return uniqeCharacters;
     }
-    return uniqeCharacters;
+    return finalString;
+    
 }
-
