@@ -48,10 +48,7 @@ const filter = (htmlText, permittedTags) => {
         );
     }
 
-    if (
-        !Array.isArray(permittedTags) ||
-        !permittedTags.every(isString)
-    ) {
+    if (!Array.isArray(permittedTags) || !permittedTags.every(isString)) {
         throw new TypeError(
             `'permittedTags' must be a type of 'string[]', got '${typeof permittedTags}'`,
         );
