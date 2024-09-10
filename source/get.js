@@ -7,7 +7,7 @@
  *
  * @param {object} object - Object to find a value in.
  * @param {string} pathToProperty - Path to property.
- * @returns {object} - Value of needed property.
+ * @returns {(object|undefined)} - Value of needed property or undefined if property is not found.
  */
 const get = (object, pathToProperty) => {        
     if (!pathToProperty || typeof pathToProperty !== 'string') {
