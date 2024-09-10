@@ -249,5 +249,68 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set(objectNested5, '.null.absolutely.incredibly.very.deep.nested.field', "other value"), objectNested5_3);
 	});
 
+	QUnit.test('set не меняет исходный объект если path неверное', function (assert) {
+		const object = {
+			very: {
+				deep: {
+					nested: {
+						field: "value"
+					}
+				}
+			}
+		};
+
+		const object1 = {
+			very: {
+				deep: {
+					nested: {
+						field: "value"
+					}
+				}
+			}
+		};
+
+
+
+		assert.deepEqual(set(object, 32, "other value"), object1);
+		assert.deepEqual(set(object, 'very.deep.nested.field', "other value"), object1);
+		assert.deepEqual(set(object, '', "other value"), object1);
+	});
+
+
+	QUnit.test('set меняет исходный объект если path содержит хотя бы одно, но корректное значение пути', function (assert) {
+		const object = {
+			very: {
+				deep: {
+					nested: {
+						field: "value"
+					}
+				}
+			}
+		};
+
+		const object1 = {
+			"": "other value",
+
+			very: {
+				deep: {
+					nested: {
+						field: "value"
+					}
+				}
+			}
+		};
+
+		const object3 = {};
+		const object4 = {
+			field: "other value"
+		};
+
+
+
+		assert.deepEqual(set(object, '.', "other value"), object1);
+		assert.deepEqual(set(object3, '.field', "other value"), object4);
+	});
+
 
 });

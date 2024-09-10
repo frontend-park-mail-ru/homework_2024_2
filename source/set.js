@@ -28,7 +28,7 @@ const changeNestedProperty = ( object, propertyList, newProperty ) =>
 /**
  * Inserts newProperty to object by the path
  * @param {Object} object - object to change
- * @param {String} path - string, which describes path to nested property newProperty
+ * @param {String} path - string, which describes path to nested property newProperty: each path element must contain "." before itself
  * @param {Number|String|BigInt|Boolean|Object|null|undefined
 *          |Number[]|String[]|BigInt[]|Boolean[]|Object[]} newProperty - instance of any type: number, string, etc.                                     
 * @returns {Object} Returns modified object if path is correct else returns original object
