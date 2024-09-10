@@ -63,22 +63,18 @@ QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format правильно валидирует элементы массива', function (assert) {
 		const input = [1, "some", 10, NaN, 1000, 10000];
 
-		const expected =
-			"string is in input data, all elements must be numbers";
+		const expected_error = new TypeError("string is in input data, all elements must be numbers")
 
-		assert.strictEqual(format(input, 6), expected);
+		assert.throws(()=> format(input, 6), expected_error);
 	});
 
 	QUnit.test('format правильно валидирует число колонок', function (assert) {
 		const input = [1, 2, 10, 3, 1000, 10000];
 
-		const expected =
-			"Amount of coloms could't be -1";
+		const expected_error1 = new Error("Amount of columns could't be -1")
+		const expected_error2 = new Error("Amount of columns could't be bigger than amount of numbers (7>6)")
 
-		const expected2 =
-			"Amount of coloms could't be bigger than amount of numbers (7>6)";
-
-		assert.strictEqual(format(input, -1), expected);
-		assert.strictEqual(format(input, 7), expected2);
+		assert.throws(()=> format(input, -1), expected_error1);
+		assert.throws(()=> format(input, 7), expected_error2);
 	});
 });
