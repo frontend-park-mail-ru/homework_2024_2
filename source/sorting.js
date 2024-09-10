@@ -14,7 +14,7 @@
  */
 
 const sorting = (arr, props) => {
-  if (arr === undefined || props === undefined) {
+  if (!arr || !props) {
     throw new TypeError("Either arr or props is undefined");
   }
 
