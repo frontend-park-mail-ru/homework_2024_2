@@ -6,6 +6,7 @@
     * @returns {Object} Объект, содержащий все поля и значения объектов, переданных в качестве параметров
     * @throws {Error} Если нет параметров
     * @throws {TypeError} Если параметр undefind
+    * @throws {TypeError} Если параметр примитив
  */
 const zip = (...objects) => {
     if (!objects.length) {
