@@ -36,10 +36,10 @@ const lineGen = (size) => {
  * // * *
  * //  * 
  * // * *
- * //
+ * // 
  */
 const chess = (size) => {
-    if (typeof size !== 'number' && typeof size !== 'string' && typeof size !== 'object') {
+    if (typeof size !== 'number' && typeof size !== 'string' && !(size instanceof String) && !(size instanceof Number)) {
         throw new TypeError('Size must be a number.');
     }
 
@@ -65,3 +65,5 @@ const chess = (size) => {
 
     return board;
 };
+
+
