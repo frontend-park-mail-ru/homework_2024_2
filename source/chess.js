@@ -12,7 +12,7 @@
 **/
 const lineGen = (size) => {
     let oddLine = '';
-    let evenLine = ''
+    let evenLine = '';
     for (let i = 0; i < size; i++) {
         oddLine += (i % 2 === 0 ? '*' : ' ');
         evenLine += (i % 2 === 0 ? ' ' : '*');
@@ -25,21 +25,14 @@ const lineGen = (size) => {
 /**
  * Генерирует шахматную доску заданного размера.
  *
- * @param {number} size - Размер шахматной доски (должен быть целым положительным числом).
- * @returns {string} Строка, представляющая шахматную доску.
- * @throws {Error} Если размер не является целым положительным числом.
- *
- * @example
- * // Возвращает шахматную доску 3x3
- * console.log(chess(3));
- * // Output:
- * // * *
- * //  * 
- * // * *
- * // 
+ * @param {number|string} size - Размер шахматной доски. Может быть числом или строкой, представляющей число.
+ * @returns {string} - Строка, представляющая шахматную доску.
+ * @throws {TypeError} - Если размер не является числом или строкой, представляющей целое число.
+ * @throws {RangeError} - Если размер меньше или равен 1.
  */
+
 const chess = (size) => {
-    if (typeof size !== 'number' && typeof size !== 'string' && !(size instanceof String) && !(size instanceof Number)) {
+    if (typeof size !== 'number' && typeof size !== 'string'  && !(size instanceof String) && !(size instanceof Number)) {
         throw new TypeError('Size must be a number.');
     }
 
