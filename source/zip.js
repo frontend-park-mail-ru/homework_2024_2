@@ -2,10 +2,10 @@
 
 /**
     * функция выделяющая все параметры и их значения
-    * @param {obj} ...objects - Объекты, из которых выделяем значения и параметры
-    * @returns {obj} Объект, содержащий все поля и значения объектов, переданных в качестве параметров
+    * @param {Array.<Object>} ...objects - Объекты, из которых выделяем значения и параметры
+    * @returns {Object} Объект, содержащий все поля и значения объектов, переданных в качестве параметров
     * @throws {Error} Если нет параметров
-    * @throws {TypeError} Если параметр nil
+    * @throws {TypeError} Если параметр undefind
  */
 const zip = (...objects) => {
     if (!objects.length) {
@@ -18,13 +18,17 @@ const zip = (...objects) => {
         if (!obj) {
             throw new TypeError('Parameter is undefined!');
         }
-
-        for (const [key, value] of Object.entries(obj)) {
-            if (!result.hasOwnProperty(key)) {
-                    result[key] = value;
-            }
+        if (obj !== Object(obj)) {
+            throw new TypeError('Parameter must be an object!');
         }
-    }
-    )
+
+
+        Object.entries(obj).forEach(([key, value]) => {
+            if (!result.hasOwnProperty(key)) {
+                result[key] = value;
+            }
+        });
+    });
+
     return result;
 };

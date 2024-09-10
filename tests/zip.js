@@ -86,4 +86,16 @@ QUnit.module('Тестируем функцию zip', function () {
 
         assert.throws(() => zip({name: 'age'}, {name: 'age'}, {value: 42}, null), TypeError);
 	});
+
+	 QUnit.test('Функция выдает ошибку при передачи примитива', function (assert) {
+        assert.throws(() => zip(1, {name: 'age'}, {value: 42}), TypeError);
+
+        assert.throws(() => zip({name: 'age'}, 'string', {name: 'age'}, {value: 42}), TypeError);
+
+        assert.ok(() => zip({name: 'age'}, {name: 'age'}, {value: 42}, new Number(2)));
+	});
+
+	 QUnit.test('Функция не выдает ошибку при передачи объекта', function (assert) {
+        assert.ok(() => zip({name: 'age'}, {name: 'age'}, {value: 42}, new Number(2)));
+	});
 });
