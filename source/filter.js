@@ -66,10 +66,10 @@ const filter = (htmlText, permittedTags) => {
         }
 
         if (char === '<') {
-            let tagEnd = chars.indexOf('>', index) + 1;
+            const tagEnd = chars.indexOf('>', index) + 1;
             if (tagEnd !== -1) {
-                let tag = chars.slice(index, tagEnd).join('');
-                let tagName = parseTagName(tag);
+                const tag = chars.slice(index, tagEnd).join('');
+                const tagName = parseTagName(tag);
                 if (permittedTags.includes(tagName)) {
                     acc.push(tag);
                     shouldSkip = true;
