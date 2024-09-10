@@ -35,7 +35,7 @@ const changeNestedProperty = ( object, propertyList, newProperty ) =>
 */
 const set = ( object, path, newProperty ) =>
 {
-    if ( typeof path !== "string" || path[ 0 ] !== "." || ! path.length)
+    if ( typeof path !== "string" || ! path.length || path[ 0 ] !== "." )
     {
         return object;
     }
