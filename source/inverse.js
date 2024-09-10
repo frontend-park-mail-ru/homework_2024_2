@@ -9,7 +9,7 @@
  */
 const inverse = (numbers, partition) => {
     if (!Array.isArray(numbers)) {
-        throw new TypeError("numbers должен быть массивом");
+        throw new TypeError('numbers должен быть массивом');
     }
     if (!Number.isInteger(partition)) {
         return [...numbers].reverse();
