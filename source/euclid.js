@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Вычисляет наибольший общий делитель (НОД) двух чисел с помощью алгоритма Евклида.
@@ -7,13 +7,13 @@
  * @returns {number} НОД чисел a и b.
  */
 const findNOD = (a, b) => {
-  let tempA = a;
-  let tempB = b;
-  while (tempB !== 0) {
-    [tempA, tempB] = [tempB, tempA % tempB];
-  }
-  return tempA;
-}
+    let tempA = a;
+    let tempB = b;
+    while (tempB !== 0) {
+        [tempA, tempB] = [tempB, tempA % tempB];
+    }
+    return tempA;
+};
 
 /**
  * Вычисляет НОД нескольких чисел с помощью алгоритма Евклида.
@@ -23,13 +23,13 @@ const findNOD = (a, b) => {
  * @throws {TypeError} Если переданы нечисловые значения.
  */
 const euclid = (...numbers) => {
-  if (!numbers.length) {
-    throw new RangeError('No arguments provided');
-  }
-  
-  if (!numbers.every(Number.isInteger)) {
-    throw new TypeError('euclid() function does not accept non-numeric values')
-  }
-  
-  return numbers.reduce((a, b) => findNOD(a, b), numbers[0]);
-}
+    if (!numbers.length) {
+        throw new RangeError("No arguments provided");
+    }
+
+    if (!numbers.every(Number.isInteger)) {
+        throw new TypeError("euclid() function does not accept non-numeric values");
+    }
+
+    return numbers.reduce((a, b) => findNOD(a, b), numbers[0]);
+};
