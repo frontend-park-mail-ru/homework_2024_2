@@ -72,73 +72,73 @@ QUnit.module('Тестируем функцию chess', function () {
 
 		assert.throws(
 			() => chess('9.2'), 
-			new TypeError('Size must be an integer.'), 
+			TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с нецелым числом'
 		);
 
 		assert.throws(
 			() => chess('-9.2'), 
-			new TypeError('Size must be an integer.'), 
+			TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с нецелым числом'
 		);
 
 		assert.throws(
 			() => chess('not1hing'), 
-			new TypeError('Size must be an integer.'), 
+			TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки без числа'
 		);
 
 		assert.throws(
 			() => chess('something'), 
-			new TypeError('Size must be an integer.'), 
+			TypeError('Size must be an integer.'), 
 			'Должна быть ошибка для строки с текстом'
 		);
 
 		assert.throws(
 			() => chess([]), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для пустого массива'
 		);
 
 		assert.throws(
 			() => chess([1, 2, 911]), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для массива с числами'
 		);
 
 		assert.throws(
 			() => chess({}), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для пустого объекта'
 		);
 
 		assert.throws(
 			() => chess({1: 8}), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для объекта с числовым ключом'
 		);
 
 		assert.throws(
 			() => chess({'1': 8}), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для объекта со строковым ключом'
 		);
 
 		assert.throws(
 			() => chess(), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для отсутствующего аргумента'
 		);
 
 		assert.throws(
 			() => chess(null), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для null'
 		);
 
 		assert.throws(
 			() => chess(true), 
-			new TypeError(expected), 
+			TypeError(expected), 
 			'Должна быть ошибка для булевого значения'
 		);
 
