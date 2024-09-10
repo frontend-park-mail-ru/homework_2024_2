@@ -45,5 +45,5 @@ QUnit.module('Тестируем функцию minmax', function () {
       new TypeError('Incorrect input parameter type, expected: string, got: boolean'),
       'Передан некорректный тип данных'
     );
-	});
+  });
 });
