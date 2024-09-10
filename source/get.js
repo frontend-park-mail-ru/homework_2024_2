@@ -7,13 +7,14 @@
  *
  * @param {object} object - Object to find a value in.
  * @param {string} pathToProperty - Path to property.
+ * @throws {Error} - If type of pathToProperty is not string or type of object is not object
  * @returns {(object|undefined)} - Value of needed property or undefined if property is not found.
  */
 const get = (object, pathToProperty) => {        
-    if (!pathToProperty || typeof pathToProperty !== 'string') {
+    if (typeof pathToProperty !== 'string' || typeof object !== 'object' || !pathToProperty) {
         throw new Error('Invalid data')
     }
-    
+
     if (pathToProperty === '.') {
         return object;
     }

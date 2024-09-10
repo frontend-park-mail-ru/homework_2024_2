@@ -71,4 +71,10 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.throws(function() {get(object, null); }, Error, 'Invalid data');
 		assert.throws(function() {get(object, undefined); }, Error, 'Invalid data');
 	});	
+
+	QUnit.test('get выбрасывает Error при object не типа object', function (assert) {
+		assert.throws(function() {get(1, ); '.foo'}, Error, 'Invalid data');
+		assert.throws(function() {get('hello', '.foo'); }, Error, 'Invalid data');
+		assert.throws(function() {get(true, '.foo'); }, Error, 'Invalid data');
+	});	
 });
