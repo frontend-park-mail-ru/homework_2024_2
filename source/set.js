@@ -5,7 +5,7 @@
  * Recursively inserts newProperty to object by the path
  * @param {Object} object - object to change
  * @param {String[]} propertyList - array of strings 
- * @param {Number|String|BigInt|Boolean|Object|null|undefined
+ * @param {Number|String|BigInt|Boolean|Object|null|undefined|symbol|
  *          |Number[]|String[]|BigInt[]|Boolean[]|Object[]} newProperty - instance of any type: number, string, etc.                                     
  * @returns {Object} Returns modified object
  */
