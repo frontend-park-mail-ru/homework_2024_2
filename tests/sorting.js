@@ -11,80 +11,80 @@ QUnit.module('Тестируем функцию sorting', function () {
 	});
 
 	// мой тест 1
-	QUnit.test("sorting корректно сортирует объекты с отрицательными числовыми свойствами", function (assert) {
+	QUnit.test('sorting корректно сортирует объекты с отрицательными числовыми свойствами', function (assert) {
 		const initial = [
-			{ prop1: -1 },
-			{ prop1: -20 },
-			{ prop1: -3 },
-			{ prop1: -44 },
-			{ prop1: -10 },
-			{ prop1: -7 },
+			{prop1: -1},
+			{prop1: -20},
+			{prop1: -3},
+			{prop1: -44},
+			{prop1: -10},
+			{prop1: -7},
 		];
-		const actual = sorting(initial, ["prop1"]);
+		const actual = sorting(initial, [ 'prop1' ]);
 
 		const expected = [
-			{ prop1: -44 },
-			{ prop1: -20 },
-			{ prop1: -10 },
-			{ prop1: -7 },
-			{ prop1: -3 },
-			{ prop1: -1 },
+			{prop1: -44},
+			{prop1: -20},
+			{prop1: -10},
+			{prop1: -7},
+			{prop1: -3},
+			{prop1: -1},
 		];
 
 		assert.deepEqual(actual, expected);
 	});
 
   	// мой тест 2
-	QUnit.test("sorting корректно сортирует объекты с числовыми свойствами разных знаков", function (assert) {
+	QUnit.test('sorting корректно сортирует объекты с числовыми свойствами разных знаков', function (assert) {
 		const initial = [
-			{ prop1: -1 },
-			{ prop1: 20 },
-			{ prop1: 3 },
-			{ prop1: -44 },
-			{ prop1: 10 },
-			{ prop1: -7 },
+			{prop1: -1},
+			{prop1: 20},
+			{prop1: 3},
+			{prop1: -44},
+			{prop1: 10},
+			{prop1: -7},
 		];
-		const actual = sorting(initial, ["prop1"]);
+		const actual = sorting(initial, [ 'prop1' ]);
 
 		const expected = [
-			{ prop1: -44 },
-			{ prop1: -7 },
-			{ prop1: -1 },
-			{ prop1: 3 },
-			{ prop1: 10 },
-			{ prop1: 20 },
+			{prop1: -44},
+			{prop1: -7},
+			{prop1: -1},
+			{prop1: 3},
+			{prop1: 10},
+			{prop1: 20},
 		];
 
 		assert.deepEqual(actual, expected);
 	});
 
 	// мой тест 3
-	QUnit.test("sorting выдаст ошибку для свойства со значением undefined и корректно отсортирует массив, где одно из значений 0", function (assert) {
+	QUnit.test('sorting выдаст ошибку для свойства со значением undefined и корректно отсортирует массив, где одно из значений 0', function (assert) {
 		const initial = [
-			{ prop1: -1 },       
-			{ prop1: undefined }, 
-			{ prop1: 3 },        
-			{ prop1: -44 },      
-			{ prop1: 10 },       
-			{ prop1: 0 },        
+			{prop1: -1},       
+			{prop1: undefined}, 
+			{prop1: 3},        
+			{prop1: -44},      
+			{prop1: 10},       
+			{prop1: 0},        
 		];
-		assert.throws(() => sorting(initial, ["prop1"]));
+		assert.throws(() => sorting(initial, [ 'prop1' ]));
 	
 		const initialWithoutUndefined = [
-			{ prop1: -1 },
-			{ prop1: 3 },
-			{ prop1: -44 },
-			{ prop1: 10 },
-			{ prop1: 0 }, 
-		];
-		const actual = sorting(initialWithoutUndefined, ["prop1"]);
+			{prop1: -1},
+			{prop1: 3},
+			{prop1: -44},
+			{prop1: 10},
+			{prop1: 0}, 
+		]
+		const actual = sorting(initialWithoutUndefined, [ 'prop1' ]);
 	
 		const expected = [
-			{ prop1: -44 },
-			{ prop1: -1 },
-			{ prop1: 0 },
-			{ prop1: 3 },
-			{ prop1: 10 },
+			{prop1: -44},
+			{prop1: -1},
+			{prop1: 0},
+			{prop1: 3},
+			{prop1: 10},
 		];
 	
 		assert.deepEqual(actual, expected);

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * Принимает на вход массив plain-объектов и массив свойств, по которым необходимо отсортировать массив объектов. Реализует устойчивую сортировку этого массива в порядке возрастания.
@@ -15,19 +15,19 @@
 
 const sorting = (arr, props) => {
   if (!arr || !props) {
-    throw new TypeError("Either arr or props is undefined");
+    throw new TypeError('Either arr or props is undefined');
   }
 
   if (!Array.isArray(arr)) {
-    throw new TypeError("arr should be array");
+    throw new TypeError('arr should be array');
   }
 
   if (!Array.isArray(props)) {
-    throw new TypeError("props should be array");
+    throw new TypeError('props should be array');
   }
 
   arr.forEach((elem) => {
-    if (typeof elem !== "object" || elem === null) {
+    if (typeof elem !== 'object' || elem === null) {
       throw new TypeError(
         `arr should contain objects only, not ${typeof elem}`
       );
