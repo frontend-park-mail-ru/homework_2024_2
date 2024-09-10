@@ -1,23 +1,34 @@
-var anagram = function(strs){
+'use strict';
+const anagram = (strs) => {
+    const anagramsMap = new Map();
+    const minElemCount = 2
+
+    if(typeof strs != "object" || !(strs instanceof Array)){
+        throw new TypeError("parameter is not a list")
+    } else if (strs.length != 0) {
+        strs.forEach((item) => {
+            if (typeof item != "string"){
+                throw new TypeError("bad parameters")
+            }
+        })
+    }
+    
     strs.sort();
-    let mp = new Map();
 
-    for(let str of strs) {
-        let sortedStr = str.split('').sort().join('');
-        if (!mp.get(sortedStr)) {
-            mp.set(sortedStr, []);
+    strs.forEach((str) => {
+        const sortedStr = str.split('').sort().join('');
+        const anagramsArr = anagramsMap.get(sortedStr) ?? []
+        anagramsArr.push(str);
+        anagramsMap.set(sortedStr, anagramsArr);
+    });
+    
+    const anagramGroups = [];
+    for(const [ _, anagrams] of anagramsMap){
+        if (anagrams.length >= minElemCount) {
+            anagramGroups.push(anagrams);
         }
-        let tempArr = mp.get(sortedStr);
-        tempArr.push(str);
-        mp.set(sortedStr, tempArr);
+            
     }
 
-    let ans = [];
-    for(m of mp){
-        if (m[1].length >= 2) {
-            ans.push(m[1]);
-        }
-        
-    }
-    return ans;
+    return anagramGroups;
 }
