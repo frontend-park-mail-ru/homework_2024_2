@@ -89,3 +89,4 @@ QUnit.module('Проверка работы функции filter', function () 
 		},
 	);
 });
+

@@ -86,3 +86,4 @@ const filter = (htmlText, permittedTags) => {
         return acc;
     }, []).join('');
 };
+
