@@ -69,15 +69,15 @@ QUnit.module('Тестируем функцию anagram', function () {
 	});
 	QUnit.test('Функция работает с неправильными данными', function (assert) {
 		const input = 123;
-		assert.throws(() => anagram(input), TypeError("parameter is not a list"), "bad parameters")
+		assert.throws(() => anagram(input), TypeError("parameter is invalid"), "bad parameters")
 	});
 	QUnit.test('Функция работает с неправильными данными', function (assert) {
 		const input = ['str', 2, 'string'];
-		assert.throws(() => anagram(input), TypeError("bad parameters"), "bad parameters")
+		assert.throws(() => anagram(input), TypeError("parameter is invalid"), "bad parameters")
 	});
 	QUnit.test('Функция работает с множеством', function (assert) {
 		const input = {};
-		assert.throws(() => anagram(input), TypeError("parameter is not a list"), "bad parameters")
+		assert.throws(() => anagram(input), TypeError("parameter is invalid"), "bad parameters")
 	});
 	
 
