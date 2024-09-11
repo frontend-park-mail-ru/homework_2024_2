@@ -144,7 +144,7 @@ QUnit.module('Тестируем функцию set', function () {
 			very: {
 				deep: {
 					nested: {
-						field: "value"
+						field: 'value'
 					}
 				}
 			}
@@ -154,7 +154,7 @@ QUnit.module('Тестируем функцию set', function () {
 			very: {
 				deep: {
 					nested: {
-						field: "other value"
+						field: 'other value'
 					}
 				}
 			}
@@ -166,7 +166,7 @@ QUnit.module('Тестируем функцию set', function () {
 				very: {
 					deep: {
 						nested: {
-							field: "value"
+							field: 'value'
 						}
 					}
 				}
@@ -178,7 +178,7 @@ QUnit.module('Тестируем функцию set', function () {
 				very: {
 					deep: {
 						nested: {
-							field: "other value"
+							field: 'other value'
 						}
 					}
 				}
@@ -191,7 +191,7 @@ QUnit.module('Тестируем функцию set', function () {
 					very: {
 						deep: {
 							nested: {
-								field: "value"
+								field: 'value'
 							}
 						}
 					}
@@ -206,7 +206,7 @@ QUnit.module('Тестируем функцию set', function () {
 					very: {
 						deep: {
 							nested: {
-								field: "other value"
+								field: 'other value'
 							}
 						}
 					}
@@ -222,7 +222,7 @@ QUnit.module('Тестируем функцию set', function () {
 						very: {
 							deep: {
 								nested: {
-									field: "other value"
+									field: 'other value'
 								}
 							}
 						}
@@ -234,7 +234,7 @@ QUnit.module('Тестируем функцию set', function () {
 					very: {
 						deep: {
 							nested: {
-								field: "other value"
+								field: 'other value'
 							}
 						}
 					}
@@ -243,10 +243,10 @@ QUnit.module('Тестируем функцию set', function () {
 			
 		};
 
-		assert.deepEqual(set(object, '.very.deep.nested.field', "other value"), object2);
-		assert.deepEqual(set(object3, '.incredibly.very.deep.nested.field', "other value"), object4);
-		assert.deepEqual(set(objectNested5, '.absolutely.incredibly.very.deep.nested.field', "other value"), objectNested5_2);
-		assert.deepEqual(set(objectNested5, '.null.absolutely.incredibly.very.deep.nested.field', "other value"), objectNested5_3);
+		assert.deepEqual(set(object, '.very.deep.nested.field', 'other value'), object2);
+		assert.deepEqual(set(object3, '.incredibly.very.deep.nested.field', 'other value'), object4);
+		assert.deepEqual(set(objectNested5, '.absolutely.incredibly.very.deep.nested.field', 'other value'), objectNested5_2);
+		assert.deepEqual(set(objectNested5, '.null.absolutely.incredibly.very.deep.nested.field', 'other value'), objectNested5_3);
 	});
 
 	QUnit.test('set не меняет исходный объект если path неверное', function (assert) {
@@ -254,7 +254,7 @@ QUnit.module('Тестируем функцию set', function () {
 			very: {
 				deep: {
 					nested: {
-						field: "value"
+						field: 'value'
 					}
 				}
 			}
@@ -264,7 +264,7 @@ QUnit.module('Тестируем функцию set', function () {
 			very: {
 				deep: {
 					nested: {
-						field: "value"
+						field: 'value'
 					}
 				}
 			}
@@ -272,9 +272,9 @@ QUnit.module('Тестируем функцию set', function () {
 
 
 
-		assert.deepEqual(set(object, 32, "other value"), object1);
-		assert.deepEqual(set(object, 'very.deep.nested.field', "other value"), object1);
-		assert.deepEqual(set(object, '', "other value"), object1);
+		assert.deepEqual(set(object, 32, 'other value'), object1);
+		assert.deepEqual(set(object, 'very.deep.nested.field', 'other value'), object1);
+		assert.deepEqual(set(object, '', 'other value'), object1);
 	});
 
 
@@ -283,19 +283,19 @@ QUnit.module('Тестируем функцию set', function () {
 			very: {
 				deep: {
 					nested: {
-						field: "value"
+						field: 'value'
 					}
 				}
 			}
 		};
 
 		const object1 = {
-			"": "other value",
+			'': 'other value',
 
 			very: {
 				deep: {
 					nested: {
-						field: "value"
+						field: 'value'
 					}
 				}
 			}
@@ -303,13 +303,13 @@ QUnit.module('Тестируем функцию set', function () {
 
 		const object3 = {};
 		const object4 = {
-			field: "other value"
+			field: 'other value'
 		};
 
 
 
-		assert.deepEqual(set(object, '.', "other value"), object1);
-		assert.deepEqual(set(object3, '.field', "other value"), object4);
+		assert.deepEqual(set(object, '.', 'other value'), object1);
+		assert.deepEqual(set(object3, '.field', 'other value'), object4);
 	});
 
 
