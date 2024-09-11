@@ -84,21 +84,21 @@ QUnit.module('Тестируем функцию format', function () {
 		const input = [ 1, 2, 10, 3, 1000, 10000 ];
 
 		const expected =
-			"Columns amount must be a positive integer";
+			'Columns amount must be a positive integer';
 
 		const expected2 =
-			"Columns amount must be greater than array size";
+			'Columns amount must be greater than array size';
 
-		assert.strictEqual(format(input, -1), expected);
-		assert.strictEqual(format(input, 10), expected2);
+		assert.throws(() => format(input, -1), expected);
+		assert.throws(() => format(input, 10), expected2);
 	});
 
 	QUnit.test('format правильно проверяет элементы массива', function (assert) {
 		const input = [1, 2, 10, 100, "str", 10000];
 
 		const expected =
-			"Input data must contain integers only";
+			Error('Input data must contain integers only');
 
-		assert.strictEqual(format(input, 6), expected);
+		assert.throws(() => format(input, 6), TypeError, expected);
 	});
 });
