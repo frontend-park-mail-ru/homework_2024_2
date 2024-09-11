@@ -37,4 +37,17 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
+
+    QUnit.test('roman правильно определяет, корректен ли ввод', function (assert) {
+		assert.strictEqual(roman('19_04'), 'Bad number format');
+		assert.strictEqual(roman('m@l'), 'Bad number format');
+		assert.strictEqual(roman('FFA'), 'Bad number format');
+        assert.strictEqual(roman(''), 'Bad number format');
+	});
+
+    QUnit.test('roman проводит проверку корректности числа записанного римскими цифрами', function (assert) {
+		assert.strictEqual(roman('VLm'), 'Bad roman number format');
+		assert.strictEqual(roman('iVL'), 'Bad roman number format');
+		assert.strictEqual(roman('CcM'), 'Bad roman number format');
+	});
 });
