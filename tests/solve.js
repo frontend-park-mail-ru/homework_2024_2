@@ -8,5 +8,9 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('2 * ( x - 1 )', 5), 8);
 		assert.strictEqual(solve('(5 - x) * (x + 5)', 3), 16);
 		assert.strictEqual(solve('((5 - x) * (x + 5)) * x * x', 3), 144);
+		assert.strictEqual(solve('6 * (3 * (4 + x) - 7)', 3), 84);
+		assert.strictEqual(solve('(x - 5) * (x + 5 * 5) - x', 10), 165);
+		assert.strictEqual(solve('(x + x + x) * (x * (x * (x + x)))', 2), 96);
+		assert.strictEqual(solve('x * (x + x) - (x * (x + x))', 5), 0);
 	});
 });

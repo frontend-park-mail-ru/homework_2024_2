@@ -1,10 +1,42 @@
 'use strict';
 
+function ParseStr (str) {
+
+    let res = []; 
+
+    let curNum = -1;
+
+    for (let elem of str) {
+
+        switch (elem) {
+            case '+':
+            case '-':
+            case '*':
+            case '(':
+            case ')':
+                if (curNum != -1) {
+                    res.push(String(curNum));
+                }
+                curNum = -1;
+                res.push(elem);
+                break;
+            case ' ':
+                break;
+            default:
+                curNum = curNum == -1 ? Number(elem) : curNum * 10 + Number(elem)
+            
+        }
+    }
+    if (curNum != -1) {
+        res.push(String(curNum));
+    }
+    return res;
+}
 
 function toPolish (str) {
 
-    let masStr = str.split("");
-
+    let masStr = ParseStr(str);
+    
     let priorities = new Map([
         ['+', 1],
         ['-', 1], 
@@ -12,28 +44,29 @@ function toPolish (str) {
 
     let myStack = [];
 
-    let answer = "";
+    let answer = [];
 
+    
     for (let val of masStr) {
         if (val === '+' || val === '-' || val === '*') {
             while (priorities.get(val) <= priorities.get(myStack.at(-1))){
-                answer += myStack.pop();
+                answer.push(myStack.pop());
             }
             myStack.push(val);
         }else if (val === '('){
             myStack.push(val);
         }else if (val === ')'){
             while (myStack.at(-1) !== '('){
-                answer += myStack.pop();
+                answer.push(myStack.pop());
             }
             myStack.pop();
         }else if (val !== ' '){
-            answer += val;
+            answer.push(val);
         }
     }
 
     while(myStack.length !== 0){
-        answer += myStack.pop();
+        answer.push(myStack.pop());
     }
     
     return answer;
@@ -61,7 +94,7 @@ function solvePolish(str) {
                 break;
         }
     }
-
+    
     return myStack.at(-1);
 
 }
@@ -70,5 +103,7 @@ function solvePolish(str) {
 function solve (str, val) {
     return solvePolish(toPolish(str.replaceAll('x', String(val))));
 }
+
+
 
 
