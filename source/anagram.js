@@ -23,14 +23,13 @@ const anagram = (strs) => {
         anagramsArr.push(str);
         anagramsMap.set(sortedStr, anagramsArr);
     });
-    
-    const anagramGroups = [];
-    for (const [ _, anagrams] of anagramsMap) {
-        if (anagrams.length >= minElemCount) {
+
+    const anagramGroups = []
+    anagramsMap.forEach((anagrams) => {
+            if (anagrams.length >= minElemCount) {
             anagramGroups.push(anagrams);
         }
-            
-    }
+    })
 
     return anagramGroups;
 }
