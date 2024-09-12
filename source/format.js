@@ -1,11 +1,21 @@
 'use strict';
 
+/**
+ * Форматирует массив чисел в строки, разбивая их на заданное количество столбцов.
+ * Каждое число выравнивается по ширине, основанной на длине самого длинного числа в соответствующем столбце.
+ *
+ * @param {number[]} input - Массив целых чисел, которые нужно отформатировать.
+ * @param {number} columns - Количество столбцов для форматирования.
+ * @returns {string} - Строка, представляющая отформатированные числа в столбцах.
+ * @throws {Error} - Если количество столбцов меньше 1 или превышает размер массива.
+ * @throws {TypeError} - Если входные данные не содержат только целые числа.
+ */
 const format = (input, columns) => {
     if (columns < 1) {
-        throw new Error('Columns amount must be a positive integer');
+        throw new RangeError('Columns amount must be a positive integer');
     }
     if (columns > input.length) {
-        throw new Error('Columns amount must be greater than array size');
+        throw new RangeError('Columns amount must be greater than array size');
     }
 
     let widths = new Array(columns);
