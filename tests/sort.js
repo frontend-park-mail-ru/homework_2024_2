@@ -65,4 +65,11 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('я и в а б г'), 'А Б В Г И Я', 'Короткие слова в обратном порядке на русском');
 	});
 
+	QUnit.test('Функция корректно обрабатывает некорректный ввод', function (assert) {
+		assert.strictEqual(sort(undefined), 'Ошибка: Неверный тип данных', 'Обрабатывает undefined');
+		assert.strictEqual(sort(null), 'Ошибка: Неверный тип данных', 'Обрабатывает null');
+		assert.strictEqual(sort(1488), 'Ошибка: Неверный тип данных', 'Обрабатывает число');
+		assert.strictEqual(sort(true), 'Ошибка: Неверный тип данных', 'Обрабатывает boolean');
+		assert.strictEqual(sort([]), 'Ошибка: Неверный тип данных', 'Обрабатывает массив');
+	});
 });
