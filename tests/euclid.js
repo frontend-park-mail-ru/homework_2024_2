@@ -33,7 +33,7 @@ QUnit.module('Тестируем функцию euclid', function () {
 	QUnit.test('Функция должна уметь работать и с отрицательными числами', function (assert) {
 		assert.strictEqual(euclid(-5, 10), 5, 'euclid(-5, 15, 10) === 5');
 		assert.strictEqual(euclid(5, -10), 5, 'euclid(5, 15, -10) === 5');
-		assert.strictEqual(euclid(-9, 18, -27), 9, 'euclidS(9, -18, 27) === 9');
+		assert.strictEqual(euclid(-9, 18q, -27), 9, 'euclidS(9, -18, 27) === 9');
 		assert.strictEqual(euclid(-9, 18, -27), 9, 'euclid(-9, 18, -27) === 9');
 	});
 
@@ -45,9 +45,6 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(function () { euclid(1, 1.5, 1) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в середине');
 		assert.throws(function () { euclid(1.5, 1, 1) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в начале');
 		assert.throws(function () { euclid(1, 1, 1.5) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в конце');
-
-
-
 	});
 
 	QUnit.test('Функция должна корректно работать с массивами', function (assert) {
