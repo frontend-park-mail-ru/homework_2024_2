@@ -32,6 +32,6 @@ const set = (object, path, newProperty) => {
     if (typeof path !== 'string' || !path.length || path[0] !== '.') {
         return object;
     }
-    let propertyList = path.split('.').slice(1);
+    const propertyList = path.split('.').slice(1);
     return changeNestedProperty(object, propertyList, newProperty);
 };
