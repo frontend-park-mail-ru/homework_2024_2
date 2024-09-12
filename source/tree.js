@@ -11,15 +11,17 @@
   */
 
 function tree(height) {
-    if ( !( (typeof height === 'number') || (typeof height == 'string')) )
+    if ( !( (typeof height === 'number') || (typeof height == 'string')) ) {
       throw new TypeError('The parameter type is invalid!');
-    
+    }
+
     if ( isNaN(height) ) {
       throw new Error('Parameter is not a number!');
     }
 
-    if (height < 3)
+    if (height < 3) {
       throw new RangeError('The height must be greater than 3');
+    }
     
     let result = '';
     let crown = '*';
@@ -27,7 +29,6 @@ function tree(height) {
 
     while (i < height - 1) { 
       result += generateCrown(i, height);
-      // crone = `${crone}**`
       crown += '**'
       
       i++;
