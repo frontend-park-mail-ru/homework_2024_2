@@ -25,7 +25,7 @@ const compareObjects = (a, b, props) => {
 };
 
 
- /**
+/**
  * Функция слияния двух отсортированных массивов.
  * @param {Object[]} left - Левый отсортированный массив.
  * @param {Object[]} right - Правый отсортированный массив.
@@ -82,7 +82,7 @@ const mergeSort = (arr, props) => {
 const sorting = (arr, props) => {
     // Проверка параметра arr
     if (!Array.isArray(arr)) {
-        throw new TypeError("Первый параметр должен быть массивом объектов.");
+        throw new TypeError('Первый параметр должен быть массивом объектов.');
     }
 
     // Если массив пустой или props пуст — сразу возвращаем его
@@ -92,7 +92,7 @@ const sorting = (arr, props) => {
 
     // Проверка параметра props
     if (!Array.isArray(props) || !props.every(prop => typeof prop === 'string')) {
-        throw new TypeError("Второй параметр должен быть массивом строк.");
+        throw new TypeError('Второй параметр должен быть массивом строк.');
     }
 
     // Запуск сортировки
