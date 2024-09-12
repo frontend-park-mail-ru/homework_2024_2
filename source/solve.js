@@ -1,13 +1,8 @@
 'use strict';
-
-function ParseStr (str) {
-
-    let res = []; 
-
+const parseStr = (str) => {
+    const res = []; 
     let curNum = -1;
-
     for (let elem of str) {
-
         switch (elem) {
             case '+':
             case '-':
@@ -23,32 +18,33 @@ function ParseStr (str) {
             case ' ':
                 break;
             default:
-                curNum = curNum == -1 ? Number(elem) : curNum * 10 + Number(elem)
-            
+                if (!isNaN(parseInt(elem))){
+                    curNum = curNum === -1 ? Number(elem) : curNum * 10 + Number(elem);  
+                }else{
+                    throw new TypeError("Тип должен быть числовым!");
+                }
         }
     }
-    if (curNum != -1) {
+
+    if (curNum !== -1) {
         res.push(String(curNum));
     }
+
     return res;
 }
 
-function toPolish (str) {
-
-    let masStr = ParseStr(str);
-    
-    let priorities = new Map([
+const toPolish = (str) => {
+    const masStr = parseStr(str); 
+    const priorities = new Map([
         ['+', 1],
         ['-', 1], 
         ['*', 2]]);
-
-    let myStack = [];
-
-    let answer = [];
+    const myStack = [];
+    const answer = [];
 
     
     for (let val of masStr) {
-        if (val === '+' || val === '-' || val === '*') {
+        if (['+', '-', '*'].includes(val)) {
             while (priorities.get(val) <= priorities.get(myStack.at(-1))){
                 answer.push(myStack.pop());
             }
@@ -72,9 +68,8 @@ function toPolish (str) {
     return answer;
 }
 
-function solvePolish(str) {
-
-    let myStack = [];
+const solvePolish = (str) => {
+    const myStack = [];
 
     for (let elem of str) {
         switch(elem) {
@@ -82,8 +77,8 @@ function solvePolish(str) {
                 myStack.push(myStack.pop() + myStack.pop());
                 break;
             case '-':
-                let oper1 = myStack.pop();
-                let oper2 = myStack.pop();
+                const oper1 = myStack.pop();
+                const oper2 = myStack.pop();
                 myStack.push(oper2 - oper1);
                 break;
             case '*':
@@ -100,6 +95,14 @@ function solvePolish(str) {
 }
 
 
-function solve (str, val) {
-    return solvePolish(toPolish(str.replaceAll('x', String(val))));
+const solve = (str, val) => {
+    if (str === undefined || val === undefined) {
+        throw new Error("str and val arguments must not be empty");
+    }
+    if (typeof str === "string" && typeof val === "number" ){
+        return solvePolish(toPolish(str.replaceAll('x', val)));
+    }else{
+        throw new TypeError("argument str must be string, argument val must be int");
+    }
 }
+

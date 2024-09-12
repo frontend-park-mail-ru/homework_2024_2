@@ -12,5 +12,9 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('(x - 5) * (x + 5 * 5) - x', 10), 165);
 		assert.strictEqual(solve('(x + x + x) * (x * (x * (x + x)))', 2), 96);
 		assert.strictEqual(solve('x * (x + x) - (x * (x + x))', 5), 0);
+		assert.throws(() => solve('x * (x + x) - (bb * (x + x))', 6), TypeError);
+		assert.throws(() => solve('x * (x + x) - (x * (x / y))', 6), TypeError);
+		assert.throws(() => solve(7, 'jhxhe'), TypeError);
+		assert.throws(() => solve(), Error);
 	});
 });
