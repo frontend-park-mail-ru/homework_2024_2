@@ -126,10 +126,9 @@ QUnit.module('Тестируем функцию zip', function () {
 
 		assert.throws(() => zip(new Array(), { name: 'age' }), error);
 		assert.throws(() => zip(new String(), { name: 'age' }), error);
+		assert.throws(() => zip({ name: 'age' }, new Set()), error);
+		assert.throws(() => zip({ name: 'age' }, new Date()), error);
 	});
-
-
-
 
 	QUnit.test('Функция не копирует свойства прототипа объекта', function(assert) {
 		const prototypeObj = { prototypeAttr: "Prototype value" };
