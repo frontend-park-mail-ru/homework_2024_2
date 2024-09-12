@@ -29,7 +29,6 @@ const zip = (...objects) => {
  * @param {*} potentialObject - a value to be checked
  */
 const isObject = (potentialObject) => {
-	return (typeof potentialObject === 'object' &&
-		potentialObject !== null);
+	return (Object.prototype.toString.call(potentialObject) ===
+		'[object Object]');
 };
-
