@@ -46,4 +46,12 @@ QUnit.module('Проверка работы функции filter', function () 
         const expected = 'Простой текст без тегов';
         assert.strictEqual(output, expected);
     });
+
+	QUnit.test('filter выбрасывает ошибку, если html не строка', function (assert) {
+        assert.throws(() => filter(42, ['strong', 'em']), new TypeError('HTML должен быть строкой'), 'Передано число вместо строки');
+        assert.throws(() => filter({}, ['strong', 'em']), new TypeError('HTML должен быть строкой'), 'Передан объект вместо строки');
+        assert.throws(() => filter(null, ['strong', 'em']), new TypeError('HTML должен быть строкой'), 'Передано null вместо строки');
+        assert.throws(() => filter(undefined, ['strong', 'em']), new TypeError('HTML должен быть строкой'), 'Передано undefined вместо строки');
+        assert.throws(() => filter(true, ['strong', 'em']), new TypeError('HTML должен быть строкой'), 'Передано булево значение вместо строки');
+    });
 });
