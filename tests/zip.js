@@ -77,6 +77,23 @@ QUnit.module('Тестируем функцию zip', function () {
 
 	// NEW TESTS
 
+	QUnit.test('Функция работает с некорректными типами данных', function (assert) {
+		const obj1 = undefined
+		const obj2 = null
+		const obj3 = false
+		const obj4 = {
+			a: 'test',
+            b: 42
+		}
+
+		const expected = {
+			a: 'test',
+			b: 42
+		};
+
+		assert.deepEqual(zip(obj1, obj2, obj3, obj4), expected)
+	})
+
     QUnit.test('Функция работает с объектами, содержащими массивы', function (assert) {
         const obj1 = {a: [1, 2, 3]};
         const obj2 = {b: [4, 5, 6], a: [1, 2]};
