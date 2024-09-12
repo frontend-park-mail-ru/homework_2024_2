@@ -13,7 +13,7 @@ const euclid = (...inputNumbers) => {
 
     inputNumbers = inputNumbers.flat(Infinity); //если массив содержит другие массивы в качестве своих элементов, то метод flat() позволяет уменьшить вложенность, вплоть до полного превращения массива в плоский
     if (!inputNumbers.length) {
-        return 'Необходимо передать хотя бы одно число';
+        throw new Error('Необходимо передать хотя бы одно число');
     }
     inputNumbers = inputNumbers.map(n => Number(n)); // преобразовывет элементы в числа
 

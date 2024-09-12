@@ -27,14 +27,14 @@ QUnit.module('Тестируем функцию euclid', function () {
 
 		const temp = [80325, 55275, 8746650, 3000000, 45672375, 225, 54675];
 		assert.strictEqual(euclid(...[...temp, ...temp, ...temp, ...temp, ...temp]), euclid(...temp));
+		assert.throws(function () { euclid() }, /Необходимо передать хотя бы одно число/, 'проверка на ввод десятичного числа в конце');
 	});
 
 	QUnit.test('Функция должна уметь работать и с отрицательными числами', function (assert) {
 		assert.strictEqual(euclid(-5, 10), 5, 'euclid(-5, 15, 10) === 5');
 		assert.strictEqual(euclid(5, -10), 5, 'euclid(5, 15, -10) === 5');
-		assert.strictEqual(euclid(-9, 18, -27), 9, 'euclidS(9, -18, 27) === 9');
+		assert.strictEqual(euclid(-9, 18q, -27), 9, 'euclidS(9, -18, 27) === 9');
 		assert.strictEqual(euclid(-9, 18, -27), 9, 'euclid(-9, 18, -27) === 9');
-		assert.strictEqual(euclid(), 'Необходимо передать хотя бы одно число', 'вызов функции с отсутсвием аргументов');
 	});
 
 	QUnit.test('Функция должна выдавать ошибку если введено не целое число', function (assert) {
@@ -45,9 +45,6 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(function () { euclid(1, 1.5, 1) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в середине');
 		assert.throws(function () { euclid(1.5, 1, 1) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в начале');
 		assert.throws(function () { euclid(1, 1, 1.5) }, /Все аргументы должны быть целыми числами/, 'проверка на ввод десятичного числа в конце');
-
-
-
 	});
 
 	QUnit.test('Функция должна корректно работать с массивами', function (assert) {
