@@ -103,7 +103,3 @@ function solvePolish(str) {
 function solve (str, val) {
     return solvePolish(toPolish(str.replaceAll('x', String(val))));
 }
-
-
-
-
