@@ -32,11 +32,11 @@ const validations = (arr, props) => {
 		}
 
 		props.forEach((prop) => {
-		if (elem[prop] === undefined) {
-			throw new Error(
-				`At least one plain object in arr doesn't contain orderby prop ${prop}`
-			);
-		}
+			if (elem[prop] === undefined) {
+				throw new Error(
+					`At least one plain object in arr doesn't contain orderby prop ${prop}`
+				);
+			}
 		});
 	});
 }
