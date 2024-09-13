@@ -19,24 +19,24 @@ const format = (input, columns) => {
     }
 
     let widths = [];
-    input.forEach((_, i) => {
+    for (let i = 0; i < columns; i++) {
         widths[i] = Math.max(...input.filter((_, j) => j % columns === i % columns)
             .map(num => num.toString().length));
-    })
+    }
 
     let output = '';
-    input.forEach((_, i) => {
-        if (typeof input[i] !== 'number') {
-            throw new TypeError('Input data must contain integers only')
+    input.forEach((val, i) => {
+        if (typeof val !== 'number') {
+            throw new TypeError('Input data must contain integers only');
         }
 
-        output += input[i].toString().padStart(widths[i % columns]);
+        output += val.toString().padStart(widths[i % columns]);
         if (i % columns === columns - 1 && i !== input.length - 1) {
             output += '\n';
         } else if (i !== input.length - 1) {
             output += ' ';
         }
-    })
+    });
 
     return output;
 }
