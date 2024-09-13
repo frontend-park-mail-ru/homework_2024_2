@@ -38,16 +38,15 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('2017'), 'MMXVII');
 	});
 
-    QUnit.test('roman правильно определяет, корректен ли ввод', function (assert) {
-		assert.strictEqual(roman('19_04'), 'Bad number format');
-		assert.strictEqual(roman('m@l'), 'Bad number format');
-		assert.strictEqual(roman('FFA'), 'Bad number format');
-        assert.strictEqual(roman(''), 'Bad number format');
+    QUnit.test('roman проводит проверку корректности числа записанного римскими цифрами', function (assert) {
+		assert.throws(function() { roman('XLM'); }, Error, "Ошибка выбрасывается для 'XLM'");
+		assert.throws(function() { roman('IVX'); }, Error, "Ошибка выбрасывается для 'IVX'");
+    	assert.throws(function() { roman('CDM'); }, Error, "Ошибка выбрасывается для 'CDM'");
 	});
 
-    QUnit.test('roman проводит проверку корректности числа записанного римскими цифрами', function (assert) {
-		assert.strictEqual(roman('VLm'), 'Bad roman number format');
-		assert.strictEqual(roman('iVL'), 'Bad roman number format');
-		assert.strictEqual(roman('CcM'), 'Bad roman number format');
+	QUnit.test('roman проводит проверку корректности записи числа', function (assert) {
+		assert.throws(function() { roman('00111'); }, Error, "Ошибка выбрасывается для '00111'");
+		assert.throws(function() { roman('19_2'); }, Error, "Ошибка выбрасывается для '19_2'");
+    	assert.throws(function() { roman('ЧXLV'); }, Error, "Ошибка выбрасывается для 'ЧXLV'");
 	});
 });
