@@ -17,7 +17,14 @@ QUnit.module('Тестируем функцию rle', function () {
     	assert.strictEqual(rle('CCCCCCCC'), 'C8', 'rle("CCCCCCCC") === "C8"');
 	});
 
-	QUnit.test('Корректная работа с пустой строкой', function (assert) {
-    	assert.strictEqual(rle(''), '', 'rle("") === ""');
+	QUnit.test('Ошибка при передаче пустой строки', function (assert) {
+    assert.throws(
+        function() {
+            rle('');
+        },
+        Error,
+        'Функция выбрасывает ошибку при передаче пустой строки'
+	);
 	});
+
 });
