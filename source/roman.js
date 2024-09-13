@@ -62,7 +62,7 @@ const romanToDecimal = (num) => {
 
 /**
  * Converts roman number to decimal numver
- * @param {string} num - Done value in decimal format
+ * @param {int} num - Done value in decimal format
  * @returns string
  */
 const decimalToRoman = (num) => {
