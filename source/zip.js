@@ -22,7 +22,7 @@ const zip = (...objects) => {
         if (obj !== Object(obj)) {
             throw new TypeError('Parameter must be an object!');
         }
-        if (obj instanceof String || obj instanceof Array || obj instanceof Number || obj instanceof Date) {
+        if (!obj.toString().includes('object')) {
             throw new TypeError('Parameter class is not available!');
         }
 
