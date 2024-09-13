@@ -27,3 +27,4 @@ const inverse = (array, start = 0) => {
   
   return array.toSpliced(begin, length, ...array.slice(begin, begin + length).reverse());
 };
+
