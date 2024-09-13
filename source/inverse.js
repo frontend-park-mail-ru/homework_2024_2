@@ -1,9 +1,9 @@
 'use strict';
 
-const inverse = function (array, shift = 0) {
+const inverse = (array, shift = 0) => {
     // incorrect arguments. Should be array and shift is integer
     if (!Array.isArray(array) || !Number.isInteger(shift)) {
-        return null;
+        throw new TypeError('Incorrect types of argument!');
     }
     if (shift >= 0) {  // The shift is positive or zero so the second part of aray should be inverted 
         return [...array.slice(0, shift), ...array.slice(shift).reverse()];
