@@ -94,5 +94,34 @@ QUnit.module('Тестируем функцию inverse', () => {
 			TypeError('The second argument must be an integer number.'),
 			'Wrong type of argument: null'
 		);
+		const arg = new Number(-1);
+		assert.throws(
+			() => inverse([ null, false, 0, Infinity, '' ], arg),
+			TypeError('The second argument must be an integer number.'),
+			'Wrong type of argument: object'
+		);
+	});
+
+	QUnit.test('Функция выбрасывает ошибку, если в неё передан не массив', (assert) => {
+		assert.throws(
+			() => inverse('apple', 3),
+			TypeError('The first argument must be an array.'),
+			'Wrong type of argument: string'
+		);
+		assert.throws(
+			() => inverse(null, -3),
+			TypeError('The first argument must be an array.'),
+			'Wrong type of argument: string'
+		);
+		assert.throws(
+			() => inverse(true),
+			TypeError('The first argument must be an array.'),
+			'Wrong type of argument: string'
+		);
+		assert.throws(
+			() => inverse(1, 'apple'),
+			TypeError('The first argument must be an array.'),
+			'Wrong type of argument: string'
+		);
 	});
 });

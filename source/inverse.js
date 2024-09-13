@@ -11,7 +11,7 @@
  */
 const inverse = (array, start = 0) => {
   if (!Array.isArray(array)) {
-    throw new TypeError('The first argument must be an array');
+    throw new TypeError('The first argument must be an array.');
   }
 
   if (!Number.isInteger(start)) {
