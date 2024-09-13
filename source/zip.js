@@ -1,13 +1,33 @@
-"use strict";
+'use strict';
 
-function zip(){
-  let c = {}
-  for (let i = 0; i < arguments.length; i++){
-    for (let key in arguments[i]){
-      if (!(key in c)){
-        c[key] = arguments[i][key]
+/*
+ * возвращает объект, содержащий все поля введенных объектов 
+ * 
+ * @param {Object[]} objects - массив объектов, которые надо "сжать"
+ * @returns {Object} - Объект, содержащий все поля введенных
+ * @example
+ * 
+ * zip({name: "nick"}, {age: 19});
+ * // =>
+ *{
+ *  name: "nick"
+ *  age: 19
+ *}
+ */
+
+
+function zip(...args){
+  let result = {};
+  args.forEach((item) => {
+    for (let key in item){
+      if (!(key in result)){
+        result[key] = item[key];
       }
     }
-  }
-  return c
+  });
+  return result;
 }
+
+
+
+
