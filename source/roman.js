@@ -38,7 +38,7 @@ function romanToDecimal(num) {
         const thirdNum = DIGITS[num[i + 2]] || 0;
 
         if (secNum && thirdNum && firstNum <= secNum && secNum < thirdNum) {
-            return ("Bad roman number format");
+            throw new Error ("Bad roman number format");
         }
 
         result += secNum > firstNum ? -firstNum : firstNum;
