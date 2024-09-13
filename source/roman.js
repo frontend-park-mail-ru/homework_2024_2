@@ -54,12 +54,12 @@ function romanToDecimal(num) {
  * @returns string
  */
 function decimalToRoman(num) {
-    let res = "";
+    let result = "";
     for (let symb in DIGITS) {
         while (num >= DIGITS[symb]) {
-            res += symb;
+            result += symb;
             num -= DIGITS[symb];
         }
     }
-    return res;
+    return result;
 }
