@@ -36,11 +36,11 @@ function roman(num) {
 
 /**
  * Converts decimal number to roman number
- * @param {int} num  - Done value in roman format
+ * @param {string} num  - Done value in roman format
  * @throws {TypeError} If roman number has incorrect format
  * @returns string
  */
-function romanToDecimal(num) {
+const romanToDecimal = (num) => {
   num = num.toUpperCase();
   let result = 0;
 
@@ -57,14 +57,15 @@ function romanToDecimal(num) {
   }
 
   return result;
-}
+};
+
 
 /**
  * Converts roman number to decimal numver
  * @param {string} num - Done value in decimal format
  * @returns string
  */
-function decimalToRoman(num) {
+const decimalToRoman = (num) => {
   let result = "";
   for (let symb in DIGITS) {
     while (num >= DIGITS[symb]) {
