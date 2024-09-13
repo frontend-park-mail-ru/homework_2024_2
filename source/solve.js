@@ -35,17 +35,18 @@ const parseStr = (str) => {
 
 const toPolish = (str) => {
     const masStr = parseStr(str); 
-    const priorities = new Map([
-        ['+', 1],
-        ['-', 1], 
-        ['*', 2]]);
+    const priorities = {
+        '+': 1,
+        '-': 1, 
+        '*': 2,
+    }
     const myStack = [];
     const answer = [];
 
     
     for (let val of masStr) {
         if (['+', '-', '*'].includes(val)) {
-            while (priorities.get(val) <= priorities.get(myStack.at(-1))){
+            while (priorities[val] <= priorities[myStack.at(-1)]){
                 answer.push(myStack.pop());
             }
             myStack.push(val);
@@ -105,4 +106,6 @@ const solve = (str, val) => {
         throw new TypeError("argument str must be string, argument val must be int");
     }
 }
+
+
 
