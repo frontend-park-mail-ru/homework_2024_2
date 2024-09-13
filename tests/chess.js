@@ -94,7 +94,7 @@ QUnit.module('Тестируем функцию chess', function () {
 		);
 		assert.throws(
 			() => chess(null),
-			new TypeError('Size must be a positive integer more than 1.'),
+			new TypeError('Size must be a number.'),
 			'Передача null должна выбросить ошибку'
 		);
 		assert.throws(
@@ -104,7 +104,7 @@ QUnit.module('Тестируем функцию chess', function () {
 		);
 		assert.throws(
 			() => chess([]),
-			new TypeError('Size must be a positive integer more than 1.'),
+			new TypeError('Size must be a number.'),
 			'Передача массива должна выбросить ошибку'
 		);
 	});

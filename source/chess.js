@@ -10,6 +10,10 @@
  * @throws {TypeError} - Если значение `N` меньше или равно 1.
  */
 const chess = (N) => {
+  if (typeof N !== 'number' && typeof N !== 'string') {
+    throw new TypeError('Size must be a number.');
+  }
+
   const size = Number(N);
 
   if (isNaN(size)) {
@@ -24,15 +28,15 @@ const chess = (N) => {
     throw new TypeError('Size must be a positive integer more than 1.');
   }
 
-  let boardArray = []; 
+  const boardArray = []; 
 
   for (let i = 0; i < size; i++) {
-    let row = ''
     for (let j = 0; j < size; j++) {
-      row += (i + j) % 2 === 0 ? '*' : ' ';
+      boardArray.push((i + j) % 2 === 0 ? '*' : ' ');    
     }
-    boardArray.push(row);
+    boardArray.push('\n');
+
   }
 
-  return boardArray.join('\n') + '\n';
+  return boardArray.join('');
 };
