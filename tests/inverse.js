@@ -76,22 +76,22 @@ QUnit.module('Тестируем функцию inverse', () => {
 	QUnit.test('Функция выбрасывает ошибку, если в неё передан некорректный параметр (не целое число)', (assert) => {
 		assert.throws(
 			() => inverse([ 1, 2, 3, 4, 5 ], "apple"),
-			TypeError('Argument must be an integer number.'),
+			TypeError('The second argument must be an integer number.'),
 			'Wrong type of argument: string'
 		);
 		assert.throws(
 			() => inverse([ 1, 2, 3, 4, 5 ], 2.5),
-			TypeError('Argument must be an integer number.'),
+			TypeError('The second argument must be an integer number.'),
 			'Wrong type of argument: non-integer number'
 		);
 		assert.throws(
 			() => inverse([ 'a', 'b', 'c', 'd', 'e' ], true),
-			TypeError('Argument must be an integer number.'),
+			TypeError('The second argument must be an integer number.'),
 			'Wrong type of argument: boolean'
 		);
 		assert.throws(
 			() => inverse([ null, false, 0, Infinity, '' ], null),
-			TypeError('Argument must be an integer number.'),
+			TypeError('The second argument must be an integer number.'),
 			'Wrong type of argument: null'
 		);
 	});
