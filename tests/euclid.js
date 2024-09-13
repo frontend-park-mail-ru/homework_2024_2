@@ -47,6 +47,12 @@ QUnit.module('Тестируем функцию euclid', function () {
 
 		assert.throws(
 			function () {
+				euclid('Hello', "World");
+			},
+			TypeError('not a number'));
+
+		assert.throws(
+			function () {
 				euclid(new Number(1), new Number(-8));
 			},
 			RangeError('not a natural number'));
