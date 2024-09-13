@@ -20,7 +20,7 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.strictEqual(euclid(new Number(2), new Number(3)), 1, 'euclid(2, 3) === 1');
 	});
 
-	QUnit.test('Числа должны быть натуральными', function (assert) {
+	QUnit.test('Числа должны быть натуральными!', function (assert) {
 		assert.throws(
 			function () {
 				euclid(-7, 35);
@@ -36,6 +36,12 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(
 			function () {
 				euclid(-1, 'one', '100');
+			},
+			Error('not a natural number'));
+
+		assert.throws(
+			function () {
+				euclid('25', '5', '100');
 			},
 			Error('not a natural number'));
 
