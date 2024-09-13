@@ -16,7 +16,7 @@
 function rle(str) {
     if (!str) throw new Error('Входная строка не должна быть пустой');
 
-    let res = [];
+    const res = [];
     let cnt = 1;
 
     for (let i = 0; i < str.length; i++) {
