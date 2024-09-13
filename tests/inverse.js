@@ -59,18 +59,18 @@ QUnit.module('Тестируем функцию inverse', () => {
   	});
 
 	QUnit.test('Функция корретно работает, не изменяя исходный массив', (assert) => {
-       	const firstArray = [1, 2, 3, 4, 5];
-       	inverse(firstArray);
-       	assert.deepEqual(firstArray, [1, 2, 3, 4, 5]);
+		const firstArray = [1, 2, 3, 4, 5];
+		inverse(firstArray);
+		assert.deepEqual(firstArray, [1, 2, 3, 4, 5]);
 		const secondArray = [1, 2, 3, 4, 5];
-	   	inverse(secondArray, 0);
-	   	assert.deepEqual(secondArray, [1, 2, 3, 4, 5]);
+		inverse(secondArray, 0);
+		assert.deepEqual(secondArray, [1, 2, 3, 4, 5]);
 		const thirdArray = [1, 2, 3, 4, 5];
-	   	inverse(thirdArray, -1);
-	   	assert.deepEqual(thirdArray, [1, 2, 3, 4, 5]);
+		inverse(thirdArray, -1);
+		assert.deepEqual(thirdArray, [1, 2, 3, 4, 5]);
 		const fourthArray = [1, 2, 3, 4, 5];
-	   	inverse(fourthArray, 2);
-	   	assert.deepEqual(fourthArray, [1, 2, 3, 4, 5]);
+		inverse(fourthArray, 2);
+		assert.deepEqual(fourthArray, [1, 2, 3, 4, 5]);
    	});
 
 	QUnit.test('Функция выбрасывает ошибку, если в неё передан некорректный параметр (не целое число)', (assert) => {
