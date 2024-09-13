@@ -19,7 +19,7 @@
  */
 const roman = (inputNumber) => {
 
-    if ( !(+inputNumber) && typeof inputNumber !== 'string' ){
+    if ( !(+inputNumber) && typeof inputNumber !== 'string' && !(inputNumber instanceof String) ){
         return TypeError(`Ожидался тип number | string, получено ${isNaN(inputNumber) ? NaN : typeof inputNumber}`);
     }
 
