@@ -3,11 +3,12 @@
 /**
  * Сортирует буквы в словах, а затем и сами слова в предложении по алфавиту. Возвращает слова с первой заглавной буквой.
  * @param {string} sentence - Строка, содержащая предложение для сортировки.
- * @returns {string|Error} Отсортированное предложение или ошибка.
+ * @returns {string} Отсортированное предложение.
+ * @throws {TypeError} Если на вход передан не строковый тип данных.
  */
-function sort(sentence) {
+const sort = (sentence) => {
     if (typeof sentence !== 'string') {
-        return 'Ошибка: Неверный тип данных';
+        throw new TypeError('Ошибка: Ожидается строка.');
     }
 
     const words = sentence.split(' ');
@@ -18,4 +19,4 @@ function sort(sentence) {
 
     sortedWords.sort((a, b) => a.localeCompare(b, 'ru'));
     return sortedWords.join(' ');
-}
+};

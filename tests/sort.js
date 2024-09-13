@@ -53,9 +53,9 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('   '), '   ', 'Пробелы остаются, даже если строка без символов');
 	});
 
-	QUnit.test('Функция корректно обрабатывает множественные пробелы', function (assert) {
-        assert.strictEqual(sort('    hello world'), '    Dlorw Ehllo', 'Множественные пробелы с русскими буквами');
-        assert.strictEqual(sort('   привет мир'), '   Веипрт Имр', 'Множественные пробелы с английскими буквами');
+	QUnit.test('Функция корректно обрабатывает отступы', function (assert) {
+        assert.strictEqual(sort('    hello world'), '    Dlorw Ehllo', 'Отступ с английскими буквами');
+        assert.strictEqual(sort('   привет мир'), '   Веипрт Имр', 'Отступ с русскими буквами');
     });
 
 	QUnit.test('Функция корректно обрабатывает слова в обратном порядке', function (assert) {
@@ -66,10 +66,12 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция корректно обрабатывает некорректный ввод', function (assert) {
-		assert.strictEqual(sort(undefined), 'Ошибка: Неверный тип данных', 'Обрабатывает undefined');
-		assert.strictEqual(sort(null), 'Ошибка: Неверный тип данных', 'Обрабатывает null');
-		assert.strictEqual(sort(1488), 'Ошибка: Неверный тип данных', 'Обрабатывает число');
-		assert.strictEqual(sort(true), 'Ошибка: Неверный тип данных', 'Обрабатывает boolean');
-		assert.strictEqual(sort([]), 'Ошибка: Неверный тип данных', 'Обрабатывает массив');
-	});
+		assert.throws(() => sort(undefined), TypeError, 'Обрабатывает undefined');
+		assert.throws(() => sort(null), TypeError, 'Обрабатывает null');
+		assert.throws(() => sort(1488), TypeError, 'Обрабатывает число');
+		assert.throws(() => sort(true), TypeError, 'Обрабатывает boolean');
+		assert.throws(() => sort([]), TypeError, 'Обрабатывает массив');
+		assert.throws(() => sort(new String('aaa')), TypeError, 'Обрабатывает объект типа String');
+	});	
+	
 });
