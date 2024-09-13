@@ -5,7 +5,6 @@ const DIGITS = {M:1000, CM:900, D:500, CD:400, C:100, XC:90, L:50, XL:40, X:10, 
 
 /**
  * Older function - converter to roman -> decimal, decimal -> roman numbers. Analyzes incoming data and calls function with it properties.
- * @constructor
  * @param {string} num 
  * @returns string
  */
@@ -24,7 +23,6 @@ function roman(num) {
 
 /**
  * Converts decimal number to roman number
- * @constructor
  * @param {string} num 
  * @returns string
  */
@@ -49,7 +47,6 @@ function romanToDecimal(num) {
 
 /**
  * Converts roman number to decimal numver
- * @construcor
  * @param {string} num 
  * @returns string
  */
