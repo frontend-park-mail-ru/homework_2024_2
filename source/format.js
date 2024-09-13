@@ -21,7 +21,7 @@ const format = (input, columns) => {
 	if (columns > input.length) {
 		throw new Error(`Amount of columns could't be bigger than amount of numbers (${columns}>${input.length})`)
 	}
-	//проверяем правильность типов, если будет объкт Number его тип все равно будет object и не подойдет
+	//проверяем правильность типов, если будет объект Number его тип все равно будет object и не подойдет
 	let wrong_type = ""
 	input.forEach((element) => {typeof(element)!=="number" ? wrong_type=typeof(element):0})
 	if (wrong_type!==""){
