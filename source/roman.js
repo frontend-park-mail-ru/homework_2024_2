@@ -20,7 +20,7 @@ const DIGITS = {
  * Older function - converter to roman -> decimal, decimal -> roman numbers. Analyzes incoming data and calls function with it properties.
  * @param {string} num  - Done value if number is roman
  * @param {number} num - Done value if number is decimal
- * @throws {TypeError} If number format not decimal or roman
+ * @throws {TypeError} If number format not decimal or roman or number too long
  * @returns string from decimalToRoman
  * @returns number from romanToDecimal
  */
