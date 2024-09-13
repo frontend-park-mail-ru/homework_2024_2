@@ -16,18 +16,10 @@
  */
 
 
-function zip(...args){
+let zip = (...args) => {
   let result = {};
   args.forEach((item) => {
-    for (let key in item){
-      if (!(key in result)){
-        result[key] = item[key];
-      }
-    }
+    Object.assign(result, {...item, ...result})
   });
   return result;
 }
-
-
-
-
