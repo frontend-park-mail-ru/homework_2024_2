@@ -23,7 +23,7 @@ const DIGITS = {
  * @returns string
  */
 function roman(num) {
-  if (/^[1-9]\d*$/.test(num)) {
+  if (/^[1-9]\d{0,3}$/.test(num)) {
     return decimalToRoman(num);
   }
 
