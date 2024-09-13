@@ -11,7 +11,7 @@
  */
 
 const get = (obj, path) => {
-    if (typeof path !== 'string') {
+    if (typeof path !== 'string' && !(path instanceof String)) {
         throw new TypeError('path is not a string');
     }
 
@@ -35,7 +35,7 @@ const get = (obj, path) => {
         }
 
         if (typeof acc === 'string') {
-            if (!isNaN(part) && Number.isInteger(part) && part >= 0) {
+            if (!isNaN(part) && Number.isInteger(+part) && +part >= 0) {
                 return acc[+part];
             }
             return acc[part];
@@ -49,3 +49,4 @@ const get = (obj, path) => {
 
     return result;
 };
+
