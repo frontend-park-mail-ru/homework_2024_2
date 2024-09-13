@@ -5,6 +5,9 @@
  *
  * @param {number} N - Размер шахматной доски (число строк и столбцов)
  * @returns {string} - Строка, представляющая шахматную доску
+ * @throws {TypeError} - Если значение `N` не является числом или его нельзя преобразовать в число.
+ * @throws {TypeError} - Если значение `N` не является целым числом.
+ * @throws {TypeError} - Если значение `N` меньше или равно 1.
  */
 const chess = (N) => {
   const size = Number(N);
@@ -21,14 +24,15 @@ const chess = (N) => {
     throw new TypeError('Size must be a positive integer more than 1.');
   }
 
-  let board = ''; 
+  let boardArray = []; 
 
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; j++) {
-      board += (i + j) % 2 === 0 ? '*' : ' ';
+  for (let i = 0; i < size; i++) {
+    let row = ''
+    for (let j = 0; j < size; j++) {
+      row += (i + j) % 2 === 0 ? '*' : ' ';
     }
-    board += '\n';
+    boardArray.push(row);
   }
 
-  return board;
+  return boardArray.join('\n') + '\n';
 };

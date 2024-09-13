@@ -85,4 +85,27 @@ QUnit.module('Тестируем функцию chess', function () {
 		const expected = '* \n' + ' *\n'; // Шахматная доска 2x2
 		assert.strictEqual(chess('  2  '), expected, 'Строка с пробелами должна работать корректно');
 	});
+
+	QUnit.test('Некорректные значения других типов', function (assert) {
+		assert.throws(
+			() => chess(undefined),
+			new TypeError('Size must be a number.'),
+			'Передача undefined должна выбросить ошибку'
+		);
+		assert.throws(
+			() => chess(null),
+			new TypeError('Size must be a positive integer more than 1.'),
+			'Передача null должна выбросить ошибку'
+		);
+		assert.throws(
+			() => chess({}),
+			new TypeError('Size must be a number.'),
+			'Передача объекта должна выбросить ошибку'
+		);
+		assert.throws(
+			() => chess([]),
+			new TypeError('Size must be a positive integer more than 1.'),
+			'Передача массива должна выбросить ошибку'
+		);
+	});
 });
