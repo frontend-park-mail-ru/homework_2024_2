@@ -18,9 +18,11 @@ const DIGITS = {
 
 /**
  * Older function - converter to roman -> decimal, decimal -> roman numbers. Analyzes incoming data and calls function with it properties.
- * @param {string} num  - Done value
+ * @param {string} num  - Done value if number is roman
+ * @param {number} num - Done value if number is decimal
  * @throws {TypeError} If number format not decimal or roman
- * @returns string
+ * @returns string from decimalToRoman
+ * @returns number from romanToDecimal
  */
 function roman(num) {
   if (/^[1-9]\d{0,3}$/.test(num)) {
@@ -38,7 +40,7 @@ function roman(num) {
  * Converts decimal number to roman number
  * @param {string} num  - Done value in roman format
  * @throws {TypeError} If roman number has incorrect format
- * @returns string
+ * @returns number
  */
 const romanToDecimal = (num) => {
   num = num.toUpperCase();
