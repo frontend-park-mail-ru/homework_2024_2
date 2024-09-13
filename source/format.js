@@ -14,7 +14,7 @@
  * @example
  * const formatedString = format([1, 2, 10, 100, 1000, 10000], 6)
  */
-const format = (input, columns) => {
+const format1 = (input, columns) => {
 	if (columns < 1) {
 		throw new Error(`Amount of columns could't be ${columns}`)
 	}
@@ -43,18 +43,18 @@ const format = (input, columns) => {
 	return output.join("\n")
 }
 
-const format1 = (input, columns) => {
+const format = (input, columns) => {
 	if (columns < 1) {
 		throw new Error(`Amount of columns could't be ${columns}`)
 	}
 	if (columns > input.length) {
 		throw new Error(`Amount of columns could't be bigger than amount of numbers (${columns}>${input.length})`)
 	}
-	let maxOfColumns = []
+	let maxOfColumns = Array(columns).fill(0);
 	let columsArr = []
 	const some = (element, iter) => {
 		if (typeof (element) !== "number") {
-			throw new TypeError(`${typeof (input[i])} is in input data, all elements must be numbers`)
+			throw new TypeError(`${typeof (element)} is in input data, all elements must be numbers`)
 		}
 		if (String(element).length > maxOfColumns[iter%columns]){
 			maxOfColumns[iter%columns] = String(element).length
@@ -65,11 +65,12 @@ const format1 = (input, columns) => {
 			columsArr[iter%columns].push(element)
 		}
 	}
-	input.forEach((element, iter) => {some(element, iter)})
-	columsArr.forEach((someColumn, iter) => {someColumn.forEach((element)=> {element=String(element).padStart(maxOfColumns[iter])})})
+	input.forEach((element, iter) => {try{some(element, iter)}catch(e){throw e}})
+	console.log(maxOfColumns)
+	columsArr.forEach((someColumn, iterColumn) => {columsArr[iterColumn].forEach((element, iter)=> {columsArr[iterColumn][iter]=String(element).padStart(maxOfColumns[iterColumn])} )})
 	for (let j = 0; j < columsArr[0].length; j++){
-		for (let i = 0; i < columsArr[i].length; i++){
-			columsArr[0][j]+=" "+columsArr[i][j]
+		for (let i = 1; i < columsArr.length; i++){
+			columsArr[0][j]+=(columsArr[i][j]!==undefined ?" "+columsArr[i][j] : "")
 		}
 	}
 	return columsArr[0].join("\n")
