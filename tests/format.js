@@ -51,6 +51,7 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
+	
 	QUnit.test('format работает правильно c количеством колонок равным количеству чисел', function (assert) {
 		const input = [1, 2, 10, 100, 1000, 10000];
 
