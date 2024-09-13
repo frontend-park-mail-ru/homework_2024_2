@@ -22,7 +22,7 @@ QUnit.module('Тестируем функцию rle', function () {
         function() {
             rle('');
         },
-        Error,
+        TypeError,
         'Функция выбрасывает ошибку при передаче пустой строки'
 	);
 	});
