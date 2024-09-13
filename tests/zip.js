@@ -98,4 +98,8 @@ QUnit.module('Тестируем функцию zip', function () {
 	 QUnit.test('Функция не выдает ошибку при передачи объекта', function (assert) {
         assert.ok(() => zip({name: 'age'}, {name: 'age'}, {value: 42}, new Number(2)));
 	});
+
+	 QUnit.test('Функция должна попускать пустой объект', function (assert) {
+        assert.deepEqual(zip({}, new Array(), new String()), {});
+	});
 });
