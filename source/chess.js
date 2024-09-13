@@ -1,4 +1,6 @@
 'use strict';
+const MinSizeBoarder = 2;
+
 /**
  * Рисует ASCII-шахматрую доску из звёздочек (в левом верхнем углу всегда стоит звёздочка) 
  * 
@@ -13,19 +15,20 @@
  *  * *"
  */
 const chess = (sizeBoard) => {
-    if ((!Number.isInteger(+sizeBoard)) || sizeBoard < 2 ) {
+    if (isNaN(sizeBoard) || (!Number.isInteger(+sizeBoard)) || sizeBoard < MinSizeBoarder ) {
         return null;
     }
-    let board = "";
+    let board = [];
     for (let i = 0; i < sizeBoard; i++) {
         for (let j = 0; j < sizeBoard; j++) {
             if ((i + j) % 2 == 0) {
-                board += "*";
-            } else {
-                board += " ";
+                board.push("*");
+            }
+            if (!((i + j) % 2 == 0)) {
+                board.push(" ");
             }
         }
-        board += "\n";
+        board.push("\n");
     }
-    return board;
+    return board.reduce((accumulator, currentValue) => accumulator + currentValue);
 };

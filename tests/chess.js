@@ -90,6 +90,14 @@ QUnit.module('Тестируем функцию chess', function () {
 			' * * * * * * * * * *\n';
 		assert.strictEqual(chess(20), expected);
 		assert.strictEqual(chess('20'), expected);
+		
 	});
 
+	QUnit.test('Доска с NaN ', function (assert) {
+		assert.strictEqual(chess(NaN), null);
+	});
+	
+	QUnit.test('Доска с undefined ', function (assert) {
+		assert.strictEqual(chess(undefined), null);
+	});
 });
