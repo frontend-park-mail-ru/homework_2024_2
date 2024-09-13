@@ -45,7 +45,7 @@ const format = (input, columns) => {
 			}
 		})(element, iter%columns)
 	})
-	// для добавляем ведущие пробелы каждому элементу в колонке
+	// добавляем ведущие пробелы каждому элементу в колонке
 	columsArr.forEach((someColumn, iterColumn) => {
 		columsArr[iterColumn].forEach((element, iter)=> {columsArr[iterColumn][iter]=String(element).padStart(maxOfColumns[iterColumn])
 		} )})
