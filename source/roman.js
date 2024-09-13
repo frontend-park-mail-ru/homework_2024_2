@@ -10,16 +10,16 @@ const DIGITS = {M:1000, CM:900, D:500, CD:400, C:100, XC:90, L:50, XL:40, X:10, 
  * @returns string
  */
 function roman(num) {
-    let res = "";
+
     if (/^[1-9]\d*$/.test(num)) {
-       res = decimalToRoman(num);
-    } else if (/^[MDCLXVImdclxvi]+$/.test(num)) {
-        res = romanToDecimal(num);
-    } else {
-        throw new Error("Bad data type")
+       return decimalToRoman(num);
+    }
+    
+    if (/^[MDCLXVImdclxvi]+$/.test(num)) {
+       return romanToDecimal(num);
     }
 
-    return res;
+    throw new Error("Bad data type")
 }
 
 /**
