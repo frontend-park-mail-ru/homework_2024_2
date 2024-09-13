@@ -10,16 +10,14 @@
  * zip({name: "nick"}, {age: 19});
  * // =>
  *{
- *  name: "nick"
- *  age: 19
+ *	name: "nick"
+ *	age: 19
  *}
  */
-
-
-let zip = (...args) => {
-  let result = {};
-  args.forEach((item) => {
-    Object.assign(result, {...item, ...result})
-  });
-  return result;
+const zip = (...args) => {
+	let result = {};
+	args.forEach((item) => {
+		Object.assign(result, {...item, ...result})
+	});
+	return result;
 }

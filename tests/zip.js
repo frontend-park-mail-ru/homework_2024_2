@@ -1,154 +1,154 @@
 'use strict';
 
 QUnit.module('Тестируем функцию zip', function () {
-  QUnit.test('Функция работает с единственным объектом', function (assert) {
-    assert.deepEqual(zip({}), {});
-    assert.deepEqual(zip({answer: 42}), {answer: 42});
-    assert.deepEqual(zip({name: 'Georg'}), {name: 'Georg'});
-    const obj = {
-      count: 0,
-      cost: '120$'
-    };
-    assert.deepEqual(zip(obj), obj);
-  });
+	QUnit.test('Функция работает с единственным объектом', function (assert) {
+		assert.deepEqual(zip({}), {});
+		assert.deepEqual(zip({answer: 42}), {answer: 42});
+		assert.deepEqual(zip({name: 'Georg'}), {name: 'Georg'});
+		const obj = {
+			count: 0,
+			cost: '120$'
+		};
+		assert.deepEqual(zip(obj), obj);
+	});
 
-  QUnit.test('Функция работает с объектами среди которых есть объекты без свойств', function (assert) {
-    assert.deepEqual(zip({}, {}), {});
-    assert.deepEqual(zip({answer: 42}, {}), {answer: 42});
-    assert.deepEqual(zip({}, {answer: 42}), {answer: 42});
-    assert.deepEqual(zip({}, {answer: 42}), {answer: 42});
-    assert.deepEqual(zip({}, {}, {}, {name: 'Georg'}), {name: 'Georg'});
+	QUnit.test('Функция работает с объектами среди которых есть объекты без свойств', function (assert) {
+		assert.deepEqual(zip({}, {}), {});
+		assert.deepEqual(zip({answer: 42}, {}), {answer: 42});
+		assert.deepEqual(zip({}, {answer: 42}), {answer: 42});
+		assert.deepEqual(zip({}, {answer: 42}), {answer: 42});
+		assert.deepEqual(zip({}, {}, {}, {name: 'Georg'}), {name: 'Georg'});
 
-    const obj = {
-      count: 0,
-      cost: '120$'
-    };
+		const obj = {
+			count: 0,
+			cost: '120$'
+		};
 
-    assert.deepEqual(zip({}, {}, {}, obj, {}, {}), obj);
-  });
+		assert.deepEqual(zip({}, {}, {}, obj, {}, {}), obj);
+	});
 
-  QUnit.test('Функция работает с объектами со свойствами с разными именами', function (assert) {
-    const obj = {
-      count: 0,
-      cost: '120$'
-    };
+	QUnit.test('Функция работает с объектами со свойствами с разными именами', function (assert) {
+		const obj = {
+			count: 0,
+			cost: '120$'
+		};
 
-    assert.deepEqual(zip({count: 0}, {cost: '120$'}), obj);
+		assert.deepEqual(zip({count: 0}, {cost: '120$'}), obj);
 
-    const obj2 = {
-      a: 1,
-      b: 2,
-      c: null,
-      d: 4,
-      e: 5
-    };
-    assert.deepEqual(zip({a: 1}, {b: 2}, {c: null}, {d: 4}, {e: 5}), obj2);
+		const obj2 = {
+			a: 1,
+			b: 2,
+			c: null,
+			d: 4,
+			e: 5
+		};
+		assert.deepEqual(zip({a: 1}, {b: 2}, {c: null}, {d: 4}, {e: 5}), obj2);
 
-    const obj3 = {
-      name: 'age',
-      value: 42
-    };
+		const obj3 = {
+			name: 'age',
+			value: 42
+		};
 
-    const obj4 = {
-      prop: false,
-      attr: null
-    };
+		const obj4 = {
+			prop: false,
+			attr: null
+		};
 
-    const obj5 = {
-      name: 'age',
-      value: 42,
-      prop: false,
-      attr: null
-    };
+		const obj5 = {
+			name: 'age',
+			value: 42,
+			prop: false,
+			attr: null
+		};
 
-    assert.deepEqual(zip(obj3, obj4), obj5);
-  });
+		assert.deepEqual(zip(obj3, obj4), obj5);
+	});
 
-  QUnit.test('Функция правильно работает со свойствами, которые встречаются в нескольких объектах', function (assert) {
-    assert.deepEqual(zip({answer: 42}, {answer: false}), {answer: 42}, 'Значение должно браться из первого встретившегося поля');
-    assert.deepEqual(zip({age: 5}, {}, {age: 4}, {age: 72}), {age: 5});
+	QUnit.test('Функция правильно работает со свойствами, которые встречаются в нескольких объектах', function (assert) {
+		assert.deepEqual(zip({answer: 42}, {answer: false}), {answer: 42}, 'Значение должно браться из первого встретившегося поля');
+		assert.deepEqual(zip({age: 5}, {}, {age: 4}, {age: 72}), {age: 5});
 
-    const obj = {
-      name: 'age',
-      value: 42
-    };
-    assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
-  });
+		const obj = {
+			name: 'age',
+			value: 42
+		};
+		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
+	});
 
-  QUnit.test('Функция работает с объектами со свойствами с разными именами, некоторые из которых встречаются в нескольких объектах', function (assert) {
-    const obj1 = {
-      name: 'age',
-      value: 42
-    };
+	QUnit.test('Функция работает с объектами со свойствами с разными именами, некоторые из которых встречаются в нескольких объектах', function (assert) {
+		const obj1 = {
+			name: 'age',
+			value: 42
+		};
 
-    const obj2 = {
-      name: 'nick',
-      prop: false,
-      attr: null
-    };
+		const obj2 = {
+			name: 'nick',
+			prop: false,
+			attr: null
+		};
 
-    const obj3 = {
-      name: 'age',
-      value: 42,
-      prop: false,
-      attr: null
-    };
+		const obj3 = {
+			name: 'age',
+			value: 42,
+			prop: false,
+			attr: null
+		};
 
-    assert.deepEqual(zip(obj1, obj2), obj3);
-  });
+		assert.deepEqual(zip(obj1, obj2), obj3);
+	});
 
-  QUnit.test('Функция работает с объектами со свойствами с разными именами, некоторые из которых пустые', function (assert) {
+	QUnit.test('Функция работает с объектами со свойствами с разными именами, некоторые из которых пустые', function (assert) {
 
-    const obj3 = {
-      name: 'age',
-      value: 42
-    };
+		const obj3 = {
+			name: 'age',
+			value: 42
+		};
 
-    const obj4 = {
-      name,
-      prop: false,
-      attr: null
-    };
+		const obj4 = {
+			name,
+			prop: false,
+			attr: null
+		};
 
-    const obj5 = {
-      name: 'age',
-      value: 42,
-      prop: false,
-      attr: null
-    };
+		const obj5 = {
+			name: 'age',
+			value: 42,
+			prop: false,
+			attr: null
+		};
 
-    assert.deepEqual(zip(obj3, obj4), obj5);
+		assert.deepEqual(zip(obj3, obj4), obj5);
 
-    const obj6 = {
-      name: undefined,
-      value: 42
-    };
+		const obj6 = {
+			name: undefined,
+			value: 42
+		};
 
-    const obj7 = {
-      name: 'age',
-      prop: false,
-      attr: null
-    };
+		const obj7 = {
+			name: 'age',
+			prop: false,
+			attr: null
+		};
 
-    const obj8 = {
-      name: undefined,
-      value: 42,
-      prop: false,
-      attr: null
-    };
+		const obj8 = {
+			name: undefined,
+			value: 42,
+			prop: false,
+			attr: null
+		};
 
-    assert.deepEqual(zip(obj6, obj7), obj8);
+		assert.deepEqual(zip(obj6, obj7), obj8);
 
-    const obj9 = {
-      name: 'ananas',
-      value: 42
-    };
+		const obj9 = {
+			name: 'ananas',
+			value: 42
+		};
 
-    const obj10 = undefined;
+		const obj10 = undefined;
 
-    assert.deepEqual(zip(obj9, obj10), obj9);
-    assert.deepEqual(zip(obj9, 10), obj9);
+		assert.deepEqual(zip(obj9, obj10), obj9);
+		assert.deepEqual(zip(obj9, 10), obj9);
 
-  });
-  
+	});
+	
 });
