@@ -19,6 +19,10 @@ function filter(html, allowedTags) {
         throw new TypeError('HTML должен быть строкой');
     }
 
+    if (!Array.isArray(allowedTags) || !allowedTags.every(tag => typeof tag === 'string')) {
+        throw new TypeError('allowedTags должен быть массивом строк');
+    }
+
     let replacedHtml = html.replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
