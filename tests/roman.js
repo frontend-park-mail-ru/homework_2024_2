@@ -98,6 +98,13 @@ QUnit.module("Тестируем функцию roman", function () {
         Error,
         "Ошибка выбрасывается для 'ЧXLV'",
       );
+      assert.throws(
+        function () {
+          roman("1000111");
+        },
+        Error,
+        "Ошибка выбрасывается для '1000111'",
+      );
     },
   );
 });
