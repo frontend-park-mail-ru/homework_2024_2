@@ -11,7 +11,7 @@
   */
 
 function tree(height) {
-  if (!((typeof height === 'number') || (typeof height == 'string'))
+  if (!((typeof height === 'number') || (typeof height === 'string'))
     || (height instanceof String) || (height instanceof Number)) {
     throw new TypeError('The parameter type is invalid!');
   }
