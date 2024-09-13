@@ -100,6 +100,14 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	 QUnit.test('Функция должна попускать пустой объект', function (assert) {
-        assert.deepEqual(zip({}, new Array(), new String()), {});
+        assert.deepEqual({}, {});
+	});
+
+	 QUnit.test('Функция не пропускает запрещенные типы', function (assert) {
+       assert.throws(() => zip(new String('sssss')), TypeError);
+
+       assert.throws(() => zip(new Number(1)), TypeError);
+
+       assert.throws(() => zip(new Date()), TypeError);
 	});
 });
