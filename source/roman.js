@@ -11,7 +11,7 @@ const DIGITS = {M:1000, CM:900, D:500, CD:400, C:100, XC:90, L:50, XL:40, X:10, 
  */
 function roman(num) {
     let res = "";
-    if (/^\d+$/.test(num)) {
+    if (/^[1-9]\d*$/.test(num)) {
        res = decimalToRoman(num);
     } else if (/^[MDCLXVImdclxvi]+$/.test(num)) {
         res = romanToDecimal(num);
