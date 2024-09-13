@@ -36,7 +36,7 @@ function roman(num) {
 
 /**
  * Converts decimal number to roman number
- * @param {string} num  - Done value in roman format
+ * @param {int} num  - Done value in roman format
  * @throws {TypeError} If roman number has incorrect format
  * @returns string
  */
