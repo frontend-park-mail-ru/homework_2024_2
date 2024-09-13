@@ -36,6 +36,9 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.strictEqual(roman('1904'), 'MCMIV');
 		assert.strictEqual(roman('1990'), 'MCMXC');
 		assert.strictEqual(roman('2017'), 'MMXVII');
+
+		assert.strictEqual(roman(new String('2017')), 'MMXVII');
+		assert.strictEqual(roman(new String('MMXVII')), 2017);
 	});
 
 	QUnit.test('roman правильно определяет, некорректные входные данные', function (assert) {
@@ -53,6 +56,9 @@ QUnit.module('Тестируем функцию roman', function () {
 		assert.throws(roman('こんにちは！'));
 
 		assert.throws(roman());
+
+		assert.throws(roman(new String()));
+		assert.throws(roman(new String('string')));
 
 		assert.throws(roman(NaN));
 		assert.throws(roman(undefined));
