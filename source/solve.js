@@ -24,7 +24,7 @@ const infixToPostfix = (expression) => {
           output.push(operators.pop());
         }
         operators.pop();
-      } else if (precedence[char] !== undefined) {
+      } else if (char in precedence) {
         while (operators.length && precedence[operators[operators.length - 1]] >= precedence[char]) {
           output.push(operators.pop());
         }
@@ -67,7 +67,7 @@ const evaluatePostfix = (expression) => {
 };
 
 const solve = (expression, x) => {
-  const replacedExpression = expression.replace(/x/g, x);
+  const replacedExpression = expression.replaceAll('x', x);
   const postfixExpression = infixToPostfix(replacedExpression);
   return evaluatePostfix(postfixExpression);
 };
