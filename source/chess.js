@@ -3,14 +3,14 @@
 /**
  * Функция для рисования ASCII-шахматной доски размера N x N символов.
  *
- * @param {number} N - Размер шахматной доски (число строк и столбцов)
+ * @param {number|string} N - Размер шахматной доски (число строк и столбцов)
  * @returns {string} - Строка, представляющая шахматную доску
  * @throws {TypeError} - Если значение `N` не является числом или его нельзя преобразовать в число.
  * @throws {TypeError} - Если значение `N` не является целым числом.
  * @throws {TypeError} - Если значение `N` меньше или равно 1.
  */
 const chess = (N) => {
-  if (typeof N !== 'number' && typeof N !== 'string') {
+  if (!(typeof N == 'number' || typeof N == 'string' || N instanceof Number || N instanceof String)) {
     throw new TypeError('Size must be a number.');
   }
 
