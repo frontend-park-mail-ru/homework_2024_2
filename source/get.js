@@ -11,7 +11,7 @@
  * @returns {(object|undefined)} - Value of needed property or undefined if property is not found.
  */
 const get = (object, pathToProperty) => {        
-    if (typeof pathToProperty !== 'string' || typeof object !== 'object' || !pathToProperty || Array.isArray(object)) {
+    if (typeof pathToProperty !== 'string' || typeof object !== 'object' || !pathToProperty || Array.isArray(object) || object instanceof String) {
         throw new Error('Invalid data')
     }
 

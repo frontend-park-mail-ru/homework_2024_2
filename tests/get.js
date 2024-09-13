@@ -79,5 +79,6 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.throws(function() {get(undefined, '.foo'); }, Error, 'Invalid data');
 		assert.throws(function() {get(null, '.foo'); }, Error, 'Invalid data');
 		assert.throws(function() {get(["apple", "orange", "pineapple"], '.foo'); }, Error, 'Invalid data');
+		assert.throws(function() {get(new String(555), undefined); }, Error, 'Invalid data');
 	});	
 });
