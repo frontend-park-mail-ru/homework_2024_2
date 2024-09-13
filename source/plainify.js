@@ -17,25 +17,30 @@
  * plainify({ a: { b: { c: 1 } } });
  * // Возвращает { 'a.b.c': 1 }
  */
+
+
+
 const plainify = (obj, prefix = '') => {
-    let result = {};
-
-    for (let key in obj) {
-        const newKey = prefix ? `${prefix}.${key}` : key;
-
-        // Проверяем на объект и исключаем falsy значения (включая null)
-        if (typeof obj[key] === 'object' && obj[key]) {
-            if (Array.isArray(obj[key])) {
-                obj[key].forEach((item, index) => {
-                    result = { ...result, ...plainify(item, `${newKey}[${index}]`) };
-                });
-            } else {
-                Object.assign(result, plainify(obj[key], newKey));
-            }
-        } else {
-            result[newKey] = obj[key];
-        }
+    if (obj === null || typeof obj !== 'object') {
+        throw new Error('Invalid input: plainify expects an object');
     }
 
-    return result;
+    return Object.keys(obj).reduce((acc, key) => {
+        const newKey = prefix ? `${prefix}.${key}` : key;
+
+        // Проверяем, что obj[key] это объект, не массив, и не объект-обертка для строки
+        if (typeof obj[key] === 'object' && obj[key] && !Array.isArray(obj[key]) && !(obj[key] instanceof String)) {
+            if (Array.isArray(obj[key])) {
+                obj[key].forEach((item, index) => {
+                    Object.assign(acc, plainify(item, `${newKey}[${index}]`));
+                });
+            } else {
+                Object.assign(acc, plainify(obj[key], newKey));
+            }
+        } else {
+            acc[newKey] = obj[key] instanceof String ? obj[key].toString() : obj[key];
+        }
+
+        return acc;
+    }, {});
 };
