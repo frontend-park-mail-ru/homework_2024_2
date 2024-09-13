@@ -11,7 +11,7 @@ const euclid = (...numbers) => {
     }
     return numbers.reduce(
         (a, b) => {
-            if (typeof a != 'number' || a < 0) {
+            if (!((a instanceof Number || typeof a === 'number') && !isNaN(a)) || !Number.isInteger(a.valueOf()) || a.valueOf() < 0) {
                 throw new Error('not a natural number');
             }
 
