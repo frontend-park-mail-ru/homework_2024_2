@@ -1,10 +1,13 @@
 'use strict'; 
 
 /** Принимает на вход массив массивов любой вложенности и создает из них один общий массив.
- * @param {object[]} arrrays Массив массивов
+ * @param {object[]} arrays Массив массивов
+ * @example
+ * const array = [1, [null, [3]], ['четыре']]
+ * const joint_array = plain(array)
+ * console.log(joint_array); // Вывод: [1, null, 3, 'четыре']
  * @throws {TypeError} Если arrays это не массив
- * @throws {TypeError} Если хотя бы один из элементов массива arrays не является массивом
  * @returns {object[]} Объединенный массив
  */
 
-const plain = arrays => arrays.flat(Infinity);
+const plain = arrays => arrays.reduce((arr, i) => Array.isArray(i) ? arr.concat(plain(i)) : arr.concat(i), []);
