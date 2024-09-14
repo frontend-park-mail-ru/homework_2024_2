@@ -59,4 +59,59 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('aabbcc', true), 'abc', 'Сохраняет первую встречу символов');
 		assert.strictEqual(letters('abcdabcd', false), 'abcd', 'Сохраняет последнюю встречу символов');
 	});
+	QUnit.test('Кейсы без повторяющихся символов', function (assert) {
+		assert.strictEqual(letters('abcdef'), 'abcdef', 'Возвращает исходную строку, если нет повторов');
+		assert.strictEqual(letters('1234567890'), '1234567890', 'Возвращает исходную строку с цифрами, если нет повторов');
+	});
+
+	QUnit.test('Кейсы с одним повторяющимся символом', function (assert) {
+		assert.strictEqual(letters('aabc'), 'bc', 'Удаляет все повторяющиеся символы, оставляя уникальные');
+		assert.strictEqual(letters('aabc', true), 'abc', 'Сохраняет первое вхождение повторяющегося символа');
+		assert.strictEqual(letters('aabc', false), 'abc', 'Сохраняет последнее вхождение повторяющегося символа');
+	});
+
+	QUnit.test('Пустая строка', function (assert) {
+		assert.strictEqual(letters(''), '', 'Возвращает пустую строку, если входная строка пуста');
+	});
+	QUnit.test('Негативные сценарии: неверные типы аргументов', function (assert) {
+		assert.throws(
+			function () {
+				letters(null);
+			},
+			TypeError,
+			'Бросает TypeError при передаче null вместо строки'
+		);
+
+		assert.throws(
+			function () {
+				letters(12345);
+			},
+			TypeError,
+			'Бросает TypeError при передаче числа вместо строки'
+		);
+
+		assert.throws(
+			function () {
+				letters({ key: 'value' });
+			},
+			TypeError,
+			'Бросает TypeError при передаче объекта вместо строки'
+		);
+
+		assert.throws(
+			function () {
+				letters(['a', 'b', 'c']);
+			},
+			TypeError,
+			'Бросает TypeError при передаче массива вместо строки'
+		);
+
+		assert.throws(
+			function () {
+				letters(undefined);
+			},
+			TypeError,
+			'Бросает TypeError при передаче undefined вместо строки'
+		);
+	});
 });
