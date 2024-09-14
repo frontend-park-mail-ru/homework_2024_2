@@ -8,7 +8,7 @@
  * @throws {RangeError} - если целое число не натуральное
  */
 const euclid = (...numbers) => {
-    if (numbers.length === 0) {
+    if (!numbers.length) {
         throw new TypeError("empty data");
     }
     return numbers.reduce(
