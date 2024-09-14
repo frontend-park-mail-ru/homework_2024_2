@@ -9,14 +9,10 @@ const arrMinmax = function (...numbers) {
 	if (!numbers.length) return [undefined, undefined];
 	let minimum = numbers[0];
 	let maximum = numbers[0];
-	for (let i = 1; i < numbers.length; i++) {
-		if (numbers[i] < minimum) {
-			minimum = numbers[i];
-		}
-		if (numbers[i] > maximum) {
-			maximum = numbers[i];
-		}
-	}
+	numbers.forEach((number) => {
+		if (number < minimum) minimum = number;
+		if (number > maximum) maximum = number;
+	});
 	return [minimum, maximum];
 };
 
