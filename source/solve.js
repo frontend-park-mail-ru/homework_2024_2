@@ -43,7 +43,6 @@ const parseStr = (str) => {
     if (curNum !== -1) {
         res.push(String(sign * curNum));
     }
-    console.log(res);
     return res;
 }
 /**
@@ -85,7 +84,6 @@ const toPolish = (str) => {
         }
     }
 
-    console.log(myStack)
     while(myStack.length !== 0){
         const elem = myStack.pop();
         if (['(', ')'].includes(elem)){
@@ -93,7 +91,6 @@ const toPolish = (str) => {
         }
         answer.push(elem);
     }
-    console.log(answer);
     return answer;
 }
 /**
