@@ -19,4 +19,3 @@ const inverse = (array, shift = 0) => {
         return [...array.slice(0, shift).reverse(), ...array.slice(shift)];
     }
 };
-
