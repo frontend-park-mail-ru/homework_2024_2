@@ -13,7 +13,6 @@ QUnit.module('Тестируем функцию get', function () {
 
 		assert.strictEqual(get(object, '.foo'), object.foo);
 		assert.strictEqual(get(object, '.deep.hested.field'), object.deep.hested.field);
-
 		assert.deepEqual(get(object, '.deep.hested'), object.deep.hested);
 		assert.deepEqual(get(object, '.deep'), object.deep);
 		assert.deepEqual(get(object, '.'), object);
@@ -64,7 +63,7 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(4, new String()), (new TypeError('path is not a string'), undefined));
         assert.strictEqual(get('string', '.foo'), undefined);
 		assert.strictEqual(get(false, '.foo'), undefined);
-		assert.strictEqual(get(new Array(), '.foo'), undefined);
+		assert.strictEqual(get(new Array(), '.length'), 0);
 		assert.strictEqual(get(new String(), '.foo'), undefined);
     });
 
