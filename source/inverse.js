@@ -6,6 +6,8 @@
  * else if shift is negative inverting first elements until shift. 
  * @param {Array} array - array of any elements.
  * @param {number} shift - positive or negative shift (by default 0).
+ * @throws {TypeError} if array isn't Array or shift isn't integer
+ * @example inverse([1, 2, 3, 4, 5], 2); // returns [1, 2, 5, 4, 3]
  * @returns {Array} inverted array.
  */
 const inverse = (array, shift = 0) => {
