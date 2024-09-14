@@ -26,7 +26,7 @@ const format = (input, columns) => {
 	let wrong_type = ""
 	if (!input.every( (currentValue)=>{
 		wrong_type = typeof(currentValue)
-		return typeof(currentValue)=="number" && Number.isInteger(currentValue)
+		return Number.isInteger(currentValue)
 	} )){
 		throw new TypeError(`${wrong_type} is in input data, all elements must be numbers`)
 	}
