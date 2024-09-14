@@ -6,7 +6,8 @@
  * 
  * Formats array of numbers to string with columns where every column have constant width.
  *
- * @param {object } input - The an array with numbers to be formated.
+ * 
+ * @param {Array} input - The an array with numbers to be formated.
  * @param {number} columns - Amount of colums we need in final string.
  * @throws {TypeError} If there is something but numbers in input.
  * @throws {Error} If amount of columns is less than lenght of input.
@@ -23,8 +24,10 @@ const format = (input, columns) => {
 	}
 	//проверяем правильность типов, если будет объект Number его тип все равно будет object и не подойдет
 	let wrong_type = ""
-	input.forEach((element) => {typeof(element)!=="number" ? wrong_type=typeof(element):0})
-	if (wrong_type!==""){
+	if (!input.every( (currentValue)=>{
+		wrong_type = typeof(currentValue)
+		return typeof(currentValue)=="number" && Number.isInteger(currentValue)
+	} )){
 		throw new TypeError(`${wrong_type} is in input data, all elements must be numbers`)
 	}
 	//находим необходимую ширину каждой колонки
@@ -47,13 +50,15 @@ const format = (input, columns) => {
 	})
 	// добавляем ведущие пробелы каждому элементу в колонке
 	columsArr.forEach((someColumn, iterColumn) => {
-		columsArr[iterColumn].forEach((element, iter)=> {columsArr[iterColumn][iter]=String(element).padStart(maxOfColumns[iterColumn])
+		columsArr[iterColumn].forEach((element, iter)=> {columsArr[iterColumn][iter] = String(element).padStart(maxOfColumns[iterColumn])
 		} )})
 	// добавляем к элементам первой колонки все остальные элементы
-	columsArr[0].forEach((_, iter1)=>{
-		columsArr.slice(1,columsArr.length).forEach((element, iter2) => {
-			columsArr[0][iter1]+=(element[iter1]!==undefined ?" "+element[iter1] : "")
-		})})
+	columsArr[0] = columsArr[0].map((elem, iter)=>
+		columsArr.reduce(
+			(nowString, nowElement) => nowString + (nowElement[iter] !== undefined ? nowElement[iter] + " " : ""),
+			"",
+		  ).slice(0, -1)
+	)
 	//склеиваем первую колонку в которой теперь есть все готовые строки в итоговый ответ
 	return columsArr[0].join("\n")
 }
