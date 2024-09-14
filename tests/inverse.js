@@ -55,3 +55,4 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.throws(() => inverse([1, 2, 3], null), TypeError, 'Передано null вместо');
 	});
 });
+
