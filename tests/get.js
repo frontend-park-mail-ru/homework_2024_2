@@ -57,11 +57,11 @@ QUnit.module('Тестируем функцию get', function () {
 	});
 
 	QUnit.test('get работает правильно с примитивами', function (assert) {
-        assert.strictEqual(get(null, '.foo'), undefined);
-        assert.strictEqual(get(undefined, '.foo'), undefined);
-        assert.strictEqual(get(4, '.foo'), undefined);
+        	assert.strictEqual(get(null, '.foo'), undefined);
+        	assert.strictEqual(get(undefined, '.foo'), undefined);
+        	assert.strictEqual(get(4, '.foo'), undefined);
 		assert.strictEqual(get(4, new String()), (new TypeError('path is not a string'), undefined));
-        assert.strictEqual(get('string', '.foo'), undefined);
+        	assert.strictEqual(get('string', '.foo'), undefined);
 		assert.strictEqual(get(false, '.foo'), undefined);
 		assert.strictEqual(get(new Array(), '.length'), 0);
 		assert.strictEqual(get(new String(), '.foo'), undefined);
