@@ -47,6 +47,7 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.throws(function(){plain('не число')}, 'При вводе строки');
 		assert.throws(function(){plain(13)}, 'Если не массив');
 		assert.throws(function(){plain(null)}, 'При null');
+		assert.throws(function(){plain([1,2][3])}, 'При вводе нескольких массивов');
 	});
 
 
