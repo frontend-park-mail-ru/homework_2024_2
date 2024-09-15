@@ -24,25 +24,25 @@ const format = (input, columns) => {
 	}
 
 	//проверяем правильность типов, если будет объект Number его тип все равно будет object и не подойдет
-	for (const value of input) {  
-        if (!Number.isInteger(value)) {  
-            throw new TypeError(`${typeof value} is in input data, all elements must be integers`);  
-        }  
-    } 
+	for (const value of input) {
+		if (!Number.isInteger(value)) {
+			throw new TypeError(`${typeof value} is in input data, all elements must be integers`);
+		}
+	}
 
 	//находим необходимую ширину каждой колонки
-	const maxWidths = new Array(columns).fill(0);  
-    input.forEach((number, index) => {  
-        const columnIndex = index % columns;  
-        maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], String(number).length);  
-    });
+	const maxWidths = new Array(columns).fill(0);
+	input.forEach((number, index) => {
+		const columnIndex = index % columns;
+		maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], String(number).length);
+	});
 
 	// формируем массив строк нужной длинны
 	const rows = [];
-    for (let i = 0; i < input.length; i += columns) {
-        const row = input.slice(i, i + columns); // Извлекаем подмассив
-        rows.push(row.map((number, index) => (String(number).padStart(maxWidths[index]))).join(' '));
-    }
+	for (let i = 0; i < input.length; i += columns) {
+		const row = input.slice(i, i + columns); // Извлекаем подмассив
+		rows.push(row.map((number, index) => (String(number).padStart(maxWidths[index]))).join(' '));
+	}
 
 	// склеиваем строки в итоговый результат
 	return rows.join("\n")
