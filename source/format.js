@@ -7,15 +7,18 @@
  * Formats array of numbers to string with columns where every column have constant width.
  *
  * 
- * @param {Array} input - The an array with numbers to be formated.
- * @param {number} columns - Amount of colums we need in final string.
+ * @param {number[]} input - The an array with numbers to be formatted.
+ * @param {number} columns - Amount of columns we need in final string.
  * @throws {TypeError} If there is something but numbers in input.
- * @throws {Error} If amount of columns is less than lenght of input.
- * @returns {number} The sum of the two numbers.
+ * @throws {Error} If amount of columns is less than length of input.
+ * @returns {string} String which represents output table.
  * @example
- * const formatedString = format([1, 2, 10, 100, 1000, 10000], 6)
+ * const formattedString = format([1, 2, 10, 100, 1000, 10000], 6)
  */
 const format = (input, columns) => {
+	if (!Array.isArray(input)){
+		throw new TypeError(`${typeof input} is not array`)
+	}
 	if (columns < 1) {
 		throw new Error(`Amount of columns could't be ${columns}`)
 	}

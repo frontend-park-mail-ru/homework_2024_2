@@ -78,4 +78,12 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.throws(()=> format(input, -1), expected_error1);
 		assert.throws(()=> format(input, 7), expected_error2);
 	});
+
+	QUnit.test('format валидирует input', function (assert) {
+		const input = 123;
+
+		const expected_error1 = new TypeError("number is not array")
+
+		assert.throws(()=> format(input, 1), expected_error1);
+	});
 });
