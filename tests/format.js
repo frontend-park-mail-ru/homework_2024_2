@@ -51,7 +51,7 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
-	
+
 	QUnit.test('format работает правильно c количеством колонок равным количеству чисел', function (assert) {
 		const input = [1, 2, 10, 100, 1000, 10000];
 
@@ -64,7 +64,7 @@ QUnit.module('Тестируем функцию format', function () {
 	QUnit.test('format правильно валидирует элементы массива', function (assert) {
 		const input = [1, "some", 10, NaN, 1000, 10000];
 
-		const expected_error = new TypeError("string is in input data, all elements must be numbers")
+		const expected_error = new TypeError("string is in input data, all elements must be integers")
 
 		assert.throws(()=> format(input, 6), expected_error);
 	});

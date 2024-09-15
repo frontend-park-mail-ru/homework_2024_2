@@ -22,43 +22,32 @@ const format = (input, columns) => {
 	if (columns > input.length) {
 		throw new Error(`Amount of columns could't be bigger than amount of numbers (${columns}>${input.length})`)
 	}
+
 	//проверяем правильность типов, если будет объект Number его тип все равно будет object и не подойдет
-	let wrong_type = ""
-	if (!input.every( (currentValue)=>{
-		wrong_type = typeof(currentValue)
-		return Number.isInteger(currentValue)
-	} )){
-		throw new TypeError(`${wrong_type} is in input data, all elements must be numbers`)
-	}
+	for (const value of input) {  
+        if (!Number.isInteger(value)) {  
+            throw new TypeError(`${typeof value} is in input data, all elements must be integers`);  
+        }  
+    } 
+
 	//находим необходимую ширину каждой колонки
-	const maxOfColumns = Array(columns).fill(0);
-	input.forEach((element, iter) => {
-		((elementLength, columnNomber)=>{
-			maxOfColumns[columnNomber] = elementLength>maxOfColumns[columnNomber]?elementLength:maxOfColumns[columnNomber]
-		})(String(element).length, iter%columns)
-	})
-	//формируем двумерный массив колонок
-	const columsArr = []
-	input.forEach((element, iter) => {
-		((element, columnNomber)=>{
-			if (columnNomber>=columsArr.length){
-				columsArr.push([element])
-			} else {
-				columsArr[columnNomber].push(element)
-			}
-		})(element, iter%columns)
-	})
-	// добавляем ведущие пробелы каждому элементу в колонке
-	columsArr.forEach((someColumn, iterColumn) => {
-		columsArr[iterColumn].forEach((element, iter)=> {columsArr[iterColumn][iter] = String(element).padStart(maxOfColumns[iterColumn])
-		} )})
-	// добавляем к элементам первой колонки все остальные элементы
-	columsArr[0] = columsArr[0].map((elem, iter)=>
-		columsArr.reduce(
-			(nowString, nowElement) => nowString + (nowElement[iter] !== undefined ? nowElement[iter] + " " : ""),
-			"",
-		  ).slice(0, -1)
-	)
-	//склеиваем первую колонку в которой теперь есть все готовые строки в итоговый ответ
-	return columsArr[0].join("\n")
+	const maxWidths = new Array(columns).fill(0);  
+    input.forEach((number, index) => {  
+        const columnIndex = index % columns;  
+        maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], String(number).length);  
+    }); 
+	// формируем массив строк нужной длинны
+	const rows = []
+	for (let i=0;i<input.length;i+=columns){
+		rows.push(input.slice(i, i+columns))
+	}
+
+	// форматируем элементы в каждой строке в соответствии с шириной их колонки
+	rows.forEach((row, iterRow) => rows[iterRow] = row.map((element, iter) => String(element).padStart(maxWidths[iter])))
+
+	// склеиваем массивы элементов в реальные строки вставляя пробелы
+	rows.forEach((element, iter) => {rows[iter]=element.join(" ")})
+	
+	// склеиваем строки в итоговый результат
+	return rows.join("\n")
 }
