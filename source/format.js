@@ -35,7 +35,8 @@ const format = (input, columns) => {
     input.forEach((number, index) => {  
         const columnIndex = index % columns;  
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], String(number).length);  
-    }); 
+    });
+	
 	// формируем массив строк нужной длинны
 	const rows = []
 	for (let i=0;i<input.length;i+=columns){
@@ -47,7 +48,7 @@ const format = (input, columns) => {
 
 	// склеиваем массивы элементов в реальные строки вставляя пробелы
 	rows.forEach((element, iter) => {rows[iter]=element.join(" ")})
-	
+
 	// склеиваем строки в итоговый результат
 	return rows.join("\n")
 }
