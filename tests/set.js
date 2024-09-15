@@ -315,7 +315,6 @@ QUnit.module('Тестируем функцию set', function () {
 
 		const pathStringIncorrect = new String('aaa');
 		const pathString = new String('.very.deep.nested.field');
-
 		assert.deepEqual(set(object, pathStringIncorrect, 'value'), object10);
 		assert.deepEqual(set(object, pathString, 'value'), object1);
 	});

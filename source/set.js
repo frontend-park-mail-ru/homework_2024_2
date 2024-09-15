@@ -1,6 +1,5 @@
 'use strict';
 
-
 /**
  * Recursively inserts newProperty to object by the path
  * @param {Object} object - object to change
@@ -9,17 +8,15 @@
  * @returns {Object} Returns modified object
  */
 const changeNestedProperty = (object, propertyList, newProperty) => {
-            if (!propertyList.length) {
-                return newProperty;
-            }
-            if (!object.hasOwnProperty(propertyList[0])) {
-                object[propertyList[0]] = {};
-            }
-            object[propertyList[0]] = changeNestedProperty(object[propertyList[0]], propertyList.slice(1), newProperty);
-            return object;
-            
-    };
-
+    if (!propertyList.length) {
+        return newProperty;
+    }
+    if (!object.hasOwnProperty(propertyList[0])) {
+        object[propertyList[0]] = {};
+    }
+    object[propertyList[0]] = changeNestedProperty(object[propertyList[0]], propertyList.slice(1), newProperty);
+    return object;       
+};
 
 /**
  * Inserts newProperty to object by the path
@@ -29,7 +26,7 @@ const changeNestedProperty = (object, propertyList, newProperty) => {
  * @returns {Object} Returns modified object if path is correct else returns original object
 */
 const set = (object, path, newProperty) => {
-    if (!(path instanceof String) || !path.length || path[0] !== '.') {
+    if (!(path instanceof String) && typeof path !== 'string' || !path.length || path[0] !== '.') {
         return object;
     }
     const propertyList = path.split('.').slice(1);
