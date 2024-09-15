@@ -96,9 +96,7 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
 
-
 	// Добавленные тесты
-
 	QUnit.test('set работает правильно c объектами со свойством null', function (assert) {
 		const object = {
 			deep: {
@@ -134,7 +132,6 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set(object, '.deep.nested.null', 43), object2);
 		assert.deepEqual(set(object3, '.deep.null.null', null), object4);
-
 		assert.deepEqual(object, object2);
 		assert.deepEqual(object3, object4);
 	});
@@ -159,7 +156,6 @@ QUnit.module('Тестируем функцию set', function () {
 				}
 			}
 		};
-
 
 		const object3 = {
 			incredibly: {
@@ -197,7 +193,6 @@ QUnit.module('Тестируем функцию set', function () {
 					}
 				}
 			}
-			
 		};
 
 		const objectNested5_2 = {
@@ -212,7 +207,6 @@ QUnit.module('Тестируем функцию set', function () {
 					}
 				}
 			}
-			
 		};
 
 		const objectNested5_3 = {
@@ -240,7 +234,6 @@ QUnit.module('Тестируем функцию set', function () {
 					}
 				}
 			}
-			
 		};
 
 		assert.deepEqual(set(object, '.very.deep.nested.field', 'other value'), object2);
@@ -270,13 +263,11 @@ QUnit.module('Тестируем функцию set', function () {
 			}
 		};
 
-
-
 		assert.deepEqual(set(object, 32, 'other value'), object1);
 		assert.deepEqual(set(object, 'very.deep.nested.field', 'other value'), object1);
 		assert.deepEqual(set(object, '', 'other value'), object1);
+		assert.deepEqual(set(object, object1, 'other value'), object1);
 	});
-
 
 	QUnit.test('set меняет исходный объект если path содержит хотя бы одно, но корректное значение пути', function (assert) {
 		const object = {
@@ -291,7 +282,6 @@ QUnit.module('Тестируем функцию set', function () {
 
 		const object1 = {
 			'': 'other value',
-
 			very: {
 				deep: {
 					nested: {
@@ -306,11 +296,27 @@ QUnit.module('Тестируем функцию set', function () {
 			field: 'other value'
 		};
 
-
-
 		assert.deepEqual(set(object, '.', 'other value'), object1);
 		assert.deepEqual(set(object3, '.field', 'other value'), object4);
 	});
 
+	QUnit.test('set правильно работает для строк созданных с помощью оператора new', function (assert) {
+		const object = {};
+		const object10 = {};
+		const object1 = {
+			very: {
+				deep: {
+					nested: {
+						field: 'value'
+					}
+				}
+			}
+		};
 
+		const pathStringIncorrect = new String('aaa');
+		const pathString = new String('.very.deep.nested.field');
+
+		assert.deepEqual(set(object, pathStringIncorrect, 'value'), object10);
+		assert.deepEqual(set(object, pathString, 'value'), object1);
+	});
 });
