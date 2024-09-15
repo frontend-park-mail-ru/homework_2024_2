@@ -47,8 +47,11 @@ QUnit.module('Тестируем функцию plain', function () {
 		assert.throws(function(){plain('не число')}, 'При вводе строки');
 		assert.throws(function(){plain(13)}, 'Если не массив');
 		assert.throws(function(){plain(null)}, 'При null');
+		assert.throws(function(){plain(undefined)}, 'При undefined');
 		assert.throws(function(){plain([1,2][3])}, 'При вводе нескольких массивов');
+		assert.throws(function(){plain({a:1, b:2})}, 'При вводе объекта');
+		assert.throws(function(){plain(new String(1))});
+		assert.throws(function(){plain(new Date(1))});
+		assert.throws(function(){plain(new Number(1))});
 	});
-
-
 });
