@@ -36,18 +36,13 @@ const format = (input, columns) => {
         const columnIndex = index % columns;  
         maxWidths[columnIndex] = Math.max(maxWidths[columnIndex], String(number).length);  
     });
-	
+
 	// формируем массив строк нужной длинны
-	const rows = []
-	for (let i=0;i<input.length;i+=columns){
-		rows.push(input.slice(i, i+columns))
-	}
-
-	// форматируем элементы в каждой строке в соответствии с шириной их колонки
-	rows.forEach((row, iterRow) => rows[iterRow] = row.map((element, iter) => String(element).padStart(maxWidths[iter])))
-
-	// склеиваем массивы элементов в реальные строки вставляя пробелы
-	rows.forEach((element, iter) => {rows[iter]=element.join(" ")})
+	const rows = [];
+    for (let i = 0; i < input.length; i += columns) {
+        const row = input.slice(i, i + columns); // Извлекаем подмассив
+        rows.push(row.map((number, index) => (String(number).padStart(maxWidths[index]))).join(' '));
+    }
 
 	// склеиваем строки в итоговый результат
 	return rows.join("\n")
