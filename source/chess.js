@@ -30,5 +30,5 @@ const chess = (sizeBoard) => {
         }
         board.push("\n");
     }
-    return board.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return board.join('');
 };
