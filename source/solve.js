@@ -1,5 +1,10 @@
 'use strict';
 
+/**
+ * Преобразует инфиксное выражение в постфиксное (обратная польская запись).
+ * @param {string} expression - математическое выражение в инфиксной записи.
+ * @returns {string} Постфиксное выражение.
+ */
 const infixToPostfix = (expression) => {
   const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
   const output = [];
@@ -9,7 +14,7 @@ const infixToPostfix = (expression) => {
   for (let i = 0; i < expression.length; i++) {
     const char = expression[i];
 
-    if (/\d/.test(char) || (char === '-' && (i === 0 || /[+\-*/(]/.test(expression[i - 1])))) {
+    if (/\d/.test(char) || (char === '-' && (i === 0 || ['+', '-', '*', '/', '('].includes(expression[i - 1])))) {
       numberBuffer += char;
     } else {
       if (numberBuffer) {
@@ -44,14 +49,20 @@ const infixToPostfix = (expression) => {
   return output.join(' ');
 };
 
+/**
+ * Выполняет вычисление постфиксного выражения.
+ * @param {string} expression - постфиксное выражение.
+ * @returns {number} Результат вычисления.
+ */
 const evaluatePostfix = (expression) => {
   const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
   const stack = [];
 
   expression.split(' ').forEach(char => {
-    if (/^-?\d+(\.\d+)?$/.test(char)) {
-      stack.push(parseFloat(char));
-    } else if (precedence[char] !== undefined) {
+    const num = parseFloat(char);
+    if (!isNaN(num)) {
+      stack.push(num);
+    } else if (char in precedence) {
       const b = stack.pop();
       const a = stack.pop();
       switch (char) {
@@ -66,6 +77,12 @@ const evaluatePostfix = (expression) => {
   return stack[0];
 };
 
+/**
+ * Решает математическое выражение, подставляя значение переменной x.
+ * @param {string} expression - математическое выражение с переменной x.
+ * @param {number} x - значение переменной x.
+ * @returns {number} Результат вычисления.
+ */
 const solve = (expression, x) => {
   const replacedExpression = expression.replaceAll('x', x);
   const postfixExpression = infixToPostfix(replacedExpression);
