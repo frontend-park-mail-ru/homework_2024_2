@@ -29,7 +29,7 @@ const changeNestedProperty = (object, propertyList, newProperty) => {
  * @returns {Object} Returns modified object if path is correct else returns original object
 */
 const set = (object, path, newProperty) => {
-    if (typeof path !== 'string' || !path.length || path[0] !== '.') {
+    if (!path instanceof String || !path.length || path[0] !== '.') {
         return object;
     }
     const propertyList = path.split('.').slice(1);
