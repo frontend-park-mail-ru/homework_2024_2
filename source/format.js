@@ -27,7 +27,7 @@ const format = (input, columns) => {
 	}
 
 	//проверяем правильность типов, если будет объект Number его тип все равно будет object и не подойдет
-	if (! input.every(value => Number.isInteger(value))) {  
+	if (!input.every(value => Number.isInteger(value))) {  
 		throw new TypeError('All elements must be integers');  
 	}
 
@@ -44,7 +44,7 @@ const format = (input, columns) => {
 		const columnIndex = index % columns;
 		const rowIndex = Math.floor(index / columns);
 		
-		if (! accumulator[rowIndex]) {  
+		if (!accumulator[rowIndex]) {  
 			accumulator[rowIndex] = [];  
 		}  
 
