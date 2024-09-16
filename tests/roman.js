@@ -71,6 +71,20 @@ QUnit.module("Тестируем функцию roman", function () {
         Error,
         "Ошибка выбрасывается для 'CDM'",
       );
+      assert.throws(
+        function () {
+          roman("Im");
+        },
+        Error,
+        "Ошибка выбрасывается для 'Im'",
+      );
+      assert.throws(
+        function () {
+          roman("XlM");
+        },
+        Error,
+        "Ошибка выбрасывается для 'XlM'",
+      );
     },
   );
 
@@ -86,7 +100,7 @@ QUnit.module("Тестируем функцию roman", function () {
       );
       assert.throws(
         function () {
-          roman("19_2");
+          roman("MM_DI");
         },
         Error,
         "Ошибка выбрасывается для '19_2'",
@@ -104,6 +118,27 @@ QUnit.module("Тестируем функцию roman", function () {
         },
         Error,
         "Ошибка выбрасывается для '1000111'",
+      );
+      assert.throws(
+        function () {
+          roman("");
+        },
+        Error,
+        "Ошибка выбрасывается для ''",
+      );
+      assert.throws(
+        function () {
+          roman("0");
+        },
+        Error,
+        "Ошибка выбрасывается для '0'",
+      );
+      assert.throws(
+        function () {
+          roman(0);
+        },
+        Error,
+        "Ошибка выбрасывается для 0",
       );
     },
   );
