@@ -31,6 +31,7 @@ QUnit.module('Тестируем функцию solve', function () {
   QUnit.test('solve работает с отрицательными числами', function (assert) {
     assert.strictEqual(solve('-x + 5', -5), 10);
     assert.strictEqual(solve('x - (-5)', 10), 15);
+    assert.strictEqual(solve('9 - x', -5), 14);
   });
 
   QUnit.test('solve работает с выражениями без пробелов и с табуляцией', function (assert) {
@@ -39,3 +40,4 @@ QUnit.module('Тестируем функцию solve', function () {
     assert.strictEqual(solve('10/\t(x-5)', 10), 2);
   });
 });
+ 

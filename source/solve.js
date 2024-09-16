@@ -50,6 +50,23 @@ const infixToPostfix = (expression) => {
 };
 
 /**
+ * Заменяет определенные последовательности минусов в строке.
+ * - Удаляет два минуса в начале строки.
+ * - Заменяет все случаи двух подряд идущих минусов ("--") на плюс ("+").
+ * - Заменяет все случаи минуса, пробела и еще одного минуса ("- -") на плюс ("+").
+ * 
+ * @param {string} expression - Входная строка, содержащая математическое выражение с минусами и пробелами.
+ * @returns {string} - Обработанная строка, где применены указанные замены.
+ */
+const replaceDoubleMinus = (expression) => {
+  let result = expression.replace(/^-{2}/, '');
+  result = result.replaceAll(/--/g, '+');
+  result = result.replaceAll(/-\s+-/g, '+');
+  return result;
+};
+
+
+/**
  * Выполняет вычисление постфиксного выражения.
  * @param {string} expression - постфиксное выражение.
  * @returns {number} Результат вычисления.
@@ -84,7 +101,9 @@ const evaluatePostfix = (expression) => {
  * @returns {number} Результат вычисления.
  */
 const solve = (expression, x) => {
-  const replacedExpression = expression.replaceAll('x', x);
-  const postfixExpression = infixToPostfix(replacedExpression);
+  const replacedExpression1 = expression.replaceAll('x', x);
+  const replacedExpression2 = replaceDoubleMinus(replacedExpression1)
+  const postfixExpression = infixToPostfix(replacedExpression2);
   return evaluatePostfix(postfixExpression);
 };
+ 
