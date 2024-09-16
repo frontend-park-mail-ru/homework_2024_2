@@ -17,20 +17,26 @@ const DIGITS = {
 };
 
 /**
- * Older function - converter to roman -> decimal, decimal -> roman numbers. Analyzes incoming data and calls function with it properties.
- * @param {string}
- * @param {number}
- * @throws {TypeError}
- * @returns string
- * @returns number
+ * Фукнция, которая анализирует переданное значение, и в зависимости от этого вызывает функцию, 
+ * которая переводит число из римской системы счисления в десятичную и наоборот
+ * @param {string} inputNumber - строка для перевода либо из римской системы счисления в десятичную, либо наоборот
+ * @param {number} inputNumber - число для перевода из десятичной системы счисления в римскую
+ * @throws {TypeError} ошибки связанные с обработкой входного значения
+ * @returns string при переводе из числа из десятичной системы в римскую
+ * @returns number при переводе из числа из римской системы в десятичную
  */
 function roman(inputNumber) {
-  if (typeof inputNumber === 'number' && inputNumber.toString().length < 5 && inputNumber.toString().length > 0 && inputNumber != 0) {
+  if (
+    typeof inputNumber === "number" &&
+    inputNumber.toString().length < 5 &&
+    inputNumber.toString().length > 0 &&
+    inputNumber != 0
+  ) {
     return decimalToRoman(inputNumber);
   }
 
   if (/^[1-9]\d{0,3}$/.test(inputNumber)) {
-    return decimalToRoman(Number(inputNumber))
+    return decimalToRoman(Number(inputNumber));
   }
 
   if (/^[MDCLXVI]+$/.test(inputNumber) || /^[mdclxvi]+$/.test(inputNumber)) {
@@ -41,57 +47,69 @@ function roman(inputNumber) {
     throw new Error("Bad roman number format");
   }
 
-  if (/^[\000-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f\u0410-\u042F\u0430-\u044F\u0401\u0451]/.test(inputNumber)) {
+  if (
+    /^[\000-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f\u0410-\u042F\u0430-\u044F\u0401\u0451]/.test(
+      inputNumber,
+    )
+  ) {
     throw new Error("Bad symbol in number");
   }
 
-  if ((typeof inputNumber === 'number' && inputNumber === 0) || (inputNumber === '0')) {
-    throw new Error("Nil value")
+  if (
+    (typeof inputNumber === "number" && inputNumber === 0) ||
+    inputNumber === "0"
+  ) {
+    throw new Error("Nil value");
   }
 
   if (String(inputNumber).length < 1 || String(inputNumber).length > 4) {
-    throw new Error("Too short or too long decimal number")
+    throw new Error("Too short or too long decimal number");
   }
+
+  throw new Error("Untraceable behavior");
 }
 
 /**
- * Converts decimal number to roman number
- * @param {string}
- * @throws {TypeError}
- * @returns number
+ * Переводит число из римской системы в десятичную
+ * @param {string} исходная строка для перевода числа из римской системы в десятичную
+ * @throws {TypeError} если в записи римского числа были допущены ошибки
+ * @returns number результат перевода из римской системы в десятичную
  */
 const romanToDecimal = (inputNumber) => {
   let bufferNumber = inputNumber.toUpperCase();
   let result = 0;
 
   for (let i = 0; i < bufferNumber.length; i++) {
-    const firstNum = DIGITS[bufferNumber[i]];
-    const secNum = DIGITS[bufferNumber[i + 1]] || 0;
-    const thirdNum = DIGITS[bufferNumber[i + 2]] || 0;
-
-    if (secNum && thirdNum && firstNum <= secNum && secNum < thirdNum) {
+    if (
+      DIGITS[bufferNumber.at(i + 1)] &&
+      DIGITS[bufferNumber.at(i + 2)] &&
+      DIGITS[bufferNumber.at(i)] <= DIGITS[bufferNumber.at(i + 1)] &&
+      DIGITS[bufferNumber.at(i + 1)] < DIGITS[bufferNumber.at(i + 2)]
+    ) {
       throw new Error("Bad roman number format");
     }
 
-    result += secNum > firstNum ? -firstNum : firstNum;
+    result +=
+      DIGITS[bufferNumber.at(i + 1)] > DIGITS[bufferNumber.at(i)]
+        ? -DIGITS[bufferNumber.at(i)]
+        : DIGITS[bufferNumber.at(i)];
   }
 
   return result;
 };
 
-
 /**
- * Converts roman number to decimal numver
- * @param {number}
- * @returns string
+ * Переводит число из десятичной системы в римскую
+ * @param {number} исходная строка для перевода числа из десятичной системы в римскую
+ * @returns string - результат перевода
  */
 const decimalToRoman = (inputNumber) => {
   let result = "";
-  for (let [key, value] of Object.entries(DIGITS)) {
+  Object.entries(DIGITS).forEach(([key, value]) => {
     while (inputNumber >= value) {
       result += key;
       inputNumber -= value;
     }
-  }
+  });
   return result;
-}
+};
