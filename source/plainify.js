@@ -30,3 +30,4 @@ const plainify = (nested) => {
     }
     return recursiveIteration(nested, '');
 };
+
