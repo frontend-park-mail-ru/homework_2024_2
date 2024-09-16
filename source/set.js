@@ -11,10 +11,11 @@ const changeNestedProperty = (object, propertyList, newProperty) => {
     if (!propertyList.length) {
         return newProperty;
     }
-    if (!object.hasOwnProperty(propertyList[0])) {
-        object[propertyList[0]] = {};
+    const currentNode = propertyList[0];
+    if (!object.hasOwnProperty(currentNode)) {
+        object[currentNode] = {};
     }
-    object[propertyList[0]] = changeNestedProperty(object[propertyList[0]], propertyList.slice(1), newProperty);
+    object[currentNode] = changeNestedProperty(object[currentNode], propertyList.slice(1), newProperty);
     return object;       
 };
 
