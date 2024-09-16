@@ -6,7 +6,9 @@
  * @returns {[number,number]|[undefined,undefined]}
  */
 const arrMinmax = function (...numbers) {
-	if (!numbers.length) return [undefined, undefined];
+	if (!numbers.length) {
+		return [undefined, undefined];
+	}
 	let minimum = numbers[0];
 	let maximum = numbers[0];
 	numbers.forEach((number) => {
