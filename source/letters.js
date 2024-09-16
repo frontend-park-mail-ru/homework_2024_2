@@ -16,30 +16,24 @@ function letters(str, keepFirst) {
 
     if (!str?.length) return '';
 
-    if (str instanceof String) {
-        str = str.valueOf();
-    }
-
     if (keepFirst === undefined) {
         const charCount = str.split('').reduce((acc, char) => {
             acc[char] = (acc[char] || 0) + 1;
             return acc;
         }, {});
 
-        const result = str.split('').filter(char => charCount[char] === 1);
-        return result.join('');
+        return str.split('').filter(char => charCount[char] === 1).join('');
     }
 
     if (keepFirst) {
         const seen = new Set();
-        const result = Array.from(str).filter(char => {
+        return Array.from(str).filter(char => {
             if (!seen.has(char)) {
                 seen.add(char);
                 return true;
             }
             return false;
-        });
-        return result.join('');
+        }).join('');
     }
 
     const lastIndex = {};
@@ -47,7 +41,5 @@ function letters(str, keepFirst) {
         lastIndex[char] = index;
     });
 
-    const result = str.split('').filter((char, index) => lastIndex[char] === index);
-    return result.join('');
-
+    return str.split('').filter((char, index) => lastIndex[char] === index).join('');
 }
