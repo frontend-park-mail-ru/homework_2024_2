@@ -4,45 +4,45 @@
  * скобок и знаков
  * @param {string} str - Строка, которую необходимо парсить
  * @returns {string[]} - Результат парсинга строки (массив знаков, скобок и чисел)
- * @throws {TypeError} - В строке вместо чисел операции проводятся над другими символами
+ * @throws {TypeError} - В строке присутствуют недопустимые символы 
  */
 const parseStr = (str) => {
     const res = []; 
     let sign = 1;
-    let curNum = -1;
-    //здесь if с includes, а не switch, т.к небольшое количество ветвлений if
+    let curNum = null;
+    
     for (let i = 0; i < str.length; i++) {
-        if (['+', '*', '(', ')'].includes(str[i])){
-            if (curNum !== -1) {
+        if (['+', '*', '(', ')'].includes(str[i])) {
+            if (curNum !== null) {
                 res.push(String(sign * curNum));
                 sign = 1;
             }
-            curNum = -1;
+            curNum = null;
             res.push(str[i]);
-        //отдельно случай с минусом тк он может быть унарным и бинарным
-        }else if (str[i] === '-'){
-            if (i + 1 < str.length && str[i + 1] === ' '){
-                if (curNum !== -1) {
+        } else if (str[i] === '-') {
+            if (i + 1 < str.length && str[i + 1] === ' ') {
+                if (curNum !== null) {
                     res.push(String(sign * curNum));
                     sign = 1;
                 }
-                curNum = -1;
+                curNum = null;
                 res.push(str[i]);
-            }else{
+            } else {
                 sign *= -1;
             }
-        }else if (str[i] !== ' '){
-            if (!isNaN(parseInt(str[i]))){
-                curNum = curNum === -1 ? Number(str[i]) : curNum * 10 + Number(str[i]);  
-            }else{
+        } else if (str[i] !== ' ') {
+            if (!isNaN(parseInt(str[i]))) {
+                curNum = curNum === null ? Number(str[i]) : curNum * 10 + Number(str[i]);  
+            } else {
                 throw new TypeError("Тип должен быть числовым!");
             }
         }
     }
 
-    if (curNum !== -1) {
+    if (curNum !== null) {
         res.push(String(sign * curNum));
     }
+
     return res;
 }
 /**
@@ -63,34 +63,34 @@ const toPolish = (str) => {
     const answer = [];
 
     for (let val of masStr) {
-        //if так как неудобно писать switch (много однотипных case)
         if (['+', '-', '*'].includes(val)) {
-            while (priorities[val] <= priorities[myStack.at(-1)]){
+            while (priorities[val] <= priorities[myStack.at(-1)]) {
                 answer.push(myStack.pop());
             }
             myStack.push(val);
-        }else if (val === '('){
+        } else if (val === '(') {
             myStack.push(val);
-        }else if (val === ')'){
-            while (myStack.length > 0 && myStack.at(-1) !== '('){
+        } else if (val === ')') {
+            while (myStack.length > 0 && myStack.at(-1) !== '(') {
                 answer.push(myStack.pop());
             }
-            if (myStack.length == 0){
+            if (myStack.length == 0) {
                 throw new Error("Неправильно расставлены скобки !!!");
             }
             myStack.pop();
-        }else if (val !== ' '){
+        } else if (val !== ' ') {
             answer.push(val);
         }
     }
 
-    while(myStack.length !== 0){
+    while(myStack.length) {
         const elem = myStack.pop();
-        if (['(', ')'].includes(elem)){
-            throw new Error("неправильно расставлены скобки !!!");
+        if (['(', ')'].includes(elem)) {
+            throw new Error("Неправильно расставлены скобки !!!");
         }
         answer.push(elem);
     }
+
     return answer;
 }
 /**
@@ -102,13 +102,11 @@ const solvePolish = (str) => {
     const myStack = [];
 
     for (let elem of str) {
-        //здесь switch, тк много ветвлений
         switch(elem) {
             case '+':
                 myStack.push(myStack.pop() + myStack.pop());
                 break;
             case '-':
-                //обработка случая с унарным минусом в начале строки
                 const oper1 = myStack.pop();
                 const oper2 = myStack.pop();
                 myStack.push(oper2 - oper1);
@@ -129,6 +127,12 @@ const solvePolish = (str) => {
 /**
  * Принимает строку представляющую выражение, которое нужно решить, и число, которое нужно подставить вместо x
  * Находит результат выражения
+ * Замечание: в функции унарный минус нужно писать следующим образом: -5
+ * а бинарный следующим: 6 - 5 (c пробелом)
+ * Это происходит из-за того, что унарный минус кладется в строку, т.к он обозначает отрицательный знак числа
+ * а не помещается в стек как бинарный минус
+ * Такое выражение корректно: 5 - -6
+ * Такое некорректно: 5 - - 6
  * @param {string} str - Строка представляющая выражение  
  * @param {number} val - Число которое нужно подставить вместо x 
  * @returns {number} - Результат вычисления выражения
@@ -136,15 +140,19 @@ const solvePolish = (str) => {
  * @throws {TypeError} - Если в функцию передали параметры других типов
  */
 const solve = (str, val) => {
-    // вначале обработка ошибок в конце логика 
     if (str === undefined || val === undefined) {
         throw new Error("str and val arguments must not be empty");
-    }else if (typeof str !== "string" || typeof val !== "number") {
+    } 
+
+    if (typeof str !== "string" || typeof val !== "number") {
         throw new TypeError("argument str must be string, argument val must be int");
-    }else{
-        return solvePolish(toPolish(str.replaceAll('x', val)));
-    }
+    } 
+    
+    return solvePolish(toPolish(str.replaceAll('x', val)));
 }
+
+
+
 
 
 

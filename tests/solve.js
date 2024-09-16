@@ -36,6 +36,7 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.throws(() => solve('x * (x + x) - (bb * (x + x))', 6), TypeError);
 		assert.throws(() => solve('x * (x + x) - (x * (x / y))', 6), TypeError);
 		assert.throws(() => solve(7, 'jhxhe'), TypeError);
+		assert.throws(() => solve('5 + 7 + \t + 3', 5), TypeError);
 		assert.throws(() => solve(), Error);
 	});
 });
