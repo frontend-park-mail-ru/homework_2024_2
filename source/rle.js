@@ -14,21 +14,18 @@
  */
 
 function rle(str) {
-    if (typeof str != 'string'|| !str) throw new TypeError('Входная строка не должна быть пустой');
-
-    const res = [];
-    let cnt = 1;
-
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === str[i + 1]) {
-            cnt++;
-        } else {
-            res.push(str[i] + (cnt > 1 ? cnt : ''));
-            cnt = 1;
-        }
+    if (typeof str !== 'string' || !str) {
+        throw new TypeError('Входная строка не должна быть пустой');
     }
 
-    return res.join('');
+    return str.split('').reduce((acc, curr, index, array) => {
+        if (curr === array[index + 1]) {
+            acc.cnt++;
+        } else {
+            acc.res.push(curr + (acc.cnt > 1 ? acc.cnt : ''));
+            acc.cnt = 1;
+        }
+        return acc;
+    }, { res: [], cnt: 1 }).res.join('');
 }
 
-// const rle = str => str.replace(/(.)\1*/g, (match, char) => char + (match.length > 1 ? match.length : ''));
