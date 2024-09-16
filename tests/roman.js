@@ -55,35 +55,35 @@ QUnit.module("Тестируем функцию roman", function () {
           roman("XLM");
         },
         Error,
-        "Ошибка выбрасывается для 'XLM'",
+        "Bad roman number format",
       );
       assert.throws(
         function () {
           roman("IVX");
         },
         Error,
-        "Ошибка выбрасывается для 'IVX'",
+        "Bad roman number format",
       );
       assert.throws(
         function () {
           roman("CDM");
         },
         Error,
-        "Ошибка выбрасывается для 'CDM'",
+        "Bad roman number format",
       );
       assert.throws(
         function () {
           roman("Im");
         },
         Error,
-        "Ошибка выбрасывается для 'Im'",
+        "Bad roman number format",
       );
       assert.throws(
         function () {
           roman("XlM");
         },
         Error,
-        "Ошибка выбрасывается для 'XlM'",
+        "Bad roman number format",
       );
     },
   );
@@ -96,28 +96,28 @@ QUnit.module("Тестируем функцию roman", function () {
           roman("00111");
         },
         Error,
-        "Ошибка выбрасывается для '00111'",
+        "Too short or too long decimal number",
       );
       assert.throws(
         function () {
           roman("MM_DI");
         },
         Error,
-        "Ошибка выбрасывается для '19_2'",
+        "Too short or too long decimal number",
       );
       assert.throws(
         function () {
           roman("ЧXLV");
         },
         Error,
-        "Ошибка выбрасывается для 'ЧXLV'",
+        "Too short or too long decimal number",
       );
       assert.throws(
         function () {
           roman("1000111");
         },
         Error,
-        "Ошибка выбрасывается для '1000111'",
+        "Too short or too long decimal number",
       );
       assert.throws(
         function () {
@@ -131,14 +131,14 @@ QUnit.module("Тестируем функцию roman", function () {
           roman("0");
         },
         Error,
-        "Ошибка выбрасывается для '0'",
+        "Nil value",
       );
       assert.throws(
         function () {
           roman(0);
         },
         Error,
-        "Ошибка выбрасывается для 0",
+        "Nil value",
       );
     },
   );
