@@ -18,11 +18,11 @@ const format = (input, columns) => {
         throw new RangeError('Columns amount must be greater than array size');
     }
 
-    let widths = [];
-    for (let i = 0; i < columns; i++) {
-        widths[i] = Math.max(...input.filter((_, j) => j % columns === i % columns)
+    const widths = Array(columns).fill(0).reduce((acc, _, index) => {
+        acc[index] = Math.max(...input.filter((_, j) => j % columns === index % columns)
             .map(num => num.toString().length));
-    }
+        return acc;
+    }, []);
 
     return input.reduce((acc, val, i) => {
         if (typeof val !== 'number') {
@@ -35,7 +35,7 @@ const format = (input, columns) => {
         } else if (i !== input.length - 1) {
             acc += ' ';
         }
-      
+
         return acc;
     }, '');
 
