@@ -13,11 +13,10 @@
  *
  */
 
-function rle(str) {
-    if (typeof str !== 'string' || !str) {
-        throw new TypeError('Входная строка не должна быть пустой');
+const rle = (str) => {
+    if (typeof str !== 'string' && !(str instanceof String) || !str) {
+        throw new TypeError('Входной параметр должен быть непустой строкой');
     }
-
     return str.split('').reduce((acc, curr, index, array) => {
         if (curr === array[index + 1]) {
             acc.cnt++;
@@ -27,5 +26,5 @@ function rle(str) {
         }
         return acc;
     }, { res: [], cnt: 1 }).res.join('');
-}
+};
 
