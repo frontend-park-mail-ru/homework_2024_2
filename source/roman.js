@@ -29,7 +29,7 @@ function roman(num) {
     return decimalToRoman(num);
   }
 
-  if (/^[MDCLXVImdclxvi]+$/.test(num)) {
+  if (/^[MDCLXVI]+$/.test(num) || /^[mdclxvi]+$/.test(num)) {
     return romanToDecimal(num);
   }
 
