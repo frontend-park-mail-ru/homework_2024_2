@@ -97,6 +97,11 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess(NaN), null);
 	});
 	
+
+	QUnit.test('Доска с 1dfsf32 ', function (assert) {
+		assert.strictEqual(chess('1dfsf32'), null);
+	});
+
 	QUnit.test('Доска с undefined ', function (assert) {
 		assert.strictEqual(chess(undefined), null);
 	});
