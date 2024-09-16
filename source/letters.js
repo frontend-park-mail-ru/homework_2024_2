@@ -14,7 +14,7 @@ function letters(str, keepFirst) {
         throw new TypeError(`Ожидалась строка или объект String, но получен тип ${typeof str}.`);
     }
 
-    if (!str?.length) {
+    if (!str.length) {
         return '';
     }
 
