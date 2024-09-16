@@ -1,6 +1,6 @@
 'use strict';
 
-const allTags = /&lt;\/?([a-zA-Z0-9]+)(.*?)&gt;/g;
+const ALL_TAGS = /&lt;\/?([a-zA-Z0-9]+)(.*?)&gt;/g;
 
 /**
  * Фильтрует HTML-строку, экранируя все теги, кроме разрешённых.
@@ -33,7 +33,7 @@ const filter = (html, allowedTags) => {
 
 
 
-	return replacedHtml.replace(allTags, (findTag, tagName) => {
+	return replacedHtml.replace(ALL_TAGS, (findTag, tagName) => {
 		tagName = tagName.toLowerCase();
 
 		if (allowedTags.includes(tagName)) {
