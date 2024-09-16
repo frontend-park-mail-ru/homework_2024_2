@@ -25,15 +25,33 @@ const DIGITS = {
  * @returns number from romanToDecimal
  */
 function roman(inputNumber) {
-  if (/^[1-9]\d{0,3}$/.test(inputNumber)) {
+  if (typeof inputNumber === 'number' && inputNumber.toString().length < 5 && inputNumber.toString().length > 0 && inputNumber != 0) {
     return decimalToRoman(inputNumber);
+  }
+
+  if (/^[1-9]\d{0,3}$/.test(inputNumber)) {
+    return decimalToRoman(Number(inputNumber))
   }
 
   if (/^[MDCLXVI]+$/.test(inputNumber) || /^[mdclxvi]+$/.test(inputNumber)) {
     return romanToDecimal(inputNumber);
   }
 
-  throw new Error("Bad data type");
+  if (/^[MDCLXVImdclxvi]+$/.test(inputNumber)) {
+    throw new Error("Bad roman number format");
+  }
+
+  if (/^[\000-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f\u0410-\u042F\u0430-\u044F\u0401\u0451]/.test(inputNumber)) {
+    throw new Error("Bad symbol in number");
+  }
+
+  if ((typeof inputNumber === 'number' && inputNumber === 0) || (inputNumber === '0')) {
+    throw new Error("Nil value")
+  }
+
+  if (String(inputNumber).length < 1 || String(inputNumber).length > 4) {
+    throw new Error("Too short or too long decimal number")
+  }
 }
 
 /**
