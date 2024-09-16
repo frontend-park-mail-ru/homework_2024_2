@@ -71,7 +71,13 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.throws(() => sort(1488), TypeError, 'Обрабатывает число');
 		assert.throws(() => sort(true), TypeError, 'Обрабатывает boolean');
 		assert.throws(() => sort([]), TypeError, 'Обрабатывает массив');
-		assert.throws(() => sort(new String('aaa')), TypeError, 'Обрабатывает объект типа String');
+	});	
+
+	QUnit.test('Функция корректно обрабатывает объекты-строки', function (assert) {
+		assert.strictEqual(sort(new String('hello world')), 'Dlorw Ehllo', 'Обрабатывает строковый объект на английском');
+    	assert.strictEqual(sort(new String('привет мир')), 'Веипрт Имр', 'Обрабатывает строковый объект на русском');
+		assert.strictEqual(sort(new String('f')), 'F', 'Обрабатывает строковый объект из одной буквы на английском');
+		assert.strictEqual(sort(new String('ё')), 'Ё', 'Обрабатывает строковый объект из одной буквы на русском');
 	});	
 	
 });
