@@ -7,9 +7,9 @@
  */
 const arrMinmax = function (...numbers) {
 	return numbers.reduce(
-		(arr, curr) => [ 
-			arr[0] < curr ? arr[0] : curr,
-			arr[1] > curr ? arr[1] : curr
+		([ minimum, maximum ], current) => [
+			minimum < current ? minimum : current,
+			maximum > current ? maximum : current
 		], [ undefined, undefined ]
 	);
 };
