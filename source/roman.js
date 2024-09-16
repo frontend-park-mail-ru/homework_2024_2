@@ -17,7 +17,7 @@ const DIGITS = {
 };
 
 /**
- * Фукнция, которая анализирует переданное значение, и в зависимости от этого вызывает функцию, 
+ * Фукнция, которая анализирует переданное значение, и в зависимости от этого вызывает функцию,
  * которая переводит число из римской системы счисления в десятичную и наоборот
  * @param {string} inputNumber - строка для перевода либо из римской системы счисления в десятичную, либо наоборот
  * @param {number} inputNumber - число для перевода из десятичной системы счисления в римскую
@@ -48,14 +48,6 @@ function roman(inputNumber) {
   }
 
   if (
-    /^[\000-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f\u0410-\u042F\u0430-\u044F\u0401\u0451]/.test(
-      inputNumber,
-    )
-  ) {
-    throw new Error("Bad symbol in number");
-  }
-
-  if (
     (typeof inputNumber === "number" && inputNumber === 0) ||
     inputNumber === "0"
   ) {
@@ -66,7 +58,7 @@ function roman(inputNumber) {
     throw new Error("Too short or too long decimal number");
   }
 
-  throw new Error("Untraceable behavior");
+  throw new Error("Bad symbol in number");
 }
 
 /**
