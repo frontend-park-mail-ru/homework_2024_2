@@ -24,13 +24,13 @@ const DIGITS = {
  * @returns string from decimalToRoman
  * @returns number from romanToDecimal
  */
-function roman(num) {
-  if (/^[1-9]\d{0,3}$/.test(num)) {
-    return decimalToRoman(num);
+function roman(inputNumber) {
+  if (/^[1-9]\d{0,3}$/.test(inputNumber)) {
+    return decimalToRoman(inputNumber);
   }
 
-  if (/^[MDCLXVI]+$/.test(num) || /^[mdclxvi]+$/.test(num)) {
-    return romanToDecimal(num);
+  if (/^[MDCLXVI]+$/.test(inputNumber) || /^[mdclxvi]+$/.test(inputNumber)) {
+    return romanToDecimal(inputNumber);
   }
 
   throw new Error("Bad data type");
@@ -42,14 +42,14 @@ function roman(num) {
  * @throws {TypeError} If roman number has incorrect format
  * @returns number
  */
-const romanToDecimal = (num) => {
-  num = num.toUpperCase();
+const romanToDecimal = (inputNumber) => {
+  let bufferNumber = inputNumber.toUpperCase();
   let result = 0;
 
-  for (let i = 0; i < num.length; i++) {
-    const firstNum = DIGITS[num[i]];
-    const secNum = DIGITS[num[i + 1]] || 0;
-    const thirdNum = DIGITS[num[i + 2]] || 0;
+  for (let i = 0; i < bufferNumber.length; i++) {
+    const firstNum = DIGITS[bufferNumber[i]];
+    const secNum = DIGITS[bufferNumber[i + 1]] || 0;
+    const thirdNum = DIGITS[bufferNumber[i + 2]] || 0;
 
     if (secNum && thirdNum && firstNum <= secNum && secNum < thirdNum) {
       throw new Error("Bad roman number format");
@@ -67,12 +67,12 @@ const romanToDecimal = (num) => {
  * @param {int} num - Done value in decimal format
  * @returns string
  */
-const decimalToRoman = (num) => {
+const decimalToRoman = (inputNumber) => {
   let result = "";
   for (let symb in DIGITS) {
-    while (num >= DIGITS[symb]) {
+    while (inputNumber >= DIGITS[symb]) {
       result += symb;
-      num -= DIGITS[symb];
+      inputNumber -= DIGITS[symb];
     }
   }
   return result;
