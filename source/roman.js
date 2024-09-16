@@ -18,11 +18,11 @@ const DIGITS = {
 
 /**
  * Older function - converter to roman -> decimal, decimal -> roman numbers. Analyzes incoming data and calls function with it properties.
- * @param {string} inputNumber  - Done value if number is roman
- * @param {number} inputNumber - Done value if number is decimal
- * @throws {TypeError} If number format not decimal or roman or number too long
- * @returns string from decimalToRoman
- * @returns number from romanToDecimal
+ * @param {string}
+ * @param {number}
+ * @throws {TypeError}
+ * @returns string
+ * @returns number
  */
 function roman(inputNumber) {
   if (typeof inputNumber === 'number' && inputNumber.toString().length < 5 && inputNumber.toString().length > 0 && inputNumber != 0) {
@@ -56,8 +56,8 @@ function roman(inputNumber) {
 
 /**
  * Converts decimal number to roman number
- * @param {string} inputNumber  - Done value in roman format
- * @throws {TypeError} If roman number has incorrect format
+ * @param {string}
+ * @throws {TypeError}
  * @returns number
  */
 const romanToDecimal = (inputNumber) => {
@@ -82,7 +82,7 @@ const romanToDecimal = (inputNumber) => {
 
 /**
  * Converts roman number to decimal numver
- * @param {number} inputNumber - Done value in decimal format
+ * @param {number}
  * @returns string
  */
 const decimalToRoman = (inputNumber) => {
