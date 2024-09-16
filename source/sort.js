@@ -11,11 +11,9 @@ const sort = (sentence) => {
         throw new TypeError('Ошибка: Ожидается строка.');
     }
 
-    const str = sentence.valueOf();
-
-    const words = str.split(' ');
-    let sortedWords = words.map(word => {
-        let sortedWord = word.toLowerCase().split('').sort((a, b) => a.localeCompare(b, 'ru')).join('');
+    const words = sentence.valueOf().split(' ');
+    const sortedWords = words.map(word => {
+        const sortedWord = word.toLowerCase().split('').sort((a, b) => a.localeCompare(b, 'ru')).join('');
         return sortedWord.charAt(0).toUpperCase() + sortedWord.slice(1);
     });
 
