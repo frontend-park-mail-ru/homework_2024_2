@@ -17,6 +17,11 @@ const format = (input, columns) => {
     if (columns > input.length) {
         throw new RangeError('Columns amount must be greater than array size');
     }
+    input.forEach(val => {
+        if (typeof val !== 'number') {
+            throw new TypeError('Input data must contain integers only');
+        }
+    })
 
     const widths = Array(columns).fill(0).reduce((acc, _, index) => {
         acc[index] = Math.max(...input.filter((_, j) => j % columns === index % columns)
@@ -25,11 +30,9 @@ const format = (input, columns) => {
     }, []);
 
     return input.reduce((acc, val, i) => {
-        if (typeof val !== 'number') {
-            throw new TypeError('Input data must contain integers only');
-        }
-
-        acc += val.toString().padStart(widths[i % columns]);
+        const currColumn = i % columns
+        acc += val.toString().padStart(widths[currColumn]);
+        
         if (i % columns === columns - 1 && i !== input.length - 1) {
             acc += '\n';
         } else if (i !== input.length - 1) {
