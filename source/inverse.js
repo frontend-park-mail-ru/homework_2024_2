@@ -15,9 +15,11 @@ const inverse = (array, shift = 0) => {
     if (!Array.isArray(array) || !Number.isInteger(shift)) {
         throw new TypeError('Incorrect types of argument!');
     }
-    return shift >= 0
-             // The shift is positive or zero so the second part of aray should be inverted 
-           ? [...array.slice(0, shift), ...array.slice(shift).reverse()] 
-             // Other case. Inverting first part of array
-           : [...array.slice(0, shift).reverse(), ...array.slice(shift)];
+
+    // The shift is positive or zero so the second part of aray should be inverted 
+    const positiveShiftResult = [...array.slice(0, shift), ...array.slice(shift).reverse()];
+    // Other case. Inverting first part of array
+    const negativeShiftResult = [...array.slice(0, shift).reverse(), ...array.slice(shift)];
+
+    return shift >= 0 ? positiveShiftResult : negativeShiftResult;
 };
