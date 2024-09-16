@@ -83,7 +83,7 @@ const toPolish = (str) => {
         }
     }
 
-    while(myStack.length) {
+    while (myStack.length) {
         const elem = myStack.pop();
         if (['(', ')'].includes(elem)) {
             throw new Error("Неправильно расставлены скобки !!!");
