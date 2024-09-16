@@ -34,8 +34,11 @@ const format = (input, columns) => {
         if (currColumn === columns - 1 && i !== input.length - 1) {
             return acc + '\n';
         }
+        
         if (i !== input.length - 1) {
             return acc + ' ';
         }
+
+        return acc
     }, '');
 }
