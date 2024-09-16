@@ -1,5 +1,7 @@
 'use strict';
 
+const allTags = /&lt;\/?([a-zA-Z0-9]+)(.*?)&gt;/g;
+
 /**
  * Фильтрует HTML-строку, экранируя все теги, кроме разрешённых.
  * 
@@ -13,6 +15,7 @@
  * console.log(filtered);
  * // Результат: <b>Hello</b> <i>world</i> &lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;
  */
+
 const filter = (html, allowedTags) => {
 	if (typeof html !== 'string' && !(html instanceof String)) {
 		throw new TypeError('HTML должен быть строкой');
@@ -22,13 +25,13 @@ const filter = (html, allowedTags) => {
 		throw new TypeError('allowedTags должен быть массивом строк');
 	}
 
-	let replacedHtml = html.replace(/&/g, '&amp;')
+	const replacedHtml = html.replace(/&/g, '&amp;')
 				.replace(/</g, '&lt;')
 				.replace(/>/g, '&gt;')
 				.replace(/"/g, '&quot;')
 				.replace(/'/g, '&#39;');
 
-	const allTags = /&lt;\/?([a-zA-Z0-9]+)(.*?)&gt;/g;
+
 
 	return replacedHtml.replace(allTags, (findTag, tagName) => {
 		tagName = tagName.toLowerCase();
