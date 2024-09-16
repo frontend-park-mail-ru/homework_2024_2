@@ -7,10 +7,10 @@
  */
 const arrMinmax = function (...numbers) {
 	return numbers.reduce(
-		([ minimum, maximum ], current) => [
+		([minimum, maximum], current) => [
 			minimum < current ? minimum : current,
-			maximum > current ? maximum : current
-		], [ undefined, undefined ]
+			maximum > current ? maximum : current,
+		], [undefined, undefined]
 	);
 };
 
