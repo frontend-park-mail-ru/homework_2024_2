@@ -24,19 +24,19 @@ const format = (input, columns) => {
             .map(num => num.toString().length));
     }
 
-    let output = '';
-    input.forEach((val, i) => {
+    return input.reduce((acc, val, i) => {
         if (typeof val !== 'number') {
             throw new TypeError('Input data must contain integers only');
         }
 
-        output += val.toString().padStart(widths[i % columns]);
+        acc += val.toString().padStart(widths[i % columns]);
         if (i % columns === columns - 1 && i !== input.length - 1) {
-            output += '\n';
+            acc += '\n';
         } else if (i !== input.length - 1) {
-            output += ' ';
+            acc += ' ';
         }
-    });
+      
+        return acc;
+    }, '');
 
-    return output;
 }
