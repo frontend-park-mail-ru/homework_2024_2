@@ -18,17 +18,28 @@ const chess = (sizeBoard) => {
     if (isNaN(sizeBoard) || (!Number.isInteger(+sizeBoard)) || sizeBoard < MinSizeBoarder ) {
         return null;
     }
-    let board = [];
-    for (let i = 0; i < sizeBoard; i++) {
-        for (let j = 0; j < sizeBoard; j++) {
-            if ((i + j) % 2 == 0) {
-                board.push("*");
-            }
-            if (!((i + j) % 2 == 0)) {
-                board.push(" ");
-            }
+    let board = Array.from({length: sizeBoard}, () => '')
+    board.forEach((element, index) => {
+        let line = ' *'.repeat(Math.floor(sizeBoard/2)-1);
+        if (sizeBoard % 2 == 0)
+        {
+            if (index % 2 == 0)
+                {
+                    line = '*' + line + ' \n';
+                } else {
+                    line = line + ' *\n'
+                }
         }
-        board.push("\n");
-    }
+        else {
+            if (index % 2 == 0)
+                {
+                    line = '* *' + line + '\n';
+                } else {
+                    line = line + ' * \n'
+                }
+        }
+        board[index] = line;
+
+    });
     return board.join('');
 };
