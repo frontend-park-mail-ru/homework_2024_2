@@ -6,13 +6,12 @@
  * @returns {[number,number]|[undefined,undefined]}
  */
 const arrMinmax = function (...numbers) {
-	if (!numbers.length) {
-		return [undefined, undefined];
-	}
-	return [
-		numbers.reduce((a, b) => (a < b ? a : b)),
-		numbers.reduce((a, b) => (a > b ? a : b))
-	];
+	return numbers.reduce(
+		(arr, curr) => [ 
+			arr[0] < curr ? arr[0] : curr,
+			arr[1] > curr ? arr[1] : curr
+		], [ undefined, undefined ]
+	);
 };
 
 /**
