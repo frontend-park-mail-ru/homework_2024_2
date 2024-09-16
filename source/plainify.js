@@ -21,9 +21,11 @@
 
 
 const plainify = (obj, prefix = '') => {
-    if (obj === null || typeof obj !== 'object') {
+
+    if(obj === null || typeof obj !== 'object' || Array.isArray(obj) ||  obj instanceof Date || obj instanceof Error || obj instanceof String) {
         throw new Error('Invalid input: plainify expects an object');
-    }
+}
+
 
     return Object.keys(obj).reduce((acc, key) => {
         const newKey = prefix ? `${prefix}.${key}` : key;
