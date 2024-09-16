@@ -31,13 +31,11 @@ const format = (input, columns) => {
         const currColumn = i % columns;
         acc += val.toString().padStart(widths[currColumn]);
 
-        if (i % columns === columns - 1 && i !== input.length - 1) {
-            acc += '\n';
-        } else if (i !== input.length - 1) {
-            acc += ' ';
+        if (currColumn === columns - 1 && i !== input.length - 1) {
+            return acc + '\n';
         }
-
-        return acc;
+        if (i !== input.length - 1) {
+            return acc + ' ';
+        }
     }, '');
-
 }
