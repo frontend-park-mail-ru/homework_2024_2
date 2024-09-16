@@ -1,5 +1,5 @@
 'use strict';
-const MinSizeBoarder = 2;
+const MIN_SIZE_BOARDER = 2;
 
 /**
  * Рисует ASCII-шахматрую доску из звёздочек (в левом верхнем углу всегда стоит звёздочка) 
@@ -15,31 +15,16 @@ const MinSizeBoarder = 2;
  *  * *"
  */
 const chess = (sizeBoard) => {
-    if (isNaN(sizeBoard) || (!Number.isInteger(+sizeBoard)) || sizeBoard < MinSizeBoarder ) {
+    if (isNaN(sizeBoard) || (!Number.isInteger(+sizeBoard)) || sizeBoard < MIN_SIZE_BOARDER ) {
         return null;
     }
-    let board = Array.from({length: sizeBoard}, () => '')
-    board.forEach((element, index) => {
-        let line = ' *'.repeat(Math.floor(sizeBoard/2)-1);
-        if (sizeBoard % 2 == 0)
-        {
-            if (index % 2 == 0)
-                {
-                    line = '*' + line + ' \n';
-                } else {
-                    line = line + ' *\n'
-                }
-        }
-        else {
-            if (index % 2 == 0)
-                {
-                    line = '* *' + line + '\n';
-                } else {
-                    line = line + ' * \n'
-                }
-        }
-        board[index] = line;
-
-    });
+    let board = Array.from({length: sizeBoard}, (element,index) => {
+        let line = (index % 2 == 0) ? '* ' : ' *'; // Проверяем на четность/нечетность строки
+        line = line.repeat(Math.floor(sizeBoard/2)) // Повторяем закономерную часть
+        if (sizeBoard % 2 != 0) {
+            line += (index % 2 == 0) ? '*' : ' '; // Если у нас размер доски нечетный, надо количество символов дополнить до нечетного
+        } 
+        return line + '\n' // Добовляем конец строки и возвращаем её.
+    })
     return board.join('');
 };
