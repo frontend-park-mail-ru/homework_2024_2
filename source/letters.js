@@ -14,20 +14,24 @@ function letters(str, keepFirst) {
         throw new TypeError(`Ожидалась строка или объект String, но получен тип ${typeof str}.`);
     }
 
-    if (!str?.length) return '';
+    if (!str?.length) {
+        return '';
+    }
+
+    const chars = str.split('');
 
     if (keepFirst === undefined) {
-        const charCount = str.split('').reduce((acc, char) => {
+        const charCount = chars.reduce((acc, char) => {
             acc[char] = (acc[char] || 0) + 1;
             return acc;
         }, {});
 
-        return str.split('').filter(char => charCount[char] === 1).join('');
+        return chars.filter(char => charCount[char] === 1).join('');
     }
 
     if (keepFirst) {
         const seen = new Set();
-        return Array.from(str).filter(char => {
+        return chars.filter(char => {
             if (!seen.has(char)) {
                 seen.add(char);
                 return true;
@@ -36,10 +40,10 @@ function letters(str, keepFirst) {
         }).join('');
     }
 
-    const lastIndex = {};
-    str.split('').forEach((char, index) => {
-        lastIndex[char] = index;
-    });
+    const lastIndex = chars.reduce((acc, char, index) => {
+        acc[char] = index;
+        return acc;
+    }, {});
 
-    return str.split('').filter((char, index) => lastIndex[char] === index).join('');
+    return chars.filter((char, index) => lastIndex[char] === index).join('');
 }
