@@ -72,7 +72,9 @@ QUnit.module('Тестируем функцию anagram', function () {
     const output = [
      [ 'for', 'rof' ]
     ];
-  
+
+    const input1 = null;
   assert.deepEqual(anagram(input), output);
+  assert.deepEqual(anagram(input1), output);
 });
 });
