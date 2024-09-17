@@ -24,7 +24,7 @@ const DIGITS = {
  * @returns string при переводе из числа из десятичной системы в римскую
  * @returns number при переводе из числа из римской системы в десятичную
  */
-function roman(inputNumber) {
+const roman = (inputNumber) => {
   if (
     typeof inputNumber === "number" &&
     inputNumber.toString().length < 5 &&
@@ -58,7 +58,7 @@ function roman(inputNumber) {
   }
 
   throw new Error("Bad symbol in number");
-}
+};
 
 /**
  * Переводит число из римской системы в десятичную
@@ -67,24 +67,21 @@ function roman(inputNumber) {
  * @returns number результат перевода из римской системы в десятичную
  */
 const romanToDecimal = (inputNumber) => {
-  let bufferNumber = inputNumber.toUpperCase();
-  let result = 0;
+  const bufferNumber = inputNumber.toUpperCase();
 
-  for (let i = 0; i < bufferNumber.length; i++) {
-    if (
-      DIGITS[bufferNumber.at(i + 1)] &&
-      DIGITS[bufferNumber.at(i + 2)] &&
-      DIGITS[bufferNumber.at(i)] <= DIGITS[bufferNumber.at(i + 1)] &&
-      DIGITS[bufferNumber.at(i + 1)] < DIGITS[bufferNumber.at(i + 2)]
-    ) {
+  const result = bufferNumber.split("").reduce((acc, _, i, arr) => {
+    const current = DIGITS[arr.at(i)];
+    const next = DIGITS[arr.at(i + 1)] || 0;
+    const afterNext = DIGITS[arr.at(i + 2)] || 0;
+
+    // Проверка на некорректный формат римского числа
+    if (next && afterNext && current <= next && next < afterNext) {
       throw new Error("Bad roman number format");
     }
 
-    result +=
-      DIGITS[bufferNumber.at(i + 1)] > DIGITS[bufferNumber.at(i)]
-        ? -DIGITS[bufferNumber.at(i)]
-        : DIGITS[bufferNumber.at(i)];
-  }
+    // Добавляем или вычитаем значение текущего символа
+    return acc + (next > current ? -current : current);
+  }, 0);
 
   return result;
 };
@@ -95,12 +92,13 @@ const romanToDecimal = (inputNumber) => {
  * @returns string - результат перевода
  */
 const decimalToRoman = (inputNumber) => {
-  let result = "";
-  Object.entries(DIGITS).forEach(([key, value]) => {
+  const result = Object.entries(DIGITS).reduce((acc, [key, value]) => {
     while (inputNumber >= value) {
-      result += key;
+      acc += key;
       inputNumber -= value;
     }
-  });
+    return acc;
+  }, "");
+
   return result;
 };
