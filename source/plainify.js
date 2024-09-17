@@ -20,17 +20,15 @@
 
 
 
+
 const plainify = (obj, prefix = '') => {
-
-    if(obj === null || typeof obj !== 'object' || Array.isArray(obj) ||  obj instanceof Date || obj instanceof Error || obj instanceof String) {
+    if (Object.prototype.toString.call(obj) !== '[object Object]') {
         throw new Error('Invalid input: plainify expects an object');
-}
-
+    }
 
     return Object.keys(obj).reduce((acc, key) => {
         const newKey = prefix ? `${prefix}.${key}` : key;
 
-        // Проверяем, что obj[key] это объект, не массив, и не объект-обертка для строки
         if (typeof obj[key] === 'object' && obj[key] && !Array.isArray(obj[key]) && !(obj[key] instanceof String)) {
             if (Array.isArray(obj[key])) {
                 obj[key].forEach((item, index) => {
@@ -46,3 +44,4 @@ const plainify = (obj, prefix = '') => {
         return acc;
     }, {});
 };
+
