@@ -1,12 +1,39 @@
 'use strict';
 
-const anagram = words => {
-    const groups = {};
-    words ??= ['words', 'for', 'example', 'rof'];
-    const MIN_GROUP_LENGTH = 2;
-    if(!Array.isArray(words)){
-        return 'Not an array';
+/**
+ * Returns an error if an argument is null or undefined
+ * @param {any} arg - argument 
+ */
+const isNullOrUndefined = arg => {
+    if(arg === null || arg === undefined){
+        throw new Error('words equals null or undefined');
     }
+};
+
+/** 
+ * Returns an error if words is not an array
+ * @param {any} words - Input words
+ */
+const ifWordsIsArray = words => {
+    if(!Array.isArray(words)){
+        throw new Error('not an array');
+    }
+};
+
+/** 
+ * @param {Array} words - Input words
+ */
+const anagram = words => {
+    try{
+        ifWordsIsArray(words);
+    }
+    catch(e){
+        console.error(e.message);
+    }
+
+    const groups = {};
+    const MIN_GROUP_LENGTH = 2;
+    
     for (const word of words){
         if(typeof word != 'string'){
             continue;

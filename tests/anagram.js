@@ -69,21 +69,7 @@ QUnit.module('Тестируем функцию anagram', function () {
  QUnit.test('Обработка undefined и null', function (assert) {
     const input = undefined;
   
-    const output = [
-     [ 'for', 'rof' ]
-    ];
-
-    const input1 = null;
-  assert.deepEqual(anagram(input), output);
-  assert.deepEqual(anagram(input1), output);
-});
-
-QUnit.test('Обработка undefined и null', function (assert) {
-    const input = undefined;
-  
-    const output = [
-     [ 'for', 'rof' ]
-    ];
+    const output = undefined;
 
     const input1 = null;
   assert.deepEqual(anagram(input), output);
@@ -93,7 +79,7 @@ QUnit.test('Обработка undefined и null', function (assert) {
 QUnit.test('Обработка немассивов', function (assert) {
     const input = 5;
   
-    const output = 'Not an array';
+    const output = undefined;
 
   assert.deepEqual(anagram(input), output);
 });
@@ -119,5 +105,4 @@ QUnit.test('Обработка нестрок', function (assert) {
   assert.deepEqual(anagram(input1), output);
   assert.deepEqual(anagram(input2), output);
 });
-
 });
