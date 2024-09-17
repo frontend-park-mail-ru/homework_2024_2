@@ -29,6 +29,7 @@ const anagram = words => {
     }
     catch(e){
         console.error(e.message);
+        return;
     }
 
     const groups = {};
