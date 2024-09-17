@@ -60,8 +60,8 @@ const infixToPostfix = (expression) => {
  */
 const replaceDoubleMinus = (expression) => {
   let result = expression.replace(/^--/, '');
-  result = result.replaceAll('--', '+');
-  result = result.replaceAll('- -', '+');
+  result = result.replaceAll(/--/g, '+');
+  result = result.replaceAll(/-\s-/g, '+');
   return result;
 };
 
