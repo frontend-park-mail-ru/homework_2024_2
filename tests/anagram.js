@@ -77,4 +77,47 @@ QUnit.module('Тестируем функцию anagram', function () {
   assert.deepEqual(anagram(input), output);
   assert.deepEqual(anagram(input1), output);
 });
+
+QUnit.test('Обработка undefined и null', function (assert) {
+    const input = undefined;
+  
+    const output = [
+     [ 'for', 'rof' ]
+    ];
+
+    const input1 = null;
+  assert.deepEqual(anagram(input), output);
+  assert.deepEqual(anagram(input1), output);
+});
+
+QUnit.test('Обработка немассивов', function (assert) {
+    const input = 5;
+  
+    const output = 'Not an array';
+
+  assert.deepEqual(anagram(input), output);
+});
+
+QUnit.test('Обработка нестрок', function (assert) {
+    const input1 = [
+        'aaa', 'aaa', 'aaa',
+        5, 'vile', 'live',
+        'rat', 'tar', 'music'
+    ];
+     
+    const output = [
+        [ 'aaa', 'aaa', 'aaa' ],
+        [ 'live', 'vile'],
+        [ 'rat', 'tar', ]
+    ];
+
+    const input2 = [
+        'aaa', 'aaa', 'aaa',
+        'vile', 'live', 5,
+        'rat', 'tar', 'music'
+    ];
+  assert.deepEqual(anagram(input1), output);
+  assert.deepEqual(anagram(input2), output);
+});
+
 });
