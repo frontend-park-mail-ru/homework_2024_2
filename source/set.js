@@ -1,14 +1,14 @@
-'use strict';
-
-const set = (object, path, value) => {
+function set(object, path, value) {
     const pathArray = path.substring(1).split('.');
-    const result = object;
-    for (let i = 0; i < pathArray.length - 1; i++) {
-        if (!Object.hasOwn(object, pathArray[i])) {
-            object[pathArray[i]] = {};
-        }
-        object = object[pathArray[i]];
-    }
-    object[pathArray[pathArray.length - 1]] = value;
-    return result;
-}
+    pathArray.reduce((obj, currentKey, index) => {
+      if (!Object.hasOwn(obj, currentKey)) {
+        obj[currentKey] = {};
+      }
+      if (index == pathArray.length - 1) {
+        obj[currentKey] = value;
+      }
+      return obj[currentKey];
+    }, object);
+    return object;
+  }
+  
