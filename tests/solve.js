@@ -10,7 +10,7 @@ QUnit.module('Тестируем функцию solve', function () {
     assert.strictEqual(solve('((5 - x) * (x + 5)) * x * x', 3), 144);
   });
 
-  QUnit.test('solve работает правильно с многосимвольными числами и делением', function (assert) {
+  QUnit.test('solve работает правильно с многосимвольными числами', function (assert) {
     assert.strictEqual(solve('100 + x', 23), 123);
     assert.strictEqual(solve('100 / 2 + x', 50), 100);
     assert.strictEqual(solve('2 * (x + 5)', 10), 30);

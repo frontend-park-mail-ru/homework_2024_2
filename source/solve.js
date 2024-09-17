@@ -59,9 +59,9 @@ const infixToPostfix = (expression) => {
  * @returns {string} - Обработанная строка, где применены указанные замены.
  */
 const replaceDoubleMinus = (expression) => {
-  let result = expression.replace(/^-{2}/, '');
-  result = result.replaceAll(/--/g, '+');
-  result = result.replaceAll(/-\s+-/g, '+');
+  let result = expression.replace(/^--/, '');
+  result = result.replaceAll('--', '+');
+  result = result.replaceAll('- -', '+');
   return result;
 };
 
