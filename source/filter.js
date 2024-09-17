@@ -1,13 +1,15 @@
-const regExp = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+"use strict";
 
-const specialChars = {
+const TAG_PATTERNS = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+
+const SPECIAL_CHARS = {
 	"&": "&amp;",
 	"<": "&lt;",
 	">": "&gt;",
 	'"': "&quot;",
 	"'": "&#39;",
 };
-const changeHTML = (text) => text.replace(/[&<>"']/g, (char) => specialChars[char]);
+const changeHTML = (text) => text.replace(/[&<>"']/g, (char) => SPECIAL_CHARS[char]);
 
 // Основная функция фильтрации
 const filter = (input, allowedTags) => {
@@ -17,7 +19,7 @@ const filter = (input, allowedTags) => {
 	let result = "";
 	let lastIndex = 0;
 
-	input.replace(regExp, (match, tagName, currentTag) => {
+	input.replace(TAG_PATTERNS, (match, tagName, currentTag) => {
 		// Добавляем текст между последним индексом и текущим тегом
 		result += changeHTML(input.slice(lastIndex, currentTag));
 		lastIndex = currentTag + match.length;
