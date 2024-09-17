@@ -26,13 +26,13 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('-5 - -5 * (-5 + 6 + -5) - 5', -30), -30);
 	});
 
-	QUnit.test('Работает правильно при неправильно расставленных скобках ', function (assert) {
+	QUnit.test('Выбрасывает ошибку при неправильно расставленных скобках ', function (assert) {
 		assert.throws(() => solve('(5 + 6))* (7 + 8)', 10), Error);
 		assert.throws(() => solve('(5 + 7 * 8', 25), Error);
 		assert.throws(() => solve('(5 + 7 ( + )8 * 9(', -30), Error);
 	});
 
-	QUnit.test('Работает правильно при неправильных типах параметров ', function (assert) {
+	QUnit.test('Выбрасывает ошибку при неправильных типах параметров', function (assert) {
 		assert.throws(() => solve('x * (x + x) - (bb * (x + x))', 6), TypeError);
 		assert.throws(() => solve('x * (x + x) - (x * (x / y))', 6), TypeError);
 		assert.throws(() => solve(7, 'jhxhe'), TypeError);
@@ -40,5 +40,3 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.throws(() => solve(), Error);
 	});
 });
-
-

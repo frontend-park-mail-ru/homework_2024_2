@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  * Принимает строку, парсит ее и возвращает массив, состоящий из строк представляющих число,
  * скобок и знаков
@@ -63,7 +64,7 @@ const toPolish = (str) => {
     const answer = [];
 
     for (let val of masStr) {
-        if (['+', '-', '*'].includes(val)) {
+        if (val in priorities) {
             while (priorities[val] <= priorities[myStack.at(-1)]) {
                 answer.push(myStack.pop());
             }
@@ -144,16 +145,13 @@ const solve = (str, val) => {
         throw new Error("str and val arguments must not be empty");
     } 
 
-    if (typeof str !== "string" || typeof val !== "number") {
-        throw new TypeError("argument str must be string, argument val must be int");
+    if (typeof str !== "string") {
+        throw new TypeError(`Ошибка! Для аргумента str нужен тип string, получен ${typeof str}`);
+    }
+
+    if (typeof val !== "number") {
+        throw new TypeError(`Ошибка! Для аргумента val нужен тип number, получен ${typeof val}`);
     } 
     
     return solvePolish(toPolish(str.replaceAll('x', val)));
 }
-
-
-
-
-
-
-
