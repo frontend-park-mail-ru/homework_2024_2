@@ -2,6 +2,7 @@
 
 const anagram = words => {
     const groups = {};
+    words ??= ['words', 'for', 'example'];
     const MIN_GROUP_LENGTH = 2;
     for (const word of words){
         const item = word.split('').sort().join('');
