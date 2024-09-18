@@ -7,8 +7,8 @@ const MIN_GROUP_LENGTH = 2;
  * or if words is not an array
  * @param {any} words - argument 
  */
-const isValid = words => {
-    if(!words || !Array.isArray(words)){
+const isValid = (words) => {
+    if(!words || !Array.isArray(words)) {
         throw new TypeError('not an array');
     }
 };
@@ -16,7 +16,7 @@ const isValid = words => {
 /** 
  * @param {Array} words - Input words
  */
-const anagram = words => {
+const anagram = (words) => {
     try{
         isValid(words);
     }
@@ -27,17 +27,19 @@ const anagram = words => {
 
     const groups = {};
     
-    for (const word of words){
-        if(typeof word != 'string'){
+    for (const word of words) {
+        if(typeof word != 'string') {
             continue;
         }
 
         const item = word.split('').sort().join('');
-        if(!groups[item]){
+        if(!groups[item]) {
             groups[item] = [];
         }
         groups[item].push(word);
     }
-    return Object.values(groups).filter(group => group.length >= MIN_GROUP_LENGTH)
-    .map(group => group.sort()).sort((a, b) => a[0].localeCompare(b[0]));
+    return Object.values(groups)
+    .filter(group => group.length >= MIN_GROUP_LENGTH)
+    .map(group => group.sort())
+    .sort((a, b) => a[0].localeCompare(b[0]));
 }
