@@ -1,3 +1,5 @@
+'use strict';
+
 function set(object, path, value) {
     const pathArray = path.substring(1).split('.');
     pathArray.reduce((obj, currentKey, index) => {
