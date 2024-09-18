@@ -8,37 +8,43 @@
  * @throws {TypeError} - В строке присутствуют недопустимые символы 
  */
 const parseStr = (str) => {
-    const res = []; 
     let sign = 1;
     let curNum = null;
-    
-    for (let i = 0; i < str.length; i++) {
-        if (['+', '*', '(', ')'].includes(str[i])) {
-            if (curNum !== null) {
-                res.push(String(sign * curNum));
-                sign = 1;
-            }
-            curNum = null;
-            res.push(str[i]);
-        } else if (str[i] === '-') {
-            if (i + 1 < str.length && str[i + 1] === ' ') {
+    const ops = ['+', '*', '(', ')'];
+
+    const res = str.split('').reduce((acc, char, index) => {
+        switch (true) {
+            case ops.includes(char):
                 if (curNum !== null) {
-                    res.push(String(sign * curNum));
+                    acc.push(String(sign * curNum));
                     sign = 1;
                 }
                 curNum = null;
-                res.push(str[i]);
-            } else {
-                sign *= -1;
-            }
-        } else if (str[i] !== ' ') {
-            if (!isNaN(parseInt(str[i]))) {
-                curNum = curNum === null ? Number(str[i]) : curNum * 10 + Number(str[i]);  
-            } else {
-                throw new TypeError("Тип должен быть числовым!");
-            }
+                acc.push(char);
+                break;
+            case char === '-': 
+                if (index < str.length && str[index + 1] === ' ') {
+                    if (curNum !== null) {
+                        acc.push(String(sign * curNum));
+                        sign = 1;
+                    }
+                    curNum = null;
+                    acc.push(char);
+                } else {
+                    sign *= -1;
+                }
+                break;
+            case char !== ' ':
+                if (!isNaN(parseInt(char))) {
+                    curNum = curNum === null ? Number(char) : curNum * 10 + Number(char);  
+                } else {
+                    throw new TypeError('Тип должен быть числовым!');
+                }
+                break;
         }
-    }
+        return acc;
+    }, []);
+    
 
     if (curNum !== null) {
         res.push(String(sign * curNum));
@@ -61,39 +67,42 @@ const toPolish = (str) => {
         '-': 1, 
         '*': 2,
     }
-    const myStack = [];
-    const answer = [];
 
-    for (let val of masStr) {
-        if (val in priorities) {
-            while (priorities[val] <= priorities[myStack.at(-1)]) {
-                answer.push(myStack.pop());
-            }
-            myStack.push(val);
-        } else if (val === '(') {
-            myStack.push(val);
-        } else if (val === ')') {
-            while (myStack.length > 0 && myStack.at(-1) !== '(') {
-                answer.push(myStack.pop());
-            }
-            if (myStack.length == 0) {
-                throw new Error("Неправильно расставлены скобки !!!");
-            }
-            myStack.pop();
-        } else if (val !== ' ') {
-            answer.push(val);
+    const result = masStr.reduce((acc, val) => {
+        switch (true) {
+            case val in priorities:
+                while (priorities[val] <= priorities[acc.stack.at(-1)]) {
+                    acc.answer.push(acc.stack.pop());
+                }
+                acc.stack.push(val);
+                break;
+            case val === '(':
+                acc.stack.push(val);
+                break;
+            case val === ')':
+                while (acc.stack.length > 0 && acc.stack.at(-1) !== '(') {
+                    acc.answer.push(acc.stack.pop());
+                }
+                if (!acc.stack.length) {
+                    throw new Error('Неправильно расставлены скобки !!!');
+                }
+                acc.stack.pop();
+                break;
+            case val !== ' ':
+                acc.answer.push(val);
+                break;
         }
-    }
+        return acc;
+    }, { stack: [], answer: [] });
 
-    while (myStack.length) {
-        const elem = myStack.pop();
-        if (['(', ')'].includes(elem)) {
-            throw new Error("Неправильно расставлены скобки !!!");
+    const brackets = ['(', ')'];
+    return result.stack.reduce((acc, elem) => {
+        if (brackets.includes(elem)) {
+            throw new Error('Неправильно расставлены скобки !!!');
         }
-        answer.push(elem);
-    }
-
-    return answer;
+        acc.push(elem);
+        return acc;
+    }, result.answer);
 }
 
 /**
@@ -102,29 +111,27 @@ const toPolish = (str) => {
  * @returns {number} - Результат вычисления выражения
  */
 const solvePolish = (str) => {
-    const myStack = [];
-
-    for (let elem of str) {
+    const res = str.reduce((acc, elem) => {
         switch(elem) {
             case '+':
-                myStack.push(myStack.pop() + myStack.pop());
+                acc.push(acc.pop() + acc.pop());
                 break;
             case '-':
-                const oper1 = myStack.pop();
-                const oper2 = myStack.pop();
-                myStack.push(oper2 - oper1);
+                const oper1 = acc.pop();
+                const oper2 = acc.pop();
+                acc.push(oper2 - oper1);
                 break;
             case '*':
-                myStack.push(myStack.pop() * myStack.pop());
+                acc.push(acc.pop() * acc.pop());
                 break;
             default:
-                myStack.push(Number(elem));
+                acc.push(Number(elem));
                 break;
         }
-    }
+        return acc;
+    }, []);
     
-    return myStack.at(-1);
-
+    return res.at(-1);
 }
 
 /**
@@ -143,17 +150,18 @@ const solvePolish = (str) => {
  * @throws {TypeError} - Если в функцию передали параметры других типов
  */
 const solve = (str, val) => {
-    if (str === undefined || val === undefined) {
-        throw new Error("str and val arguments must not be empty");
+    if (!str || !val) {
+        throw new Error('Аргументы str и val не должны быть пустыми');
     } 
 
-    if (typeof str !== "string") {
+    if (typeof str !== 'string' && !(str instanceof String)) {
         throw new TypeError(`Ошибка! Для аргумента str нужен тип string, получен ${typeof str}`);
     }
 
-    if (typeof val !== "number") {
+    if (typeof val !== 'number') {
         throw new TypeError(`Ошибка! Для аргумента val нужен тип number, получен ${typeof val}`);
     } 
     
     return solvePolish(toPolish(str.replaceAll('x', val)));
 }
+
