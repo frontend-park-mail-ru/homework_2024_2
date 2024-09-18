@@ -26,9 +26,6 @@ const anagram = (words) => {
     }
 
     const groups = {};
-    words.forEach((word) => {
-        
-    })
     for (const word of words) {
         if(typeof word != 'string') {
             continue;
