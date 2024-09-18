@@ -1,22 +1,15 @@
 'use strict';
 
+const MIN_GROUP_LENGTH = 2;
+
 /**
  * Returns an error if an argument is null or undefined
- * @param {any} arg - argument 
+ * or if words is not an array
+ * @param {any} words - argument 
  */
-const isNullOrUndefined = arg => {
-    if(arg === null || arg === undefined){
-        throw new Error('words equals null or undefined');
-    }
-};
-
-/** 
- * Returns an error if words is not an array
- * @param {any} words - Input words
- */
-const ifWordsIsArray = words => {
-    if(!Array.isArray(words)){
-        throw new Error('not an array');
+const isValid = words => {
+    if(!words || !Array.isArray(words)){
+        throw new TypeError('not an array');
     }
 };
 
@@ -25,7 +18,7 @@ const ifWordsIsArray = words => {
  */
 const anagram = words => {
     try{
-        ifWordsIsArray(words);
+        isValid(words);
     }
     catch(e){
         console.error(e.message);
@@ -33,7 +26,6 @@ const anagram = words => {
     }
 
     const groups = {};
-    const MIN_GROUP_LENGTH = 2;
     
     for (const word of words){
         if(typeof word != 'string'){
@@ -46,6 +38,6 @@ const anagram = words => {
         }
         groups[item].push(word);
     }
-    let result = Object.values(groups).filter(group => group.length >= MIN_GROUP_LENGTH);
-    return result.map(group => group.sort()).sort((a, b) => a[0].localeCompare(b[0]));
+    return Object.values(groups).filter(group => group.length >= MIN_GROUP_LENGTH)
+    .map(group => group.sort()).sort((a, b) => a[0].localeCompare(b[0]));
 }
