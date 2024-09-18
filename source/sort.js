@@ -12,8 +12,11 @@ const sort = (sentence) => {
     }
 
     return sentence.valueOf().split(' ')
-        .map(word => {
-            const sortedWord = word.toLowerCase().split('').sort((a, b) => a.localeCompare(b, 'ru')).join('');
+        .map((word) => {
+            const sortedWord = word.toLowerCase()
+            .split('')
+            .sort((a, b) => a.localeCompare(b, 'ru'))
+            .join('');
             return sortedWord.charAt(0).toUpperCase() + sortedWord.slice(1);
         })
         .sort((a, b) => a.localeCompare(b, 'ru'))
