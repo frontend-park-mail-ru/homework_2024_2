@@ -7,7 +7,7 @@
  * @param {string} [prefix=''] - Префикс для ключей. Используется при рекурсивном вызове для сохранения пути к свойствам.
  * @returns {Object} - Возвращает плоский объект, где ключи содержат путь к значению через вложенные объекты.
  * 
- * @throws {Error} Если передан не объект, выбрасывается ошибка.
+ * @throws {TypeError} Если передан не объект, выбрасывается ошибка.
  * 
  * @example
  * plainify({ foo: 'bar', baz: { qux: 42 } });
@@ -18,24 +18,23 @@
  * // Возвращает { 'a.b.c': 1 }
  */
 
+// Функция для проверки, является ли значение объектом
+const isPlainObject = (value) => {
+    return typeof value === 'object' && value !== null && !Array.isArray(value) && !(value instanceof String);
+};
+
 const plainify = (obj, prefix = '') => {
     if (Object.prototype.toString.call(obj) !== '[object Object]') {
-        throw new Error('Invalid input: plainify expects an object');
+        throw new TypeError('Invalid input: plainify expects an object');
     }
 
-    return Object.keys(obj).reduce((acc, key) => {
+    return Object.entries(obj).reduce((acc, [key, value]) => {
         const newKey = prefix ? `${prefix}.${key}` : key;
 
-        if (typeof obj[key] === 'object' && obj[key] && !Array.isArray(obj[key]) && !(obj[key] instanceof String)) {
-            if (Array.isArray(obj[key])) {
-                obj[key].forEach((item, index) => {
-                    Object.assign(acc, plainify(item, `${newKey}[${index}]`));
-                });
-            } else {
-                Object.assign(acc, plainify(obj[key], newKey));
-            }
+        if (isPlainObject(value)) {
+            Object.assign(acc, plainify(value, newKey));
         } else {
-            acc[newKey] = obj[key] instanceof String ? obj[key].toString() : obj[key];
+            acc[newKey] = value instanceof String ? value.toString() : value;
         }
 
         return acc;

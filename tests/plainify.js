@@ -43,12 +43,7 @@ QUnit.module('Тестируем функцию plainify на позитивны
 		assert.deepEqual(plainify(nested2), plain2);
 	});
 
-
-
-
-
-
-    QUnit.test('Plain obj без вложенности', function (assert) {
+	QUnit.test('Plain obj без вложенности', function (assert) {
         const input = { a: 1, b: 2, c: 3 };
         const expected = { a: 1, b: 2, c: 3 };
         assert.deepEqual(plainify(input), expected, 'plainify возвращает исходный объект без изменений');
