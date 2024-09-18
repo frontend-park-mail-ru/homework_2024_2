@@ -25,19 +25,19 @@ const anagram = (words) => {
         return;
     }
 
-    const groups = {};
-    for (const word of words) {
-        if(typeof word != 'string') {
-            continue;
+    const result = words.reduce((groups, word) => {
+        if(typeof word == 'string') {
+            const item = word.split('').sort().join('');
+            if(!groups[item]) {
+                groups[item] = [];
+            }
+            groups[item].push(word);
         }
+        return groups;
+    }, {});
 
-        const item = word.split('').sort().join('');
-        if(!groups[item]) {
-            groups[item] = [];
-        }
-        groups[item].push(word);
-    }
-    return Object.values(groups)
+
+    return Object.values(result)
                  .filter(group => group.length >= MIN_GROUP_LENGTH)
                  .map(group => group.sort())
                  .sort((a, b) => a[0].localeCompare(b[0]));
