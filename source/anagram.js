@@ -38,7 +38,7 @@ const anagram = (words) => {
         groups[item].push(word);
     }
     return Object.values(groups)
-    .filter(group => group.length >= MIN_GROUP_LENGTH)
-    .map(group => group.sort())
-    .sort((a, b) => a[0].localeCompare(b[0]));
+                 .filter(group => group.length >= MIN_GROUP_LENGTH)
+                 .map(group => group.sort())
+                 .sort((a, b) => a[0].localeCompare(b[0]));
 }
