@@ -73,10 +73,6 @@ QUnit.module('Тестируем функцию plainify на позитивны
     });
 });
 
-
-
-
-
 QUnit.module('Тестируем функцию plainify на негативные кейсы', function () {
     QUnit.test('plainify выбрасывает ошибку при передаче null', function (assert) {
         assert.throws(
@@ -118,11 +114,3 @@ QUnit.module('Тестируем функцию plainify на негативны
         );
     });
 });
-
-
-
-
-
-
-
-

@@ -18,9 +18,6 @@
  * // Возвращает { 'a.b.c': 1 }
  */
 
-
-
-
 const plainify = (obj, prefix = '') => {
     if (Object.prototype.toString.call(obj) !== '[object Object]') {
         throw new Error('Invalid input: plainify expects an object');
@@ -44,4 +41,3 @@ const plainify = (obj, prefix = '') => {
         return acc;
     }, {});
 };
-
