@@ -1,5 +1,11 @@
 'use strict';
 
+const priorities = {
+    '+': 1,
+    '-': 1, 
+    '*': 2,
+}
+
 /**
  * Принимает строку, парсит ее и возвращает массив, состоящий из строк представляющих число,
  * скобок и знаков
@@ -62,11 +68,6 @@ const parseStr = (str) => {
  */
 const toPolish = (str) => {
     const masStr = parseStr(str); 
-    const priorities = {
-        '+': 1,
-        '-': 1, 
-        '*': 2,
-    }
 
     const result = masStr.reduce((acc, val) => {
         switch (true) {
