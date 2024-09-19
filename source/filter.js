@@ -34,7 +34,11 @@ const changeHTML = (text) => text.replace(/[&<>"']/g, (char) => SPECIAL_CHARS[ch
  * @returns {string} - The filtered string with only allowed tags.
  */
 const filter = (input, allowedTags) => {
-	input = typeof input === "string" ? input : input == null ? "" : String(input);
+    input = typeof input === "string"
+        ? input 
+        : input == null 
+            ? "" 
+            : String(input);
 
 	let result = "";
 	let lastIndex = 0;
