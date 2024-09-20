@@ -1,52 +1,59 @@
 'use strict';
 
+// Глобальные константы для приоритета операторов и допустимых символов
+const PRECEDENCE = { '+': 1, '-': 1, '*': 2, '/': 2 };
+const MATHS = ['+', '-', '*', '/', '('];
+const OPERATORS = ['+', '-', '*', '/'];
+
 /**
  * Преобразует инфиксное выражение в постфиксное (обратная польская запись).
  * @param {string} expression - математическое выражение в инфиксной записи.
  * @returns {string} Постфиксное выражение.
  */
 const infixToPostfix = (expression) => {
-  const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
-  const output = [];
+  const numbers = [];
   const operators = [];
   let numberBuffer = '';
 
-  for (let i = 0; i < expression.length; i++) {
-    const char = expression[i];
-
-    if (/\d/.test(char) || (char === '-' && (i === 0 || ['+', '-', '*', '/', '('].includes(expression[i - 1])))) {
+  expression.split('').reduce((_, char, i) => {
+    if (/\d/.test(char) || (char === '-' && (i === 0 || MATHS.includes(expression[i - 1])))) {
       numberBuffer += char;
-    } else {
-      if (numberBuffer) {
-        output.push(numberBuffer);
-        numberBuffer = '';
-      }
+      return;
+    }
 
-      if (char === '(') {
+    if (numberBuffer) {
+      numbers.push(numberBuffer);
+      numberBuffer = '';
+    }
+
+    switch (char) {
+      case '(':
         operators.push(char);
-      } else if (char === ')') {
-        while (operators.length && operators[operators.length - 1] !== '(') {
-          output.push(operators.pop());
+        break;
+      case ')':
+        while (operators.length && operators.at(-1) !== '(') {
+          numbers.push(operators.pop());
         }
         operators.pop();
-      } else if (char in precedence) {
-        while (operators.length && precedence[operators[operators.length - 1]] >= precedence[char]) {
-          output.push(operators.pop());
+        break;
+      default:
+        if (char in PRECEDENCE) {
+          while (operators.length && PRECEDENCE[operators.at(-1)] >= PRECEDENCE[char]) {
+            numbers.push(operators.pop());
+          }
+          operators.push(char);
         }
-        operators.push(char);
-      }
+        break;
     }
-  }
+  }, []);
 
   if (numberBuffer) {
-    output.push(numberBuffer);
+    numbers.push(numberBuffer);
   }
 
-  while (operators.length) {
-    output.push(operators.pop());
-  }
+  numbers.push(...operators.reverse());
 
-  return output.join(' ');
+  return numbers.join(' ');
 };
 
 /**
@@ -58,13 +65,8 @@ const infixToPostfix = (expression) => {
  * @param {string} expression - Входная строка, содержащая математическое выражение с минусами и пробелами.
  * @returns {string} - Обработанная строка, где применены указанные замены.
  */
-const replaceDoubleMinus = (expression) => {
-  let result = expression.replace(/^--/, '');
-  result = result.replaceAll(/--/g, '+');
-  result = result.replaceAll(/-\s-/g, '+');
-  return result;
-};
-
+const replaceDoubleMinus = (expression) =>
+  expression.replace(/^--/, '').replaceAll(/--/g, '+').replaceAll(/-\s-/g, '+');
 
 /**
  * Выполняет вычисление постфиксного выражения.
@@ -72,14 +74,15 @@ const replaceDoubleMinus = (expression) => {
  * @returns {number} Результат вычисления.
  */
 const evaluatePostfix = (expression) => {
-  const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
   const stack = [];
 
   expression.split(' ').forEach(char => {
     const num = parseFloat(char);
     if (!isNaN(num)) {
       stack.push(num);
-    } else if (char in precedence) {
+      return;
+    }
+    if (OPERATORS.includes(char)) {
       const b = stack.pop();
       const a = stack.pop();
       switch (char) {
@@ -100,10 +103,8 @@ const evaluatePostfix = (expression) => {
  * @param {number} x - значение переменной x.
  * @returns {number} Результат вычисления.
  */
-const solve = (expression, x) => {
-  const replacedExpression1 = expression.replaceAll('x', x);
-  const replacedExpression2 = replaceDoubleMinus(replacedExpression1)
-  const postfixExpression = infixToPostfix(replacedExpression2);
-  return evaluatePostfix(postfixExpression);
-};
- 
+const solve = (expression, x) =>
+  evaluatePostfix(
+    infixToPostfix(
+      replaceDoubleMinus(expression.replaceAll('x', x))));
+
