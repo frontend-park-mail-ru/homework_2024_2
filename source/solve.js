@@ -11,19 +11,29 @@ const OPERATORS = ['+', '-', '*', '/'];
  * @returns {string} Постфиксное выражение.
  */
 const infixToPostfix = (expression) => {
-  const numbers = [];
+  const output = [];
   const operators = [];
-  let numberBuffer = '';
+  let numberBuffer = null;
 
   expression.split('').reduce((_, char, i) => {
-    if (/\d/.test(char) || (char === '-' && (i === 0 || MATHS.includes(expression[i - 1])))) {
-      numberBuffer += char;
+    if (/\d/.test(char)) {
+      if (numberBuffer < 0){
+        numberBuffer *= 10;
+        numberBuffer -= parseInt(char);
+      } else {
+        numberBuffer *= 10;
+        numberBuffer += parseInt(char);
+      } 
       return;
     }
 
-    if (numberBuffer) {
-      numbers.push(numberBuffer);
-      numberBuffer = '';
+    if (char === '-' && (i === 0 || MATHS.includes(expression[i - 1]))) {
+      numberBuffer = -0;
+    }
+
+    if (numberBuffer != null) {
+      output.push(numberBuffer);
+      numberBuffer = null;
     }
 
     switch (char) {
@@ -32,14 +42,14 @@ const infixToPostfix = (expression) => {
         break;
       case ')':
         while (operators.length && operators.at(-1) !== '(') {
-          numbers.push(operators.pop());
+          output.push(operators.pop());
         }
         operators.pop();
         break;
       default:
         if (char in PRECEDENCE) {
           while (operators.length && PRECEDENCE[operators.at(-1)] >= PRECEDENCE[char]) {
-            numbers.push(operators.pop());
+            output.push(operators.pop());
           }
           operators.push(char);
         }
@@ -47,13 +57,13 @@ const infixToPostfix = (expression) => {
     }
   }, []);
 
-  if (numberBuffer) {
-    numbers.push(numberBuffer);
+  if (numberBuffer != null) {
+    output.push(numberBuffer);
   }
 
-  numbers.push(...operators.reverse());
+  output.push(...operators.reverse());
 
-  return numbers.join(' ');
+  return output.join(' ');
 };
 
 /**
