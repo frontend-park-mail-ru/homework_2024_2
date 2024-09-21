@@ -2,8 +2,8 @@
 
 // Глобальные константы для приоритета операторов и допустимых символов
 const PRECEDENCE = { '+': 1, '-': 1, '*': 2, '/': 2 };
-const MATHS = ['+', '-', '*', '/', '('];
-const OPERATORS = ['+', '-', '*', '/'];
+const MATHS = ['+', '-', '*', '/', '(', ')'];
+const OPERATORS = Object.keys(PRECEDENCE);
 
 /**
  * Преобразует инфиксное выражение в постфиксное (обратная польская запись).
@@ -15,23 +15,17 @@ const infixToPostfix = (expression) => {
   const operators = [];
   let numberBuffer = null;
 
-  expression.split('').reduce((_, char, i) => {
+  expression.split('').reduce((acc, char, i) => {
     if (/\d/.test(char)) {
-      if (numberBuffer < 0){
-        numberBuffer *= 10;
-        numberBuffer -= parseInt(char);
-      } else {
-        numberBuffer *= 10;
-        numberBuffer += parseInt(char);
-      } 
-      return;
+      numberBuffer = numberBuffer !== null ? numberBuffer * 10 + parseInt(char) : parseInt(char);
+      return acc;
     }
 
     if (char === '-' && (i === 0 || MATHS.includes(expression[i - 1]))) {
       numberBuffer = -0;
     }
 
-    if (numberBuffer != null) {
+    if (numberBuffer !== null) {
       output.push(numberBuffer);
       numberBuffer = null;
     }
@@ -41,23 +35,22 @@ const infixToPostfix = (expression) => {
         operators.push(char);
         break;
       case ')':
-        while (operators.length && operators.at(-1) !== '(') {
-          output.push(operators.pop());
-        }
+        const openBracketIndex = operators.lastIndexOf('(');
+        output.push(...operators.splice(openBracketIndex + 1).reverse());
         operators.pop();
         break;
       default:
         if (char in PRECEDENCE) {
-          while (operators.length && PRECEDENCE[operators.at(-1)] >= PRECEDENCE[char]) {
-            output.push(operators.pop());
-          }
+          operators.filter(op => PRECEDENCE[op] >= PRECEDENCE[char]).forEach(op => output.push(operators.pop()));
           operators.push(char);
         }
         break;
     }
-  }, []);
 
-  if (numberBuffer != null) {
+    return acc;
+  }, {});
+
+  if (numberBuffer !== null) {
     output.push(numberBuffer);
   }
 
@@ -65,6 +58,7 @@ const infixToPostfix = (expression) => {
 
   return output.join(' ');
 };
+
 
 /**
  * Заменяет определенные последовательности минусов в строке.
@@ -113,8 +107,9 @@ const evaluatePostfix = (expression) => {
  * @param {number} x - значение переменной x.
  * @returns {number} Результат вычисления.
  */
-const solve = (expression, x) =>
-  evaluatePostfix(
-    infixToPostfix(
-      replaceDoubleMinus(expression.replaceAll('x', x))));
-
+const solve = (expression, x) => {
+  const replacedExpression = expression.replaceAll('x', x);
+  const replacedExpression2 = replaceDoubleMinus(replacedExpression)
+  const postfixExpression = infixToPostfix(replacedExpression2);
+  return evaluatePostfix(postfixExpression);
+}
