@@ -42,21 +42,22 @@ const infixToPostfix = (expression) => {
         operators.pop();
         lastWasOperator = false;
         break;
-      default:
-        if (!(char in PRECEDENCE)) {
-          console.warn(`Not allowed symbol: ${char}`);
+        default: 
+        if (!(char in PRECEDENCE)) { 
+          if (!/\s/.test(char)) { 
+            console.warn(`Not allowed symbol: ${char}`); 
+          } 
           break;
         }
 
         if (char === '-' && lastWasOperator) {
           numberBuffer = '-';
-        } else {
-          while (operators.length > 0 && PRECEDENCE[operators[operators.length - 1]] >= PRECEDENCE[char]) {
-            output.push(operators.pop());
-          }
-          operators.push(char);
-          lastWasOperator = true;
+          break;
         }
+        const lastLowerPrecedenceIndex = operators.findLastIndex(op => PRECEDENCE[op] < PRECEDENCE[char]); 
+        output.push(...operators.splice(lastLowerPrecedenceIndex + 1));
+        operators.push(char);
+        lastWasOperator = true;
     }
   });
 
@@ -67,6 +68,7 @@ const infixToPostfix = (expression) => {
   output.push(...operators.reverse());
   return output;
 };
+
 
 /**
  * Заменяет определенные последовательности минусов в строке.
